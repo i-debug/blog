@@ -1,0 +1,14 @@
+[Unit]
+Description=Blog Gunicorn Service
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/path/to/your/project  # 替换为您的项目路径
+ExecStart=/path/to/your/venv/bin/gunicorn -c gunicorn_config.py blog.wsgi:application  # 替换为您的虚拟环境路径
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target 

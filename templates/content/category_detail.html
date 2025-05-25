@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }} - 个人知识博客{% endblock %}
+
+{% block content %}
+<!-- 分类头部 -->
+<section class="py-20 bg-gradient-to-b from-apple-gray-50 to-white dark:from-apple-gray-800 dark:to-apple-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="animate-on-scroll">
+            <!-- 面包屑导航 -->
+            <div class="flex justify-center items-center space-x-2 text-sm mb-6">
+                <a href="{% url 'content:home' %}" class="text-apple-blue hover:underline">首页</a>
+                <i class="fas fa-chevron-right text-apple-gray-400 text-xs"></i>
+                <span class="text-apple-gray-600 dark:text-apple-gray-300">{{ category.name }}</span>
+            </div>
+            
+            <!-- 分类图标和标题 -->
+            {% if category.icon %}
+            <div class="mb-6">
+                <i class="{{ category.icon }} text-6xl text-apple-blue"></i>
+            </div>
+            {% endif %}
+            
+            <h1 class="text-5xl sm:text-6xl font-bold mb-6">{{ category.name }}</h1>
+            
+            {% if category.description %}
+            <p class="text-xl text-apple-gray-600 dark:text-apple-gray-300 max-w-3xl mx-auto mb-8">
+                {{ category.description }}
+            </p>
+            {% endif %}
+            
+            <div class="flex justify-center items-center text-apple-gray-500 dark:text-apple-gray-400">
+                <i class="fas fa-file-alt mr-2"></i>
+                <span>共 {{ articles.count }} 篇文章</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 文章列表 -->
+{% if articles %}
+<section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {% for article in articles %}
+            <article class="animate-on-scroll card-hover bg-white dark:bg-apple-gray-800 rounded-2xl shadow-lg p-8 border border-apple-gray-100 dark:border-apple-gray-700">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        {% if article.is_featured %}
+                        <i class="fas fa-star text-yellow-500"></i>
+                        {% endif %}
+                        <span class="text-apple-blue font-medium">推荐阅读</span>
+                    </div>
+                    <span class="text-sm text-apple-gray-500">{{ article.created_at|date:"M d" }}</span>
+                </div>
+                
+                <h3 class="text-2xl font-bold mb-3 hover:text-apple-blue transition-colors">
+                    <a href="{% url 'content:article_detail' article.category.slug article.slug %}">
+                        {{ article.title }}
+                    </a>
+                </h3>
+                
+                {% if article.summary %}
+                <p class="text-apple-gray-600 dark:text-apple-gray-300 mb-6 line-clamp-3">
+                    {{ article.summary }}
+                </p>
+                {% endif %}
+                
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        {% if article.get_tags_list %}
+                        <div class="flex flex-wrap gap-2">
+                            {% for tag in article.get_tags_list|slice:":3" %}
+                            <span class="px-2 py-1 bg-apple-gray-100 dark:bg-apple-gray-700 text-apple-gray-600 dark:text-apple-gray-300 text-xs rounded-full">
+                                {{ tag }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="flex items-center text-apple-gray-500 text-sm">
+                        <i class="fas fa-eye mr-1"></i>
+                        {{ article.view_count }}
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="animate-on-scroll">
+            <i class="fas fa-file-alt text-6xl text-apple-gray-300 dark:text-apple-gray-600 mb-6"></i>
+            <h2 class="text-3xl font-bold mb-4">暂无文章</h2>
+            <p class="text-apple-gray-600 dark:text-apple-gray-400 mb-8">
+                该分类下还没有发布文章，敬请期待！
+            </p>
+            <a href="{% url 'content:home' %}" class="inline-flex items-center px-6 py-3 bg-apple-blue text-white rounded-full hover:bg-blue-600 transition-colors">
+                <i class="fas fa-home mr-2"></i>
+                返回首页
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %} 

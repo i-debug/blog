@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }} - 个人知识博客{% endblock %}
+
+{% block content %}
+<!-- 分类头部 -->
+<section class="py-20 bg-gradient-to-b from-blue-50 to-white dark:from-blue-900/30 dark:to-apple-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="animate-on-scroll">
+            <!-- 面包屑导航 -->
+            <div class="flex justify-center items-center space-x-2 text-sm mb-6">
+                <a href="{% url 'content:home' %}" class="text-blue-600 hover:underline">首页</a>
+                <i class="fas fa-chevron-right text-apple-gray-400 text-xs"></i>
+                <span class="text-apple-gray-600 dark:text-apple-gray-300">{{ category.name }}</span>
+            </div>
+            
+            <!-- 分类图标和标题 -->
+            <div class="mb-6">
+                <i class="fas fa-tv text-6xl text-blue-600 dark:text-blue-400"></i>
+            </div>
+            
+            <h1 class="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                {{ category.name }}
+            </h1>
+            
+            {% if category.description %}
+            <p class="text-xl text-apple-gray-600 dark:text-apple-gray-300 max-w-3xl mx-auto mb-8">
+                {{ category.description }}
+            </p>
+            {% endif %}
+            
+            <div class="flex justify-center items-center text-apple-gray-500 dark:text-apple-gray-400">
+                <i class="fas fa-file-alt mr-2"></i>
+                <span>共 {{ articles.count }} 篇文章</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 日程导航 -->
+<section class="py-10 bg-white dark:bg-apple-gray-900 border-b border-apple-gray-200 dark:border-apple-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="#day1" class="px-6 py-3 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full hover:bg-blue-200 dark:hover:bg-blue-800/50 transition-colors">
+                <i class="fas fa-calendar-day mr-2"></i>
+                Day 1 (1月23日)
+            </a>
+            <a href="#day2" class="px-6 py-3 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full hover:bg-blue-200 dark:hover:bg-blue-800/50 transition-colors">
+                <i class="fas fa-calendar-day mr-2"></i>
+                Day 2 (1月24日)
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Day 1 文章列表 -->
+<section id="day1" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="animate-on-scroll text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4">
+                <i class="fas fa-calendar-day text-blue-600 mr-3"></i>
+                Day 1 (1月23日)
+            </h2>
+            <p class="text-apple-gray-600 dark:text-apple-gray-400 text-lg">
+                2025年1月23日的演讲内容
+            </p>
+        </div>
+        
+        <div class="space-y-8">
+            {% for article in articles %}
+            {% if article.title|slice:":2" == "1-" %}
+            <article class="animate-on-scroll card-hover bg-white dark:bg-apple-gray-800 rounded-2xl shadow-lg p-8 border border-blue-100 dark:border-blue-900/30">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-sm font-medium px-3 py-1 rounded-full">
+                            {{ article.title|slice:":5" }}
+                        </div>
+                        {% if article.is_featured %}
+                        <span class="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                            <i class="fas fa-star mr-1"></i>
+                            主题演讲
+                        </span>
+                        {% endif %}
+                    </div>
+                    <span class="text-sm text-apple-gray-500">{{ article.created_at|date:"M d" }}</span>
+                </div>
+                
+                <h3 class="text-2xl font-bold mb-3 hover:text-blue-600 transition-colors">
+                    <a href="{% url 'content:article_detail' article.category.slug article.slug %}">
+                        {{ article.title|slice:"5:" }}
+                    </a>
+                </h3>
+                
+                {% if article.summary %}
+                <p class="text-apple-gray-600 dark:text-apple-gray-300 mb-6">
+                    {{ article.summary }}
+                </p>
+                {% endif %}
+                
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        {% if article.get_tags_list %}
+                        <div class="flex flex-wrap gap-2">
+                            {% for tag in article.get_tags_list %}
+                            <span class="px-2 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 text-xs rounded-full">
+                                {{ tag }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="flex items-center">
+                        <a href="{% url 'content:article_detail' article.category.slug article.slug %}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-file-alt mr-2"></i>
+                            查看演讲
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Day 2 文章列表 -->
+<section id="day2" class="py-20 bg-apple-gray-50 dark:bg-apple-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="animate-on-scroll text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4">
+                <i class="fas fa-calendar-day text-blue-600 mr-3"></i>
+                Day 2 (1月24日)
+            </h2>
+            <p class="text-apple-gray-600 dark:text-apple-gray-400 text-lg">
+                2025年1月24日的演讲内容
+            </p>
+        </div>
+        
+        <div class="space-y-8">
+            {% for article in articles %}
+            {% if article.title|slice:":2" == "2-" %}
+            <article class="animate-on-scroll card-hover bg-white dark:bg-apple-gray-800 rounded-2xl shadow-lg p-8 border border-blue-100 dark:border-blue-900/30">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-sm font-medium px-3 py-1 rounded-full">
+                            {{ article.title|slice:":5" }}
+                        </div>
+                        {% if article.is_featured %}
+                        <span class="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                            <i class="fas fa-star mr-1"></i>
+                            主题演讲
+                        </span>
+                        {% endif %}
+                    </div>
+                    <span class="text-sm text-apple-gray-500">{{ article.created_at|date:"M d" }}</span>
+                </div>
+                
+                <h3 class="text-2xl font-bold mb-3 hover:text-blue-600 transition-colors">
+                    <a href="{% url 'content:article_detail' article.category.slug article.slug %}">
+                        {{ article.title|slice:"5:" }}
+                    </a>
+                </h3>
+                
+                {% if article.summary %}
+                <p class="text-apple-gray-600 dark:text-apple-gray-300 mb-6">
+                    {{ article.summary }}
+                </p>
+                {% endif %}
+                
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        {% if article.get_tags_list %}
+                        <div class="flex flex-wrap gap-2">
+                            {% for tag in article.get_tags_list %}
+                            <span class="px-2 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 text-xs rounded-full">
+                                {{ tag }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="flex items-center">
+                        <a href="{% url 'content:article_detail' article.category.slug article.slug %}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-file-alt mr-2"></i>
+                            查看演讲
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %} 

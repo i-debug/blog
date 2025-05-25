@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}个人知识博客{% endblock %}</title>
+    
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- 自定义样式 -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'apple-blue': '#007AFF',
+                        'apple-gray': {
+                            50: '#F2F2F7',
+                            100: '#E5E5EA',
+                            200: '#D1D1D6',
+                            300: '#C7C7CC',
+                            400: '#AEAEB2',
+                            500: '#8E8E93',
+                            600: '#636366',
+                            700: '#48484A',
+                            800: '#3A3A3C',
+                            900: '#1C1C1E'
+                        },
+                        'blog-text': '#D1D5DB', // 新增非黑非白的文本颜色
+                        'blog-bg': '#1F2937'    // 新增深色背景颜色
+                    },
+                    fontFamily: {
+                        'apple': ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'fade-in': 'fadeIn 0.6s ease-out'
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .animate-on-scroll.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="font-apple bg-blog-bg text-blog-text">
+    <!-- 导航栏 -->
+    <nav class="sticky top-0 z-50 backdrop-blur-lg bg-blog-bg/80 border-b border-apple-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="{% url 'content:home' %}" class="text-xl font-semibold text-apple-blue">
+                        <i class="fas fa-brain mr-2"></i>
+                        知识博客
+                    </a>
+                </div>
+                
+                <!-- 导航链接 -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="{% url 'content:home' %}" class="text-apple-gray-300 hover:text-apple-blue transition-colors">首页</a>
+                    <a href="{% url 'content:category_detail' 'omdia-display-forum' %}" class="text-apple-gray-300 hover:text-apple-blue transition-colors">
+                        <i class="fas fa-tv mr-1"></i>
+                        Omdia论坛
+                    </a>
+                </div>
+                
+                <!-- 搜索框 -->
+                <div class="flex-1 max-w-md mx-8">
+                    <form method="get" action="{% url 'content:search' %}" class="relative">
+                        <input type="text" 
+                               name="q" 
+                               placeholder="搜索文章..." 
+                               value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}"
+                               class="w-full px-4 py-2 pl-10 pr-4 rounded-full bg-apple-gray-800 border border-apple-gray-700 focus:outline-none focus:ring-2 focus:ring-apple-blue focus:border-transparent">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-apple-gray-400"></i>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="min-h-screen">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-apple-gray-800 py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="text-apple-gray-400">
+                    <p>&copy; {% now "Y" %} 个人知识博客. 简约而不简单.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Intersection Observer 动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // 元素进入视口
+                    setTimeout(() => {
+                        entry.target.classList.add('show');
+                    }, index * 100); // 交错动画效果
+                } else {
+                    // 元素离开视口，重置动画状态
+                    // 只有当元素完全离开视口顶部时才重置
+                    if (entry.boundingClientRect.top > window.innerHeight) {
+                        entry.target.classList.remove('show');
+                    }
+                }
+            });
+        }, observerOptions);
+        
+        // 监听所有需要动画的元素
+        document.addEventListener('DOMContentLoaded', () => {
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            animateElements.forEach(el => observer.observe(el));
+        });
+    </script>
+    
+    {% block extra_js %}
+    {% endblock %}
+</body>
+</html> 
