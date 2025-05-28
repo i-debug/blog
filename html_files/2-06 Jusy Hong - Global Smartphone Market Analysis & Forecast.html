@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球智能手机市场分析与预测 - Omdia</title>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #E0E0E0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        }
+
+        .highlight-text {
+            color: #0096c7; /* New Sea Blue */
+        }
+
+        .highlight-bg {
+            background-color: #0096c7; /* New Sea Blue */
+        }
+        
+        .highlight-border {
+            border-color: #0096c7; /* New Sea Blue */
+        }
+
+        .tech-gradient-bg {
+            background-image: linear-gradient(to bottom right, rgba(0, 150, 199, 0.5), rgba(0, 150, 199, 0.2)); /* New Sea Blue Gradient */
+        }
+        .tech-gradient-bg-subtle {
+            background-image: linear-gradient(to bottom right, rgba(0, 150, 199, 0.2), rgba(0, 150, 199, 0.05)); /* New Sea Blue Gradient */
+        }
+
+        .main-card {
+            background-color: #1A1A1A;
+            border: 1px solid #333333;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .mini-card {
+            background-color: #222222;
+            border: 1px solid #333333;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        
+        .main-card.is-visible, .mini-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .chart-container {
+            position: relative; 
+            height: 320px; 
+        }
+        
+        .chartjs-tooltip {
+            background: rgba(30, 30, 30, 0.9);
+            border-radius: 0.375rem;
+            color: #E0E0E0;
+            opacity: 1;
+            pointer-events: none;
+            position: absolute;
+            transform: translate(-50%, 0);
+            transition: all .1s ease;
+            padding: 0.5rem; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
+            border: 1px solid #4B5563; 
+        }
+
+        .chartjs-tooltip-key {
+            display: inline-block;
+            background: #0096c7; /* New Sea Blue for tooltip key */
+            border-radius: 0.125rem; 
+            height: 0.75rem; 
+            width: 0.75rem; 
+            margin-right: 0.25rem; 
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #4A5568; 
+            padding: 0.75rem; 
+            text-align: left;
+        }
+        th {
+            background-color: #2D3748; 
+            color: #E2E8F0; 
+            font-weight: bold;
+        }
+        td {
+            color: #CBD5E0; 
+        }
+        tr:nth-child(even) {
+            background-color: #252d3a; 
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="py-16 sm:py-24 text-center tech-gradient-bg-subtle">
+        <div class="container mx-auto px-4">
+            <i class="fas fa-mobile-screen-button fa-3x highlight-text mb-4"></i>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold highlight-text">全球智能手机市场分析与预测</h1>
+            <p class="mt-4 text-xl sm:text-2xl text-gray-300">Omdia 报告摘要</p>
+            <p class="mt-2 text-lg sm:text-xl text-gray-400">[<span class="font-semibold">来源</span>: 第48届日本显示产业论坛] [<span class="font-semibold">日期</span>: 2025年1月23-24日]</p>
+             <p class="mt-1 text-md text-gray-500">Jusy Hong, 智能手机高级研究经理</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 space-y-12">
+
+        <section class="main-card rounded-xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-chart-line fa-fw mr-3 highlight-text"></i>智能手机市场更新</h2>
+            <p class="text-lg text-gray-300 mb-6">随着行业缓慢而稳定地复苏，智能手机出货量持续同比增长。</p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="chart-container">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-200">全球智能手机出货量及YoY预测（年度）</h3>
+                    <canvas id="globalShipmentsChart"></canvas>
+                    <p class="text-xs text-gray-500 mt-2 text-center">数据根据源文件估算</p>
+                </div>
+                <div class="chart-container">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-200">季度智能手机出货量及YoY</h3>
+                    <canvas id="quarterlyShipmentsChart"></canvas>
+                    <p class="text-xs text-gray-500 mt-2 text-center">数据根据源文件估算</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-card rounded-xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-boxes-stacked fa-fw mr-3 highlight-text"></i>2024年1-3季度累计智能手机出货量</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="mini-card rounded-lg p-6 text-center is-visible">
+                    <p class="text-6xl font-bold highlight-text">9.012亿</p>
+                    <p class="mt-2 text-lg text-gray-300">累计出货量 (2024年1-3季度)</p>
+                    <p class="text-sm text-gray-500">总出货量</p>
+                </div>
+                <div class="mini-card rounded-lg p-6 text-center is-visible">
+                    <p class="text-6xl font-bold highlight-text">7.7%</p>
+                    <p class="mt-2 text-lg text-gray-300">同比增长率</p>
+                    <p class="text-sm text-gray-500">YoY 增长</p>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-4 text-gray-200">核心洞察:</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-2xl font-bold highlight-text">主要驱动力</h4>
+                    <p class="mt-1 text-sm text-gray-400">中低端手机需求强劲及中国/印度市场需求复苏。</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-2xl font-bold highlight-text">中国OEM增长</h4>
+                    <p class="mt-1 text-sm text-gray-400">Xiaomi, Transsion, Vivo 出货量分别同比增长2000万、1400万、1000万台。</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-2xl font-bold highlight-text">Huawei增长放缓</h4>
+                    <p class="mt-1 text-sm text-gray-400">1-3季度累计YoY增长48.0%，但增速从Q1的105%降至Q3的7.5%。</p>
+                </div>
+                 <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-2xl font-bold highlight-text">Motorola崛起</h4>
+                    <p class="mt-1 text-sm text-gray-400">在美洲、欧洲和亚洲出货量显著增加。</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-2xl font-bold highlight-text">超出预期</h4>
+                    <p class="mt-1 text-sm text-gray-400">预计年度增长约5%。</p>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-3 text-gray-200">2024年1-3季度累计智能手机出货量Top 15 OEM（百万台）</h3>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>OEM</th>
+                            <th>2024 (百万台)</th>
+                            <th>市场份额 2024</th>
+                            <th>2023 (百万台)</th>
+                            <th>市场份额 2023</th>
+                            <th>YoY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Samsung</td><td>171.6</td><td>19%</td><td>172.1</td><td>21%</td><td>-0.3%</td></tr>
+                        <tr><td>2</td><td>Apple</td><td>150.8</td><td>17%</td><td>154.2</td><td>18%</td><td>-2%</td></tr>
+                        <tr><td>3</td><td>Xiaomi</td><td>125.9</td><td>14%</td><td>105.5</td><td>13%</td><td>19.4%</td></tr>
+                        <tr><td>4</td><td>Oppo Group</td><td>78.8</td><td>8%</td><td>78.1</td><td>8%</td><td>1%</td></tr>
+                        <tr><td>5</td><td>Transsion</td><td>78.5</td><td>5% (*实际M/S约8.7%*)</td><td>64.6</td><td>5%</td><td>21.5%</td></tr>
+                        <tr><td>6</td><td>vivo</td><td>76.2</td><td>8%</td><td>66.3</td><td>8%</td><td>15%</td></tr>
+                        <tr><td>7</td><td>Honor</td><td>47.0</td><td>4% (*5.2%*)</td><td>41.1</td><td>3%</td><td>14.3%</td></tr>
+                        <tr><td>8</td><td>Lenovo</td><td>41.9</td><td>5% (*4.6%*)</td><td>32.1</td><td>4%</td><td>30%</td></tr>
+                        <tr><td>9</td><td>Huawei</td><td>36.3</td><td>4%</td><td>24.5</td><td>4%</td><td>48.0%</td></tr>
+                        <tr><td>10</td><td>Realme</td><td>36.1</td><td>4%</td><td>29.6</td><td>4%</td><td>22%</td></tr>
+                         <tr><td>11</td><td>ZTE</td><td>8.5</td><td>2% (*0.9%*)</td><td>5.7</td><td>2%</td><td>49.5%</td></tr>
+                        <tr><td>12</td><td>Google</td><td>6.5</td><td>1%</td><td>5.7</td><td>1%</td><td>13%</td></tr>
+                        <tr><td>13</td><td>TCL-Alcatel</td><td>6.4</td><td>1%</td><td>6.6</td><td>1%</td><td>-3.6%</td></tr>
+                        <tr><td>14</td><td>HMD</td><td>2.9</td><td>1%</td><td>4.1</td><td>1%</td><td>-28%</td></tr>
+                        <tr><td>15</td><td>Sony</td><td>1.1</td><td>5% (*0.1%*)</td><td>1.3</td><td>7%</td><td>-18.4%</td></tr>
+                        <tr><td></td><td>其他</td><td>32.8</td><td>3%</td><td>44.0</td><td>2%</td><td>-26%</td></tr>
+                        <tr><td></td><td>总计</td><td>901.2</td><td>100%</td><td>837.0</td><td>100%</td><td>7.7%</td></tr>
+                    </tbody>
+                </table>
+                <p class="text-xs text-gray-500 mt-1">* 市场份额数据来自PDF；括号中为根据提供数据精确计算的百分比。</p>
+            </div>
+        </section>
+
+        <section class="main-card rounded-xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-hourglass-half fa-fw mr-3 highlight-text"></i>市场两极分化：沙漏趋势</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="mini-card rounded-lg p-6 tech-gradient-bg">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-crown fa-2x highlight-text mr-3"></i>
+                        <h3 class="text-2xl font-bold">高端 (>\$750)</h3>
+                    </div>
+                    <p class="text-gray-300">最昂贵型号需求稳定；标准型号需求下降。</p>
+                    <p class="text-sm text-gray-400 mt-1">例如：Apple Pro/Pro Max 表现优于标准版。</p>
+                </div>
+                <div class="mini-card rounded-lg p-6 tech-gradient-bg">
+                     <div class="flex items-center mb-3">
+                        <i class="fas fa-layer-group fa-2x highlight-text mr-3"></i>
+                        <h3 class="text-2xl font-bold">中高端 (\$151-750)</h3>
+                    </div>
+                    <p class="text-gray-300">由于智能手机寿命延长和回收市场增长，出货量持续下降。</p>
+                </div>
+                <div class="mini-card rounded-lg p-6 tech-gradient-bg">
+                     <div class="flex items-center mb-3">
+                        <i class="fas fa-tag fa-2x highlight-text mr-3"></i>
+                        <h3 class="text-2xl font-bold">低端 (<\$150)</h3>
+                    </div>
+                    <p class="text-gray-300">中国OEM厂商积极拓展新兴市场低端产品线。</p>
+                     <p class="text-sm text-gray-400 mt-1">4G低端手机驱动出货量。</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="main-card rounded-xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-calendar-alt fa-fw mr-3 highlight-text"></i>2024-2025年智能手机OEM出货量预测</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
+                <div class="mini-card rounded-lg p-4">
+                    <p class="text-5xl font-bold highlight-text">12.2亿</p>
+                    <p class="mt-1 text-md text-gray-300">预计2024年出货量</p>
+                    <p class="text-xs text-gray-500">较2023年增长7.2%</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-2xl font-bold highlight-text">Apple 领先</h4>
+                    <p class="mt-1 text-sm text-gray-400">预计2024年位居榜首，Samsung第二。</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-2xl font-bold highlight-text">前两名下滑</h4>
+                    <p class="mt-1 text-sm text-gray-400">Apple (-1.4%) 和 Samsung (-1.1%) 2024年出货量预计YoY下降。</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-2xl font-bold highlight-text">中国OEM激增</h4>
+                    <p class="mt-1 text-sm text-gray-400">Huawei (35.7%), Lenovo (24.3%) 高速增长。Xiaomi, Oppo, Transsion 两位数增长。</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-2xl font-bold highlight-text">2025年放缓</h4>
+                    <p class="mt-1 text-sm text-gray-400">由于OEM专注于盈利能力，增长将放缓。</p>
+                </div>
+            </div>
+            <p class="text-sm text-gray-500 mb-4">注意：数据基于2024年11月初步调查和预测，可能会有变动。</p>
+            <div class="overflow-x-auto">
+                <table class="min-w-full">
+                    <thead>
+                        <tr>
+                            <th>OEM</th>
+                            <th>2023年 (百万台)</th>
+                            <th>2024年预测 (百万台)</th>
+                            <th>2024 YoY</th>
+                            <th>2025年预测 (百万台)</th>
+                            <th>2025 YoY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Apple</td><td>229</td><td>226</td><td>-1.4%</td><td>227</td><td>0.6%</td></tr>
+                        <tr><td>Samsung</td><td>226</td><td>223</td><td>-1.1%</td><td>221</td><td>-0.9%</td></tr>
+                        <tr><td>Xiaomi</td><td>146</td><td>169</td><td>15.4%</td><td>175</td><td>3.9%</td></tr>
+                        <tr><td>Transsion</td><td>93</td><td>106</td><td>14.8%</td><td>107</td><td>0.7%</td></tr>
+                        <tr><td>Oppo</td><td>101</td><td>103</td><td>2.6%</td><td>102</td><td>-1.3%</td></tr>
+                        <tr><td>vivo</td><td>89</td><td>101</td><td>13.9%</td><td>103</td><td>2.0%</td></tr>
+                        <tr><td>Honor</td><td>57</td><td>64</td><td>13.4%</td><td>64</td><td>-0.3%</td></tr>
+                        <tr><td>Lenovo</td><td>47</td><td>58</td><td>24.3%</td><td>57</td><td>-1.6%</td></tr>
+                        <tr><td>Realme</td><td>44</td><td>49</td><td>10.2%</td><td>51</td><td>5.0%</td></tr>
+                        <tr><td>Huawei</td><td>36</td><td>48</td><td>35.7%</td><td>48</td><td>0.0%</td></tr>
+                        <tr><td>其他</td><td>76</td><td>77</td><td>0.4%</td><td>68</td><td>-11.4%</td></tr>
+                        <tr><td><strong>总计</strong></td><td><strong>1,142</strong></td><td><strong>1,224</strong></td><td><strong>7.2%</strong></td><td><strong>1,231</strong></td><td><strong>0.6%</strong></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="main-card rounded-xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-mobile-button fa-fw mr-3 highlight-text"></i>折叠屏智能手机市场</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                <div class="mini-card rounded-lg p-4">
+                    <p class="text-5xl font-bold highlight-text">-21%</p>
+                    <p class="mt-1 text-md text-gray-300">折叠屏出货量YoY (2024年3季度)</p>
+                    <p class="text-xs text-gray-500">自2023年1季度以来首次下降</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <p class="text-5xl font-bold highlight-text">1800万</p>
+                    <p class="mt-1 text-md text-gray-300">2024年折叠屏总出货量</p>
+                    <p class="text-xs text-gray-500">较上年增加200万台</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-2xl font-bold highlight-text">2025年收缩</h4>
+                    <p class="mt-1 text-sm text-gray-400">预计出货量将首次出现YoY下降。</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-2xl font-bold highlight-text">Apple 折叠屏?</h4>
+                    <p class="mt-1 text-sm text-gray-400">预计2027年发布以刷新市场。</p>
+                </div>
+                 <div class="mini-card rounded-lg p-4">
+                    <p class="text-5xl font-bold highlight-text">68.4%</p>
+                    <p class="mt-1 text-md text-gray-300">Samsung 折叠屏市场份额 (2024年3季度)</p>
+                    <p class="text-xs text-gray-500">主导地位</p>
+                </div>
+                 <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-2xl font-bold highlight-text">中国厂商ASP</h4>
+                    <p class="mt-1 text-sm text-gray-400">中国OEM的折叠屏手机ASP通常低于Samsung的80%。</p>
+                </div>
+            </div>
+            <div class="chart-container mb-8">
+                <h3 class="text-xl font-semibold mb-3 text-gray-200">折叠屏智能手机出货量预测 (2021-2028F)</h3>
+                <canvas id="foldableForecastChart"></canvas>
+                <p class="text-xs text-gray-500 mt-2 text-center">数据根据源文件估算</p>
+            </div>
+            <h3 class="text-xl font-semibold mb-4 text-gray-200">折叠屏增长放缓原因:</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="mini-card rounded-lg p-4"><p><i class="fas fa-dollar-sign mr-2"></i>价格壁垒</p></div>
+                <div class="mini-card rounded-lg p-4"><p><i class="fas fa-hammer mr-2"></i>耐用性较差</p></div>
+                <div class="mini-card rounded-lg p-4"><p><i class="fas fa-wrench mr-2"></i>维修成本高</p></div>
+                <div class="mini-card rounded-lg p-4"><p><i class="fas fa-lightbulb mr-2"></i>缺乏杀手级应用</p></div>
+                <div class="mini-card rounded-lg p-4"><p><i class="fas fa-tv mr-2"></i>显示屏宽高比不理想 (视频)</p></div>
+                <div class="mini-card rounded-lg p-4"><p><i class="far fa-heart-broken mr-2"></i>对折叠屏忠诚度低</p></div>
+            </div>
+        </section>
+
+        <section class="main-card rounded-xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-microchip fa-fw mr-3 highlight-text"></i>硬件与功能趋势</h2>
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-200 flex items-center"><i class="fas fa-ruler-combined fa-fw mr-2 highlight-text"></i>轻薄化新趋势</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="mini-card rounded-lg p-4">
+                            <h4 class="text-xl font-bold">iPhone 17 Air</h4>
+                            <p class="text-sm text-gray-400">将取代 Plus 型号。</p>
+                        </div>
+                        <div class="mini-card rounded-lg p-4">
+                            <h4 class="text-xl font-bold">Galaxy S25 Slim</h4>
+                            <p class="text-sm text-gray-400">S25系列新增型号。</p>
+                        </div>
+                        <div class="mini-card rounded-lg p-4 colspan-full md:col-span-2">
+                             <h4 class="text-xl font-bold">共同规格</h4>
+                             <p class="text-sm text-gray-400">两者均可能配备6.6英寸AMOLED屏幕，定位中端价值。轻薄旗舰仍是小众产品，Apple可能将其作为未来折叠设备厚度的测试。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-200 flex items-center"><i class="fas fa-battery-full fa-fw mr-2 highlight-text"></i>电池技术演进</h3>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="mini-card rounded-lg p-4">
+                            <h4 class="text-xl font-bold">>5000mAh 主导</h4>
+                            <p class="text-sm text-gray-400">占据市场70%以上份额。</p>
+                        </div>
+                        <div class="mini-card rounded-lg p-4">
+                            <h4 class="text-xl font-bold">硅碳负极技术</h4>
+                            <p class="text-sm text-gray-400">中国OEM采用以在不增加体积情况下提升容量；6000mAh即将推出。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-200 flex items-center"><i class="fas fa-tv-alt fa-fw mr-2 highlight-text"></i>AMOLED显示屏激增</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="mini-card rounded-lg p-4">
+                             <p class="text-5xl font-bold highlight-text">56%</p>
+                             <p class="mt-1 text-md text-gray-300">AMOLED份额 (2024年3季度)</p>
+                             <p class="text-xs text-gray-500">历史最高</p>
+                        </div>
+                        <div class="mini-card rounded-lg p-4">
+                            <h4 class="text-xl font-bold">柔性AMOLED领先</h4>
+                            <p class="text-sm text-gray-400">占AMOLED市场76.3% (2024年3季度)，被中国OEM用于中低端设备。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-200 flex items-center"><i class="fas fa-camera-retro fa-fw mr-2 highlight-text"></i>光学图像稳定 (OIS)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="mini-card rounded-lg p-4">
+                             <p class="text-5xl font-bold highlight-text">45%</p>
+                             <p class="mt-1 text-md text-gray-300">OIS市场份额 (2024年3季度)</p>
+                             <p class="text-xs text-gray-500">2024年持平</p>
+                        </div>
+                        <div class="mini-card rounded-lg p-4">
+                            <h4 class="text-xl font-bold">中端市场增长</h4>
+                            <p class="text-sm text-gray-400">OIS在中端市场渗透率达88% (2024年3季度)。中国OEM是主要驱动力。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-200 flex items-center"><i class="fas fa-cogs fa-fw mr-2 highlight-text"></i>高端SoC采用情况</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="mini-card rounded-lg p-4">
+                             <p class="text-5xl font-bold highlight-text">97%</p>
+                             <p class="mt-1 text-md text-gray-300">高端SoC出货量YoY增长 (2024年1-3季度)</p>
+                        </div>
+                        <div class="mini-card rounded-lg p-4">
+                             <p class="text-5xl font-bold highlight-text">\$810</p>
+                             <p class="mt-1 text-md text-gray-300">搭载高端SoC的全球ASP (2024年1-3季度)</p>
+                             <p class="text-xs text-gray-500">低于去年的\$887</p>
+                        </div>
+                         <div class="mini-card rounded-lg p-4 colspan-full md:col-span-2">
+                             <h4 class="text-xl font-bold">Qualcomm 主导</h4>
+                             <p class="text-sm text-gray-400">占高端SoC智能手机出货量的71% (2024年1-3季度)。</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <section class="main-card rounded-xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 flex items-center"><i class="fas fa-brain fa-fw mr-3 highlight-text"></i>AI智能手机洞察</h2>
+            
+            <div class="mb-8">
+                <h3 class="text-2xl font-semibold mb-3 text-gray-200">初步市场反应积极</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="mini-card rounded-lg p-4">
+                        <h4 class="text-xl font-bold">Samsung Galaxy S24</h4>
+                        <p class="text-sm text-gray-400">发布年1-3季度出货量YoY增长25%。</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <h4 class="text-xl font-bold">iPhone Pro 型号</h4>
+                        <p class="text-sm text-gray-400">iPhone 16系列发布年占比约70%。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="text-2xl font-semibold mb-3 text-gray-200">用户认知与偏好</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="mini-card rounded-lg p-4 text-center">
+                         <p class="text-5xl font-bold highlight-text">89%</p>
+                         <p class="mt-1 text-md text-gray-300">用户了解AI功能</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4 text-center">
+                        <p class="text-5xl font-bold highlight-text">63%</p>
+                        <p class="mt-1 text-md text-gray-300">使用语音助手</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4 text-center">
+                         <p class="text-5xl font-bold highlight-text">43%</p>
+                         <p class="mt-1 text-md text-gray-300">偏好端侧AI处理</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-8 chart-container">
+                <h3 class="text-xl font-semibold mb-3 text-gray-200">端侧AI智能手机预测 (2024F-2028F)</h3>
+                <canvas id="onDeviceAiChart"></canvas>
+                <p class="text-xs text-gray-500 mt-2 text-center">数据根据源文件估算</p>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-4 text-gray-200">端侧AI关键预测:</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                 <div class="mini-card rounded-lg p-4">
+                    <p class="text-4xl font-bold highlight-text">>2亿</p>
+                    <p class="mt-1 text-md text-gray-300">2024年出货量 (17% 市场份额)</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <p class="text-4xl font-bold highlight-text">6.88亿</p>
+                    <p class="mt-1 text-md text-gray-300">至2028年出货量 (27% CAGR)</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <p class="text-4xl font-bold highlight-text">54%</p>
+                    <p class="mt-1 text-md text-gray-300">至2028年渗透率</p>
+                     <p class="text-xs text-gray-500">由中高端市场扩张驱动</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-xl font-bold">技术下放</h4>
+                    <p class="text-sm text-gray-400">AI功能自2025年起向低层级设备渗透。</p>
+                </div>
+            </div>
+             <p class="mt-6 text-lg text-gray-300">“随着智能手机AI的不断发展，端侧计算变得越来越重要，从而导致AI体验的更大差异化。”</p>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 mt-12 border-t border-gray-800">
+        <p class="text-gray-500 text-sm">数据来源：Omdia - 全球智能手机市场分析与预测 (2025年1月)。</p>
+        <p class="text-gray-600 text-xs mt-1">此为基于所提供PDF的综合可视化呈现。官方数据与分析请参考Omdia。</p>
+    </footer>
+
+    <script>
+        // Intersection Observer for animations
+        const animatedElements = document.querySelectorAll('.main-card, .mini-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    let delay = 0;
+                    if (entry.target.classList.contains('mini-card')) {
+                        const siblings = Array.from(entry.target.parentElement.children);
+                        const elIndex = siblings.indexOf(entry.target);
+                        delay = elIndex * 100; 
+                    }
+                    setTimeout(() => {
+                        entry.target.classList.add('is-visible');
+                    }, delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Chart.js configurations
+        const highlightColor = '#0096c7'; // New Sea Blue
+        const gridColor = 'rgba(255, 255, 255, 0.1)';
+        const textColor = '#E0E0E0';
+        const tooltipBackgroundColor = 'rgba(30, 30, 30, 0.9)';
+        const secondaryLineColor = '#00AEEF'; // Kept for contrast if needed, or can be same as highlightColor
+
+        Chart.defaults.font.family = "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif";
+        Chart.defaults.color = textColor;
+        Chart.defaults.borderColor = gridColor;
+
+        // Global Smartphone Shipments Chart
+        const globalShipmentsCtx = document.getElementById('globalShipmentsChart');
+        if (globalShipmentsCtx) {
+            new Chart(globalShipmentsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024(F)', '2025(F)', '2026(F)', '2027(F)', '2028(F)'],
+                    datasets: [{
+                        label: '出货量 (百万台)',
+                        data: [1410, 1390, 1290, 1360, 1210, 1140, 1220, 1230, 1250, 1290, 1330], 
+                        backgroundColor: 'rgba(0, 150, 199, 0.7)', // New Sea Blue
+                        borderColor: highlightColor,
+                        borderWidth: 1,
+                        yAxisID: 'y',
+                    }, {
+                        label: 'YoY 增长 (%)',
+                        data: [null, -2, -8, 6, -11, -5, 7.2, 0.6, 1.5, 3, 3], 
+                        type: 'line',
+                        borderColor: secondaryLineColor, 
+                        backgroundColor: 'rgba(0, 174, 239, 0.2)',
+                        tension: 0.1,
+                        yAxisID: 'y1',
+                    }]
+                },
+                options: {
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    scales: {
+                        x: { grid: { color: gridColor }, ticks: { color: textColor } },
+                        y: { 
+                            position: 'left', 
+                            title: { display: true, text: '出货量 (百万台)', color: textColor },
+                            grid: { color: gridColor }, ticks: { color: textColor }
+                        },
+                        y1: { 
+                            position: 'right', 
+                            title: { display: true, text: 'YoY 增长 (%)', color: textColor },
+                            grid: { drawOnChartArea: false }, ticks: { color: textColor }
+                        }
+                    },
+                    plugins: { legend: { labels: { color: textColor } }, tooltip: { backgroundColor: tooltipBackgroundColor, titleFont: { weight: 'bold'}, bodyFont: {}, footerFont: {} } }
+                }
+            });
+        }
+        
+        // Quarterly Smartphone Shipments Chart
+        const quarterlyShipmentsCtx = document.getElementById('quarterlyShipmentsChart');
+        if (quarterlyShipmentsCtx) {
+             new Chart(quarterlyShipmentsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['3Q21', '4Q21', '1Q22', '2Q22', '3Q22', '4Q22', '1Q23', '2Q23', '3Q23', '4Q23', '1Q24', '2Q24', '3Q24', '4Q24(F)'],
+                    datasets: [{
+                        label: '出货量 (百万台)',
+                        data: [330, 360, 310, 290, 300, 300, 270, 265, 302, 328, 300, 290, 310, 320], 
+                        backgroundColor: 'rgba(0, 150, 199, 0.7)', // New Sea Blue
+                        borderColor: highlightColor,
+                        borderWidth: 1,
+                        yAxisID: 'y',
+                    }, {
+                        label: 'YoY 增长 (%)',
+                        data: [3, 0, -11, -9, -8, -18, -15, -12, 0, 9, 11, 10, 3, 2.9], 
+                        type: 'line',
+                        borderColor: secondaryLineColor,
+                        backgroundColor: 'rgba(0, 174, 239, 0.2)',
+                        tension: 0.1,
+                        yAxisID: 'y1',
+                    }]
+                },
+                options: {
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    scales: {
+                        x: { grid: { color: gridColor }, ticks: { color: textColor, maxRotation: 45, minRotation: 45 } },
+                        y: { position: 'left', title: { display: true, text: '出货量 (百万台)', color: textColor }, grid: { color: gridColor }, ticks: { color: textColor } },
+                        y1: { position: 'right', title: { display: true, text: 'YoY 增长 (%)', color: textColor }, grid: { drawOnChartArea: false }, ticks: { color: textColor } }
+                    },
+                    plugins: { legend: { labels: { color: textColor } }, tooltip: { backgroundColor: tooltipBackgroundColor, titleFont: { weight: 'bold'}, bodyFont: {}, footerFont: {} } }
+                }
+            });
+        }
+
+        // Foldable Smartphone Shipment Forecast Chart
+        const foldableForecastCtx = document.getElementById('foldableForecastChart');
+        if (foldableForecastCtx) {
+            new Chart(foldableForecastCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2021', '2022', '2023', '2024(F)', '2025(F)', '2026(F)', '2027(F)', '2028(F)'],
+                    datasets: [{
+                        label: '折叠屏出货量 (百万台)',
+                        data: [9, 13, 16, 18, 18, 26, 38, 53], 
+                        backgroundColor: 'rgba(0, 150, 199, 0.7)', // New Sea Blue
+                        borderColor: highlightColor,
+                        yAxisID: 'y',
+                    }, {
+                        label: '渗透率 (%)',
+                        data: [0.7, 1.1, 1.4, 1.5, 1.4, 2.0, 2.9, 4.0], 
+                        type: 'line',
+                        borderColor: secondaryLineColor,
+                        backgroundColor: 'rgba(0, 174, 239, 0.2)',
+                        tension: 0.1,
+                        yAxisID: 'y1',
+                    }]
+                },
+                options: {
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    scales: {
+                        x: { grid: { color: gridColor }, ticks: { color: textColor } },
+                        y: { position: 'left', title: { display: true, text: '出货量 (百万台)', color: textColor }, grid: { color: gridColor }, ticks: { color: textColor }, suggestedMax: 60 },
+                        y1: { position: 'right', title: { display: true, text: '渗透率 (%)', color: textColor }, grid: { drawOnChartArea: false }, ticks: { color: textColor, callback: function(value) { return value + '%' } }, suggestedMax: 5 }
+                    },
+                    plugins: { legend: { labels: { color: textColor } }, tooltip: { backgroundColor: tooltipBackgroundColor, titleFont: { weight: 'bold'}, bodyFont: {}, footerFont: {} } }
+                }
+            });
+        }
+        
+        // On-Device AI Smartphone Forecast Chart
+        const onDeviceAiCtx = document.getElementById('onDeviceAiChart');
+        if (onDeviceAiCtx) {
+            new Chart(onDeviceAiCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2024(F)', '2025(F)', '2026(F)', '2027(F)', '2028(F)'],
+                    datasets: [
+                    {
+                        label: '全球智能手机出货量 (百万台)',
+                        data: [1224, 1231, 1250, 1290, 1330], 
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)', 
+                        borderColor: 'rgb(75, 192, 192)',
+                        yAxisID: 'y',
+                        order: 2
+                    },    
+                    {
+                        label: 'AI智能手机出货量 (百万台)',
+                        data: [208, 295, 430, 555, 688], 
+                        backgroundColor: 'rgba(0, 150, 199, 0.7)', // New Sea Blue
+                        borderColor: highlightColor,
+                        yAxisID: 'y',
+                        order: 1
+                    }, {
+                        label: 'AI渗透率 (%)',
+                        data: [17, 24, 34, 43, 54], 
+                        type: 'line',
+                        borderColor: secondaryLineColor,
+                        backgroundColor: 'rgba(0, 174, 239, 0.2)',
+                        tension: 0.1,
+                        yAxisID: 'y1',
+                        order: 0
+                    }]
+                },
+                options: {
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    scales: {
+                        x: { grid: { color: gridColor }, ticks: { color: textColor } },
+                        y: { position: 'left', title: { display: true, text: '出货量 (百万台)', color: textColor }, grid: { color: gridColor }, ticks: { color: textColor }, suggestedMax: 1400 },
+                        y1: { position: 'right', title: { display: true, text: '渗透率 (%)', color: textColor }, grid: { drawOnChartArea: false }, ticks: { color: textColor, callback: function(value) { return value + '%' } }, suggestedMax: 60 }
+                    },
+                    plugins: { legend: { labels: { color: textColor } }, tooltip: { backgroundColor: tooltipBackgroundColor, titleFont: { weight: 'bold'}, bodyFont: {}, footerFont: {} } }
+                }
+            });
+        }
+
+    </script>
+
+</body>
+</html>

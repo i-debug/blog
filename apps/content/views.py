@@ -83,6 +83,7 @@ def article_detail(request, category_slug, article_slug):
                 html_content = f.read()
         except Exception as e:
             print(f"读取HTML文件错误: {e}")
+            # 读取错误时不设置html_content，将使用article.content
     
     context = {
         'article': article,

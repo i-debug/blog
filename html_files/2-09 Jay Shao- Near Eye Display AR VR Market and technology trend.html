@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>近眼显示 AR/VR 市场与技术趋势分析</title>
+    <script src="https://cdn.tailwindcss.com/3.4.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .highlight-text {
+            color: #00AEEF; /* Tech Blue */
+        }
+        .highlight-bg {
+            background-color: #00AEEF;
+        }
+        .highlight-gradient {
+            background-image: linear-gradient(to bottom, rgba(0, 174, 239, 0.7), rgba(0, 174, 239, 0.3));
+        }
+        .card {
+            background-color: #1a1a1a;
+            border: 1px solid #333333;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .mini-card {
+            background-color: #222222;
+            border: 1px solid #383838;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .mini-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Staggered animation for grid items */
+        .grid .mini-card:nth-child(1) { transition-delay: 0.1s; }
+        .grid .mini-card:nth-child(2) { transition-delay: 0.2s; }
+        .grid .mini-card:nth-child(3) { transition-delay: 0.3s; }
+        .grid .mini-card:nth-child(4) { transition-delay: 0.4s; }
+        .grid .mini-card:nth-child(5) { transition-delay: 0.5s; }
+        .grid .mini-card:nth-child(6) { transition-delay: 0.6s; }
+        .grid .mini-card:nth-child(7) { transition-delay: 0.7s; }
+        .grid .mini-card:nth-child(8) { transition-delay: 0.8s; }
+
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 60vh;
+            width: 90%;
+        }
+
+        /* Custom scrollbar for Webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00AEEF;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0078a8;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="py-8 md:py-16 text-center card rounded-b-2xl mx-4 md:mx-8">
+        <div class="container mx-auto px-4">
+            <i class="fas fa-eye fa-3x highlight-text mb-4"></i>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white">近眼显示 AR/VR 市场与技术趋势</h1>
+            <p class="text-lg sm:text-xl md:text-2xl font-semibold text-gray-300 mt-2">Near Eye Display AR VR Market and technology trend</p>
+            <div class="mt-6 text-sm text-gray-400">
+                <p>Jay Shao, Senior Analyst, OLED & Micro LED, Technology [cite: 2]</p>
+                <p>第48回ディスプレイ産業フォーラム | 48th Display Japan Forum [cite: 2, 3]</p>
+                <p>January 23-24, 2025 [cite: 2, 3]</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+
+        <section id="shipment-forecast" class="my-12 card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 text-white"><i class="fas fa-chart-line highlight-text mr-2"></i>近眼显示设备：长期出货量预测 [cite: 4]</h2>
+            <p class="text-gray-300 mb-6">AR/VR 应用中的近眼显示设备出货量预测与增长情况。数据显示，VR设备在初期占据主导地位，但AR设备预计将表现出更快的增长率，并在总出货量中的占比逐渐提升。 [cite: 5]</p>
+            <div class="chart-container mb-8">
+                <canvas id="shipmentForecastChart"></canvas>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-center">
+                <div class="mini-card rounded-lg p-4">
+                    <p class="text-4xl font-bold highlight-text">81.6M</p>
+                    <p class="text-sm text-gray-400 mt-1">2030年总出货量 (预测) [cite: 5]</p>
+                    <p class="text-xs text-gray-500">Total Shipments 2030E</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <p class="text-4xl font-bold highlight-text">24%</p>
+                    <p class="text-sm text-gray-400 mt-1">2030年AR设备占比 (预测) [cite: 5]</p>
+                    <p class="text-xs text-gray-500">AR Share 2030E</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <p class="text-4xl font-bold highlight-text">27.1%</p>
+                    <p class="text-sm text-gray-400 mt-1">2030年总出货量同比增长 (预测) [cite: 5]</p>
+                    <p class="text-xs text-gray-500">Total YoY Growth 2030E</p>
+                </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-4 text-center">数据来源: Omdia, Near-eye Display for XR/AR/VR Application Report 2024 [cite: 6]</p>
+        </section>
+
+        <section id="integration-vision" class="my-12 card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 text-white"><i class="fas fa-vr-cardboard highlight-text mr-2"></i>人眼视觉与虚拟内容的融合 [cite: 8]</h2>
+            <p class="text-gray-300 mb-8">显示技术领域中，人眼视觉与虚拟内容的融合仍然是一个令人兴奋的发展方向。不同类型的设备针对不同的应用场景，采用了多样的显示和光学方案。 [cite: 8, 9]</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-2xl font-semibold highlight-text mb-2">VR / VST MR</h3>
+                    <p class="text-sm text-gray-400 mb-1">显示方案：Fast LCD (~2.5") + Fresnel / OLEDOS (>1.3") + Pancake [cite: 9]</p>
+                    <p class="text-sm text-gray-400">应用场景：空间计算 (Vision Pro)，游戏娱乐 [cite: 9]</p>
+                </div>
+                <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-2xl font-semibold highlight-text mb-2">VG (Vision Glass)</h3>
+                    <p class="text-sm text-gray-400 mb-1">显示方案：OLEDOS (>0.6") + Birdbath [cite: 9]</p>
+                    <p class="text-sm text-gray-400">应用场景：便携扩展显示 [cite: 9]</p>
+                </div>
+                <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-2xl font-semibold highlight-text mb-2">AR / OST MR</h3>
+                    <p class="text-sm text-gray-400 mb-1">显示方案：LEDOS (<0.3") + Waveguide [cite: 9]</p>
+                    <p class="text-sm text-gray-400">应用场景：AR + AI 眼镜 (Orion Glasses)，户外运动与即时消息提示 [cite: 9]</p>
+                </div>
+                 <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-2xl font-semibold highlight-text mb-2">AI Glasses</h3>
+                    <p class="text-sm text-gray-400 mb-1">显示方案：LEDOS (<0.3") + Waveguide [cite: 9]</p>
+                    <p class="text-sm text-gray-400">应用场景：AI 眼镜 (RayBan Glasses) [cite: 9]</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="apple-roadmap" class="my-12 card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 text-white"><i class="fab fa-apple highlight-text mr-2"></i>Apple XR 显示屏路线图更新 [cite: 13]</h2>
+            <p class="text-gray-300 mb-8">Omdia 对 Apple XR OLED 面板路线图的预估，揭示了未来产品迭代中可能采用的技术和规格。 [cite: 13]</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-white mb-2">Vision Pro 1st (2024) [cite: 14]</h3>
+                    <p class="text-3xl font-bold highlight-text">3391 PPI</p>
+                    <p class="text-sm text-gray-400 mt-1">内部显示屏 (WOLEDOS, 1.42" x2) [cite: 14]</p>
+                    <p class="text-xs text-gray-500">Internal Display</p>
+                    <hr class="my-3 border-gray-700">
+                    <p class="text-gray-300 text-sm"><span class="font-semibold">外部显示:</span> 800x360, 145 PPI (Flexible OLED) [cite: 14]</p>
+                    <p class="text-gray-300 text-sm"><span class="font-semibold">OLED供应商:</span> Sony [cite: 14]</p>
+                </div>
+                <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-white mb-2">Vision Pro 2nd (2025-2026 Est.) [cite: 14]</h3>
+                     <p class="text-3xl font-bold highlight-text">3391 PPI</p>
+                    <p class="text-sm text-gray-400 mt-1">内部显示屏 (WOLEDOS, 1.42" x2, Reuse) [cite: 14]</p>
+                    <p class="text-xs text-gray-500">Internal Display (Reuse)</p>
+                    <hr class="my-3 border-gray-700">
+                    <p class="text-gray-300 text-sm"><span class="font-semibold">外部显示:</span> 800x360, 145 PPI (Reuse) [cite: 14]</p>
+                    <p class="text-sm text-red-400 mt-2">市场风险：若AVP2推迟，产品线将面临市场降温风险。 [cite: 15]</p>
+                </div>
+                <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-white mb-2">Vision VR (2027 Est. from 2028) [cite: 15]</h3>
+                    <p class="text-3xl font-bold highlight-text">>1500 PPI</p>
+                    <p class="text-sm text-gray-400 mt-1">Rigid W OLED / Fast LCD (2.0-2.5" x2) [cite: 15]</p>
+                    <p class="text-xs text-gray-500">Mainstream VR Focus</p>
+                </div>
+                <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-white mb-2">Vision Pro 3rd (2028 Est.) [cite: 15]</h3>
+                    <p class="text-3xl font-bold highlight-text">5000 PPI</p>
+                    <p class="text-sm text-gray-400 mt-1">内部显示屏 (RGB OLEDOS) [cite: 15]</p>
+                    <p class="text-xs text-gray-500">Next Gen Internal Display</p>
+                     <hr class="my-3 border-gray-700">
+                    <p class="text-gray-300 text-sm"><span class="font-semibold">外部显示:</span> 1600x720, 292 PPI (Flexible OLED) [cite: 15]</p>
+                </div>
+                <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-white mb-2">Vision AR (2028 Est.) [cite: 15]</h3>
+                    <p class="text-3xl font-bold highlight-text">>3000 PPI</p>
+                    <p class="text-sm text-gray-400 mt-1">WOLEDOS [cite: 15]</p>
+                    <p class="text-xs text-gray-500">AR Glasses Focus</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="oled-comparison" class="my-12 card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 text-white"><i class="fas fa-adjust highlight-text mr-2"></i>硅基 RGB OLED 与玻璃基白光 OLED？ [cite: 16]</h2>
+            <p class="text-gray-300 mb-8">从技术难度和市场需求来看，对于注重视觉效果的VR产品，硅基白光OLED（White OLEDOS）仍是主流选择。 [cite: 16]</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <i class="fas fa-ruler-combined fa-2x highlight-text mb-2"></i>
+                    <h3 class="text-xl font-semibold text-white">更高 PPI</h3>
+                    <p class="text-sm text-gray-400">Higher PPI</p>
+                    <p class="text-sm text-gray-300 mt-1">RGB OLEDOS 和 White OLEDOS 均可实现高PPI，但技术路径不同。 [cite: 16]</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <i class="fas fa-sun fa-2x highlight-text mb-2"></i>
+                    <h3 class="text-xl font-semibold text-white">更高亮度</h3>
+                    <p class="text-sm text-gray-400">Higher Brightness</p>
+                     <p class="text-sm text-gray-300 mt-1">RGB OLEDOS 在亮度方面有潜力。 [cite: 16]</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <i class="fas fa-coins fa-2x highlight-text mb-2"></i>
+                    <h3 class="text-xl font-semibold text-white">更高经济性</h3>
+                    <p class="text-sm text-gray-400">Higher Economy</p>
+                    <p class="text-sm text-gray-300 mt-1">White OLED on glass (>1500 PPI) 在特定场景下具备经济性优势。 [cite: 16]</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="masking-tech" class="my-12 card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 text-white"><i class="fas fa-microchip highlight-text mr-2"></i>RGB OLEDOS 各种掩膜技术的问题与可能性 [cite: 19]</h2>
+            <p class="text-gray-300 mb-8">除了三星显示的精细硅掩模 (FSM)，多家公司正在开发其他 RGB OLEDOS 掩模技术。 [cite: 19] 各技术在当前PPI、未来潜力、可重复性、可扩展性方面存在差异。</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
+                <div class="mini-card rounded-lg p-4">
+                    <h3 class="text-lg font-semibold text-white">eMagin (SDC Exclusive)</h3>
+                    <p class="text-2xl font-bold highlight-text mt-1">3,500 PPI</p>
+                    <p class="text-sm text-gray-400">FSM (光刻, SiNx) [cite: 20, 27]</p>
+                    <p class="text-xs text-gray-500 mt-1">未来PPI: 高, 重复性: 低, 扩展性: 低 [cite: 27]</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h3 class="text-lg font-semibold text-white">OLUM Materials</h3>
+                    <p class="text-2xl font-bold highlight-text mt-1">3,000 PPI</p>
+                    <p class="text-sm text-gray-400">EFM (电铸, Ni, Fe) [cite: 21, 27]</p>
+                    <p class="text-xs text-gray-500 mt-1">未来PPI: 高, 重复性: 高, 扩展性: 低 [cite: 27]</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h3 class="text-lg font-semibold text-white">APS Materials</h3>
+                    <p class="text-2xl font-bold highlight-text mt-1">3,000 PPI</p>
+                    <p class="text-sm text-gray-400">LFM (激光钻孔, Invar) [cite: 22, 27]</p>
+                    <p class="text-xs text-gray-500 mt-1">未来PPI: 低, 重复性: 高, 扩展性: 高 [cite: 27]</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h3 class="text-lg font-semibold text-white">HUNET Plus</h3>
+                    <p class="text-2xl font-bold highlight-text mt-1">3,000 PPI</p>
+                    <p class="text-sm text-gray-400">NFM (UHM) (纳米压印, Hybrid) [cite: 23, 27]</p>
+                    <p class="text-xs text-gray-500 mt-1">未来PPI: 高, 重复性: 中, 扩展性: 中 [cite: 27]</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h3 class="text-lg font-semibold text-white">Applied Materials</h3>
+                    <p class="text-2xl font-bold highlight-text mt-1">600 PPI</p>
+                    <p class="text-sm text-gray-400">FPM (光刻, Photo Resist) [cite: 24, 27]</p>
+                    <p class="text-xs text-gray-500 mt-1">未来PPI: 中, 重复性: 低, 扩展性: 高 [cite: 27]</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h3 class="text-lg font-semibold text-white">Orthogonal</h3>
+                    <p class="text-2xl font-bold highlight-text mt-1">2,000 PPI</p>
+                    <p class="text-sm text-gray-400">OSCOR (光刻, Fluorinated) [cite: 25, 27]</p>
+                    <p class="text-xs text-gray-500 mt-1">未来PPI: 高, 重复性: 低, 扩展性: 高 [cite: 27]</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="chip-options" class="my-12 card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 text-white"><i class="fas fa-memory highlight-text mr-2"></i>芯片方案选择</h2>
+            <p class="text-gray-300 mb-8">短期内，1-chip、2-chip 1 和 2-chip 2 三种方案将共存。从长远来看，2-chip 1 方案更有可能成为最终选择。 [cite: 30]</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="mini-card rounded-lg p-6 text-center">
+                    <h3 class="text-2xl font-semibold text-white mb-2">1-Chip</h3>
+                    <p class="text-sm text-gray-400">集成度高，组件包含像素驱动、门驱动、源驱动、信号发生器、Tcon、帧缓冲、接收器。 [cite: 30]</p>
+                </div>
+                <div class="mini-card rounded-lg p-6 text-center border-2 border-sky-500 shadow-lg shadow-sky-500/30">
+                    <h3 class="text-2xl font-semibold highlight-text mb-2">2-Chip 1 (长期优选)</h3>
+                    <p class="text-sm text-gray-400">Tcon、帧缓冲、接收器分离为一个芯片，其余驱动和信号发生器在另一芯片。 [cite: 30]</p>
+                     <p class="text-xs text-gray-300 mt-2">Long-term Preferred</p>
+                </div>
+                <div class="mini-card rounded-lg p-6 text-center">
+                    <h3 class="text-2xl font-semibold text-white mb-2">2-Chip 2</h3>
+                    <p class="text-sm text-gray-400">像素和门驱动在一芯片，源驱动、信号发生器、Tcon、帧缓冲、接收器在另一芯片。 [cite: 30]</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="oledos-supply" class="my-12 card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 text-white"><i class="fas fa-industry highlight-text mr-2"></i>全球 OLEDOS 供应能力现状 [cite: 33]</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                <div class="mini-card rounded-lg p-4">
+                    <p class="text-3xl font-bold highlight-text">选择有限</p>
+                    <p class="text-sm text-gray-400 mt-1">尽管许多公司声称将进入OLEDOS领域，但终端客户可选择的供应商不多。 [cite: 33]</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <p class="text-3xl font-bold highlight-text">>1.3 英寸</p>
+                    <p class="text-sm text-gray-400 mt-1">VR领域OLEDOS产品尺寸通常超过1.3英寸，主要使用12英寸OLEDOS产能。 [cite: 34]</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                     <p class="text-3xl font-bold highlight-text">需求增长</p>
+                    <p class="text-sm text-gray-400 mt-1">受Apple Vision Pro推动，OLEDOS需求增加。 [cite: 36]</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <p class="text-3xl font-bold highlight-text">29.5K</p>
+                    <p class="text-sm text-gray-400 mt-1">全球12英寸OLEDOS理论最大月产能(晶圆)小幅增长至此。 [cite: 37]</p>
+                    <p class="text-xs text-gray-500">Wafer/Month Capacity</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <p class="text-3xl font-bold highlight-text">成本挑战</p>
+                    <p class="text-sm text-gray-400 mt-1">OLEDOS生产成本较高，因晶圆基板昂贵。 [cite: 39]</p>
+                </div>
+                 <div class="mini-card rounded-lg p-4">
+                    <p class="text-3xl font-bold highlight-text">成功关键</p>
+                    <p class="text-sm text-gray-400 mt-1">生产成本竞争力和技术攻关是成功关键。 [cite: 40]</p>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-4">主要12英寸晶圆OLEDOS供应商产能 (千片/月, 量产) [cite: 41, 42]</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-400">
+                    <thead class="text-xs text-gray-300 uppercase bg-gray-700/30">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">地区</th>
+                            <th scope="col" class="px-6 py-3">制造商</th>
+                            <th scope="col" class="px-6 py-3">工厂</th>
+                            <th scope="col" class="px-6 py-3">类型</th>
+                            <th scope="col" class="px-6 py-3">产能 (K/月)</th>
+                            <th scope="col" class="px-6 py-3">晶圆供应商</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-700">
+                            <td class="px-6 py-4">日本</td>
+                            <td class="px-6 py-4">Sony Semiconductor</td>
+                            <td class="px-6 py-4">OLEDOS 1 Higashi Ura/Kumamoto</td>
+                            <td class="px-6 py-4">$WOLED+CF$</td>
+                            <td class="px-6 py-4">3.5</td>
+                            <td class="px-6 py-4">Sony/TSMC</td>
+                        </tr>
+                        <tr class="border-b border-gray-700">
+                            <td class="px-6 py-4">中国</td>
+                            <td class="px-6 py-4">BOE</td>
+                            <td class="px-6 py-4">YC Optoelectronics Kunming 2</td>
+                            <td class="px-6 py-4">$WOLED+CF$</td>
+                            <td class="px-6 py-4">6.0</td>
+                            <td class="px-6 py-4">SMIC</td>
+                        </tr>
+                        <tr class="border-b border-gray-700">
+                            <td class="px-6 py-4">中国</td>
+                            <td class="px-6 py-4">SeeYa Display Tech</td>
+                            <td class="px-6 py-4">SYD Hefei</td>
+                            <td class="px-6 py-4">$WOLED+CF$</td>
+                            <td class="px-6 py-4">9.0</td>
+                            <td class="px-6 py-4">TSMC</td>
+                        </tr>
+                         <tr class="border-b border-gray-700">
+                            <td class="px-6 py-4">中国</td>
+                            <td class="px-6 py-4">Sidtek</td>
+                            <td class="px-6 py-4">Wuhu 2</td>
+                            <td class="px-6 py-4">$WOLED+CF$</td>
+                            <td class="px-6 py-4">6.0</td>
+                            <td class="px-6 py-4">SMIC</td>
+                        </tr>
+                        <tr class="border-b border-gray-700">
+                            <td class="px-6 py-4">美国</td>
+                            <td class="px-6 py-4">eMagin</td>
+                            <td class="px-6 py-4">New York 2</td>
+                            <td class="px-6 py-4">$WOLFD+CF$</td>
+                            <td class="px-6 py-4">3.0</td>
+                            <td class="px-6 py-4">Global Foundry</td>
+                        </tr>
+                         <tr class="border-b border-gray-700">
+                            <td class="px-6 py-4">美国</td>
+                            <td class="px-6 py-4">eMagin</td>
+                            <td class="px-6 py-4">New York 2</td>
+                            <td class="px-6 py-4">$WOLED+CF$</td>
+                            <td class="px-6 py-4">2.0</td>
+                            <td class="px-6 py-4">Global Foundry</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-xs text-gray-500 mt-4">注：OLEDOS产能数据库会因市场不成熟、工厂验证困难、产能目标不确定等因素随时间发生显著变化。 [cite: 43]</p>
+        </section>
+
+        <section id="ces-highlights" class="my-12 card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-1 text-white"><i class="fas fa-tv highlight-text mr-2"></i>CES 2025 技术亮点</h2>
+            <p class="text-gray-400 mb-8">多家公司在CES 2025上展示了其最新的OLEDOS和LEDOS技术进展。</p>
+
+            <div class="mb-10">
+                <h3 class="text-2xl font-semibold text-white mb-4">Samsung Display OLEDOS [cite: 46]</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-lg font-semibold text-white">White OLEDOS 1.3"</p>
+                        <p class="text-3xl font-bold highlight-text mt-1">4000 PPI</p>
+                        <p class="text-sm text-gray-400">3552x3840, >10,000 nits, DCI-P3 96% [cite: 46]</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-lg font-semibold text-white">SXGA096 XLE 0.62"</p>
+                        <p class="text-3xl font-bold highlight-text mt-1">2646 PPI</p>
+                        <p class="text-sm text-gray-400">1280x1024, 1,500 nits [cite: 46]</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-lg font-semibold text-white">WUXGA RGB dPdTM 0.86"</p>
+                        <p class="text-3xl font-bold highlight-text mt-1">2646 PPI</p>
+                        <p class="text-sm text-gray-400">1920x1200, 10,000 nits [cite: 46]</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-10">
+                <h3 class="text-2xl font-semibold text-white mb-4">Sidtek OLEDOS [cite: 49, 50]</h3>
+                <p class="text-gray-400 mb-4">Sidtek 拥有8英寸OLEDOS生产线，其12英寸工厂于2024年点亮，一期产能6k晶圆/月。 [cite: 50]</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-lg font-semibold text-white">1.35" OLEDOS</p>
+                        <p class="text-3xl font-bold highlight-text mt-1">4875 PPI</p>
+                        <p class="text-sm text-gray-400">3552x3840, >6,000 nits [cite: 49]</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-lg font-semibold text-white">0.49" OLEDOS</p>
+                        <p class="text-3xl font-bold highlight-text mt-1">4536 PPI</p>
+                        <p class="text-sm text-gray-400">1920x1080, Pixel pitch 5.6um [cite: 49]</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-lg font-semibold text-white">0.68" OLEDOS</p>
+                        <p class="text-3xl font-bold highlight-text mt-1">3240 PPI</p>
+                        <p class="text-sm text-gray-400">1920x1200, Pixel pitch 7.65um [cite: 49]</p>
+                    </div>
+                     <div class="mini-card rounded-lg p-4">
+                        <p class="text-lg font-semibold text-white">0.6" OLEDOS</p>
+                        <p class="text-3xl font-bold highlight-text mt-1">2687 PPI</p>
+                        <p class="text-sm text-gray-400">1280x1024 [cite: 49]</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-10">
+                <h3 class="text-2xl font-semibold text-white mb-4">Sony XR [cite: 53]</h3>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-xl font-semibold text-white">XYN Headset</p>
+                        <p class="text-2xl font-bold highlight-text mt-1">4K OLEDOS</p>
+                        <p class="text-sm text-gray-400">面向专业内容创作者。 [cite: 53]</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-xl font-semibold text-white">Play for Dream MR Device</p>
+                        <p class="text-sm text-gray-400 mt-1">双1.35" 4K (3840x3552) OLEDOS显示屏, 92% DCI-P3色域, Pancake光学, 103° FOV (双目)。 [cite: 53]</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-2xl font-semibold text-white mb-4">Xreal One [cite: 54]</h3>
+                <div class="mini-card rounded-lg p-4 inline-block">
+                    <p class="text-xl font-semibold text-white">Sony 0.55" FHD OLEDOS</p>
+                    <p class="text-sm text-gray-400 mt-1">用于Xreal One设备。 [cite: 55]</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="optical-efficiency" class="my-12 card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 text-white"><i class="fas fa-lightbulb highlight-text mr-2"></i>光学模块的高光效对OLEDOS的裨益 [cite: 57]</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-white">LetinAR PinTILT™</h3>
+                    <p class="text-5xl font-bold highlight-text my-2">33%</p>
+                    <p class="text-sm text-gray-400">韩国公司LetinAR开发的光学模块PinTILT™，宣称光效可达33%。 [cite: 57]</p>
+                    <p class="text-xs text-gray-500">Light Efficiency</p>
+                </div>
+                <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-white">OLEDOS 亮度表现</h3>
+                    <p class="text-5xl font-bold highlight-text my-2">330 nits</p>
+                    <p class="text-sm text-gray-400">采用此高效光学模块的OLEDOS (10,000 nits初始亮度, 10%占空比)，理论上可实现330尼特的入眼亮度。 [cite: 58, 60]</p>
+                    <p class="text-xs text-gray-500">Brightness to Eyes</p>
+                    <p class="text-sm text-gray-300 mt-2">此亮度在强光下稍显不足，但结合简单遮光处理可与太阳镜良好结合。 [cite: 59]</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="ledos-solutions" class="my-12 card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 text-white"><i class="fas fa-palette highlight-text mr-2"></i>多种全彩 LEDOS 解决方案 [cite: 66, 69]</h2>
+            <p class="text-gray-300 mb-8">全彩技术是LEDOS发展的重要里程碑。目前主要有RGB芯片堆叠和量子点+LED芯片两种技术路径。 [cite: 69, 70]</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold highlight-text">RGB芯片堆叠</h3>
+                    <p class="text-sm text-gray-400 mt-2"><span class="font-semibold text-white">开发者:</span> JBD [cite: 70]</p>
+                    <p class="text-sm text-gray-400"><span class="font-semibold text-white">关键步骤:</span> 多重金属键合 [cite: 70]</p>
+                    <p class="text-sm text-gray-400"><span class="font-semibold text-white">优点:</span> 可靠性、色彩纯度 [cite: 70]</p>
+                    <p class="text-sm text-gray-400"><span class="font-semibold text-white">缺点:</span> 受下层发光层影响，像素驱动电路受限 [cite: 70]</p>
+                    <p class="text-sm text-gray-400"><span class="font-semibold text-white">状态:</span> Demo, MP ready [cite: 70]</p>
+                </div>
+                <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold highlight-text">量子点 + LED芯片 (QDPR)</h3>
+                    <p class="text-sm text-gray-400 mt-2"><span class="font-semibold text-white">开发者:</span> Sitan & Raysolve [cite: 70]</p>
+                    <p class="text-sm text-gray-400"><span class="font-semibold text-white">关键步骤:</span> QDPR光刻 [cite: 70]</p>
+                    <p class="text-sm text-gray-400"><span class="font-semibold text-white">优点:</span> 工艺简单成熟、经济、灵活 [cite: 70]</p>
+                    <p class="text-sm text-gray-400"><span class="font-semibold text-white">缺点:</span> QD色转换效率、QD寿命短 [cite: 70]</p>
+                    <p class="text-sm text-gray-400"><span class="font-semibold text-white">状态:</span> Demo [cite: 70]</p>
+                </div>
+                <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold highlight-text">量子点 + LED芯片 (纳米孔QD)</h3>
+                    <p class="text-sm text-gray-400 mt-2"><span class="font-semibold text-white">开发者:</span> Saphlux [cite: 70]</p>
+                    <p class="text-sm text-gray-400"><span class="font-semibold text-white">关键步骤:</span> 纳米孔制造和QD加载 [cite: 70]</p>
+                    <p class="text-sm text-gray-400"><span class="font-semibold text-white">优点:</span> 工艺简单、经济 [cite: 70]</p>
+                    <p class="text-sm text-gray-400"><span class="font-semibold text-white">缺点:</span> QD色转换效率、QD寿命短 [cite: 70]</p>
+                    <p class="text-sm text-gray-400"><span class="font-semibold text-white">状态:</span> Demo [cite: 70]</p>
+                </div>
+            </div>
+
+            <h4 class="text-lg font-semibold text-white mt-6 mb-2">JBD 堆叠式全彩方案 [cite: 73, 79]</h4>
+            <p class="text-sm text-gray-300 mb-2">通过金属键合将三色LED芯片堆叠在同一位置，可单独控制。利用不同发光层的尺寸差异避免下层遮挡。 [cite: 74, 75] 推测通过时序控制器 (Tcon) 实现全彩画面。 [cite: 78]</p>
+            
+            <h4 class="text-lg font-semibold text-white mt-6 mb-2">Sitan QDPR 技术 [cite: 83, 84]</h4>
+            <p class="text-sm text-gray-300 mb-2">Sitan Technology (成立于2018年) 通过QD光刻胶实现全彩，在CES 2025上展示了0.2"和0.45"全彩模组。 [cite: 83, 84]</p>
+
+            <h4 class="text-lg font-semibold text-white mt-6 mb-2">Raysolve QDPR 技术 [cite: 85, 86, 89]</h4>
+            <p class="text-sm text-gray-300 mb-2">Raysolve (成立于2019年) 使用其QDPR和CoANODE技术开发LEDOS显示屏。方案包含两种颜色的LED，部分通过量子点转换为第三种颜色。 [cite: 85, 87, 88] 2023年推出7200 PPI (0.11" 320x240, 0.22" 640x480) LEDOS显示屏，亮度达10万尼特，CES 2024称提升至15万尼特。 [cite: 86]</p>
+        </section>
+
+        <section id="ar-devices" class="my-12 card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 text-white"><i class="fas fa-glasses highlight-text mr-2"></i>AR 设备亮点</h2>
+            
+            <div class="mb-10">
+                <h3 class="text-2xl font-semibold text-white mb-4">Meta Orion Glasses (Meta Connection 2024) [cite: 91]</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-3xl font-bold highlight-text">98g</p>
+                        <p class="text-sm text-gray-400 mt-1">设备重量 [cite: 91]</p>
+                        <p class="text-xs text-gray-500">Weight</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-3xl font-bold highlight-text">70° FOV</p>
+                        <p class="text-sm text-gray-400 mt-1">对角视场角 (约13 PPD) [cite: 91]</p>
+                        <p class="text-xs text-gray-500">Diagonal Field of View</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-lg font-semibold text-white">全彩 LEDOS</p>
+                        <p class="text-sm text-gray-400 mt-1">采用 SiC 基波导，估计为JBD的0.13" 640x480 LEDOS。 [cite: 91, 92, 95]</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-lg font-semibold text-white">挑战</p>
+                        <p class="text-sm text-gray-400 mt-1">户外亮度不足，存在彩虹纹，眼部辉光，SiC波导成本高 (约$2000/片Orion镜片盒)。 [cite: 95]</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-10">
+                <h3 class="text-2xl font-semibold text-white mb-4">Rokid Glasses (CES 2025) [cite: 99, 101]</h3>
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-3xl font-bold highlight-text">49g</p>
+                        <p class="text-sm text-gray-400 mt-1">重量 [cite: 100]</p>
+                    </div>
+                     <div class="mini-card rounded-lg p-4">
+                        <p class="text-lg font-semibold text-white">Qualcomm AR1</p>
+                        <p class="text-sm text-gray-400 mt-1">SoC [cite: 100]</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-lg font-semibold text-white">LEDOS + Waveguide</p>
+                        <p class="text-sm text-gray-400 mt-1">光学方案 [cite: 100]</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-3xl font-bold highlight-text">30° FOV</p>
+                        <p class="text-sm text-gray-400 mt-1">视场角 [cite: 100]</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-3xl font-bold highlight-text">1,000 nits</p>
+                        <p class="text-sm text-gray-400 mt-1">亮度 [cite: 100]</p>
+                    </div>
+                     <div class="mini-card rounded-lg p-4">
+                        <p class="text-lg font-semibold text-white">$640\times480$</p>
+                        <p class="text-sm text-gray-400 mt-1">分辨率 [cite: 100]</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-semibold text-white mb-4">Vuzix (CES 2025) [cite: 103, 104]</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-lg font-semibold text-white">Vuzix Incognito 技术</p>
+                        <p class="text-sm text-gray-400 mt-1">应用于MI-30-01单目波导，减少前向漏光。 [cite: 103]</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-lg font-semibold text-white">CI-30-01 双目波导</p>
+                        <p class="text-sm text-gray-400 mt-1">行业领先的色彩均匀性，配合Avagant LCOS投影仪。 [cite: 103]</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-lg font-semibold text-white">C-40-01 双目波导</p>
+                        <p class="text-sm text-gray-400 mt-1">最亮的40度全彩波导。 [cite: 104]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="conclusion" class="my-12 card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold mb-6 text-white"><i class="fas fa-flag-checkered highlight-text mr-2"></i>结论：科技巨头引领XR发展 [cite: 107]</h2>
+            <p class="text-gray-300 mb-8">科技巨头仍在引领XR（扩展现实）的发展，不同的发展方向对显示技术提出了不同的需求。 [cite: 107] 室内办公、虚拟通讯、游戏娱乐等场景更多依赖VR/VST MR的高沉浸感，而户外运动、即时消息、AI辅助等场景则推动AR及AI眼镜向更轻便、时尚及信息提示功能发展。 [cite: 108]</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold highlight-text">VR / VST MR / VG</h3>
+                     <p class="text-sm text-gray-400 mt-2">主要应用：空间计算 (Vision Pro)，便携扩展显示 (Vision Glass)，游戏娱乐。 [cite: 108]</p>
+                     <p class="text-sm text-gray-400 mt-1">显示技术：Fast LCD, OLEDOS (>1.3" or >0.6") 配合 Fresnel, Pancake, Birdbath 光学方案。 [cite: 108]</p>
+                     <p class="text-sm text-gray-300 mt-1">发展方向：与智能手机竞争，探索新应用场景。 [cite: 108]</p>
+                </div>
+                <div class="mini-card rounded-lg p-6">
+                    <h3 class="text-xl font-semibold highlight-text">AR / OST MR / AI Glasses</h3>
+                    <p class="text-sm text-gray-400 mt-2">主要应用：AR+AI眼镜 (Orion Glasses)，AI眼镜 (RayBan Glasses)。 [cite: 108]</p>
+                    <p class="text-sm text-gray-400 mt-1">显示技术：LEDOS (<0.3") 配合 Waveguide 光学方案。 [cite: 108]</p>
+                    <p class="text-sm text-gray-300 mt-1">发展方向：首先应追求时尚眼镜形态，并具备前瞻性功能。 [cite: 108]</p>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <footer class="text-center py-8 text-xs text-gray-500 card rounded-t-2xl mx-4 md:mx-8">
+        <p>报告作者: Jay Shao, Senior Analyst, OLED & Micro LED, Technology. [cite: 2]</p>
+        <p>48th Display Japan Forum, January 23-24, 2025. [cite: 2, 3]</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Chart.js: Shipment Forecast
+            const shipmentCtx = document.getElementById('shipmentForecastChart');
+            if (shipmentCtx) {
+                const shipmentData = {
+                    labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+                    datasets: [
+                        {
+                            label: 'AR 出货量 (千台)',
+                            data: [689, 823, 909, 1151, 1604, 3170, 6894, 12397, 19589], /*[cite: 5]*/
+                            borderColor: '#FFCA28', // Amber
+                            backgroundColor: 'rgba(255, 202, 40, 0.3)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true,
+                        },
+                        {
+                            label: 'VR 出货量 (千台)',
+                            data: [13058, 16371, 16298, 18383, 24210, 32388, 42114, 51830, 62034], /*[cite: 5]*/
+                            borderColor: '#00AEEF', // Tech Blue
+                            backgroundColor: 'rgba(0, 174, 239, 0.3)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true,
+                        },
+                        {
+                            label: '总出货量 (千台)',
+                            data: [13747, 17194, 17207, 19534, 25814, 35558, 49008, 64227, 81623], /*[cite: 5]*/
+                            borderColor: '#4CAF50', // Green
+                            backgroundColor: 'rgba(76, 175, 80, 0.3)',
+                            borderWidth: 3,
+                            type: 'line',
+                            fill: false,
+                        }
+                    ]
+                };
+                new Chart(shipmentCtx, {
+                    type: 'bar', // Default to bar, one dataset is line
+                    data: shipmentData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: '出货量 (千台)', color: '#e0e0e0' },
+                                ticks: { color: '#e0e0e0' },
+                                grid: { color: 'rgba(224, 224, 224, 0.2)' }
+                            },
+                            x: {
+                                title: { display: true, text: '年份', color: '#e0e0e0' },
+                                ticks: { color: '#e0e0e0' },
+                                grid: { color: 'rgba(224, 224, 224, 0.2)' }
+                            }
+                        },
+                        plugins: {
+                            legend: { labels: { color: '#e0e0e0' } },
+                            tooltip: {
+                                titleFont: { size: 14 },
+                                bodyFont: { size: 12 },
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += context.parsed.y.toLocaleString() + ' 千台';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        interaction: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                    }
+                });
+            }
+
+            // Intersection Observer for animations
+            const animatedElements = document.querySelectorAll('.card, .mini-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Optional: unobserve after animation
+                        // observer.unobserve(entry.target); 
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+</html>

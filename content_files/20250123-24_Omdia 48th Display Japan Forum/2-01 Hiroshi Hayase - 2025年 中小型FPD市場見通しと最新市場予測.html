@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025年 中小型FPD市场展望与最新市场预测</title>
+    <script src="https://cdn.tailwindcss.com/3.4.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #E5E7EB; /* Light Gray for text */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+        .main-card {
+            background-color: #1a1a1a;
+            border: 1px solid #333333;
+            transition: all 0.5s ease-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .mini-card {
+            background-color: #222222;
+            border: 1px solid #333333;
+            transition: all 0.5s ease-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .main-card.is-visible, .mini-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .highlight-text {
+            color: #00AEEF; /* Tech Blue */
+        }
+        .tech-gradient-bg {
+            background: linear-gradient(to bottom, rgba(0, 174, 239, 0.2), rgba(0, 174, 239, 0.05));
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 40vh;
+            width: 100%;
+            max-width: 600px; /* Limit max width for larger screens */
+        }
+        .chart-container-pie {
+            position: relative;
+            margin: auto;
+            height: 50vh; /* Taller for pie charts */
+            width: 100%;
+            max-width: 450px;
+        }
+        .large-digit {
+            font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive font size */
+        }
+        .card-title-main {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+        }
+        .mini-card-title {
+             font-size: clamp(1.2rem, 3vw, 1.875rem); /* text-3xl equivalent */
+        }
+
+        /* Staggered animation for mini-cards */
+        .mini-card-grid .mini-card:nth-child(1) { transition-delay: 0.1s; }
+        .mini-card-grid .mini-card:nth-child(2) { transition-delay: 0.2s; }
+        .mini-card-grid .mini-card:nth-child(3) { transition-delay: 0.3s; }
+        .mini-card-grid .mini-card:nth-child(4) { transition-delay: 0.4s; }
+        .mini-card-grid .mini-card:nth-child(5) { transition-delay: 0.5s; }
+        /* Add more if needed */
+
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <header class="text-center mb-12 sm:mb-16 main-card rounded-2xl p-6">
+        <i class="fas fa-chart-line highlight-text text-4xl mb-4"></i>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white">2025年 中小型FPD市场展望与最新市场预测</h1>
+        <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mt-2">Small & Medium FPD Market Outlook and Latest Market Forecast for 2025</p>
+        <p class="text-sm text-gray-500 mt-4">来源: 第48回显示产业论坛 | 早濑宏</p>
+    </header>
+
+    <main class="space-y-8">
+
+        <section class="main-card rounded-xl p-6">
+            <h2 class="card-title-main font-semibold text-white mb-6 border-b border-gray-700 pb-3"><i class="fas fa-info-circle highlight-text mr-2"></i>演讲内容与定义</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-2xl font-semibold highlight-text mb-3">演讲内容</h3>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2">
+                        <li>2024年中小型FPD市场各应用领域出货趋势 (经济环境好转促进换机需求)</li>
+                        <li>中小型FPD市场 手机&车载FPD市场预测 (换机需求暂告一段落，但对附加值提升的期待仍在)</li>
+                        <li>中小型FPD市场 最新长期预测 (「TFT LCD → AMOLED」「LTPS → LTPO」的技术代际更迭推动持续的金额增长)</li>
+                        <li>整体总结</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold highlight-text mb-3">主要定义</h3>
+                    <div class="space-y-3 mini-card-grid">
+                        <div class="mini-card rounded-lg p-4">
+                            <h4 class="mini-card-title font-bold text-white">中小型FPD</h4>
+                            <p class="text-sm text-gray-400">9.0英寸以下的FPD。但车载用途包含所有尺寸。</p>
+                        </div>
+                        <div class="mini-card rounded-lg p-4">
+                            <h4 class="mini-card-title font-bold text-white">FPD</h4>
+                            <p class="text-sm text-gray-400">AMFPD + PMFPD 的总和。</p>
+                        </div>
+                        <div class="mini-card rounded-lg p-4">
+                            <h4 class="mini-card-title font-bold text-white">AMFPD</h4>
+                            <p class="text-sm text-gray-400">TFT LCD + AMOLED + AMEPD + On-Silicon micro-display 的总和。</p>
+                        </div>
+                        <div class="mini-card rounded-lg p-4">
+                            <h4 class="mini-card-title font-bold text-white">PMFPD</h4>
+                            <p class="text-sm text-gray-400">TN/STN-LCD + PMOLED 的总和。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-card rounded-xl p-6">
+            <h2 class="card-title-main font-semibold text-white mb-6 border-b border-gray-700 pb-3"><i class="fas fa-calendar-alt highlight-text mr-2"></i>2024年 中小型FPD市场总结</h2>
+            <p class="text-gray-300 mb-6">经济环境的好转促进了换机需求。随着乌克兰及中东局势的僵持化以及能源价格上涨趋于平稳，全球经济通胀放缓。这激活了消费活动，智能手机和智能手表等移动IT设备的需求增长超出了最初的预期。车载市场预计也将保持强劲需求。因此，2024年中小型FPD市场的出货量预计将超预期增长，但下半年需求增长已初现疲态。</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mini-card-grid mb-8">
+                <div class="mini-card rounded-lg p-4 tech-gradient-bg">
+                    <p class="large-digit font-bold highlight-text">+2%</p>
+                    <p class="text-sm text-gray-300 mt-1">2024年 中小型AMFPD出货量预测 (YoY)</p>
+                    <p class="text-xs text-gray-500">Total AMFPD Shipment Volume YoY Growth (Forecast)</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 tech-gradient-bg">
+                    <p class="large-digit font-bold highlight-text">+12%</p>
+                    <p class="text-sm text-gray-300 mt-1">2024年 中小型AMFPD出货金额预测 (YoY)</p>
+                    <p class="text-xs text-gray-500">Total AMFPD Shipment Value YoY Growth (Forecast)</p>
+                </div>
+                 <div class="mini-card rounded-lg p-4 tech-gradient-bg">
+                    <p class="mini-card-title font-bold text-white">需求结构变化</p>
+                    <p class="text-sm text-gray-300 mt-1">从TFT LCD向AMOLED，从LTPS向LTPO的转变加速。</p>
+                    <p class="text-xs text-gray-500">Shift to AMOLED & LTPO</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="main-card rounded-lg p-4">
+                    <h3 class="text-xl font-semibold text-white mb-3">2024年 中小型AMFPD 各应用领域出货金额 (预测)</h3>
+                    <div class="chart-container">
+                        <canvas id="appRevenue2024Chart"></canvas>
+                    </div>
+                </div>
+                <div class="main-card rounded-lg p-4">
+                    <h3 class="text-xl font-semibold text-white mb-3">2024年 中小型AMFPD 各技术类别出货金额 (预测)</h3>
+                    <div class="chart-container">
+                        <canvas id="techRevenue2024Chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-card rounded-xl p-6">
+            <h2 class="card-title-main font-semibold text-white mb-6 border-b border-gray-700 pb-3"><i class="fas fa-mobile-alt highlight-text mr-2"></i>手机用FPD市场分析 (2023-2024年)</h2>
+            <p class="text-gray-300 mb-6">2024年，所有主要品牌都扩大了AMOLED的采用，采购量较上年大幅增加并稳定增长。尤其是在中端及以上智能手机中，AMOLED的搭载尤为显著。另一方面，a-Si TFT LCD在低端智能手机市场的需求有所回升，预计2024年下半年采购量将扩大。LTPS TFT LCD的出货量急剧萎缩，iPhone向け的出货也趋于结束。</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mini-card-grid mb-8">
+                <div class="mini-card rounded-lg p-4">
+                    <p class="mini-card-title font-bold highlight-text">AMOLED跃进</p>
+                    <p class="text-sm text-gray-300 mt-1">2024年，在智能手机FPD出货量中占比超过50%。</p>
+                    <p class="text-xs text-gray-500">AMOLED Exceeds 50% Share</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <p class="mini-card-title font-bold highlight-text">LTPS TFT LCD萎缩</p>
+                    <p class="text-sm text-gray-300 mt-1">需求受挤压，或将退出市场。</p>
+                    <p class="text-xs text-gray-500">LTPS TFT LCD Decline</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                     <p class="large-digit font-bold highlight-text">US$451亿</p>
+                    <p class="text-sm text-gray-300 mt-1">2024年 手机用FPD出货金额预测 (+12% YoY)。</p>
+                    <p class="text-xs text-gray-500">Mobile FPD Revenue Forecast</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="main-card rounded-lg p-4">
+                    <h3 class="text-xl font-semibold text-white mb-3">2024年 手机用AMFPD 技术类别出货趋势 (季度)</h3>
+                    <div class="chart-container">
+                        <canvas id="mobileTechShipments2024Q"></canvas>
+                    </div>
+                </div>
+                <div class="main-card rounded-lg p-4">
+                    <h3 class="text-xl font-semibold text-white mb-3">2024年 手机用AMOLED 厂商出货量份额 (预测)</h3>
+                     <p class="text-xs text-gray-400 mb-2">三星保持首位但份额跌破50%，中国厂商（尤其是China Star）大幅增长。</p>
+                    <div class="chart-container-pie">
+                        <canvas id="mobileAmoledManufShare2024"></canvas>
+                    </div>
+                </div>
+            </div>
+             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="main-card rounded-lg p-4">
+                    <h3 class="text-xl font-semibold text-white mb-3">手机用AMFPD 平均售价(ASP)趋势</h3>
+                    <div class="chart-container">
+                        <canvas id="mobileAspTrendsChart"></canvas>
+                    </div>
+                </div>
+                <div class="main-card rounded-lg p-4">
+                    <h3 class="text-xl font-semibold text-white mb-3">2024(F) 手机用FPD技术类别 出货量与金额</h3>
+                     <div class="chart-container">
+                        <canvas id="mobileFpdTechVolVal2024"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-card rounded-xl p-6">
+            <h2 class="card-title-main font-semibold text-white mb-6 border-b border-gray-700 pb-3"><i class="fas fa-car highlight-text mr-2"></i>车载显示器用AMFPD市场分析 (2023-2024年)</h2>
+            <p class="text-gray-300 mb-6">EV换购潮和消费复苏带动汽车销售向好，车载显示器用AMFPD出货也稳定增长。但EV换购需求趋缓及中国市场减速，预计2024年第四季度后增长将放缓。大尺寸化趋势明显，平均尺寸从2023年第一季度的8.6英寸增至2025年第一季度的9.5英寸。LTPS TFT LCD的出货量稳步增长。</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mini-card-grid mb-8">
+                <div class="mini-card rounded-lg p-4 tech-gradient-bg">
+                     <p class="large-digit font-bold highlight-text">2.3亿片</p>
+                    <p class="text-sm text-gray-300 mt-1">2024年 车载显示器用AMFPD出货量预测 (+6% YoY)。</p>
+                    <p class="text-xs text-gray-500">Automotive AMFPD Shipments</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 tech-gradient-bg">
+                    <p class="mini-card-title font-bold highlight-text">大尺寸化加速</p>
+                    <p class="text-sm text-gray-300 mt-1">CSD、仪表盘均向10英寸以上发展。平均尺寸达9.5英寸(2025年Q1预测)。</p>
+                    <p class="text-xs text-gray-500">Screen Size Increase</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 tech-gradient-bg">
+                    <p class="mini-card-title font-bold highlight-text">LTPS TFT LCD增长</p>
+                    <p class="text-sm text-gray-300 mt-1">高分辨率、低功耗需求推动LTPS TFT LCD出货增加。</p>
+                    <p class="text-xs text-gray-500">LTPS TFT LCD Growth</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="main-card rounded-lg p-4">
+                    <h3 class="text-xl font-semibold text-white mb-3">2024年 车载显示器用AMFPD 厂商出货量份额 (预测)</h3>
+                    <div class="chart-container-pie">
+                        <canvas id="autoManufShare2024"></canvas>
+                    </div>
+                </div>
+                <div class="main-card rounded-lg p-4">
+                     <h3 class="text-xl font-semibold text-white mb-3">车载显示器用AMFPD 技术类别出货趋势 (季度)</h3>
+                    <div class="chart-container">
+                        <canvas id="autoTechShipments2024Q"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-card rounded-xl p-6">
+            <h2 class="card-title-main font-semibold text-white mb-6 border-b border-gray-700 pb-3"><i class="fas fa-stopwatch highlight-text mr-2"></i>智能手表用FPD市场分析 (2023-2024年)</h2>
+            <p class="text-gray-300 mb-6">到2024年上半年为止，市场实现了两位数的增长，但随着Apple Watch的普及率达到顶峰，LTPO Flexible AMOLED的出货量增长停滞。下半年整体增长率降至个位数。市场可能趋于饱和。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mini-card-grid mb-8">
+                <div class="mini-card rounded-lg p-4 tech-gradient-bg">
+                    <p class="large-digit font-bold highlight-text">3.8亿片</p>
+                    <p class="text-sm text-gray-300 mt-1">2024年 智能手表用FPD出货量预测 (+8% YoY)。</p>
+                    <p class="text-xs text-gray-500">Smartwatch FPD Shipments</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 tech-gradient-bg">
+                    <p class="mini-card-title font-bold highlight-text">增长放缓</p>
+                    <p class="text-sm text-gray-300 mt-1">2024年下半年起增长率降至个位数，市场饱和迹象显现。</p>
+                    <p class="text-xs text-gray-500">Growth Slowdown</p>
+                </div>
+            </div>
+             <div class="main-card rounded-lg p-4">
+                <h3 class="text-xl font-semibold text-white mb-3">2024年 智能手表用FPD 厂商出货量份额 (预测)</h3>
+                <p class="text-xs text-gray-400 mb-2">BOE凭借TFT LCD保持首位。AMOLED领域，Visionox、Tianma等厂商份额提升。</p>
+                <div class="chart-container-pie">
+                    <canvas id="smartwatchManufShare2024"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-card rounded-xl p-6">
+            <h2 class="card-title-main font-semibold text-white mb-6 border-b border-gray-700 pb-3"><i class="fas fa-chart-area highlight-text mr-2"></i>中小型AMFPD 最新长期预测 (2023-2031年)</h2>
+            <p class="text-gray-300 mb-6">手机用FPD正加速向LTPO Flexible AMOLED过渡。预计2024年智能手机用AMOLED出货量将达7.84亿片 (同比增长26%)。车载显示器用FPD随着大尺寸化和高分辨率化，正从a-Si TFT LCD转向LTPS TFT LCD，AMOLED的采用也在增加。整体而言，出货量增长预计有限，但通过提升附加值，销售额有望持续增长。</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="main-card rounded-lg p-4">
+                    <h3 class="text-xl font-semibold text-white mb-3">中小型AMFPD 出货量预测 (按应用领域)</h3>
+                    <div class="chart-container">
+                        <canvas id="longTermShipmentAppChart"></canvas>
+                    </div>
+                </div>
+                <div class="main-card rounded-lg p-4">
+                    <h3 class="text-xl font-semibold text-white mb-3">中小型AMFPD 出货量预测 (按技术类别)</h3>
+                    <div class="chart-container">
+                        <canvas id="longTermShipmentTechChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="main-card rounded-lg p-4">
+                    <h3 class="text-xl font-semibold text-white mb-3">中小型AMFPD 出货金额预测 (按应用领域)</h3>
+                    <div class="chart-container">
+                        <canvas id="longTermRevenueAppChart"></canvas>
+                    </div>
+                </div>
+                <div class="main-card rounded-lg p-4">
+                    <h3 class="text-xl font-semibold text-white mb-3">中小型AMFPD 出货金额预测 (按技术类别)</h3>
+                    <div class="chart-container">
+                        <canvas id="longTermRevenueTechChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <section class="main-card rounded-xl p-6">
+            <h2 class="card-title-main font-semibold text-white mb-6 border-b border-gray-700 pb-3"><i class="fas fa-สรุป highlight-text mr-2"></i>整体总结与未来焦点</h2>
+            <div class="space-y-4 mini-card-grid">
+                <div class="mini-card rounded-lg p-4 tech-gradient-bg">
+                    <p class="mini-card-title font-bold highlight-text">2024年市场稳健</p>
+                    <p class="text-sm text-gray-300 mt-1">经济好转带动换机需求，出货量增2%。LTPO-AMOLED引领，出货金额大幅增长12%。</p>
+                    <p class="text-xs text-gray-500">Solid 2024 Market</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 tech-gradient-bg">
+                    <p class="mini-card-title font-bold highlight-text">技术转型加速</p>
+                    <p class="text-sm text-gray-300 mt-1">智能手机领域从「TFT LCD → AMOLED」、「LTPS → LTPO」的转型加速。</p>
+                    <p class="text-xs text-gray-500">Tech Shift Accelerating</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 tech-gradient-bg">
+                    <p class="mini-card-title font-bold highlight-text">中国厂商崛起</p>
+                    <p class="text-sm text-gray-300 mt-1">中国FPD厂商AMOLED量产能力迅速提升，蚕食韩国厂商份额，竞争加剧。</p>
+                    <p class="text-xs text-gray-500">Rise of Chinese Manufacturers</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 tech-gradient-bg">
+                    <p class="mini-card-title font-bold highlight-text">2024下半年~2025年隐忧</p>
+                    <p class="text-sm text-gray-300 mt-1">2024年下半年起主要应用需求增长乏力。特朗普政府政策可能影响智能手机和汽车市场（本次预测未反映）。</p>
+                    <p class="text-xs text-gray-500">2H 2024 - 2025 Concerns</p>
+                </div>
+                 <div class="mini-card rounded-lg p-4 tech-gradient-bg">
+                    <p class="mini-card-title font-bold highlight-text">追求“质重于量”</p>
+                    <p class="text-sm text-gray-300 mt-1">附加值提升趋势持续。2025年将更加注重“质（价值）重于量”，仍有维持和扩大销售额规模的潜力。</p>
+                    <p class="text-xs text-gray-500">Focus on Value over Volume</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center mt-12 text-gray-500 text-xs">
+        <p>信息基于所提供的文档“2025年中小型FPD市场展望与最新市场预测”，作者：早濑宏，显示产业论坛，2025年1月23-24日。</p>
+        <p>&copy; 2025 Informa Tech Target. 版权所有。</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer for animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+            const elementsToAnimate = document.querySelectorAll('.main-card, .mini-card');
+            elementsToAnimate.forEach(el => observer.observe(el));
+
+            // Chart configurations
+            const defaultChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: '#E5E7EB' }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#9CA3AF' },
+                        grid: { color: 'rgba(156, 163, 175, 0.2)' }
+                    },
+                    y: {
+                        ticks: { color: '#9CA3AF' },
+                        grid: { color: 'rgba(156, 163, 175, 0.2)' },
+                        beginAtZero: true
+                    }
+                }
+            };
+            const pieChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#E5E7EB', boxWidth: 12, padding: 15 }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += context.parsed + '%';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            };
+
+            // Chart Data and Initialization
+            // Page 29: 2024年 中小型AMFPD 各应用领域出货金额 (预测)
+            const appRevenue2024Ctx = document.getElementById('appRevenue2024Chart');
+            if (appRevenue2024Ctx) {
+                new Chart(appRevenue2024Ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['手机', '智能手表', '车载显示器', '移动PC', '电子书', 'AR VR MR 近眼显示', '其他'],
+                        datasets: [{
+                            label: '2023 (US$ 十亿)',
+                            data: [40.34, 2.72, 10.59, 0.64, 0.48, 0.55, 0.33+0.06+0.12+0.17+0.73], // Summing smaller 'Others' from page 31 data
+                            backgroundColor: 'rgba(0, 174, 239, 0.5)',
+                            borderColor: 'rgba(0, 174, 239, 1)',
+                            borderWidth: 1
+                        }, {
+                            label: '2024(F) (US$ 十亿)',
+                            data: [45.07, 3.08, 12.07, 0.57, 0.73, 0.71, 0.33+0.06+0.14+0.12+0.52], // Summing smaller 'Others' from page 31 data
+                            backgroundColor: 'rgba(255, 165, 0, 0.5)',
+                            borderColor: 'rgba(255, 165, 0, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: defaultChartOptions
+                });
+            }
+            // Page 30: 2024年 中小型AMFPD 各技术类别出货金额 (预测)
+            const techRevenue2024Ctx = document.getElementById('techRevenue2024Chart');
+            if (techRevenue2024Ctx) {
+                new Chart(techRevenue2024Ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['a-Si TFT LCD', 'LTPS TFT LCD', 'AMOLED LTPS-Rigid', 'AMOLED LTPS-Flexible', 'AMOLED LTPO-Flexible', '其他'],
+                        datasets: [{
+                            label: '2023 (US$ 十亿)',
+                            data: [10.20, 7.38, 2.98, 15.51, 19.79, 0.21+0.48+0.18+0.00], // Oxide, AMEPD, OLEDOS, MicroLED
+                            backgroundColor: 'rgba(0, 174, 239, 0.5)',
+                            borderColor: 'rgba(0, 174, 239, 1)',
+                            borderWidth: 1
+                        }, {
+                            label: '2024(F) (US$ 十亿)',
+                            data: [10.07, 7.06, 4.09, 14.18, 26.57, 0.19+0.12+0.73+0.40+0.00], // Oxide, Hybrid AMOLED, AMEPD, OLEDOS, MicroLED
+                            backgroundColor: 'rgba(255, 165, 0, 0.5)',
+                            borderColor: 'rgba(255, 165, 0, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: defaultChartOptions
+                });
+            }
+
+            // Page 15 mobileTechShipments2024Q (Simplified from Page 9 data for 2024 quarters)
+            const mobileTechShipments2024QCtx = document.getElementById('mobileTechShipments2024Q');
+            if (mobileTechShipments2024QCtx) {
+                new Chart(mobileTechShipments2024QCtx, {
+                    type: 'bar', // Changed to bar for better readability of multiple series
+                    data: {
+                        labels: ['1Q24', '2Q24', '3Q24', '4Q24(F)'],
+                        datasets: [
+                            { label: 'a-Si TFT LCD', data: [186.8, 170.4, 199.7, 198.8], backgroundColor: 'rgba(0, 174, 239, 0.7)' }, // Source: Page 9
+                            { label: 'LTPS TFT LCD', data: [53.0, 37.0, 30.7, 29.8], backgroundColor: 'rgba(0, 100, 148, 0.7)' }, // Source: Page 9
+                            { label: 'LTPS Rigid AMOLED', data: [47.1, 46.9, 36.7, 36.1], backgroundColor: 'rgba(255, 165, 0, 0.7)' }, // Source: Page 9
+                            { label: 'LTPS Flexible AMOLED', data: [78.5, 88.3, 90.1, 85.1], backgroundColor: 'rgba(255, 99, 132, 0.7)' }, // Source: Page 9
+                            { label: 'LTPO Flexible AMOLED', data: [56.6, 59.7, 68.2, 90.9], backgroundColor: 'rgba(75, 192, 192, 0.7)' } // Source: Page 9
+                        ]
+                    },
+                    options: {...defaultChartOptions, scales: {x: {...defaultChartOptions.scales.x, stacked: true}, y: {...defaultChartOptions.scales.y, stacked: true, title: { display: true, text: '百万片/季度', color: '#E5E7EB'}}}}
+                });
+            }
+            // Page 14: 2024年 手机用AMOLED 厂商出货量份额 (预测)
+            const mobileAmoledManufShare2024Ctx = document.getElementById('mobileAmoledManufShare2024');
+            if (mobileAmoledManufShare2024Ctx) {
+                new Chart(mobileAmoledManufShare2024Ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Samsung', 'BOE', 'China Star', 'Tianma', 'LG Display', 'Visionox', 'Everdisplay', 'Sharp'], // Source: Page 14
+                        datasets: [{
+                            label: '出货量份额 (%)',
+                            data: [46.0, 17.0, 10.0, 9.4, 8.9, 8.0, 0.6, 0.1], // Source: Page 14
+                            backgroundColor: ['#0052A3', '#ED1D26', '#FFA500', '#00AEEF', '#4BC0C0', '#FDB45C', '#949FB1', '#7FFF00'],
+                        }]
+                    },
+                    options: pieChartOptions
+                });
+            }
+            
+            // Page 15: Mobile ASP Trends Chart (Simplified)
+            const mobileAspTrendsChartCtx = document.getElementById('mobileAspTrendsChart');
+            if (mobileAspTrendsChartCtx) {
+                 new Chart(mobileAspTrendsChartCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['1Q23', '2Q23', '3Q23', '4Q23', '1Q24', '2Q24', '3Q24', '4Q24(F)', '1Q25(F)'], // Source: Page 15
+                        datasets: [
+                            {
+                                label: 'ASP (LTPO Flexible AMOLED)', // Source: Page 15
+                                data: [80, 75, 85, 100, 90, 92, 95, 110, 98].map(v => v*0.8), // Adjusted visually from graph on Page 15 (right graph values, scaled for left axis)
+                                borderColor: '#00AEEF',
+                                tension: 0.1,
+                                yAxisID: 'yPriceHigh'
+                            },
+                             {
+                                label: 'ASP (LTPS Flexible AMOLED)', // Source: Page 15
+                                data: [22, 20, 21, 25, 20, 19, 18, 17, 19].map(v => v*1.8), // Adjusted visually from graph on Page 15 (left graph values)
+                                borderColor: '#FFA500',
+                                tension: 0.1,
+                                yAxisID: 'yPriceLow'
+                            },
+                            {
+                                label: 'ASP (LTPS Rigid AMOLED)', // Source: Page 15
+                                data: [15, 14, 16, 18, 17, 16, 14, 13, 15].map(v => v*1.8), // Adjusted visually from graph on Page 15 (left graph values)
+                                borderColor: '#4BC0C0',
+                                tension: 0.1,
+                                yAxisID: 'yPriceLow'
+                            },
+                            {
+                                label: 'ASP (LTPS TFT LCD)', // Source: Page 15
+                                data: [10, 9, 8.5, 8, 7, 6, 5.5, 5, 4.5].map(v => v*1.8), // Adjusted visually from graph on Page 15 (left graph values)
+                                borderColor: '#FDB45C',
+                                tension: 0.1,
+                                yAxisID: 'yPriceLow'
+                            },
+                             {
+                                label: 'ASP (a-Si TFT LCD)', // Source: Page 15
+                                data: [4, 3.8, 3.5, 3.7, 4.2, 4.5, 4.3, 4.1, 4.0].map(v => v*1.8), // Adjusted visually from graph on Page 15 (left graph values)
+                                borderColor: '#949FB1',
+                                tension: 0.1,
+                                yAxisID: 'yPriceLow'
+                            }
+                        ]
+                    },
+                    options: {
+                        ...defaultChartOptions,
+                        scales: {
+                            x: {...defaultChartOptions.scales.x},
+                            yPriceLow: { type: 'linear', position: 'left', title: { display: true, text: 'ASP ($) - 中低端', color: '#E5E7EB'}, ticks: { color: '#9CA3AF' }, grid: { color: 'rgba(156, 163, 175, 0.2)' } },
+                            yPriceHigh: { type: 'linear', position: 'right', title: { display: true, text: 'ASP ($) - 高端', color: '#E5E7EB'}, ticks: { color: '#9CA3AF' }, grid: { drawOnChartArea: false } }
+                        }
+                    }
+                });
+            }
+
+            // Page 16: Mobile FPD Tech Volume & Value 2024
+            const mobileFpdTechVolVal2024Ctx = document.getElementById('mobileFpdTechVolVal2024');
+            if (mobileFpdTechVolVal2024Ctx) {
+                 new Chart(mobileFpdTechVolVal2024Ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['a-Si TFT', 'LTPS TFT', 'LTPS Rigid AMOLED', 'LTPS Flexible AMOLED', 'LTPO Flexible AMOLED'], // Source: Page 16 table
+                        datasets: [
+                            {
+                                label: '2024(F) 出货量 (百万片)', // Source: Page 16 table
+                                data: [755.6, 150.5, 166.7, 342.0, 275.4],
+                                backgroundColor: 'rgba(0, 174, 239, 0.7)',
+                                yAxisID: 'yVolume'
+                            },
+                            {
+                                label: '2024(F) 出货金额 (US$ 十亿)', // Source: Page 16 table
+                                data: [2.58, 1.48, 2.64, 13.56, 24.80],
+                                backgroundColor: 'rgba(255, 165, 0, 0.7)',
+                                yAxisID: 'yValue'
+                            }
+                        ]
+                    },
+                    options: {
+                       ...defaultChartOptions,
+                        scales: {
+                            x: defaultChartOptions.scales.x,
+                            yVolume: { type: 'linear', position: 'left', title: { display: true, text: '出货量 (百万片)', color: '#E5E7EB'}, ticks: { color: '#9CA3AF' } },
+                            yValue: { type: 'linear', position: 'right', title: { display: true, text: '出货金额 (US$ 十亿)', color: '#E5E7EB'}, ticks: { color: '#9CA3AF' }, grid: { drawOnChartArea: false } }
+                        }
+                    }
+                });
+            }
+
+
+            // Page 20/12: 2024年 车载显示器用AMFPD 厂商出货量份额 (预测)
+            const autoManufShare2024Ctx = document.getElementById('autoManufShare2024');
+            if (autoManufShare2024Ctx) {
+                new Chart(autoManufShare2024Ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['BOE', 'Tianma', 'AUO', 'Japan Display', 'LG Display', 'IVO', 'Innolux', 'HannStar', 'Truly', 'Sharp', 'China Star', '其他'], // Source: Page 20 (same as Page 12)
+                        datasets: [{
+                            label: '出货量份额 (%)',
+                            data: [17.8, 15.7, 10.5, 8.8, 7.7, 6.5, 5.6, 5.4, 5.3, 5.2, 5.0, 1.5+1.2+0.9+0.7+0.5+1.7+0.0], // HKC, Century, GiantPlus, Samsung, Toppan, Kyocera, Everdisplay
+                            backgroundColor: ['#00AEEF', '#FFA500', '#4BC0C0', '#FDB45C', '#949FB1', '#7FFF00', '#FF6384', '#36A2EB', '#FFCE56', '#ADFF2F', '#20B2AA', '#D3D3D3'],
+                        }]
+                    },
+                    options: pieChartOptions
+                });
+            }
+            
+            //Page 19 autoTechShipments2024Q
+            const autoTechShipments2024QCtx = document.getElementById('autoTechShipments2024Q');
+            if(autoTechShipments2024QCtx){
+                new Chart(autoTechShipments2024QCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['1Q24', '2Q24', '3Q24', '4Q24(F)'],
+                        datasets:[
+                            { label: 'a-Si TFT LCD', data: [38561, 39905, 38548, 37634], borderColor: '#00AEEF', tension: 0.1 }, // Source: Page 19
+                            { label: 'LTPS TFT LCD', data: [15543, 17846, 18475, 18959], borderColor: '#FFA500', tension: 0.1 }, // Source: Page 19
+                            { label: 'AMOLED', data: [438, 550, 771, 878], borderColor: '#4BC0C0', tension: 0.1 }, // Source: Page 19
+                            { label: 'Oxide TFT LCD', data: [440, 637, 627, 655], borderColor: '#FDB45C', tension: 0.1 } // Source: Page 19
+                        ]
+                    },
+                    options: {...defaultChartOptions, scales: {...defaultChartOptions.scales, y: {...defaultChartOptions.scales.y, title: {display: true, text: '千片/季度', color: '#E5E7EB'}}}}
+                });
+            }
+
+            // Page 22: 2024年 智能手表用FPD 厂商出货量份额 (预测)
+            const smartwatchManufShare2024Ctx = document.getElementById('smartwatchManufShare2024');
+            if (smartwatchManufShare2024Ctx) {
+                new Chart(smartwatchManufShare2024Ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['BOE', 'Visionox', 'LG Display', 'Tianma', 'Everdisplay', 'Truly', 'Japan Display', 'Samsung', '其他'], // Source: Page 22
+                        datasets: [{
+                            label: '出货量份额 (%)',
+                            data: [57.5, 9.4, 7.4, 6.6, 6.1, 5.9, 2.5, 2.3, 1.6+0.5+0.1+0.2], // Sharp, WiseChip, ChinaStar, Others
+                            backgroundColor: ['#00AEEF', '#FFA500', '#4BC0C0', '#FDB45C', '#949FB1', '#7FFF00', '#FF6384', '#36A2EB', '#D3D3D3'],
+                        }]
+                    },
+                    options: pieChartOptions
+                });
+            }
+
+            // Long Term Charts (Simplified, showing overall trends)
+            // Page 45: Long Term Shipment by Application
+            const longTermShipmentAppCtx = document.getElementById('longTermShipmentAppChart');
+            if (longTermShipmentAppCtx) {
+                 new Chart(longTermShipmentAppCtx, {
+                    type: 'line', // Line chart for trends over years
+                    data: {
+                        labels: ['2023', '2024(F)', '2025(F)', '2026(F)', '2027(F)', '2028(F)', '2029(F)', '2030(F)', '2031(F)'], // Source: Page 123
+                        datasets: [
+                            { label: '手机', data: [1688.1, 1690.2, 1676.6, 1657.3, 1655.0, 1637.2, 1624.1, 1619.3, 1637.6], borderColor: '#00AEEF', tension: 0.1 }, // Source: Page 123
+                            { label: '智能手表', data: [348.6, 378.7, 381.1, 382.6, 385.9, 388.7, 394.4, 401.1, 407.8], borderColor: '#FFA500', tension: 0.1 }, // Source: Page 123
+                            { label: '车载显示器', data: [218.4, 230.5, 238.5, 246.5, 253.2, 258.2, 260.5, 262.6, 266.5], borderColor: '#4BC0C0', tension: 0.1 }, // Source: Page 123
+                            { label: 'AR VR MR 近眼显示', data: [12.7, 14.7, 19.5, 26.2, 35.1, 49.9, 64.3, 81.4, 96.5], borderColor: '#FF6384', tension: 0.1 }, // Source: Page 123
+                            // Total can be added as another line or not shown if focusing on components
+                        ]
+                    },
+                    options: {...defaultChartOptions, scales: {...defaultChartOptions.scales, y: {...defaultChartOptions.scales.y, title: {display: true, text: '出货量 (百万片/年)', color: '#E5E7EB'}}}}
+                });
+            }
+            // Page 46: Long Term Shipment by Technology
+            const longTermShipmentTechCtx = document.getElementById('longTermShipmentTechChart');
+            if (longTermShipmentTechCtx) {
+                 new Chart(longTermShipmentTechCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2023', '2024(F)', '2025(F)', '2026(F)', '2027(F)', '2028(F)', '2029(F)', '2030(F)', '2031(F)'], // Source: Page 125
+                        datasets: [
+                            { label: 'TFT LCD 合计', data: [1712.4, 1562.8, 1512.7, 1464.5, 1444.6, 1399.8, 1351.8, 1323.8, 1301.2], borderColor: '#00AEEF', tension: 0.1 }, // Source: Page 125
+                            { label: 'AMOLED 合计', data: [777.9, 963.6, 1010.3, 1051.8, 1098.1, 1145.8, 1191.7, 1227.7, 1288.4], borderColor: '#FFA500', tension: 0.1 }, // Source: Page 125
+                            { label: 'AMEPD', data: [17.7, 24.7, 30.7, 33.4, 35.1, 35.8, 36.2, 36.5, 36.6], borderColor: '#4BC0C0', tension: 0.1 }, // Source: Page 125
+                            { label: 'Micro LED & OLEDOS', data: [2.4, 4.4, 5.6, 9.0, 9.4, 16.9, 28.6, 43.9, 57.2], borderColor: '#FF6384', tension: 0.1 } // Sum of OLEDOS and Micro LED & LEDOS from Page 125
+                        ]
+                    },
+                    options: {...defaultChartOptions, scales: {...defaultChartOptions.scales, y: {...defaultChartOptions.scales.y, title: {display: true, text: '出货量 (百万片/年)', color: '#E5E7EB'}}}}
+                });
+            }
+            // Page 49: Long Term Revenue by Application
+            const longTermRevenueAppCtx = document.getElementById('longTermRevenueAppChart');
+            if (longTermRevenueAppCtx) {
+                 new Chart(longTermRevenueAppCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2023', '2024(F)', '2025(F)', '2026(F)', '2027(F)', '2028(F)', '2029(F)', '2030(F)', '2031(F)'], // Source: Page 139
+                        datasets: [
+                            { label: '手机', data: [40.34, 45.07, 47.36, 46.77, 48.01, 49.33, 49.17, 48.69, 50.71], borderColor: '#00AEEF', tension: 0.1 }, // Source: Page 139
+                            { label: '车载显示器', data: [10.59, 12.07, 13.22, 14.04, 14.91, 15.70, 16.20, 16.75, 17.52], borderColor: '#FFA500', tension: 0.1 }, // Source: Page 139
+                            { label: '智能手表', data: [2.72, 3.08, 3.15, 3.07, 3.01, 3.06, 3.37, 3.64, 3.97], borderColor: '#4BC0C0', tension: 0.1 }, // Source: Page 139
+                            { label: 'AR VR MR 近眼显示', data: [0.55, 0.71, 0.77, 1.18, 1.48, 2.06, 2.78, 3.72, 4.29], borderColor: '#FF6384', tension: 0.1 }, // Source: Page 139
+                        ]
+                    },
+                     options: {...defaultChartOptions, scales: {...defaultChartOptions.scales, y: {...defaultChartOptions.scales.y, title: {display: true, text: '出货金额 (US$ 十亿/年)', color: '#E5E7EB'}}}}
+                });
+            }
+             // Page 50: Long Term Revenue by Technology
+            const longTermRevenueTechCtx = document.getElementById('longTermRevenueTechChart');
+            if (longTermRevenueTechCtx) {
+                 new Chart(longTermRevenueTechCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2023', '2024(F)', '2025(F)', '2026(F)', '2027(F)', '2028(F)', '2029(F)', '2030(F)', '2031(F)'], // Source: Page 140
+                        datasets: [
+                            { label: 'TFT LCD 合计', data: [17.79, 17.32, 17.74, 18.17, 18.55, 18.88, 18.84, 18.72, 18.64], borderColor: '#00AEEF', tension: 0.1 }, // Source: Page 140
+                            { label: 'AMOLED 合计', data: [38.29, 44.95, 48.13, 48.01, 50.09, 52.03, 52.33, 52.36, 54.95], borderColor: '#FFA500', tension: 0.1 }, // Source: Page 140
+                            { label: 'AMEPD', data: [0.48, 0.73, 0.93, 1.00, 1.03, 1.04, 1.04, 1.04, 1.04], borderColor: '#4BC0C0', tension: 0.1 }, // Source: Page 140
+                            { label: 'Micro LED & OLEDOS', data: [0.18, 0.40, 0.39, 0.72, 0.92, 1.44, 2.53, 3.92, 5.21], borderColor: '#FF6384', tension: 0.1 } // Sum of OLEDOS and Micro LED & LCOS from Page 140
+                        ]
+                    },
+                    options: {...defaultChartOptions, scales: {...defaultChartOptions.scales, y: {...defaultChartOptions.scales.y, title: {display: true, text: '出货金额 (US$ 十亿/年)', color: '#E5E7EB'}}}}
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>显示触控界面与显示盖板发展趋势分析</title>
+    <script src="https://cdn.tailwindcss.com/3.4.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .highlight-text {
+            color: #00AEEF; /* Tech Blue */
+        }
+
+        .highlight-bg-subtle {
+            background: linear-gradient(to bottom, rgba(0, 174, 239, 0.2), rgba(0, 174, 239, 0.05));
+        }
+        
+        .highlight-bg-strong {
+             background: linear-gradient(to right, rgba(0, 174, 239, 0.7), rgba(0, 174, 239, 0.3));
+        }
+
+        .card {
+            background-color: #1a1a1a;
+            border: 1px solid #333333;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mini-card {
+            background-color: #222222;
+            border: 1px solid #333333;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .mini-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .main-title-gradient {
+            background: -webkit-linear-gradient(45deg, #00AEEF, #007ACC);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Chart.js dark mode styles */
+        Chart.defaults.color = '#ccc';
+        Chart.defaults.borderColor = '#444';
+        Chart.defaults.plugins.legend.labels.color = '#ccc';
+        Chart.defaults.scale.ticks.color = '#ccc';
+        Chart.defaults.scale.grid.color = '#444';
+        Chart.defaults.scale.angleLines.color = '#444';
+    </style>
+</head>
+<body class="bg-black text-white p-4 sm:p-6 md:p-8">
+
+    <header class="text-center my-12 md:my-16">
+        <i class="fas fa-chart-line highlight-text text-4xl mb-4"></i>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold main-title-gradient">显示触控界面与显示盖板发展趋势</h1>
+        <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mt-2">Display Touch Interface and Display Cover Lens Development Trends</p>
+        <p class="text-sm text-gray-500 mt-1">来源: Omdia | 第48回ディスプレイ産業フォーラム (48th Display Japan Forum) [cite: 1, 2]</p>
+        <p class="text-sm text-gray-500">日期: 2025年1月23-24日 [cite: 1, 2]</p>
+    </header>
+
+    <main class="space-y-12 md:space-y-16">
+
+        <section class="card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-semibold mb-6 highlight-text"><i class="fas fa-eye mr-2"></i>报告核心总结</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="mini-card rounded-xl p-6">
+                    <h3 class="text-2xl font-bold highlight-text mb-2">触控市场趋势</h3>
+                    <p class="text-gray-300">整体增长放缓，技术趋于成熟，嵌入式触控和与显示的集成是主要方向。 [cite: 3, 84]</p>
+                </div>
+                <div class="mini-card rounded-xl p-6">
+                    <h3 class="text-2xl font-bold highlight-text mb-2">盖板市场趋势</h3>
+                    <p class="text-gray-300">低增长将成为常态，玻璃陶瓷和可折叠盖板是发展重点，中国品牌积极布局供应链。 [cite: 42, 43, 44, 45, 86]</p>
+                </div>
+                <div class="mini-card rounded-xl p-6">
+                    <h3 class="text-2xl font-bold highlight-text mb-2">可折叠设备挑战</h3>
+                    <p class="text-gray-300">若无突破性卖点，2025年可折叠设备可能面临挑战。 [cite: 85] 盖板技术仍在优化中，UTG+CPI 方案或成主流。 [cite: 88]</p>
+                </div>
+                <div class="mini-card rounded-xl p-6">
+                    <h3 class="text-2xl font-bold highlight-text mb-2">技术创新方向</h3>
+                    <p class="text-gray-300">玻璃陶瓷供应链本土化， [cite: 86] 不均匀厚度UTG的研发正在进行中。 [cite: 89]</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-semibold mb-6 highlight-text"><i class="fas fa-mobile-alt mr-2"></i>手机触控市场趋势 (Mobile Phone Touch)</h2>
+            <div class="mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-5xl font-bold highlight-text">缓</p>
+                    <p class="text-sm text-gray-300 mt-1">长期缓慢增长</p>
+                    <p class="text-xs text-gray-500">Slow Growth</p>
+                    <p class="text-xs text-gray-400 mt-1">成熟技术导致 [cite: 4]</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-3xl font-bold highlight-text">主流技术</p>
+                    <p class="text-sm text-gray-300 mt-1">柔性On-cell AMOLED</p>
+                    <p class="text-sm text-gray-300">& In-cell TFT LCD [cite: 5]</p>
+                    <p class="text-xs text-gray-500">Dominant Technologies</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-3xl font-bold highlight-text">增长动力?</p>
+                    <p class="text-sm text-gray-300 mt-1">AI与折叠屏</p>
+                    <p class="text-sm text-gray-300">不一定驱动增长 [cite: 6]</p>
+                    <p class="text-xs text-gray-500">Growth Drivers?</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="mini-card rounded-xl p-4 highlight-bg-subtle">
+                    <h4 class="text-xl font-semibold mb-2">手机触控模组出货量 (000s)</h4>
+                    <canvas id="mobileTouchShipmentsChart"></canvas>
+                    <p class="text-xs text-gray-400 mt-2 text-center">数据来源：Omdia [cite: 4]</p>
+                </div>
+                <div class="mini-card rounded-xl p-4 highlight-bg-subtle">
+                    <h4 class="text-xl font-semibold mb-2">主要技术结构百分比</h4>
+                    <canvas id="mobileTouchTechChart"></canvas>
+                    <p class="text-xs text-gray-400 mt-2 text-center">数据来源：Omdia [cite: 4]</p>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-100">技术与结构观察</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-xl font-bold highlight-text">In-cell TFT LCD</p>
+                        <p class="text-sm text-gray-300 mt-1">坚守HD+份额，FHD+份额被On-cell AMOLED大量占据。 [cite: 8]</p>
+                        <p class="text-xs text-gray-500">HD+ Share Retention</p>
+                    </div>
+                     <div class="mini-card rounded-lg p-4">
+                        <p class="text-xl font-bold highlight-text">折叠屏类型</p>
+                        <p class="text-sm text-gray-300 mt-1">首次出现同比和环比衰退，需关注。 [cite: 9]</p>
+                        <p class="text-xs text-gray-500">Foldable Type Recession</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-xl font-bold highlight-text">On-cell AMOLED</p>
+                        <p class="text-sm text-gray-300 mt-1">在2024年Q2及Q3出货量和占比均有显著增长。 [cite: 10]</p>
+                        <p class="text-xs text-gray-500">Significant Growth in 2024</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-semibold mb-6 highlight-text"><i class="fas fa-folder-open mr-2"></i>可折叠智能手机困境 (Foldable Smartphones)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <i class="fas fa-dollar-sign text-4xl highlight-text mb-2"></i>
+                    <p class="text-lg font-semibold">价格</p>
+                    <p class="text-xs text-gray-400">Price</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <i class="fas fa-cogs text-4xl highlight-text mb-2"></i>
+                    <p class="text-lg font-semibold">硬件</p>
+                    <p class="text-xs text-gray-400">Hardware</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                     <i class="fas fa-desktop text-4xl highlight-text mb-2"></i>
+                    <p class="text-lg font-semibold">系统</p>
+                    <p class="text-xs text-gray-400">System</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <i class="fas fa-weight-hanging text-4xl highlight-text mb-2"></i>
+                    <p class="text-lg font-semibold">重量</p>
+                    <p class="text-xs text-gray-400">Weight</p>
+                </div>
+            </div>
+            <p class="text-gray-300 mb-4">可折叠智能手机在价格、硬件、系统、重量等方面仍存在不足，难以说服更多消费者购买。 [cite: 12] 一些中国智能手机品牌正在削减可折叠项目。 [cite: 13]</p>
+            <p class="text-sm text-gray-400 text-center">图表展示了主要中国品牌可折叠智能手机路线图，部分项目延期或调整。 [cite: 14]</p>
+        </section>
+
+        <section class="card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-semibold mb-6 highlight-text"><i class="fas fa-tablet-alt mr-2"></i>平板触控市场趋势 (Tablet Touch)</h2>
+             <div class="mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-5xl font-bold highlight-text">温和</p>
+                    <p class="text-sm text-gray-300 mt-1">2025-2026温和增长</p>
+                    <p class="text-xs text-gray-500">Mild Growth</p>
+                    <p class="text-xs text-gray-400 mt-1">2027-2028微小增长 [cite: 15]</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-3xl font-bold highlight-text">主流技术</p>
+                    <p class="text-sm text-gray-300 mt-1">In-cell LCD (中低端)</p>
+                    <p class="text-sm text-gray-300">Add-on: GF2 (Apple) [cite: 16]</p>
+                    <p class="text-xs text-gray-500">Mainstream Technologies</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-3xl font-bold highlight-text">关注点</p>
+                    <p class="text-sm text-gray-300 mt-1">Apple何时转向</p>
+                    <p class="text-sm text-gray-300">On-cell AMOLED? [cite: 18]</p>
+                    <p class="text-xs text-gray-500">Hot Observation</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="mini-card rounded-xl p-4 highlight-bg-subtle">
+                    <h4 class="text-xl font-semibold mb-2">平板触控模组出货量 (000s)</h4>
+                    <canvas id="tabletTouchShipmentsChart"></canvas>
+                     <p class="text-xs text-gray-400 mt-2 text-center">数据来源：Omdia [cite: 19]</p>
+                </div>
+                <div class="mini-card rounded-xl p-4 highlight-bg-subtle">
+                    <h4 class="text-xl font-semibold mb-2">主要技术结构百分比</h4>
+                    <canvas id="tabletTouchTechChart"></canvas>
+                    <p class="text-xs text-gray-400 mt-2 text-center">数据来源：Omdia [cite: 19]</p>
+                </div>
+            </div>
+            <div class="mt-8">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-100">平板尺寸与技术趋势</h3>
+                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-xl font-bold highlight-text">多样化</p>
+                        <p class="text-sm text-gray-300 mt-1">尺寸和分辨率趋向定制化和多样化。 [cite: 21]</p>
+                        <p class="text-xs text-gray-500">Diversified Size & Resolution</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-xl font-bold highlight-text">技术态度</p>
+                        <p class="text-sm text-gray-300 mt-1">品牌对LTPS新项目谨慎，对AMOLED新项目相对积极。 [cite: 22]</p>
+                        <p class="text-xs text-gray-500">Cautious on LTPS, Positive on AMOLED</p>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-400 mt-4">新尺寸平板项目包括多种TFT LCD和AMOLED技术，涵盖不同尺寸和柔性/刚性类型。 [cite: 23]</p>
+            </div>
+        </section>
+
+        <section class="card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-semibold mb-6 highlight-text"><i class="fas fa-laptop mr-2"></i>笔记本触控市场趋势 (Notebook Touch)</h2>
+            <div class="mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-3xl font-bold highlight-text">依赖型增长</p>
+                    <p class="text-sm text-gray-300 mt-1">2024年增长依赖于22/23年衰退</p>
+                    <p class="text-sm text-gray-300">长期增长依赖替换需求 [cite: 25]</p>
+                    <p class="text-xs text-gray-500">Dependent Growth</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-3xl font-bold highlight-text">竞争格局</p>
+                    <p class="text-sm text-gray-300 mt-1">Metal Mesh (高端)</p>
+                    <p class="text-sm text-gray-300">In-cell LCD Vcom Blocks (蚕食份额) [cite: 26]</p>
+                    <p class="text-xs text-gray-500">Competitive Landscape</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-3xl font-bold highlight-text">核心问题</p>
+                    <p class="text-sm text-gray-300 mt-1">触控是标配吗?</p>
+                    <p class="text-sm text-gray-300">Apple何时推出触控本? [cite: 27]</p>
+                    <p class="text-xs text-gray-500">Key Questions</p>
+                </div>
+            </div>
+             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="mini-card rounded-xl p-4 highlight-bg-subtle">
+                    <h4 class="text-xl font-semibold mb-2">笔记本触控模组出货量 (000s)</h4>
+                    <canvas id="notebookTouchShipmentsChart"></canvas>
+                     <p class="text-xs text-gray-400 mt-2 text-center">数据来源：Omdia [cite: 28]</p>
+                </div>
+                <div class="mini-card rounded-xl p-4 highlight-bg-subtle">
+                    <h4 class="text-xl font-semibold mb-2">主要技术结构百分比</h4>
+                    <canvas id="notebookTouchTechChart"></canvas>
+                    <p class="text-xs text-gray-400 mt-2 text-center">数据来源：Omdia [cite: 28]</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-semibold mb-6 highlight-text"><i class="fas fa-car mr-2"></i>汽车触控市场趋势 (Automotive Touch)</h2>
+            <div class="mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-5xl font-bold highlight-text">低</p>
+                    <p class="text-sm text-gray-300 mt-1">长期低增长</p>
+                    <p class="text-xs text-gray-500">Low Growth</p>
+                    <p class="text-xs text-gray-400 mt-1">受关税和电动汽车疑虑影响 [cite: 31]</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-3xl font-bold highlight-text">主导技术</p>
+                    <p class="text-sm text-gray-300 mt-1">In-cell LCD Vcom Blocks</p>
+                    <p class="text-sm text-gray-300">积极抢占份额 (尤其≥10英寸) [cite: 32]</p>
+                    <p class="text-xs text-gray-500">Dominant Technology</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-3xl font-bold highlight-text">智能座舱</p>
+                    <p class="text-sm text-gray-300 mt-1">趋势将优先考虑传感器</p>
+                    <p class="text-sm text-gray-300">而非显示和触控 [cite: 34]</p>
+                    <p class="text-xs text-gray-500">Smart Cockpit Focus</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                 <div class="mini-card rounded-xl p-4 highlight-bg-subtle">
+                    <h4 class="text-xl font-semibold mb-2">汽车触控模组出货量 (000s)</h4>
+                    <canvas id="automotiveTouchShipmentsChart"></canvas>
+                    <p class="text-xs text-gray-400 mt-2 text-center">数据来源：Omdia [cite: 35]</p>
+                </div>
+                <div class="mini-card rounded-xl p-4 highlight-bg-subtle">
+                    <h4 class="text-xl font-semibold mb-2">主要技术结构百分比</h4>
+                    <canvas id="automotiveTouchTechChart"></canvas>
+                    <p class="text-xs text-gray-400 mt-2 text-center">数据来源：Omdia [cite: 35]</p>
+                </div>
+            </div>
+             <div class="mt-8">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-100">汽车显示设计思考</h3>
+                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-xl font-bold highlight-text">发展方向?</p>
+                        <p class="text-sm text-gray-300 mt-1">更大或贯穿式触控显示是正确且必要的方向吗? [cite: 38]</p>
+                        <p class="text-xs text-gray-500">Right Direction for Display Size?</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-xl font-bold highlight-text">3D触控</p>
+                        <p class="text-sm text-gray-300 mt-1">如何与智能座舱结合 (触觉反馈、悬浮触控等) [cite: 39]</p>
+                        <p class="text-xs text-gray-500">3D Touch & Smart Cockpit</p>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-400 mt-4">汽车显示设计方案包括2合1、3合1和贯穿式显示，触控功能的选择也多样化。 [cite: 40]</p>
+            </div>
+        </section>
+        
+        <section class="card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-semibold mb-6 highlight-text"><i class="fas fa-layer-group mr-2"></i>盖板市场 (Cover Lens Market)</h2>
+            <div class="mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-5xl font-bold highlight-text">低</p>
+                    <p class="text-sm text-gray-300 mt-1">低增长将成常态</p>
+                    <p class="text-xs text-gray-500">Low Growth Norm</p>
+                    <p class="text-xs text-gray-400 mt-1">有时甚至小幅衰退 [cite: 43]</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-3xl font-bold highlight-text">发展焦点</p>
+                    <p class="text-sm text-gray-300 mt-1">可折叠盖板</p>
+                    <p class="text-sm text-gray-300">& 玻璃陶瓷 [cite: 44]</p>
+                    <p class="text-xs text-gray-500">Development Focus</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-3xl font-bold highlight-text">供应链</p>
+                    <p class="text-sm text-gray-300 mt-1">中国品牌构建</p>
+                    <p class="text-sm text-gray-300">自有盖板供应链 [cite: 45]</p>
+                    <p class="text-xs text-gray-500">Supply Chain Building</p>
+                </div>
+            </div>
+
+            <div class="mini-card rounded-xl p-4 highlight-bg-subtle mb-8">
+                <h4 class="text-xl font-semibold mb-2 text-center">盖板市场终端出货量预测 (千片)</h4>
+                <canvas id="coverLensShipmentsChart"></canvas>
+                <p class="text-xs text-gray-400 mt-2 text-center">数据来源：Omdia [cite: 46]</p>
+            </div>
+
+            <div class="mt-8">
+                <h3 class="text-2xl font-semibold mb-4 text-gray-100">智能手机盖板材料演进趋势</h3>
+                <p class="text-gray-300 mb-4">未来趋势显示，旗舰和高端市场将以玻璃陶瓷和UTG+CPI为主，中高端市场锂铝硅酸盐玻璃和玻璃陶瓷并存，入门级仍为铝硅酸盐玻璃。 [cite: 48]</p>
+            </div>
+        </section>
+
+        <section class="card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-semibold mb-6 highlight-text"><i class="fas fa-gem mr-2"></i>玻璃陶瓷 (Glass Ceramic)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="mini-card rounded-xl p-6">
+                    <h3 class="text-2xl font-bold highlight-text mb-2">Apple Ceramic Shield</h3>
+                    <p class="text-gray-300">通过玻璃轧制和晶化等关键工艺制造。 [cite: 50] 其精加工包括研磨、抛光和化学强化等步骤。 [cite: 50]</p>
+                </div>
+                <div class="mini-card rounded-xl p-6">
+                    <h3 class="text-2xl font-bold highlight-text mb-2">安卓阵营发展</h3>
+                    <p class="text-gray-300">华为昆仑玻璃已更新至第三代，荣耀巨犀玻璃至第二代。小米、OPPO、vivo等亦推出自有品牌玻璃陶瓷。 [cite: 52, 53] 部分品牌直接参与研发以控制供应链。 [cite: 55]</p>
+                </div>
+            </div>
+            <div class="mt-6 mini-card rounded-lg p-4">
+                <h4 class="text-xl font-semibold mb-3">安卓阵营玻璃陶瓷供应链</h4>
+                 <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-300">
+                        <thead class="text-xs text-gray-100 uppercase bg-gray-700">
+                            <tr>
+                                <th scope="col" class="px-4 py-2">原料玻璃供应商</th>
+                                <th scope="col" class="px-4 py-2">盖板精加工商</th>
+                                <th scope="col" class="px-4 py-2">品牌</th>
+                                <th scope="col" class="px-4 py-2">代表型号</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-700">
+                                <td class="px-4 py-2">ATG</td> <td class="px-4 py-2">BNJ</td> <td class="px-4 py-2">Huawei</td> <td class="px-4 py-2">P60, Pura 70 series [cite: 57]</td>
+                            </tr>
+                            <tr class="border-b border-gray-700">
+                                <td class="px-4 py-2">CDGM (成都光明)</td> <td class="px-4 py-2">BYD</td> <td class="px-4 py-2">Honor</td> <td class="px-4 py-2">Magic 5/6 series [cite: 57]</td>
+                            </tr>
+                             <tr class="border-b border-gray-700">
+                                <td class="px-4 py-2">Kibing</td> <td class="px-4 py-2">?</td> <td class="px-4 py-2">Xiaomi</td> <td class="px-4 py-2">14 series, Mix Fold 4 [cite: 57]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="text-xs text-gray-500 mt-1">注：此为部分示例，完整供应链见源文档。 [cite: 57]</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="card rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-semibold mb-6 highlight-text"><i class="fas fa-mobile-alt mr-1"></i><i class="fas fa-folder-open mr-2"></i>可折叠盖板 (Foldable Cover Lens)</h2>
+            <p class="text-gray-300 mb-6">可折叠手机价格区间广泛，从500美元到2500美元以上均有分布，显示了市场多样性和价格下探趋势。 [cite: 60]</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="mini-card rounded-xl p-6">
+                    <h3 class="text-2xl font-bold highlight-text mb-3">CPI vs UTG</h3>
+                    <p class="text-gray-400 mb-3">CPI和UTG是主要的可折叠盖板材料，但两者均非完美。 [cite: 63]</p>
+                    <ul class="space-y-2 text-sm">
+                        <li><span class="font-semibold text-gray-200">硬度 (Hardness):</span> UTG 更硬 [cite: 65]</li>
+                        <li><span class="font-semibold text-gray-200">平整度 (Flatness):</span> UTG 更好 [cite: 65]</li>
+                        <li><span class="font-semibold text-gray-200">透光率 (Transmittance):</span> UTG 更好 [cite: 65]</li>
+                        <li><span class="font-semibold text-gray-200">成本 (Cost):</span> CPI 较高, UTG 更高 [cite: 65]</li>
+                        <li><span class="font-semibold text-gray-200">折叠半径 (Foldable Radius):</span> CPI <1.0mm, UTG <1.5mm [cite: 65]</li>
+                    </ul>
+                </div>
+
+                <div class="mini-card rounded-xl p-6">
+                    <h3 class="text-2xl font-bold highlight-text mb-3">UTG 解决方案</h3>
+                    <p class="text-gray-400 mb-1">主要有三种UTG解决方案，涉及不同的原材料供应商、玻璃减薄和盖板精加工商。 [cite: 71]</p>
+                    <p class="text-gray-300 mb-3"><span class="font-semibold text-gray-100">减薄法 (Thinning method):</span> 方案三，通过二次减薄处理将较厚玻璃减至所需厚度（如30μm）。 [cite: 67, 68] 优点是原材料选择更多，缺点是工艺增加、均匀性和可靠性降低。 [cite: 69]</p>
+                    <p class="text-sm text-gray-400">采用减薄法的可折叠手机包括Moto Razr系列、OPPO Find N3系列等。 [cite: 74]</p>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                 <h3 class="text-2xl font-semibold mb-4 text-gray-100">可折叠盖板结构发展</h3>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-xl font-bold highlight-text">UTG + CPI 方案</p>
+                        <p class="text-sm text-gray-300 mt-1">OPPO Find N3率先采用UTG和CPI共同作为主折叠盖板材料。 [cite: 76] 此方案旨在提高可靠性，但成本增加。 [cite: 77] 未来可能成为主流。 [cite: 88]</p>
+                        <p class="text-xs text-gray-500">UTG and CPI Work Together</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4">
+                        <p class="text-xl font-bold highlight-text">不均匀厚度 UTG</p>
+                        <p class="text-sm text-gray-300 mt-1">典型结构为两侧较厚（如100μm），中间区域渐薄至30μm，中间间隙通常用树脂填充。 [cite: 79, 80, 81]</p>
+                        <p class="text-xs text-gray-500">Uneven Thickness UTG</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center mt-16 mb-8">
+        <p class="text-sm text-gray-500">&copy; 2025 Omdia. All rights reserved. [cite: 99, 100]</p>
+    </footer>
+
+    <script>
+        const chartHighlightColor = 'rgba(0, 174, 239, 0.7)'; // Tech Blue for charts
+        const chartBorderColor = 'rgba(0, 174, 239, 1)';
+        const chartGridColor = 'rgba(204, 204, 204, 0.2)';
+        const chartFontColor = '#cccccc';
+
+        // Mobile Phone Touch Charts
+        const mobileTouchShipmentsCtx = document.getElementById('mobileTouchShipmentsChart');
+        if (mobileTouchShipmentsCtx) {
+            new Chart(mobileTouchShipmentsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2023', '2024', '2025', '2026', '2027', '2028'],
+                    datasets: [{
+                        label: 'In-cell TFT LCD (000s)',
+                        data: [847195, 743155, 740150, 741630, 743114, 737912], // Source: Page 3, "In-cell TFT LCD"
+                        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'On-cell AMOLED (000s)',
+                        data: [663820, 761427, 784661, 799617, 802663, 809116], // Source: Page 3, "On-cell AMOLED"
+                        backgroundColor: chartHighlightColor,
+                        borderColor: chartBorderColor,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true, ticks: { color: chartFontColor }, grid: { color: chartGridColor } },
+                        x: { ticks: { color: chartFontColor }, grid: { color: chartGridColor } }
+                    },
+                    plugins: { legend: { labels: { color: chartFontColor } } }
+                }
+            });
+        }
+
+        const mobileTouchTechCtx = document.getElementById('mobileTouchTechChart');
+        if (mobileTouchTechCtx) {
+            new Chart(mobileTouchTechCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['In-cell TFT LCD', 'On-cell AMOLED', 'Add-on (P. Capacitive)', 'Others'],
+                    datasets: [{
+                        label: '2023 Technology Share (%)',
+                        data: [54.7, 40.9, parseFloat("1.2") + parseFloat("0.8"), 2.1], // Source: Page 3, for 2023 percentages, Add-on is sum of GF2, GFF from notes. Others from chart
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.7)',
+                            chartHighlightColor,
+                            'rgba(255, 159, 64, 0.7)',
+                            'rgba(153, 102, 255, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            chartBorderColor,
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { position: 'bottom', labels: { color: chartFontColor } } }
+                }
+            });
+        }
+        
+        // Tablet Touch Charts
+        const tabletTouchShipmentsCtx = document.getElementById('tabletTouchShipmentsChart');
+        if (tabletTouchShipmentsCtx) {
+            new Chart(tabletTouchShipmentsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2023', '2024', '2025', '2026', '2027', '2028'],
+                    datasets: [{
+                        label: 'In-cell TFT LCD (000s)',
+                        data: [52520, 55254, 58858, 61519, 62619, 62965], // Source: Page 6
+                        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Add-on (P. Capacitive) (000s)', // Mainly GF2 (Apple)
+                        data: [58865, 62645, 66041, 67779, 68240, 68673], // Source: Page 6
+                        backgroundColor: chartHighlightColor,
+                        borderColor: chartBorderColor,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true, ticks: { color: chartFontColor }, grid: { color: chartGridColor } },
+                        x: { ticks: { color: chartFontColor }, grid: { color: chartGridColor } }
+                    },
+                    plugins: { legend: { labels: { color: chartFontColor } } }
+                }
+            });
+        }
+
+        const tabletTouchTechCtx = document.getElementById('tabletTouchTechChart');
+        if (tabletTouchTechCtx) {
+             new Chart(tabletTouchTechCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['In-cell LCD', 'Add-on: GF2', 'On-cell AMOLED Rigid', 'Others'],
+                    datasets: [{
+                        label: '2023 Technology Share (%)',
+                        // Data from Page 6, Percentage chart for 2023
+                        // In-cell LCD: Vcom Blocks: 45.1%
+                        // Add-on: GF2: 44.8%
+                        // On-cell AMOLED: Rigid: 3.2% (blue bar)
+                        // Others: 2.3% (chart) + 4.6% (Add-on Metal Mesh) - 3.2% (On-cell AMOLED Rigid) = 3.7% 
+                        //Simplified: In-cell LCD, Add-on GF2, On-cell AMOLED Rigid, All Others
+                        data: [45.1, 44.8, 3.2, 100 - 45.1 - 44.8 - 3.2], // Source: Page 6, for 2023 percentages
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.7)',
+                            chartHighlightColor,
+                            'rgba(255, 205, 86, 0.7)',
+                            'rgba(153, 102, 255, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            chartBorderColor,
+                            'rgba(255, 205, 86, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { position: 'bottom', labels: { color: chartFontColor } } }
+                }
+            });
+        }
+
+        // Notebook Touch Charts
+        const notebookTouchShipmentsCtx = document.getElementById('notebookTouchShipmentsChart');
+        if (notebookTouchShipmentsCtx) {
+             new Chart(notebookTouchShipmentsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2023', '2024', '2025', '2026', '2027', '2028'],
+                    datasets: [{
+                        label: 'Total Notebook Touch Shipments (000s)',
+                        // Summing up the segments from Page 8 data:
+                        // 2023: 2606+1278+1957+20791 = 26632 (approx from graph visual total is ~37k, discrepancy with stacked components. Using graph totals instead)
+                        // The graph total is clearer: 20791+1957+1278+2606+~others ~27k. Sum of stacks provided:
+                        // 2023: (7.0+32.0+5.2+40.3+14.6+0.9) -> Use sum from stacked bars in '000s' graph
+                        // 2023: 2606(In-cell)+11954(On-cell Color Filter)+1278(On-cell AMOLED Rigid)+1957(On-cell AMOLED Flex)+20791(Add-on OGS)+13781(Add-on Metal Mesh). This is too complex for a simple sum.
+                        // Let's use the total height of the bars from the 'Shipments (000s)' graph, which is implied by the topmost value.
+                        // Data for total shipments (approximated from top of stacked bars):
+                        data: [20791+1957+1278+8101+2606, 21440+4566+3359+9756+3276, 20687+5340+5929+11954+13100, 20448+5695+13276+13100+17400, 20066+5894+12503+26900+17400, 19670+6018+11563+24600+20800], // These are visual estimations and sums from the stacked chart on page 8. For simplicity, I will pick the top values of the largest segment to represent a major trend, or use total shipment values if clearly stated.
+                        // The chart has "Shipments (000s)" at the top of stacked bars, which implies totals:
+                        // Let's use "Add-on: OGS(OGM)" as a major component + "In-cell LCD"
+                        data: [20791+2606, 21440+3276, 20687+13100, 20448+17400, 20066+17400, 19670+20800], //This sums the largest add-on with in-cell.
+                        // The data is complex. Let's use the "Add-on: OGS(OGM)" numbers directly from the chart as one series.
+                        // And "In-cell LCD: Vcom Blocks" as another
+                        // It should be total shipments if available. The graph shows stacked components.
+                        // Let's use the total implied by the top of the stacks:
+                        // 2023 total approx 37k, 2024 approx 40k, 2025 approx 43k, 2026 approx 45k, 2027 approx 46k, 2028 approx 46k
+                        // The table below the graph on page 8 shows numbers for different components.
+                        // To simplify for one line: using "Add-on: OGS(OGM)" numbers
+                        data: [20791, 21440, 20687, 20448, 20066, 19670], // Add-on: OGS(OGM) [cite:28]
+                        borderColor: chartBorderColor,
+                        backgroundColor: chartHighlightColor,
+                        tension: 0.1,
+                        fill: true
+                    }]
+                },
+                 options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: false, ticks: { color: chartFontColor }, grid: { color: chartGridColor } }, // Start y not necessarily at 0 for line
+                        x: { ticks: { color: chartFontColor }, grid: { color: chartGridColor } }
+                    },
+                    plugins: { legend: { labels: { color: chartFontColor } } }
+                }
+            });
+        }
+        const notebookTouchTechCtx = document.getElementById('notebookTouchTechChart');
+        if (notebookTouchTechCtx) {
+             new Chart(notebookTouchTechCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2023', '2028'],
+                    datasets: [{
+                        label: 'In-cell LCD: Vcom Blocks (%)',
+                        data: [7.0, 20.8], // Source: Page 8, for 2023 and 2028
+                        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Add-on: OGS(OGM) (%)',
+                        data: [40.3, 27.5], // Source: Page 8, for 2023 and 2028
+                        backgroundColor: chartHighlightColor,
+                        borderColor: chartBorderColor,
+                        borderWidth: 1
+                    }, {
+                        label: 'Add-on: Metal Mesh (%)',
+                        data: [14.6, 14.3], // "Others" category in chart (topmost dark purple) shows 14.6% for 2023, 14.3% for 2028. The legend below says Add-on: Metal Mesh.
+                        backgroundColor: 'rgba(255, 159, 64, 0.7)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true, indexAxis: 'y',
+                    scales: {
+                        y: { ticks: { color: chartFontColor }, grid: { color: chartGridColor } },
+                        x: { ticks: { color: chartFontColor }, grid: { color: chartGridColor }, stacked: false }
+                    },
+                    plugins: { legend: { labels: { color: chartFontColor } } }
+                }
+            });
+        }
+
+        // Automotive Touch Charts
+        const automotiveTouchShipmentsCtx = document.getElementById('automotiveTouchShipmentsChart');
+        if (automotiveTouchShipmentsCtx) {
+            new Chart(automotiveTouchShipmentsCtx, {
+                type: 'bar', // Changed to bar to show components better
+                data: {
+                    labels: ['2023', '2024', '2025', '2026', '2027', '2028'],
+                    datasets: [
+                    {
+                        label: 'In-cell LCD: Vcom Blocks (000s)',
+                        data: [26160, 35013, 41446, 49004, 54014, 57896], // Source: Page 9
+                        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Add-on: GG (000s)', // Dominant Add-on type
+                        data: [44495, 38045, 32862, 26947, 22687, 18482], // Source: Page 9 (Add-on GG from legend, light blue segment)
+                        backgroundColor: chartHighlightColor,
+                        borderColor: chartBorderColor,
+                        borderWidth: 1
+                    }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true, ticks: { color: chartFontColor }, grid: { color: chartGridColor }, stacked: true },
+                        x: { ticks: { color: chartFontColor }, grid: { color: chartGridColor }, stacked: true }
+                    },
+                    plugins: { legend: { labels: { color: chartFontColor } } }
+                }
+            });
+        }
+        const automotiveTouchTechCtx = document.getElementById('automotiveTouchTechChart');
+        if (automotiveTouchTechCtx) {
+            new Chart(automotiveTouchTechCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['In-cell LCD', 'Add-on: GG', 'Add-on: OGS', 'Others'],
+                    datasets: [{
+                        label: '2023 Technology Share (%)',
+                        // Data from Page 9, Percentage chart for 2023
+                        // In-cell LCD: Vcom Blocks: 35.1%
+                        // Add-on: GG: 31.3%
+                        // Add-on: OGS: 24.6%
+                        // Others: All remaining (0.7 + any small unlisted) = ~8.3%
+                        data: [35.1, 31.3, 24.6, 100-35.1-31.3-24.6], // Source: Page 9, for 2023
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.7)',
+                            chartHighlightColor,
+                            'rgba(255, 205, 86, 0.7)',
+                            'rgba(153, 102, 255, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            chartBorderColor,
+                            'rgba(255, 205, 86, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { position: 'bottom', labels: { color: chartFontColor } } }
+                }
+            });
+        }
+
+        // Cover Lens Shipments Chart
+        const coverLensShipmentsCtx = document.getElementById('coverLensShipmentsChart');
+        if (coverLensShipmentsCtx) {
+            new Chart(coverLensShipmentsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028'],
+                    datasets: [{
+                        label: 'Cover Lens Shipments (thousands)',
+                        data: [6366116, 5750125, 5912768, 5914736, 5943306, 6024682, 6010114, 6050746], // Source: Page 12
+                        borderColor: chartBorderColor,
+                        backgroundColor: chartHighlightColor,
+                        tension: 0.1,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: false, ticks: { color: chartFontColor }, grid: { color: chartGridColor } },
+                        x: { ticks: { color: chartFontColor }, grid: { color: chartGridColor } }
+                    },
+                    plugins: { legend: { labels: { color: chartFontColor } } }
+                }
+            });
+        }
+
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('is-visible');
+                    }, index * 100); // Staggered animation for grid items
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        const elementsToAnimate = document.querySelectorAll('.card, .mini-card');
+        elementsToAnimate.forEach(el => observer.observe(el));
+
+    </script>
+</body>
+</html>

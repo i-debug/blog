@@ -65,8 +65,13 @@
             <div class="omdia-content prose max-w-none">
                 {{ html_content|safe }}
             </div>
+            {% elif article.content %}
+            <!-- 如果没有HTML内容，显示文章content字段内容 -->
+            <div class="omdia-content prose max-w-none">
+                {{ article.content|safe }}
+            </div>
             {% else %}
-            <!-- 如果没有HTML内容，显示摘要 -->
+            <!-- 如果没有HTML内容和content内容，显示摘要 -->
             <div class="prose max-w-none">
                 <p>{{ article.summary }}</p>
                 <div class="bg-yellow-900/20 p-4 rounded-lg border border-yellow-900/30 mt-8">

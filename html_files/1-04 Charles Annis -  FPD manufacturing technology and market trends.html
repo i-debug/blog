@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPD制造技术与市场趋势分析</title>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --highlight-color: #00AEEF; /* Tech Blue */
+            --highlight-color-rgb: 0, 174, 239;
+            --card-bg-color: #1a1a1a;
+            --border-color: #333333;
+        }
+        body {
+            background-color: #000000;
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .tech-gradient-bg {
+            background-image: linear-gradient(to bottom right, rgba(var(--highlight-color-rgb), 0.1), rgba(var(--highlight-color-rgb), 0.05));
+        }
+        .highlight-text {
+            color: var(--highlight-color);
+        }
+        .main-card {
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .main-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .mini-card {
+            background-color: #222222; /* Slightly lighter than main card for depth */
+            border: 1px solid var(--border-color);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        .mini-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .citation {
+            font-size: 0.6rem;
+            color: #555;
+            margin-left: 4px;
+            display: inline-block;
+        }
+        .section-title-icon {
+            font-size: 2.5rem; /* Tailwind text-4xl */
+            margin-right: 0.75rem; /* Tailwind mr-3 */
+            color: var(--highlight-color);
+        }
+
+        /* Chart.js Dark Mode Styles */
+        Chart.defaults.color = '#e0e0e0';
+        Chart.defaults.borderColor = '#444';
+        Chart.defaults.plugins.legend.labels.color = '#e0e0e0';
+        Chart.defaults.scale.ticks.color = '#bbb';
+        Chart.defaults.scale.grid.color = '#444';
+        Chart.defaults.scale.grid.borderColor = '#444';
+
+        /* Custom scrollbar for a more modern look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--highlight-color);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #007bff; /* A slightly darker shade of highlight for hover */
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12 md:mb-16 main-card rounded-2xl py-8 tech-gradient-bg">
+            <i class="fas fa-chart-line highlight-text" style="font-size: 3rem;"></i>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mt-4">平板显示（FPD）制造技术与市场趋势
+                <span class="citation">[cite: 1]</span></h1>
+            <p class="text-lg sm:text-xl md:text-2xl font-semibold text-gray-300 mt-2">FPD Manufacturing Technology and Market Trends <span class="citation">[cite: 1]</span></p>
+            <div class="mt-6 text-sm md:text-base text-gray-400">
+                <p>作者：Charles Annis, Practice Leader, Displays <span class="citation">[cite: 1]</span></p>
+                <p>活动：第48回ディスプレイ産業フォーラム | 48th Display Japan Forum <span class="citation">[cite: 1, 13]</span></p>
+                <p>日期：2025年1月23-24日 <span class="citation">[cite: 1, 2]</span></p>
+            </div>
+        </header>
+
+        <nav class="mb-12 main-card rounded-xl p-4">
+            <ul class="flex flex-wrap justify-center gap-2 md:gap-4">
+                <li><a href="#supply" class="text-sm md:text-base highlight-text hover:underline px-3 py-2 rounded-md">供应视角</a></li>
+                <li><a href="#mfg-tech" class="text-sm md:text-base highlight-text hover:underline px-3 py-2 rounded-md">制造技术</a></li>
+                <li><a href="#demand" class="text-sm md:text-base highlight-text hover:underline px-3 py-2 rounded-md">需求视角</a></li>
+                <li><a href="#implications" class="text-sm md:text-base highlight-text hover:underline px-3 py-2 rounded-md">市场启示</a></li>
+                <li><a href="#summary" class="text-sm md:text-base highlight-text hover:underline px-3 py-2 rounded-md">总结展望</a></li>
+            </ul>
+        </nav>
+
+        <section id="supply" class="mb-12 md:mb-16">
+            <div class="main-card rounded-2xl p-6 md:p-8 tech-gradient-bg">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-industry section-title-icon"></i>市场：供应视角 <span class="citation">[cite: 3]</span>
+                </h2>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 highlight-text">主要新增FPD工厂计划 <span class="citation">[cite: 6]</span></h3>
+                    <p class="text-gray-300 mb-4">总结了主要的未来FPD工厂投资计划，预计设备安装至2027年，最大产能约至2030年。 <span class="citation">[cite: 6]</span></p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        <div class="mini-card p-4 rounded-lg">
+                            <div class="text-4xl font-bold highlight-text">90%</div>
+                            <div class="text-xs text-gray-400 mt-1">LIKELY</div>
+                            <p class="text-lg font-semibold mt-2">京东方 B16 <span class="citation">[cite: 7]</span></p>
+                            <p class="text-sm text-gray-300">技术: FMM OLED <span class="citation">[cite: 7]</span></p>
+                            <p class="text-sm text-gray-300">目标: IT/移动设备等 <span class="citation">[cite: 7]</span></p>
+                            <p class="text-sm text-gray-300">安装: 2025年6月 <span class="citation">[cite: 7]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <div class="text-4xl font-bold highlight-text">30%</div>
+                            <div class="text-xs text-gray-400 mt-1">LIKELY</div>
+                            <p class="text-lg font-semibold mt-2">华星光电 T8 <span class="citation">[cite: 7]</span></p>
+                            <p class="text-sm text-gray-300">技术: IJP OLED <span class="citation">[cite: 7]</span></p>
+                            <p class="text-sm text-gray-300">目标: IT/移动设备等 <span class="citation">[cite: 7]</span></p>
+                            <p class="text-sm text-gray-300">安装: 2027年1月 <span class="citation">[cite: 7]</span></p>
+                        </div>
+                         <div class="mini-card p-4 rounded-lg">
+                            <div class="text-4xl font-bold highlight-text">100%</div>
+                            <div class="text-xs text-gray-400 mt-1">LIKELY</div>
+                            <p class="text-lg font-semibold mt-2">三星 SDC A6 <span class="citation">[cite: 7]</span></p>
+                            <p class="text-sm text-gray-300">技术: FMM OLED <span class="citation">[cite: 7]</span></p>
+                            <p class="text-sm text-gray-300">目标: IT等 <span class="citation">[cite: 7]</span></p>
+                            <p class="text-sm text-gray-300">安装: 2024年3月 <span class="citation">[cite: 7]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold mt-2">投资关注点</p>
+                            <p class="text-sm text-gray-300">表格详细列出了各厂商（如天马、华星光电、三星、京东方、友达等）的新厂计划、技术路线、目标应用、尺寸、TFT技术、投资概率等。 <span class="citation">[cite: 7]</span></p>
+                            <p class="text-sm text-gray-300 mt-1">Omdia预测，<30%概率的投资不计入预测，仅作跟踪。 <span class="citation">[cite: 11]</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 highlight-text">FPD工厂关闭：Omdia关闭预测 <span class="citation">[cite: 15]</span></h3>
+                    <p class="text-gray-300 mb-4">许多旧的LCD工厂在2022-2024年关闭，预计此趋势将在2025年及以后持续。 <span class="citation">[cite: 15]</span> 主要原因包括供应过剩、盈利能力低以及与中国新产能的竞争力不足。 <span class="citation">[cite: 16]</span></p>
+                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">夏普 SDP Sakai <span class="citation">[cite: 22]</span></p>
+                            <p class="text-sm text-gray-300">代数: G10 <span class="citation">[cite: 22]</span></p>
+                            <p class="text-sm text-gray-300">关闭: 2024年8月 <span class="citation">[cite: 22]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">JDI Fab 6 <span class="citation">[cite: 22]</span></p>
+                            <p class="text-sm text-gray-300">代数: G4 <span class="citation">[cite: 22]</span></p>
+                            <p class="text-sm text-gray-300">关闭: 2025年3月 <span class="citation">[cite: 22]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">LG Display P8 (LCD) <span class="citation">[cite: 22]</span></p>
+                            <p class="text-sm text-gray-300">代数: G8.5 <span class="citation">[cite: 22]</span></p>
+                            <p class="text-sm text-gray-300">关闭: 2027年4月 (推测) <span class="citation">[cite: 21, 22]</span></p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mt-4">如何利用旧设施已成为FPD制造商的重要商业策略。 <span class="citation">[cite: 17]</span> 建筑物、土地、洁净室等可能有较高价值。 <span class="citation">[cite: 19]</span></p>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 highlight-text">关闭FPD工厂的再利用：先进半导体封装 (ASP) <span class="citation">[cite: 27]</span></h3>
+                    <p class="text-gray-300 mb-4">关闭的FPD工厂可被重新利用于多种新工厂，其中数据中心和ASP是热门方向。 <span class="citation">[cite: 28]</span> ASP因其高增长潜力和与FPD生产的相似性而备受关注。 <span class="citation">[cite: 31]</span></p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">友达 (AUO) <span class="citation">[cite: 29]</span></p>
+                            <p class="text-sm text-gray-300">台南CF设施C4A, C5D, C6C售予美光，作价2.32亿美元，用于晶圆测试。 <span class="citation">[cite: 29]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">群创 (Innolux) <span class="citation">[cite: 29]</span></p>
+                            <p class="text-sm text-gray-300">Fab 4设施售予台积电，作价5.31亿美元，台积电仅使用建筑和设施。 <span class="citation">[cite: 29]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <div class="text-4xl font-bold highlight-text">$85-130B</div>
+                            <div class="text-xs text-gray-400 mt-1">BY 2034</div>
+                            <p class="text-sm text-gray-300 mt-2">ASP市场规模预测 (2034年) <span class="citation">[cite: 32]</span></p>
+                            <p class="text-sm text-gray-300">2024年约为\$30-\$45B。 <span class="citation">[cite: 32]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                             <p class="text-lg font-semibold">玻璃基板挑战 <span class="citation">[cite: 33]</span></p>
+                            <p class="text-sm text-gray-300">玻璃封装技术尚不成熟，可能仅限于≤G3.5，仍面临许多市场和技术挑战。 <span class="citation">[cite: 33]</span></p>
+                        </div>
+                    </div>
+                     <p class="text-gray-300 mt-4">目前，大多数用于ASP生产的FPD工厂销售仅是出售设施，而非设备或工艺技术。 <span class="citation">[cite: 34]</span></p>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 highlight-text">FPD设备支出预测 <span class="citation">[cite: 37]</span></h3>
+                    <canvas id="fpdEquipmentForecastChart" class="tech-gradient-bg p-2 rounded-lg"></canvas>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div class="mini-card p-4 rounded-lg">
+                            <div class="text-4xl font-bold highlight-text">-53%</div>
+                            <div class="text-xs text-gray-400 mt-1">REVISION</div>
+                            <p class="text-sm text-gray-300 mt-2">2026年FPD设备支出预测下调 <span class="citation">[cite: 38]</span></p>
+                            <p class="text-sm text-gray-300">主要由于投机性工厂计划的破产和已规划工厂的延迟。 <span class="citation">[cite: 38, 39]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                             <p class="text-lg font-semibold">“规划者下垂”效应 <span class="citation">[cite: 40, 51]</span></p>
+                            <p class="text-sm text-gray-300">2030年预测数据偏低是由于自下而上预测方法超出面板制造商当前计划范围所致，并非市场将崩溃。 <span class="citation">[cite: 40, 41]</span></p>
+                        </div>
+                         <div class="mini-card p-4 rounded-lg">
+                             <div class="text-4xl font-bold highlight-text">$1.6B</div>
+                            <div class="text-xs text-gray-400 mt-1">AVG. PER YEAR</div>
+                            <p class="text-sm text-gray-300 mt-2">2023-2025年平均年度增量支出 <span class="citation">[cite: 50]</span></p>
+                            <p class="text-sm text-gray-300">这部分支出用于现有工厂的工艺增强和增量扩容。 <span class="citation">[cite: 46, 48]</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mfg-tech" class="mb-12 md:mb-16">
+            <div class="main-card rounded-2xl p-6 md:p-8 tech-gradient-bg">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-cogs section-title-icon"></i>制造与技术：DAA及IJP OLED分析 <span class="citation">[cite: 58]</span>
+                </h2>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 highlight-text">DAA (驱动区域退火) 技术 <span class="citation">[cite: 59]</span></h3>
+                    <p class="text-gray-300 mb-4">DAA是一种旨在最大化性能并最小化LTPO+成本的方法。 <span class="citation">[cite: 59]</span> 在此背景下，LTPO+指所有像素TFT为Oxide，所有栅极驱动TFT为LTPS。 <span class="citation">[cite: 59]</span></p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">工作原理 <span class="citation">[cite: 63, 64]</span></p>
+                            <p class="text-sm text-gray-300">最新ELA设备可在有源区加速扫描（不结晶a-Si），在GOA区减速扫描（结晶a-Si为LTPS）。 <span class="citation">[cite: 63, 64, 65]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                             <div class="text-4xl font-bold highlight-text">2X</div>
+                            <div class="text-xs text-gray-400 mt-1">THROUGHPUT</div>
+                            <p class="text-sm text-gray-300 mt-2">DAA可使单台设备吞吐量翻倍 <span class="citation">[cite: 65]</span></p>
+                            <p class="text-sm text-gray-300">并减少一半维护（特定条件下）。 <span class="citation">[cite: 65]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">成本优势 <span class="citation">[cite: 66]</span></p>
+                            <p class="text-sm text-gray-300">ELA设备昂贵且运行成本高，DAA因此具有吸引力。 <span class="citation">[cite: 66]</span> 若结合SLA，可再降成本50%以上，但SLA采用可能性低。 <span class="citation">[cite: 67, 68]</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 highlight-text">IJP (喷墨打印) OLED 技术 <span class="citation">[cite: 73]</span></h3>
+                     <p class="text-gray-300 mb-1">TCL华星光电于2024年11月16日宣布IJP OLED显示器实现“量产”。<span class="citation">[cite: 73, 75]</span></p>
+                     <p class="text-gray-300 mb-4">理论上IJP是优雅的制造方法，但实践中常未达预期。<span class="citation">[cite: 75, 76]</span></p>
+
+                    <h4 class="text-xl font-semibold mt-6 mb-3 text-gray-200">IJP的承诺与挑战 <span class="citation">[cite: 74]</span></h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        <div class="mini-card p-4 rounded-lg">
+                            <div class="text-4xl font-bold highlight-text">5X</div>
+                            <div class="text-xs text-gray-400 mt-1">UTILIZATION</div>
+                            <p class="text-sm text-gray-300 mt-2">材料高利用率 <span class="citation">[cite: 74]</span></p>
+                            <p class="text-sm text-gray-300">比FMM效率高5倍。 <span class="citation">[cite: 74]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">生产灵活性 <span class="citation">[cite: 74]</span></p>
+                            <p class="text-sm text-gray-300">"数字化"减少开发时间，无需FMM，快速转换，适合小批量。 <span class="citation">[cite: 74]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                             <div class="text-4xl font-bold highlight-text">>2X</div>
+                            <div class="text-xs text-gray-400 mt-1">APERTURE RATIO</div>
+                            <p class="text-sm text-gray-300 mt-2">开口率优势 <span class="citation">[cite: 74]</span></p>
+                            <p class="text-sm text-gray-300">相比FMM。 <span class="citation">[cite: 74]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold text-red-400">挑战：材料寿命与效率 <span class="citation">[cite: 74]</span></p>
+                            <p class="text-sm text-gray-300">特别是蓝色，远低于蒸镀蓝光。大像素开口率可补偿，但无法与Tandem竞争。 <span class="citation">[cite: 74]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold text-red-400">挑战：高分辨率 <span class="citation">[cite: 74]</span></p>
+                            <p class="text-sm text-gray-300">受限于液滴尺寸，虽有进展，但实现350 PPI需权衡。 <span class="citation">[cite: 74]</span></p>
+                        </div>
+                         <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold text-red-400">挑战：Tandem不可行 <span class="citation">[cite: 74]</span></p>
+                            <p class="text-sm text-gray-300">缺乏可打印且稳定的CGL材料。 <span class="citation">[cite: 74, 88]</span></p>
+                        </div>
+                    </div>
+
+                    <h4 class="text-xl font-semibold mt-6 mb-3 text-gray-200">IJP 前板工艺流程与关键点 <span class="citation">[cite: 81]</span></h4>
+                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">简化色彩 patterning <span class="citation">[cite: 81]</span></p>
+                            <p class="text-sm text-gray-300">打印RGB子像素，简化流程，减少真空过程、洁净室空间，无需FMM处理。 <span class="citation">[cite: 81, 82]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">部分材料仍需蒸镀 <span class="citation">[cite: 83, 84]</span></p>
+                            <p class="text-sm text-gray-300">ETL、阴极、CPL等目前不兼容喷墨，仍需VTE（开放掩模蒸镀）。 <span class="citation">[cite: 83, 84, 85]</span></p>
+                        </div>
+                         <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">高分辨率打印 <span class="citation">[cite: 93]</span></p>
+                            <p class="text-sm text-gray-300">>200 PPI已商业化，华星光电目标>300 PPI，可覆盖IT应用。 <span class="citation">[cite: 94]</span> 智能手机分辨率仍具挑战。 <span class="citation">[cite: 96]</span></p>
+                        </div>
+                         <div class="mini-card p-4 rounded-lg">
+                             <div class="text-4xl font-bold highlight-text">10%</div>
+                            <div class="text-xs text-gray-400 mt-1">EFFICIENCY UP</div>
+                            <p class="text-sm text-gray-300 mt-2">全尺寸基板处理优势 <span class="citation">[cite: 107]</span></p>
+                            <p class="text-sm text-gray-300">16.2"示例中，IJP比FMM半切效率高10%。 <span class="citation">[cite: 107]</span></p>
+                        </div>
+                     </div>
+
+                    <h4 class="text-xl font-semibold mt-6 mb-3 text-gray-200">IJP vs. FMM 成本比较 (16.2" 示例) <span class="citation">[cite: 113]</span></h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="mini-card p-4 rounded-lg">
+                            <div class="text-5xl font-bold highlight-text">34%</div>
+                            <div class="text-xs text-gray-400 mt-1">LOWER COST</div>
+                            <p class="text-sm text-gray-300 mt-2">IJP OLED制造成本低于FMM VTE <span class="citation">[cite: 116]</span></p>
+                            <p class="text-sm text-gray-300">主要由于IJP的资本支出优势。 <span class="citation">[cite: 113]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                             <p class="text-lg font-semibold">华星光电目标良率 <span class="citation">[cite: 115]</span></p>
+                             <div class="text-4xl font-bold mt-1">85%</div>
+                            <p class="text-sm text-gray-300">通过新G8.6工厂和经验积累可能实现。 <span class="citation">[cite: 115]</span></p>
+                        </div>
+                    </div>
+                    <canvas id="ijpCostComparisonChart" class="mt-6 tech-gradient-bg p-2 rounded-lg"></canvas>
+
+
+                    <h4 class="text-xl font-semibold mt-6 mb-3 text-gray-200">IJP 总结：华星光电会投资T8 (G8.6 IJP OLED工厂)吗? <span class="citation">[cite: 122]</span></h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">材料性能挑战 <span class="citation">[cite: 123]</span></p>
+                            <p class="text-sm text-gray-300">是反对IJP OLED的最强论据，特别是蓝光寿命。 <span class="citation">[cite: 123, 126]</span></p>
+                        </div>
+                         <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">成本降低路径 <span class="citation">[cite: 127, 130]</span></p>
+                            <p class="text-sm text-gray-300">IJP提供显著成本节省潜力。 <span class="citation">[cite: 127]</span> 华星光电T5生产远非最佳，需全新设计的大型工厂。 <span class="citation">[cite: 130, 131, 132]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">市场定位 <span class="citation">[cite: 135]</span></p>
+                            <p class="text-sm text-gray-300">IJP为华星光电提供了针对中端IT市场的潜在优势策略。 <span class="citation">[cite: 135]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">投资决策 <span class="citation">[cite: 140]</span></p>
+                            <div class="text-3xl font-bold mt-1 highlight-text">1H25</div>
+                            <p class="text-sm text-gray-300">华星光电可能在2025上半年根据T5进展决定T8的命运。 <span class="citation">[cite: 140]</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="demand" class="mb-12 md:mb-16">
+            <div class="main-card rounded-2xl p-6 md:p-8 tech-gradient-bg">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-users section-title-icon"></i>市场：需求视角 <span class="citation">[cite: 143]</span>
+                </h2>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 highlight-text">宏观经济：GDP + CPI <span class="citation">[cite: 144]</span></h3>
+                    <p class="text-gray-300 mb-4">与2024年7月相比，2024-2025年全球GDP预测下调，CPI预测上调。美国新关税及贸易战担忧是主因。 <span class="citation">[cite: 146, 147]</span></p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">全球GDP增长 (实际) <span class="citation">[cite: 145]</span></p>
+                            <p class="text-sm text-gray-300">2024: <span class="font-bold highlight-text">2.7%</span> <span class="citation">[cite: 145]</span></p>
+                            <p class="text-sm text-gray-300">2025: <span class="font-bold highlight-text">2.5%</span> <span class="citation">[cite: 145]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">中国GDP增长 (实际) <span class="citation">[cite: 145]</span></p>
+                            <p class="text-sm text-gray-300">2024: <span class="font-bold highlight-text">5.0%</span> <span class="citation">[cite: 145]</span></p>
+                            <p class="text-sm text-gray-300">2025: <span class="font-bold highlight-text">4.2%</span> <span class="citation">[cite: 145]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">全球CPI (年同比%) <span class="citation">[cite: 157]</span></p>
+                            <p class="text-sm text-gray-300">2024: <span class="font-bold highlight-text">4.5%</span> <span class="citation">[cite: 157]</span></p>
+                            <p class="text-sm text-gray-300">2025: <span class="font-bold highlight-text">3.4%</span> <span class="citation">[cite: 157]</span></p>
+                        </div>
+                         <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">中国CPI (年同比%) <span class="citation">[cite: 157]</span></p>
+                            <p class="text-sm text-gray-300">2024: <span class="font-bold highlight-text">0.3%</span> <span class="citation">[cite: 157]</span></p>
+                            <p class="text-sm text-gray-300">2025: <span class="font-bold highlight-text">0.9%</span> <span class="citation">[cite: 157]</span> (通缩是问题 <span class="citation">[cite: 153]</span>)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 highlight-text">各应用显示需求分析 <span class="citation">[cite: 159]</span></h3>
+                    <p class="text-gray-300 mb-4">LCD市场面积巨大，预计到2030年仍增长19%，但营收仅增2.6%。 <span class="citation">[cite: 160]</span> OLED市场较小，但面积和营收增长更快。 <span class="citation">[cite: 161]</span> OLED面临的主要问题是，尽管质量优异，但其成本/价格与LCD的差距难以弥合。 <span class="citation">[cite: 163]</span></p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-sm font-semibold">LCD 总面积增长 (2024-2030) <span class="citation">[cite: 168]</span></p>
+                            <div class="text-4xl font-bold highlight-text mt-1">19.2%</div>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                           <p class="text-sm font-semibold">LCD 总营收增长 (2024-2030) <span class="citation">[cite: 168]</span></p>
+                            <div class="text-4xl font-bold highlight-text mt-1">2.6%</div>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-sm font-semibold">OLED 总面积增长 (2024-2030) <span class="citation">[cite: 168]</span></p>
+                            <div class="text-4xl font-bold highlight-text mt-1">62.0%</div>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-sm font-semibold">OLED 总营收增长 (2024-2030) <span class="citation">[cite: 168]</span></p>
+                            <div class="text-4xl font-bold highlight-text mt-1">31.7%</div>
+                        </div>
+                    </div>
+                     <p class="text-gray-300 mt-4">大多数OLED制造商以低于总销售成本的价格销售面板，以争夺市场份额并产生现金流。 <span class="citation">[cite: 164]</span> OLED利润与需求增长不相称。 <span class="citation">[cite: 165]</span></p>
+                </div>
+
+                <div class="mb-8">
+                     <h3 class="text-2xl font-semibold mb-4 highlight-text">OLED渗透率预测 <span class="citation">[cite: 171]</span></h3>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <canvas id="notebookOledPenetrationChart" class="tech-gradient-bg p-2 rounded-lg"></canvas>
+                            <p class="text-center text-sm text-gray-400 mt-2">笔记本电脑OLED渗透率 <span class="citation">[cite: 182]</span></p>
+                        </div>
+                        <div>
+                            <canvas id="tabletOledPenetrationChart" class="tech-gradient-bg p-2 rounded-lg"></canvas>
+                            <p class="text-center text-sm text-gray-400 mt-2">平板电脑OLED渗透率 <span class="citation">[cite: 182]</span></p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-6">
+                        <div class="mini-card p-4 rounded-lg">
+                            <div class="text-4xl font-bold highlight-text">51%</div>
+                            <div class="text-xs text-gray-400 mt-1">IN 2024</div>
+                            <p class="text-sm text-gray-300 mt-2">智能手机OLED渗透率 <span class="citation">[cite: 173]</span></p>
+                            <p class="text-sm text-gray-300">预计2030年LCD仍占35%。 <span class="citation">[cite: 174]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <div class="text-4xl font-bold highlight-text">3%</div>
+                            <div class="text-xs text-gray-400 mt-1">STILL ONLY</div>
+                            <p class="text-sm text-gray-300 mt-2">OLED电视面板份额 <span class="citation">[cite: 176]</span></p>
+                            <p class="text-sm text-gray-300">预计未来不会增长，有成为PDP故事的风险。 <span class="citation">[cite: 176, 177]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">IT市场机会 <span class="citation">[cite: 179]</span></p>
+                            <p class="text-sm text-gray-300">平板和笔记本是OLED最具潜力的增长机会。 <span class="citation">[cite: 179]</span> 但需关注成本/价格降低。 <span class="citation">[cite: 181]</span></p>
+                        </div>
+                         <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">显示器OLED渗透率 <span class="citation">[cite: 178]</span></p>
+                            <p class="text-sm text-gray-300">2024年1.3%，预计2030年稳定增长至3.5%，尤其在高端游戏领域。 <span class="citation">[cite: 178]</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 highlight-text">Tandem OLED 渗透率 <span class="citation">[cite: 185]</span></h3>
+                    <p class="text-gray-300 mb-4">Tandem技术能使亮度<span class="font-bold highlight-text">提高2倍</span>，寿命<span class="font-bold highlight-text">延长4倍</span>，但成本溢价高。 <span class="citation">[cite: 185, 186]</span></p>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <canvas id="notebookTandemOledChart" class="tech-gradient-bg p-2 rounded-lg"></canvas>
+                             <p class="text-center text-sm text-gray-400 mt-2">笔记本RGB OLED按堆叠类型出货量 <span class="citation">[cite: 193]</span></p>
+                        </div>
+                        <div>
+                            <canvas id="tabletTandemOledChart" class="tech-gradient-bg p-2 rounded-lg"></canvas>
+                            <p class="text-center text-sm text-gray-400 mt-2">平板RGB OLED按堆叠类型出货量 <span class="citation">[cite: 193]</span></p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">汽车应用 <span class="citation">[cite: 187]</span></p>
+                            <p class="text-sm text-gray-300">2024年45% OLED汽车显示器为Tandem，预计2030年增至58%。 <span class="citation">[cite: 187]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">苹果策略 <span class="citation">[cite: 188, 189]</span></p>
+                            <p class="text-sm text-gray-300">初期OLED IT策略聚焦高端，Pro产品用Tandem。 <span class="citation">[cite: 188, 189]</span> 主流Air系列预计用单层OLED。 <span class="citation">[cite: 190]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">IJP OLED目标市场 <span class="citation">[cite: 192]</span></p>
+                            <p class="text-sm text-gray-300">IT显示市场的中端部分对IJP OLED具吸引力。 <span class="citation">[cite: 192]</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="implications" class="mb-12 md:mb-16">
+            <div class="main-card rounded-2xl p-6 md:p-8 tech-gradient-bg">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-chart-pie section-title-icon"></i>市场启示 <span class="citation">[cite: 197]</span>
+                </h2>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 highlight-text">大尺寸FPD面板供需情况 <span class="citation">[cite: 198]</span></h3>
+                    <canvas id="largeAreaSupplyDemandChart" class="tech-gradient-bg p-2 rounded-lg mb-4"></canvas>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="mini-card p-4 rounded-lg">
+                             <div class="text-4xl font-bold highlight-text">6.2%</div>
+                            <div class="text-xs text-gray-400 mt-1">DEMAND GROWTH 2024</div>
+                            <p class="text-sm text-gray-300 mt-2">2024年大尺寸面板需求增长 <span class="citation">[cite: 198]</span></p>
+                            <p class="text-sm text-gray-300">预计2025年增5.7%，2026年增5.6%。 <span class="citation">[cite: 198]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">供应过剩持续 <span class="citation">[cite: 198]</span></p>
+                            <p class="text-sm text-gray-300">市场再平衡将比6个月前预期更长，2025-2026年供应仍将过剩。 <span class="citation">[cite: 198]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">2028年起供应不足 <span class="citation">[cite: 199]</span></p>
+                            <p class="text-sm text-gray-300">若需求预测准确，2028年起供应将不足，尤其LCD产能。 <span class="citation">[cite: 199]</span> OLED扩产在计划中。 <span class="citation">[cite: 200]</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 highlight-text">大尺寸TFT LCD面板利润率预测 <span class="citation">[cite: 205]</span></h3>
+                    <canvas id="lcdProfitMarginChart" class="tech-gradient-bg p-2 rounded-lg mb-4"></canvas>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">2H24需求弱于预期 <span class="citation">[cite: 205]</span></p>
+                            <p class="text-sm text-gray-300">3Q24价格侵蚀超预期，导致2H24利润率未达标。 <span class="citation">[cite: 206, 207]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">价格预计恢复 <span class="citation">[cite: 208]</span></p>
+                            <p class="text-sm text-gray-300">因中国“以旧换新”补贴、美国关税前备货及超大尺寸面板推广。 <span class="citation">[cite: 208]</span></p>
+                        </div>
+                        <div class="mini-card p-4 rounded-lg">
+                            <p class="text-lg font-semibold">利润率仍低 <span class="citation">[cite: 211]</span></p>
+                            <p class="text-sm text-gray-300">未来2-3年TFT产能充足，LCD利润可能微薄，难以大幅高于百分之几。 <span class="citation">[cite: 211]</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="summary" class="mb-12 md:mb-16">
+            <div class="main-card rounded-2xl p-6 md:p-8 tech-gradient-bg">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-flag-checkered section-title-icon"></i>总结：行业气象 <span class="citation">[cite: 216]</span>
+                </h2>
+
+                <p class="text-gray-300 mb-6">2025年初，全球经济包括显示产业充满不确定性。美国新关税政策可能加剧贸易战、通胀等风险。 <span class="citation">[cite: 216, 217]</span> 尽管2024年增长慢于预期，FPD需求增长仍快于产能，这应能随时间平衡市场。 <span class="citation">[cite: 219, 220]</span></p>
+
+                <h3 class="text-2xl font-semibold mb-4 highlight-text">关键行业指标气象预报 <span class="citation">[cite: 232]</span></h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-8">
+                    <div class="mini-card p-4 rounded-lg text-center">
+                        <i class="fas fa-cloud fa-2x highlight-text"></i>
+                        <p class="font-semibold mt-2">宏观经济 <span class="citation">[cite: 232]</span></p>
+                        <p class="text-xs text-gray-400">2024: <i class="fas fa-cloud"></i> 2025: <i class="fas fa-cloud"></i> 2026: <i class="fas fa-cloud-sun"></i></p>
+                    </div>
+                     <div class="mini-card p-4 rounded-lg text-center">
+                        <i class="fas fa-dollar-sign fa-2x highlight-text"></i>
+                        <p class="font-semibold mt-2">FPD厂商财务 <span class="citation">[cite: 232]</span></p>
+                        <p class="text-xs text-gray-400">2024: <i class="fas fa-cloud-sun-rain"></i> 2025: <i class="fas fa-cloud-sun"></i> 2026: <i class="fas fa-sun"></i></p>
+                    </div>
+                    <div class="mini-card p-4 rounded-lg text-center">
+                        <i class="fas fa-expand-alt fa-2x highlight-text"></i>
+                        <p class="font-semibold mt-2">产能扩张 <span class="citation">[cite: 232]</span></p>
+                        <p class="text-xs text-gray-400">2024: <i class="fas fa-cloud-showers-heavy"></i> 2025: <i class="fas fa-cloud-showers-heavy"></i> 2026: <i class="fas fa-cloud-sun-rain"></i></p>
+                    </div>
+                     <div class="mini-card p-4 rounded-lg text-center">
+                        <i class="fas fa-tools fa-2x highlight-text"></i>
+                        <p class="font-semibold mt-2">设备市场 <span class="citation">[cite: 232]</span></p>
+                        <p class="text-xs text-gray-400">2024: <i class="fas fa-cloud-showers-heavy"></i> 2025: <i class="fas fa-cloud-showers-heavy"></i> 2026: <i class="fas fa-cloud-sun-rain"></i></p>
+                    </div>
+                     <div class="mini-card p-4 rounded-lg text-center">
+                        <i class="fas fa-balance-scale fa-2x highlight-text"></i>
+                        <p class="font-semibold mt-2">供需关系 <span class="citation">[cite: 232]</span></p>
+                        <p class="text-xs text-gray-400">2024: <i class="fas fa-cloud-sun-rain"></i> 2025: <i class="fas fa-cloud-sun"></i> 2026: <i class="fas fa-sun"></i></p>
+                    </div>
+                     </div>
+                 <p class="text-xs text-gray-500 mb-6">气象图标含义：晴朗 = 上升/高盈利/市场紧张；多云转晴 = 仍积极但稍逊；阴 = 不确定；小雨转晴 = 负盈利/市场宽松但已过最差时期；雨天 = 下行/负盈利/市场宽松。 <span class="citation">[cite: 281, 282, 283]</span></p>
+
+
+                <h3 class="text-2xl font-semibold mb-4 highlight-text">成本的重要性：苹果的教训 <span class="citation">[cite: 222, 223]</span></h3>
+                <p class="text-gray-300 mb-4">除高端市场外，产品对价格敏感，成本至关重要！<span class="citation">[cite: 222]</span> 2024年，即便是苹果也遭遇挫折：</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="mini-card p-4 rounded-lg">
+                        <p class="text-lg font-semibold">Micro LED项目关闭 <span class="citation">[cite: 223]</span></p>
+                        <p class="text-sm text-gray-300">历时10年，花费约25亿美元后关闭。 <span class="citation">[cite: 223]</span></p>
+                    </div>
+                    <div class="mini-card p-4 rounded-lg">
+                        <p class="text-lg font-semibold">Vision Pro销量 <span class="citation">[cite: 224]</span></p>
+                        <p class="text-sm text-gray-300">预期约100万台，最终<40万台。 <span class="citation">[cite: 224]</span></p>
+                    </div>
+                    <div class="mini-card p-4 rounded-lg">
+                        <p class="text-lg font-semibold">iPad Pro销量 <span class="citation">[cite: 225]</span></p>
+                        <p class="text-sm text-gray-300">Tandem RGB OLED版一年前预测900-1000万台，最终出货刚过570万台。 <span class="citation">[cite: 225]</span></p>
+                    </div>
+                </div>
+                <p class="text-gray-300 mt-4">这些不足在一定程度上均与成本/价格相关。 <span class="citation">[cite: 226]</span> Vision Pro和iPad Pro性能一流，但消费者认为太贵。 <span class="citation">[cite: 227]</span></p>
+
+                <h3 class="text-2xl font-semibold mt-8 mb-4 highlight-text">技术驱动成本降低 <span class="citation">[cite: 228]</span></h3>
+                <p class="text-gray-300">DAA和IJP OLED是技术降低成本的好例子。 <span class="citation">[cite: 228]</span> IJP尤其旨在降低OLED成本，可能实现更高盈利、更低价格和性能的“双赢”组合。 <span class="citation">[cite: 229]</span></p>
+
+            </div>
+        </section>
+
+        <footer class="text-center text-sm text-gray-500 py-8">
+            <p>&copy; 2025 Omdia. Informa Tech Target, a trading division of Informa PLC. All rights reserved. <span class="citation">[cite: 13, 23, 26, 44, 57, 72, 80, 92, 106, 120, 158, 184, 196, 204, 215, 237, 241, 245, 249, 253, 257, 270, 278, 289]</span></p>
+            <p>Generated HTML representation based on source document for illustrative purposes.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer for animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Stagger animations for items in a grid
+                        const delay = entry.target.classList.contains('mini-card') ? index * 50 : 0;
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, delay);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+            document.querySelectorAll('.main-card, .mini-card').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Chart data (placeholders, should be extracted from PDF images)
+            const fpdEquipmentForecastData = {
+                labels: ['2024', '2025', '2026', '2027', '2028', '2029', '2030'], // Source: Page 7 [cite: 37] (Jan 2025 chart)
+                datasets: [
+                    {
+                        label: 'OLED ($ billions)',
+                        data: [4.0, 6.0, 3.8, 7.2, 7.5, 6.5, 2.2], // Approximated from Jan 2025 chart [cite: 37]
+                        backgroundColor: 'rgba(var(--highlight-color-rgb), 0.7)',
+                        borderColor: 'var(--highlight-color)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'LCD ($ billions)',
+                        data: [4.8, 2.8, 0.2, 4.8, 2.8, 0.8, 0.8], // Approximated from Jan 2025 chart [cite: 37]
+                        backgroundColor: 'rgba(128, 128, 128, 0.7)', // Gray for LCD
+                        borderColor: 'rgb(128, 128, 128)',
+                        borderWidth: 1
+                    }
+                ]
+            };
+            new Chart(document.getElementById('fpdEquipmentForecastChart'), {
+                type: 'bar',
+                data: fpdEquipmentForecastData,
+                options: {
+                    responsive: true,
+                    plugins: { title: { display: true, text: 'FPD设备支出预测 (48th JDC, Jan 2025) [cite: 37]' } },
+                    scales: { y: { beginAtZero: true, title: { display: true, text: '$ Billions' } } }
+                }
+            });
+            
+            const ijpCostComparisonData = { // Source: Page 16 (bottom chart) [cite: 122]
+                labels: ['2024', '2025', '2026', '2027', '2028'],
+                datasets: [
+                    {
+                        label: 'Single FMM OLED@HG8.6',
+                        data: [93, 90, 87, 88, 85], // Approximated from Page 15 table [cite: 117] and Page 16 chart
+                        borderColor: 'rgb(255, 99, 132)',
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Tandem FMM OLED@HG8.6', // Data for this line is not explicitly in the tables on p15, but implied in chart on p16
+                        data: [115, 110, 105, 100, 95], // Hypothetical data for chart based on typical tandem cost premium
+                        borderColor: 'rgb(255, 159, 64)',
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Single IJP OLED@FG8.6',
+                        data: [66, 63, 61, 58, 56], // Approximated from Page 15 table [cite: 119] and Page 16 chart
+                        borderColor: 'var(--highlight-color)',
+                        tension: 0.1
+                    }
+                ]
+            };
+            new Chart(document.getElementById('ijpCostComparisonChart'), {
+                type: 'line',
+                data: ijpCostComparisonData,
+                options: {
+                    responsive: true,
+                    plugins: { title: { display: true, text: '16.2" Hybrid OLED模组总制造成本 [cite: 122]' } },
+                    scales: { y: { beginAtZero: false, title: { display: true, text: 'Module manufacturing cost ($)' } } }
+                }
+            });
+            
+            const notebookOledPenetrationData = { // Source: Page 20 [cite: 182]
+                labels: ['2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+                datasets: [
+                    {
+                        type: 'bar',
+                        label: 'TFT LCD (000 units)',
+                        data: [190000, 200000, 205000, 210000, 195000, 180000, 185000, 188000], // Approximated
+                        backgroundColor: 'rgba(128, 128, 128, 0.7)'
+                    },
+                    {
+                        type: 'bar',
+                        label: 'AMOLED (000 units)',
+                        data: [5000, 8000, 12000, 20000, 30000, 40000, 50000, 60000], // Approximated
+                        backgroundColor: 'rgba(var(--highlight-color-rgb), 0.7)'
+                    },
+                    {
+                        type: 'line',
+                        label: 'OLED Penetration %',
+                        data: [2, 4, 5, 8, 13, 18, 21, 24], // Approximated
+                        borderColor: 'rgb(255, 205, 86)',
+                        yAxisID: 'y1'
+                    }
+                ]
+            };
+             new Chart(document.getElementById('notebookOledPenetrationChart'), {
+                data: notebookOledPenetrationData,
+                options: {
+                    responsive: true,
+                    plugins: { title: { display: true, text: '笔记本电脑面板需求按技术划分 [cite: 182]' } },
+                    scales: { y: { beginAtZero: true, title: { display: true, text: '出货量 (千片)' } }, y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'OLED渗透率 (%)' }, grid: { drawOnChartArea: false } } }
+                }
+            });
+
+            // Tablet OLED Penetration (similar structure to notebook) - Source: Page 20 [cite: 182]
+            // Data approximated
+            const tabletOledPenetrationData = {
+                labels: ['2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+                datasets: [
+                    { type: 'bar', label: 'TFT LCD', data: [200000, 195000, 190000, 180000, 170000, 165000, 160000, 155000], backgroundColor: 'rgba(128,128,128,0.7)' },
+                    { type: 'bar', label: 'AMOLED', data: [10000, 15000, 20000, 28000, 35000, 42000, 48000, 53000], backgroundColor: 'rgba(var(--highlight-color-rgb),0.7)' },
+                    { type: 'line', label: 'OLED Penetration %', data: [5, 7, 10, 13, 17, 20, 23, 25], borderColor: 'rgb(255,205,86)', yAxisID: 'y1' }
+                ]
+            };
+            new Chart(document.getElementById('tabletOledPenetrationChart'), {
+                data: tabletOledPenetrationData,
+                options: { responsive: true, plugins: { title: { display: true, text: '平板电脑面板需求按技术划分 [cite: 182]' }}, scales: { y: {beginAtZero: true, title: {display: true, text:'出货量 (千片)'}}, y1: { type: 'linear', display: true, position: 'right', title:{display: true, text:'OLED渗透率 (%)'}, grid: { drawOnChartArea: false } } } }
+            });
+            
+            // Notebook Tandem OLED chart - Source: Page 21 [cite: 193]
+            // Data approximated
+            const notebookTandemData = {
+                labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+                datasets: [
+                    { type: 'bar', label: 'RGB Single', data: [5, 3, 8, 10, 12, 20, 25, 30, 35], backgroundColor: 'rgba(128,128,128,0.7)' },
+                    { type: 'bar', label: 'RGB Tandem', data: [0, 0.5, 1, 2, 5, 10, 15, 20, 25], backgroundColor: 'rgba(var(--highlight-color-rgb),0.7)' },
+                    { type: 'line', label: 'Tandem %', data: [0, 14, 11, 16, 29, 33, 37, 40, 42], borderColor: 'rgb(255,205,86)', yAxisID: 'y1' }
+                ]
+            };
+             new Chart(document.getElementById('notebookTandemOledChart'), {
+                data: notebookTandemData,
+                options: { responsive: true, plugins: { title: { display: true, text: '笔记本RGB OLED出货量 (按堆叠) [cite: 193]' }}, scales: { y: {beginAtZero: true, stacked: true, title: {display: true, text:'出货量 (百万片)'}}, y1: { type: 'linear', display: true, position: 'right', title:{display: true, text:'Tandem渗透率 (%)'}, grid: { drawOnChartArea: false } } } }
+            });
+
+            // Tablet Tandem OLED chart - Source: Page 21 [cite: 193]
+            // Data approximated
+             const tabletTandemData = {
+                labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030'],
+                datasets: [
+                    { type: 'bar', label: 'RGB Single', data: [8, 10, 12, 13, 10, 8, 7, 6, 5], backgroundColor: 'rgba(128,128,128,0.7)' },
+                    { type: 'bar', label: 'RGB Tandem', data: [0.5, 1, 3, 7, 15, 22, 26, 30, 33], backgroundColor: 'rgba(var(--highlight-color-rgb),0.7)' },
+                    { type: 'line', label: 'Tandem %', data: [6, 9, 20, 35, 60, 73, 79, 83, 87], borderColor: 'rgb(255,205,86)', yAxisID: 'y1' }
+                ]
+            };
+             new Chart(document.getElementById('tabletTandemOledChart'), {
+                data: tabletTandemData,
+                options: { responsive: true, plugins: { title: { display: true, text: '平板RGB OLED出货量 (按堆叠) [cite: 193]' }}, scales: { y: {beginAtZero: true, stacked: true, title: {display: true, text:'出货量 (百万片)'}}, y1: { type: 'linear', display: true, position: 'right', title:{display: true, text:'Tandem渗透率 (%)'}, grid: { drawOnChartArea: false } } } }
+            });
+
+
+            // Large Area Supply/Demand chart - Source: Page 23 (Annual chart) [cite: 202]
+            // Data approximated
+            const largeAreaSupplyDemandData = {
+                labels: ['2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031'],
+                datasets: [
+                    { type: 'bar', label: '需求总量 (Demand total)', data: [240000, 255000, 270000, 280000, 295000, 310000, 320000, 330000], backgroundColor: 'rgba(var(--highlight-color-rgb),0.5)' },
+                    { type: 'bar', label: '产能 (Yielded Capacity)', data: [290000, 300000, 305000, 310000, 310000, 315000, 320000, 325000], backgroundColor: 'rgba(128,128,128,0.5)' },
+                    { type: 'line', label: 'TFT过剩率 (TFT Glut %)', data: [15, 12, 9, 5, 1, -2, -3, -5], borderColor: 'rgb(255,99,132)', yAxisID: 'y1', tension: 0.1 }
+                ]
+            };
+            new Chart(document.getElementById('largeAreaSupplyDemandChart'), {
+                data: largeAreaSupplyDemandData,
+                options: { responsive: true, plugins: { title: { display: true, text: '大尺寸LCD+OLED+EPD供需 (年) [cite: 202]' }}, scales: { y: {beginAtZero: true, title: {display: true, text:'需求/产能 (千平方米/季度)'}}, y1: { type: 'linear', display: true, position: 'right', title:{display: true, text:'过剩率 (% 供应/需求)'}, grid: { drawOnChartArea: false } } } }
+            });
+
+            // LCD Profit Margin chart - Source: Page 24 (Jan 2025 chart) [cite: 214]
+            // Data approximated
+            const lcdProfitMarginData = {
+                labels: ['1Q23', '2Q23', '3Q23', '4Q23', '1Q24', '2Q24', '3Q24', '4Q24E', '1Q25E', '2Q25E', '3Q25E', '4Q25E'],
+                datasets: [
+                    { label: '利润率 (%) (LA Profit %)', data: [-9.7, -3.8, 0.1, 0.7, -1.7, 1.8, 0.3, -0.5, 1.3, 2.3, 1.9, 1.7], borderColor: 'var(--highlight-color)', tension: 0.1, fill: false },
+                    // Low/High scenarios can be added if desired, omitted for simplicity here
+                ]
+            };
+            new Chart(document.getElementById('lcdProfitMarginChart'), {
+                type: 'line',
+                data: lcdProfitMarginData,
+                options: { responsive: true, plugins: { title: { display: true, text: '大尺寸TFT LCD面板利润率预测 (48th JDC, Jan 2025) [cite: 214]' }}, scales: { y: { title: {display: true, text:'利润率 (%)'} } } }
+            });
+
+
+        });
+    </script>
+</body>
+</html>

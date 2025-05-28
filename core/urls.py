@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('content.urls')),
+    path('', include('apps.content.urls')),
 ]
 
 # 开发环境下的静态文件和媒体文件配置

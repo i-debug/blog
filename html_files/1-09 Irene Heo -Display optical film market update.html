@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>显示光学膜市场最新动态 | Display Optical Film Market Update</title>
+    <script src="https://cdn.tailwindcss.com/3.4.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+        .highlight-text { color: #00AEEF; }
+        .highlight-bg { background-color: #00AEEF; }
+        .highlight-border { border-color: #00AEEF; }
+
+        .tech-gradient {
+            background-image: linear-gradient(to bottom right, rgba(0, 174, 239, 0.2), rgba(0, 174, 239, 0.05));
+        }
+        .card {
+            background-color: #1a1a1a;
+            border: 1px solid #333333;
+        }
+        .mini-card {
+            background-color: #222222;
+            border: 1px solid #333333;
+            min-height: 180px; /* Ensure consistent height for mini cards */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+            text-align: center; /* Center text */
+        }
+        .main-title-zh {
+            font-size: 3rem; /* Equivalent to text-5xl */
+            font-weight: 700; /* bold */
+        }
+        @media (min-width: 768px) {
+            .main-title-zh {
+                font-size: 4.5rem; /* Equivalent to text-7xl for larger screens */
+            }
+        }
+        .main-title-en {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* semibold */
+            color: #9ca3af; /* gray-400 */
+        }
+        .mini-card-value {
+            font-size: 3rem; /* text-5xl */
+            font-weight: 700; /* bold */
+            line-height: 1.1;
+        }
+        .mini-card-title-text {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* bold */
+            line-height: 1.2;
+        }
+        .mini-card-desc {
+            font-size: 0.875rem; /* text-sm */
+            color: #9ca3af; /* gray-400 */
+            margin-top: 0.5rem; /* mt-2 */
+        }
+        .mini-card-sub-desc {
+            font-size: 0.75rem; /* text-xs */
+            color: #6b7280; /* gray-500 */
+            margin-top: 0.25rem; /* mt-1 */
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 40vh; /* Adjust as needed */
+            width: 100%; /* Adjust as needed */
+            max-width: 800px; /* Optional: constrain max width */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="py-12 md:py-20 text-center container mx-auto px-4">
+        <i class="fas fa-chart-line highlight-text text-4xl mb-4"></i>
+        <h1 class="main-title-zh highlight-text animate-on-scroll">显示光学膜市场最新动态</h1>
+        <p class="main-title-en mt-2 animate-on-scroll" style="transition-delay: 0.1s;">Display Optical Film Market Update</p>
+        <p class="text-gray-400 mt-4 text-lg animate-on-scroll" style="transition-delay: 0.2s;">Irene Heo, Principal Analyst, Display</p>
+        <p class="text-gray-500 mt-1 text-sm animate-on-scroll" style="transition-delay: 0.3s;">January 23-24, 2025 | 48th Display Japan Forum [cite: 2]</p>
+    </header>
+
+    <main class="container mx-auto px-4">
+
+        <section class="mb-12 md:mb-16 card rounded-xl p-6 md:p-8 tech-gradient animate-on-scroll">
+            <h2 class="text-3xl font-bold mb-6 text-white text-center"><i class="fas fa-layer-group mr-2 highlight-text"></i>偏光片市场更新</h2>
+            <p class="text-center text-gray-300 mb-8">偏光片需求预计在2024年同比增长4%，2025年增长5%。 [cite: 5]</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                <div class="mini-card rounded-lg p-4 animate-on-scroll">
+                    <div class="mini-card-value highlight-text">4%</div>
+                    <div class="mini-card-desc">2024年面积需求同比增长 [cite: 7]</div>
+                    <div class="mini-card-sub-desc">2024 Area Demand YoY Growth</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="mini-card-value highlight-text">5%</div>
+                    <div class="mini-card-desc">2025年面积需求同比增长 [cite: 7]</div>
+                    <div class="mini-card-sub-desc">2025 Area Demand YoY Growth</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="mini-card-value highlight-text">594</div>
+                    <div class="mini-card-desc">2024年总面积需求 (百万 m²) [cite: 7]</div>
+                    <div class="mini-card-sub-desc">Total Area Demand 2024 (M m²)</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll">
+                    <div class="mini-card-value highlight-text">624</div>
+                    <div class="mini-card-desc">2025年总面积需求 (百万 m²) [cite: 7]</div>
+                    <div class="mini-card-sub-desc">Total Area Demand 2025 (M m²)</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="mini-card-value highlight-text">3%</div>
+                    <div class="mini-card-desc">2024年营收同比增长 [cite: 9]</div>
+                    <div class="mini-card-sub-desc">2024 Revenue YoY Growth</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="mini-card-value highlight-text">$9,445 M</div>
+                    <div class="mini-card-desc">2025年总营收预测 [cite: 9]</div>
+                    <div class="mini-card-sub-desc">Total Revenue Forecast 2025</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="animate-on-scroll">
+                    <h3 class="text-xl font-semibold mb-3 text-center text-white">偏光片面积需求预测 (百万 m²)</h3>
+                    <div class="chart-container bg-gray-800 p-4 rounded-lg"><canvas id="polarizerAreaDemandChart"></canvas></div>
+                </div>
+                <div class="animate-on-scroll">
+                    <h3 class="text-xl font-semibold mb-3 text-center text-white">偏光片营收预测 (百万美元)</h3>
+                    <div class="chart-container bg-gray-800 p-4 rounded-lg"><canvas id="polarizerRevenueForecastChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12 md:mb-16 card rounded-xl p-6 md:p-8 tech-gradient animate-on-scroll">
+            <h2 class="text-3xl font-bold mb-6 text-white text-center"><i class="fas fa-industry mr-2 highlight-text"></i>偏光片生产能力预测</h2>
+            <p class="text-center text-gray-300 mb-8">过去一年，偏光片产能预测出现两位数下降。 [cite: 13]</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
+                <div class="mini-card rounded-lg p-4 animate-on-scroll">
+                    <div class="mini-card-title-text highlight-text">绵阳 L11,12</div>
+                    <div class="mini-card-desc">杉金光电，MP日程延期至2026年 [cite: 14]</div>
+                    <div class="mini-card-sub-desc">Shanjin Mianyang, Delayed to 2026</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="mini-card-title-text highlight-text">合肥 L3</div>
+                    <div class="mini-card-desc">Sunnypol，MP日程从1Q24延期至4Q24 [cite: 14]</div>
+                    <div class="mini-card-sub-desc">Sunnypol Hefei, Delayed 1Q24 → 4Q24</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="mini-card-title-text highlight-text">湖北 L9</div>
+                    <div class="mini-card-desc">Sunnypol，MP日程从2024延期至4Q25 [cite: 14]</div>
+                    <div class="mini-card-sub-desc">Sunnypol Hubei, Delayed 2024 → 4Q25</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.3s;">
+                    <div class="mini-card-title-text highlight-text">昆山 L5</div>
+                    <div class="mini-card-desc">HMO，MP日程从2025延期至4Q26 [cite: 14]</div>
+                    <div class="mini-card-sub-desc">HMO Kunshan, Delayed 2025 → 4Q26</div>
+                </div>
+            </div>
+            <div class="animate-on-scroll">
+                <h3 class="text-xl font-semibold mb-3 text-center text-white">偏光片生产能力预测变化 (百万 m²)</h3>
+                <div class="chart-container bg-gray-800 p-4 rounded-lg"><canvas id="polarizerCapacityChangeChart"></canvas></div>
+            </div>
+        </section>
+
+        <section class="mb-12 md:mb-16 card rounded-xl p-6 md:p-8 tech-gradient animate-on-scroll">
+            <h2 class="text-3xl font-bold mb-6 text-white text-center"><i class="fas fa-balance-scale mr-2 highlight-text"></i>偏光片供需增长率</h2>
+             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                <div class="mini-card rounded-lg p-4 animate-on-scroll">
+                    <div class="mini-card-title-text highlight-text">需求强劲</div>
+                    <div class="mini-card-desc">COVID-19期间 (2020-21) [cite: 22]</div>
+                    <div class="mini-card-sub-desc">Strong Demand</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="mini-card-title-text highlight-text">供应短缺</div>
+                    <div class="mini-card-desc">COVID-19期间 (2020-21) [cite: 22]</div>
+                    <div class="mini-card-sub-desc">Supply Shortage</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="mini-card-title-text highlight-text">需求锐减</div>
+                    <div class="mini-card-desc">后疫情、战争与通胀影响 [cite: 22]</div>
+                    <div class="mini-card-sub-desc">Demand Drops Severely</div>
+                </div>
+            </div>
+            <div class="animate-on-scroll">
+                <h3 class="text-xl font-semibold mb-3 text-center text-white">偏光片需求与供应预测增长率 (%)</h3>
+                <div class="chart-container bg-gray-800 p-4 rounded-lg"><canvas id="demandSupplyGrowthChart"></canvas></div>
+            </div>
+        </section>
+
+        <section class="mb-12 md:mb-16 card rounded-xl p-6 md:p-8 tech-gradient animate-on-scroll">
+            <h2 class="text-3xl font-bold mb-6 text-white text-center"><i class="fas fa-chart-pie mr-2 highlight-text"></i>供需分析与投资重组</h2>
+            <p class="text-center text-gray-300 mb-8">供应减少和需求增长导致市场趋紧。 [cite: 25]</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+                <div class="mini-card rounded-lg p-4 animate-on-scroll">
+                    <div class="mini-card-value highlight-text">12%</div>
+                    <div class="mini-card-desc">1Q25 供过于求率 (3Q24预测) [cite: 25]</div>
+                    <div class="mini-card-sub-desc">1Q25 Glut % (3Q24 Forecast)</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="mini-card-value highlight-text">4%</div>
+                    <div class="mini-card-desc">3Q25 供过于求率 (3Q24预测) [cite: 25]</div>
+                    <div class="mini-card-sub-desc">3Q25 Glut % (3Q24 Forecast)</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="mini-card-title-text highlight-text">日东退出</div>
+                    <div class="mini-card-desc">日东电工退出台湾TV偏光片市场 [cite: 31]</div>
+                    <div class="mini-card-sub-desc">Nitto Denko Exits Taiwan TV Market</div>
+                </div>
+                 <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.3s;">
+                    <div class="mini-card-title-text highlight-text">HMO收购SDI</div>
+                    <div class="mini-card-desc">恒美光电收购三星SDI偏光片业务 [cite: 32]</div>
+                    <div class="mini-card-sub-desc">HMO Acquires SDI Polarizer Biz</div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="animate-on-scroll">
+                    <h3 class="text-xl font-semibold mb-3 text-center text-white">季度偏光片供需 (百万 m²)</h3>
+                    <div class="chart-container bg-gray-800 p-4 rounded-lg"><canvas id="quarterlySupplyDemandChart"></canvas></div>
+                </div>
+                <div class="animate-on-scroll">
+                    <h3 class="text-xl font-semibold mb-3 text-center text-white">年度偏光片供过于求率 (%)</h3>
+                    <div class="chart-container bg-gray-800 p-4 rounded-lg"><canvas id="yearlyGlutChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12 md:mb-16 card rounded-xl p-6 md:p-8 tech-gradient animate-on-scroll">
+            <h2 class="text-3xl font-bold mb-6 text-white text-center"><i class="fas fa-globe-asia mr-2 highlight-text"></i>市场份额与产业向中国转移</h2>
+            <p class="text-center text-gray-300 mb-8">偏光片产业正加速向中国主导过渡，中国公司竞争力持续增强。 [cite: 53, 41]</p>
+             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                <div class="mini-card rounded-lg p-4 animate-on-scroll">
+                    <div class="mini-card-value highlight-text">32%</div>
+                    <div class="mini-card-desc">杉金光电 (Shanjin) - 大型偏光片市场份额 (3Q24) [cite: 80]</div>
+                    <div class="mini-card-sub-desc">Shanjin - Large Area Share (3Q24)</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="mini-card-value highlight-text">27%</div>
+                    <div class="mini-card-desc">SDI/HMO/SAPO - 大型偏光片市场份额 (3Q24) [cite: 80]</div>
+                    <div class="mini-card-sub-desc">SDI/HMO/SAPO - Large Area Share (3Q24)</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="mini-card-value highlight-text">$836 M</div>
+                    <div class="mini-card-desc">HMO收购SDI金额 (约) [cite: 54]</div>
+                    <div class="mini-card-sub-desc">HMO Acquires SDI (Deal Value)</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                 <div class="animate-on-scroll">
+                    <h3 class="text-xl font-semibold mb-3 text-center text-white">大型偏光片市场份额 (3Q24)</h3>
+                    <div class="chart-container bg-gray-800 p-4 rounded-lg"><canvas id="largeAreaMarketShareChart"></canvas></div>
+                </div>
+                <div class="animate-on-scroll">
+                    <h3 class="text-xl font-semibold mb-3 text-center text-white">偏光片各地区产能占比</h3>
+                    <div class="chart-container bg-gray-800 p-4 rounded-lg"><canvas id="capacityByRegionChart"></canvas></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                 <div class="mini-card rounded-lg p-4 animate-on-scroll">
+                    <div class="mini-card-title-text highlight-text">关税影响</div>
+                    <div class="mini-card-desc">若征收6.5%关税，65英寸偏光片成本增加约1.07美元 [cite: 98]</div>
+                    <div class="mini-card-sub-desc">Tariff Impact: 65" Polarizer +$1.07</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="mini-card-title-text highlight-text">国产化提升</div>
+                    <div class="mini-card-desc">新美收购LGC保护膜业务，提升国产化率 [cite: 94]</div>
+                    <div class="mini-card-sub-desc">Xinmei Acquires LGC Biz, Boosts Localization</div>
+                </div>
+            </div>
+        </section>
+
+         <section class="mb-12 md:mb-16 card rounded-xl p-6 md:p-8 tech-gradient animate-on-scroll">
+            <h2 class="text-3xl font-bold mb-6 text-white text-center"><i class="fas fa-tv mr-2 highlight-text"></i>TV及移动OLED偏光片挑战与趋势</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                <div class="mini-card rounded-lg p-4 animate-on-scroll">
+                    <div class="mini-card-title-text highlight-text">LCD TV: 大尺寸化</div>
+                    <div class="mini-card-desc">关键需求：Non-TAC 技术 [cite: 100]</div>
+                    <div class="mini-card-sub-desc">LCD TV: Size Enlargement (Non-TAC)</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="mini-card-title-text highlight-text">OLED TV: 降本</div>
+                    <div class="mini-card-desc">技术重点：液晶替代COP膜, Pol-less [cite: 100]</div>
+                    <div class="mini-card-sub-desc">OLED TV: Cost Reduction</div>
+                </div>
+                 <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="mini-card-title-text highlight-text">移动OLED: 液晶主导</div>
+                    <div class="mini-card-desc">80%市场已采用液晶型偏光片 [cite: 104]</div>
+                    <div class="mini-card-sub-desc">Mobile OLED: Liquid Crystal Dominates</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll">
+                    <div class="mini-card-title-text highlight-text">折叠屏: Pol-less挑战</div>
+                    <div class="mini-card-desc">需平衡厚度、透光率及护眼需求 [cite: 106]</div>
+                    <div class="mini-card-sub-desc">Foldable: Pol-less Challenges</div>
+                </div>
+                <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="mini-card-title-text highlight-text">护眼需求</div>
+                    <div class="mini-card-desc">OLED偏光片持续关注护眼功能 [cite: 104, 106]</div>
+                    <div class="mini-card-sub-desc">Eye-care Demand Continues</div>
+                </div>
+                 <div class="mini-card rounded-lg p-4 animate-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="mini-card-value highlight-text">150μm</div>
+                    <div class="mini-card-desc">UTG+传统偏光片厚度示例 [cite: 107]</div>
+                    <div class="mini-card-sub-desc">UTG + Polarizer Thickness Example</div>
+                </div>
+            </div>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="animate-on-scroll">
+                    <h3 class="text-xl font-semibold mb-3 text-center text-white">LCD TV 外层PVA保护膜构成 (%)</h3>
+                    <div class="chart-container bg-gray-800 p-4 rounded-lg"><canvas id="lcdTvOuterPvaChart"></canvas></div>
+                </div>
+                <div class="animate-on-scroll">
+                    <h3 class="text-xl font-semibold mb-3 text-center text-white">OLED手机偏光片市场份额趋势 (3Q23 vs 3Q24)</h3>
+                    <div class="chart-container bg-gray-800 p-4 rounded-lg"><canvas id="mobileOledMarketShareChart"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 mt-12">
+        <p class="text-gray-500 text-sm">资料来源：Omdia Display Optical Film Market Update, January 2025[cite: 2, 4, 8, 10, 11, 12, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 49, 50, 51, 52, 55, 57, 62, 67, 68, 69, 70, 72, 76, 77, 80, 81, 82, 86, 87, 89, 90, 96, 97, 98, 101, 102, 105, 106, 107, 108, 109].</p>
+        <p class="text-gray-600 text-xs mt-1"> <span id="generationDate"></span>.</p>
+    </footer>
+
+    <script>
+        document.getElementById('generationDate').textContent = new Date().toLocaleDateString();
+
+        // Intersection Observer for animations
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Apply staggered delay for mini-cards or elements in a sequence
+                    const delay = entry.target.closest('.grid') ? (Array.from(entry.target.parentElement.children).indexOf(entry.target) * 100) : 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('is-visible');
+                    }, delay > 500 ? 0 : delay); // cap delay to avoid long waits on large grids
+                    // observer.unobserve(entry.target); // Optional: unobserve after animation
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Chart.js Global Config
+        Chart.defaults.color = '#e0e0e0';
+        Chart.defaults.borderColor = '#4b5563'; // gray-600
+
+        // Chart Initializations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Polarizer Area Demand Chart
+            const polarizerAreaDemandCtx = document.getElementById('polarizerAreaDemandChart');
+            if (polarizerAreaDemandCtx) {
+                new Chart(polarizerAreaDemandCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028'],
+                        datasets: [{
+                            label: 'LCD TV',
+                            data: [391, 399, 416, 439, 464, 483, 493], /* From page 4 [cite: 6, 7, 8] */
+                            borderColor: '#00AEEF',
+                            backgroundColor: 'rgba(0, 174, 239, 0.2)',
+                            tension: 0.1,
+                            fill: true
+                        }, {
+                            label: 'Total',
+                            data: [568, 569, 594, 624, 651, 670, 683], /* From page 4 [cite: 6, 7, 8] */
+                            borderColor: '#FFA500',
+                            backgroundColor: 'rgba(255, 165, 0, 0.2)',
+                            tension: 0.1,
+                            fill: true
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+                });
+            }
+
+            // Polarizer Revenue Forecast Chart
+            const polarizerRevenueForecastCtx = document.getElementById('polarizerRevenueForecastChart');
+            if (polarizerRevenueForecastCtx) {
+                new Chart(polarizerRevenueForecastCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028'],
+                        datasets: [{
+                            label: 'Total Revenue',
+                            data: [9609, 9154, 9389, 9445, 9385, 9221, 9039], /* From page 4 [cite: 11, 9, 10] */
+                            borderColor: '#00AEEF',
+                            backgroundColor: 'rgba(0, 174, 239, 0.2)',
+                            tension: 0.1,
+                            fill: true
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false } } }
+                });
+            }
+
+            // Polarizer Production Capacity Change Chart
+            const polarizerCapacityChangeCtx = document.getElementById('polarizerCapacityChangeChart');
+            if(polarizerCapacityChangeCtx) {
+                new Chart(polarizerCapacityChangeCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['2024', '2025', '2026', '2027', '2028'], // Simplified years for better display
+                        datasets: [{
+                            label: '产能 (4Q23预测)',
+                            data: [931, 1021, 1091, 1108, 1128], /* Data from page 5 [cite: 15] */
+                            backgroundColor: 'rgba(0, 174, 239, 0.5)',
+                            borderColor: '#00AEEF',
+                            borderWidth: 1
+                        }, {
+                            label: '产能 (3Q24预测)',
+                            data: [816, 856, 911, 1003, 1022], /* Data from page 5 [cite: 15] */
+                            backgroundColor: 'rgba(255, 165, 0, 0.5)',
+                            borderColor: '#FFA500',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+                });
+            }
+
+            // Polarizer Demand vs. Supply Growth Rate Chart
+            const demandSupplyGrowthCtx = document.getElementById('demandSupplyGrowthChart');
+            if (demandSupplyGrowthCtx) {
+                new Chart(demandSupplyGrowthCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028'],
+                        datasets: [{
+                            label: '需求增长率',
+                            data: [10, 4, 7, 5, -5, 0, 4, 5, 4, 3, 2], /* From page 7 [cite: 22] */
+                            borderColor: '#00AEEF',
+                            tension: 0.1
+                        }, {
+                            label: '供应增长率 (3Q24预测)',
+                            data: [9, 5, -7, 10, 8, -2, 5, 5, 6, 10, 2], /* From page 7 [cite: 22] */
+                            borderColor: '#FFA500',
+                            tension: 0.1
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false } } }
+                });
+            }
+
+            // Quarterly Polarizer Supply/Demand Chart
+            const quarterlySupplyDemandCtx = document.getElementById('quarterlySupplyDemandChart');
+            if(quarterlySupplyDemandCtx) {
+                new Chart(quarterlySupplyDemandCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['1Q24', '2Q24', '3Q24', '4Q24', '1Q25', '2Q25', '3Q25', '4Q25'],
+                        datasets: [{
+                            label: '偏光片需求',
+                            data: [144, 152, 149, 149, 147, 160, 162, 155], /* From page 8 [cite: 25] */
+                            backgroundColor: 'rgba(0, 174, 239, 0.7)',
+                        }, {
+                            label: '良率后偏光片供应',
+                            data: [156, 162, 165, 161, 167, 168, 169, 173], /* From page 8 [cite: 25] */
+                            backgroundColor: 'rgba(255, 165, 0, 0.7)',
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+                });
+            }
+
+            // Yearly Polarizer Glut Chart
+            const yearlyGlutCtx = document.getElementById('yearlyGlutChart');
+            if(yearlyGlutCtx) {
+                 new Chart(yearlyGlutCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028'],
+                        datasets: [{
+                            label: '供过于求率 (1Q24预测)',
+                            data: [-8, -3, 10, 8, 8, 8, 10, 15, 15], /* From page 9 [cite: 28] - simplified matching to years*/
+                            borderColor: '#00AEEF',
+                            tension: 0.1,
+                            fill: false
+                        }, {
+                            label: '供过于求率 (3Q24预测)',
+                            data: [-8, -3, 10, 8, 8, 8, 13, 18, 18], /* From page 9 [cite: 28] - simplified matching to years, used 4Q23 for 2020-2023 then 3Q24 for rest */
+                            borderColor: '#FFA500',
+                            tension: 0.1,
+                            fill: false
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false,  ticks: { callback: function(value) { return value + "%" } } } } }
+                });
+            }
+
+             // Large Area Market Share Chart (3Q24)
+            const largeAreaMarketShareCtx = document.getElementById('largeAreaMarketShareChart');
+            if (largeAreaMarketShareCtx) {
+                new Chart(largeAreaMarketShareCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Shanjin (杉金)', 'SDI/HMO/SAPO', 'Sumitomo (住友)', 'Nitto (日东)', 'BQM (达兴)', 'Sunnypol (盛泰)', 'Others (其他)'],
+                        datasets: [{
+                            label: '大型偏光片市场份额 (3Q24)',
+                            data: [32, 27, 11, 6, 4, 3, 17], // Sum of CMMT(3), Optimax(0), LG Chem(0), Sanritz(0) + any remaining for Others [cite: 80]
+                            backgroundColor: ['#00AEEF', '#FFA500', '#34D399', '#A78BFA', '#F472B6', '#FB923C', '#60A5FA'],
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+            }
+
+            // Polarizer Capacity by Region Chart
+            const capacityByRegionCtx = document.getElementById('capacityByRegionChart');
+            if (capacityByRegionCtx) {
+                new Chart(capacityByRegionCtx, {
+                    type: 'bar', // Changed to bar for better readability of stacks over years
+                    data: {
+                        labels: ['2020', '2022', '2024', '2026', '2028'], // Selected years [cite: 91]
+                        datasets: [
+                            {
+                                label: '中国 (China)',
+                                data: [36, 47, 66, 78, 78], /* From page 20 [cite: 91] */
+                                backgroundColor: '#00AEEF',
+                            },
+                            {
+                                label: '台湾 (Taiwan)',
+                                data: [33, 25, 18, 14, 14], /* From page 20 [cite: 91] */
+                                backgroundColor: '#FFA500',
+                            },
+                            {
+                                label: '韩国 (Korea)',
+                                data: [23, 16, 12, 7, 7], /* From page 20 [cite: 91] */
+                                backgroundColor: '#34D399',
+                            },
+                             {
+                                label: '日本 (Japan)',
+                                data: [8, 7, 5, 1, 1], /* From page 20, approximated for display from (100 - sum) or explicit if available */
+                                backgroundColor: '#A78BFA',
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true, max:100, ticks: {callback: function(v){return v+"%"}} } }
+                    }
+                });
+            }
+
+
+            // LCD TV Outer PVA Protection Film Chart
+            const lcdTvOuterPvaCtx = document.getElementById('lcdTvOuterPvaChart');
+            if (lcdTvOuterPvaCtx) {
+                new Chart(lcdTvOuterPvaCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['TV', 'TV (>65")'], // From page 21 chart [cite: 101]
+                        datasets: [
+                            {
+                                label: 'Non-TAC',
+                                data: [64, 57], // Data from page 21 chart [cite: 101]
+                                backgroundColor: '#00AEEF',
+                            },
+                            {
+                                label: 'TAC',
+                                data: [36, 43], // Data from page 21 chart [cite: 101]
+                                backgroundColor: '#FFA500',
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                        scales: { x: { stacked: true, ticks: {callback: function(v){return v+"%"}} }, y: { stacked: true } },
+                        plugins: { legend: { position: 'top' } }
+                    }
+                });
+            }
+
+            // Mobile OLED Market Share Chart
+            const mobileOledMarketShareCtx = document.getElementById('mobileOledMarketShareChart');
+            if (mobileOledMarketShareCtx) {
+                 new Chart(mobileOledMarketShareCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['DW', 'Nitto', 'SAPO', 'BQM', 'Sunnypol', 'Shanjin'], /* From page 22 [cite: 105] */
+                        datasets: [{
+                            label: '3Q23',
+                            data: [/*DW approx 47*/ 47, /*Nitto approx 47*/ 47, /*SAPO approx 2*/ 2, /*BMC (BQM) approx 1*/ 1, /*Sunnypol approx 2*/ 2, /*Shanjin approx 1*/ 1], // Approximate from chart bars [cite: 105]
+                            backgroundColor: 'rgba(0, 174, 239, 0.7)',
+                        }, {
+                            label: '3Q24',
+                            data: [/*DW approx 48*/ 48, /*Nitto approx 43 (down from 47)*/ 43, /*SAPO approx 2*/ 2, /*BMC (BQM) approx 1*/ 1, /*Sunnypol approx 5 (up from 2)*/ 5, /*Shanjin approx 1*/ 1], // Approximate from chart bars [cite: 105]
+                            backgroundColor: 'rgba(255, 165, 0, 0.7)',
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: {callback: function(v){return v+"%"}}} } }
+                });
+            }
+
+
+        });
+    </script>
+</body>
+</html>

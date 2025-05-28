@@ -82,7 +82,21 @@
                             prose-li:relative prose-li:pl-6 prose-li:mb-2">
                     
                     <!-- 注入HTML内容 -->
-                    {{ article.get_html_content|safe }}
+                    {% if html_content %}
+                        {{ html_content|safe }}
+                    {% elif article.content %}
+                        {{ article.content|safe }}
+                    {% else %}
+                        <div class="bg-yellow-900/20 p-4 rounded-lg border border-yellow-900/30 mt-8">
+                            <div class="flex items-center text-yellow-300 mb-2">
+                                <i class="fas fa-exclamation-circle mr-2"></i>
+                                <span class="font-semibold">提示</span>
+                            </div>
+                            <p class="text-yellow-200">
+                                该文章内容暂未加载。请稍后再试。
+                            </p>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </article>
