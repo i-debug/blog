@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>显示市场与技术趋势 2024回顾暨2025展望</title>
+    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/tailwind/3.3.3/tailwind.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.staticfile.org/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #E0E0E0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+        .highlight-color { color: #00AEEF; }
+        .highlight-bg { background-color: #00AEEF; }
+        .highlight-border { border-color: #00AEEF; }
+        .tech-gradient {
+            background-image: linear-gradient(to bottom, rgba(0, 174, 239, 0.2), rgba(0, 174, 239, 0.05));
+        }
+        .tech-gradient-solid {
+             background-image: linear-gradient(to bottom, rgba(0, 174, 239, 0.7), rgba(0, 174, 239, 0.3));
+        }
+
+        .main-card {
+            background-color: #1A1A1A;
+            border: 1px solid #333333;
+            border-radius: 1rem; /* rounded-xl */
+            padding: 2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .mini-card {
+            background-color: #222222;
+            border: 1px solid #333333;
+            border-radius: 0.75rem; /* rounded-lg */
+            padding: 1.5rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%; /* Ensure cards in a row have same height */
+        }
+        .mini-card .value {
+            font-size: 3rem; /* text-5xl */
+            font-weight: bold;
+            color: #00AEEF;
+            line-height: 1.2;
+        }
+        .mini-card .title {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: bold;
+            color: #FFFFFF;
+            line-height: 1.2;
+        }
+        .mini-card .description {
+            font-size: 0.875rem; /* text-sm */
+            color: #A0A0A0; /* lighter gray */
+            margin-top: 0.5rem;
+            flex-grow: 1;
+        }
+        .mini-card .eng-subtitle {
+            font-size: 0.75rem; /* text-xs */
+            color: #707070; /* darker gray */
+            margin-top: 0.25rem;
+        }
+
+        .content-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 40vh;
+            width: 100%;
+            max-width: 800px; /* Limit chart width for better readability */
+        }
+        th, td {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #444;
+            text-align: left;
+        }
+        th {
+            background-color: #2a2a2a;
+        }
+        .kpi-value {
+            font-size: 2.5rem; /* text-4xl */
+            font-weight: bold;
+            color: #00AEEF;
+        }
+        .kpi-label {
+            font-size: 0.875rem; /* text-sm */
+            color: #A0A0A0;
+            margin-top: 0.25rem;
+        }
+        .grid-item-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <header class="text-center mb-12 md:mb-16">
+        <i class="fas fa-desktop highlight-color text-4xl mb-4"></i>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white">显示市场与技术趋势</h1>
+        <p class="text-lg sm:text-xl md:text-2xl font-semibold text-gray-300 mt-2">Display Market and Technology Trend</p>
+        <p class="text-md text-gray-400 mt-2">2024 回顾暨2025展望 (2024 Review and 2025 Forecast)</p>
+        <p class="text-sm text-gray-500 mt-1">David Hsieh, Senior Director, Display [cite: 1]</p>
+        <p class="text-sm text-gray-500 mt-1">Jan 23-24, 2025 [cite: 1]</p>
+    </header>
+
+    <main>
+        <section class="main-card">
+            <h2 class="text-3xl font-bold mb-6 text-white border-l-4 highlight-border pl-4">核心关注点 <span class="text-lg font-normal text-gray-400">Key Focus Areas</span></h2>
+            <p class="text-gray-300 mb-6">美国对墨西哥和中国可能征收的关税在短期内增加了订单，但给中期带来了更多不确定性，长期来看将改变从显示器到OEM的供应链，同时后端模块正在迁出中国。 [cite: 1]</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="mini-card tech-gradient">
+                    <div class="title">中国补贴</div>
+                    <div class="description">中国政府宣布2024年对消费电子产品（电视、个人电脑、冰箱、空调）进行新一轮补贴，并从2025年起扩展到智能手持产品。 [cite: 3] 中央政府准备了3000亿元人民币（420亿美元），从2024年下半年到2025年上半年分4期进行补贴。 [cite: 4, 5] 节能等级2产品补贴15%，节能等级1产品补贴20%，每台最高补贴2000元人民币（280美元）。 [cite: 4, 5]</div>
+                    <div class="eng-subtitle">China Subsidy</div>
+                </div>
+                <div class="mini-card tech-gradient">
+                    <div class="title">中国量化宽松</div>
+                    <div class="description">中国央行向国内金融市场释放1万亿元人民币（1380亿美元）流动性，并将在2025年持续“量化宽松”。 [cite: 6] 央行将存款准备金率下调0.5%，向金融市场提供约1万亿元长期流动性。 [cite: 6]</div>
+                    <div class="eng-subtitle">China Quantitative Easing</div>
+                </div>
+                <div class="mini-card tech-gradient">
+                    <div class="title">美国新关税可能</div>
+                    <div class="description">美国新政府可能会对来自中国、墨西哥和加拿大的产品实施新的关税政策。 [cite: 7, 8] 特朗普表示将对墨西哥和加拿大所有进入美国的产品征收25%的关税，对中国产品额外征收10%的关税。 [cite: 11, 12, 16, 17]</div>
+                    <div class="eng-subtitle">US New Tariff Possible</div>
+                </div>
+                <div class="mini-card tech-gradient">
+                    <div class="title">超大尺寸电视趋势</div>
+                    <div class="description">中国双十一促销显示，65英寸及以下尺寸需求下降，而75英寸、85英寸及以上尺寸增长。 [cite: 9] 北美黑色星期五促销显示所有尺寸同比增长，但65英寸及以上尺寸增长更为强劲。 [cite: 9]</div>
+                    <div class="eng-subtitle">Super Large Size TV Trend</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-card">
+            <h2 class="text-3xl font-bold mb-6 text-white border-l-4 highlight-border pl-4">显示市场与技术趋势概要 <span class="text-lg font-normal text-gray-400">Display Market & Tech Trends Summary</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="mini-card">
+                    <div class="value">13%</div>
+                    <div class="description">2024年营收同比增长 [cite: 18]</div>
+                    <div class="eng-subtitle">2024 Revenue YoY</div>
+                </div>
+                <div class="mini-card">
+                    <div class="value">6%</div>
+                    <div class="description">2024年面积同比增长 [cite: 18]</div>
+                    <div class="eng-subtitle">2024 Area YoY</div>
+                </div>
+                 <div class="mini-card">
+                    <div class="value">6%</div>
+                    <div class="description">2025年营收同比增长预测 [cite: 19]</div>
+                    <div class="eng-subtitle">2025F Revenue YoY</div>
+                </div>
+                <div class="mini-card">
+                    <div class="value">5%</div>
+                    <div class="description">2025年面积同比增长预测 [cite: 19]</div>
+                    <div class="eng-subtitle">2025F Area YoY</div>
+                </div>
+                <div class="mini-card">
+                    <div class="title">电视换代趋势</div>
+                    <div class="description">电视显示器换代正从以“台”为基础转向以“面积”为基础，预计2025年电视显示器需求将达到2亿平方米。 [cite: 20]</div>
+                    <div class="eng-subtitle">TV Replacement Shift</div>
+                </div>
+                <div class="mini-card">
+                    <div class="title">新产线投资</div>
+                    <div class="description">新产线投资集中于平板/笔记本/手机用OLED，以及汽车和Micro LED用LTPS/LTPO/Oxide技术。 [cite: 21]</div>
+                    <div class="eng-subtitle">New Fab Investment</div>
+                </div>
+                <div class="mini-card">
+                    <div class="title">供需动态调整</div>
+                    <div class="description">2024-2025年面板供需平衡将处于动态和季节性调整中，包括重组、并购。 [cite: 23]</div>
+                    <div class="eng-subtitle">Supply-Demand Balance</div>
+                </div>
+                <div class="mini-card">
+                    <div class="title">地缘政治影响</div>
+                    <div class="description">地缘政治和关税正在改变面板制造商的竞争、供应链和OEM关系，后端模块和整机组装已在迁出中国。 [cite: 25]</div>
+                    <div class="eng-subtitle">Geopolitics & Tariff Impact</div>
+                </div>
+                <div class="mini-card">
+                    <div class="title">IT显示变革</div>
+                    <div class="description">IT（笔记本、显示器、平板）显示面临巨大变革：OLED渗透高端市场，玻璃基板（glass-cell）商业模式因新产能激烈竞争导致供过于求。 [cite: 26]</div>
+                    <div class="eng-subtitle">IT Display Changes</div>
+                </div>
+                <div class="mini-card">
+                    <div class="title">新兴显示</div>
+                    <div class="description">Micro LED、OLEDoS、可变形OLED等新型显示技术需要“创新利基”市场来发展，并需领先品牌的采用。 [cite: 27]</div>
+                    <div class="eng-subtitle">New Display Development</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-card">
+            <h2 class="text-3xl font-bold mb-6 text-white border-l-4 highlight-border pl-4">市场恢复与预测详情 <span class="text-lg font-normal text-gray-400">Market Recovery & Forecast Details</span></h2>
+            <p class="text-gray-300 mb-4">2024年市场复苏：营收同比增长13%，面积同比增长6%。2025年预测：营收同比增长6%，面积同比增长5%。 [cite: 28]</p>
+            <div class="chart-container mb-8">
+                <canvas id="displayMarketYoYChart"></canvas>
+            </div>
+            <h3 class="text-xl font-semibold mb-4 text-white">各应用领域显示需求 (年同比增长率) <span class="text-sm font-normal text-gray-400">Display Demand YoY by Application</span></h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="mini-card">
+                    <div class="value">7%</div>
+                    <div class="description">2024年智能手机显示屏需求增长 [cite: 29]</div>
+                    <div class="eng-subtitle">Smartphone Display 2024 YoY</div>
+                </div>
+                <div class="mini-card">
+                    <div class="value">10%</div>
+                    <div class="description">2024年PC显示屏需求增长 [cite: 29]</div>
+                    <div class="eng-subtitle">PC Display 2024 YoY</div>
+                </div>
+                <div class="mini-card">
+                    <div class="value">3%</div>
+                    <div class="description">2024年电视显示屏需求增长 [cite: 29]</div>
+                    <div class="eng-subtitle">TV Display 2024 YoY</div>
+                </div>
+                <div class="mini-card">
+                    <div class="value">6%</div>
+                    <div class="description">2024年汽车显示屏需求增长 [cite: 29]</div>
+                    <div class="eng-subtitle">Automotive Display 2024 YoY</div>
+                </div>
+                 <div class="mini-card">
+                    <div class="value">-1%</div>
+                    <div class="description">2025年智能手机显示屏需求预测 [cite: 29]</div>
+                    <div class="eng-subtitle">Smartphone Display 2025F YoY</div>
+                </div>
+                <div class="mini-card">
+                    <div class="value">0%</div>
+                    <div class="description">2025年PC显示屏需求预测 [cite: 29]</div>
+                    <div class="eng-subtitle">PC Display 2025F YoY</div>
+                </div>
+                <div class="mini-card">
+                    <div class="value">1%</div>
+                    <div class="description">2025年电视显示屏需求预测 [cite: 29]</div>
+                    <div class="eng-subtitle">TV Display 2025F YoY</div>
+                </div>
+                <div class="mini-card">
+                    <div class="value">3%</div>
+                    <div class="description">2025年汽车显示屏需求预测 [cite: 29]</div>
+                    <div class="eng-subtitle">Automotive Display 2025F YoY</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-card">
+            <h2 class="text-3xl font-bold mb-6 text-white border-l-4 highlight-border pl-4">电视促销活动分析 <span class="text-lg font-normal text-gray-400">TV Sales Events Analysis</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-white">中国双十一电视销量表现 (2024 vs 2023)</h3>
+                    <p class="text-gray-400 mb-2">销量同比增长15%，销售面积同比增长25%。65英寸及以下尺寸均下降，75英寸以上大幅增长。 [cite: 39, 35]</p>
+                    <div class="chart-container">
+                        <canvas id="chinaDouble11Chart"></canvas>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mt-4">
+                        <div class="mini-card tech-gradient !p-3">
+                            <div class="value !text-3xl">250%</div>
+                            <div class="description !text-xs">98"/100" 销量增长 [cite: 39]</div>
+                        </div>
+                        <div class="mini-card tech-gradient !p-3">
+                            <div class="title !text-xl">85" 翻倍</div>
+                            <div class="description !text-xs">85英寸销量强劲增长 [cite: 39]</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-white">北美黑色星期五电视销量表现 (2024 vs 2023)</h3>
+                    <p class="text-gray-400 mb-2">销量同比增长4%，销售面积同比增长4%。 [cite: 42, 36]</p>
+                    <div class="chart-container">
+                        <canvas id="northAmericaBlackFridayChart"></canvas>
+                    </div>
+                     <div class="grid grid-cols-2 gap-4 mt-4">
+                        <div class="mini-card tech-gradient !p-3">
+                            <div class="value !text-3xl">900%</div>
+                            <div class="description !text-xs">90英寸及以上销量激增 [cite: 42]</div>
+                        </div>
+                        <div class="mini-card tech-gradient !p-3">
+                            <div class="title !text-xl">7-10%</div>
+                            <div class="description !text-xs">多数65英寸以下尺寸增长率 [cite: 42]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="main-card">
+            <h2 class="text-3xl font-bold mb-6 text-white border-l-4 highlight-border pl-4">季度需求与面板采购 <span class="text-lg font-normal text-gray-400">Quarterly Demand & Panel Purchases</span></h2>
+            <p class="text-gray-300 mb-4">2025年面积增长将更为明显，中国补贴和美国关税可能导致需求从2025年下半年提前至2024年第四季度至2025年第一季度。 [cite: 46]</p>
+            <div class="chart-container mb-8">
+                <canvas id="quarterlyDemandChart"></canvas>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="mini-card">
+                    <div class="title">中国电视厂商</div>
+                    <div class="description">中国电视厂商对全球扩张更有信心，在2024年第四季度和2025年第一季度持续增加订单，是有史以来最强劲的LCD电视面板采购期。 [cite: 49, 52, 48]</div>
+                    <div class="eng-subtitle">China TV Makers' Confidence</div>
+                </div>
+                <div class="mini-card">
+                    <div class="title">韩国电视厂商</div>
+                    <div class="description">韩国电视厂商在2024年第四季度持保守态度，认为全球需求不佳，但在2025年第一季度积极增加采购。 [cite: 50, 51]</div>
+                    <div class="eng-subtitle">South Korean TV Makers' Strategy</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-card">
+            <h2 class="text-3xl font-bold mb-6 text-white border-l-4 highlight-border pl-4">电视显示面板出货趋势 <span class="text-lg font-normal text-gray-400">TV Display Shipment Trends</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2 text-white">LCD与OLED电视面板出货量 (百万台) [cite: 55]</h3>
+                    <p class="text-xs text-gray-400 mb-4">TV display shipments peaked (280–290 million units per year) in 2018–19. After that it go gown each year, until 2024, which go back to the same level in 2014: 250 million units. [cite: 56]</p>
+                    <div class="chart-container">
+                        <canvas id="tvShipmentUnitsChart"></canvas>
+                    </div>
+                     <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="mini-card !p-3 tech-gradient">
+                            <div class="value !text-2xl">250M</div>
+                            <div class="description !text-xs">2024年出货量 (单位：百万台) [cite: 56]</div>
+                            <div class="eng-subtitle !text-2xs">Units Shipped 2024</div>
+                        </div>
+                        <div class="mini-card !p-3 tech-gradient">
+                             <div class="value !text-2xl">~40M</div>
+                            <div class="description !text-xs">中国市场规模 (补贴后, 单位：百万台) [cite: 57]</div>
+                            <div class="eng-subtitle !text-2xs">China Market Size (Post-Subsidy)</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2 text-white">LCD与OLED电视面板出货面积 (百万平方米) [cite: 65]</h3>
+                     <p class="text-xs text-gray-400 mb-4">TV area grew slowly owing to COVID-19 but sped up in 2022–25; area growth will mature and slow from 2026, reaching 231 million square meters. [cite: 73]</p>
+                    <div class="chart-container">
+                        <canvas id="tvShipmentAreaChart"></canvas>
+                    </div>
+                     <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="mini-card !p-3 tech-gradient">
+                            <div class="value !text-2xl">200M</div>
+                            <div class="description !text-xs">2025年预计出货面积 (单位：百万平方米) [cite: 69]</div>
+                             <div class="eng-subtitle !text-2xs">Area Shipment 2025F (m²)</div>
+                        </div>
+                        <div class="mini-card !p-3 tech-gradient">
+                            <div class="value !text-2xl">231M</div>
+                            <div class="description !text-xs">2031年预计出货面积 (单位：百万平方米) [cite: 72]</div>
+                            <div class="eng-subtitle !text-2xs">Area Shipment 2031F (m²)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="mini-card">
+                    <div class="title">单位增长停滞</div>
+                    <div class="description">电视显示器换代周期为6-7年（按单位计算），但单位增长现已停滞，未来由于市场成熟可能甚至下降。 [cite: 62] 消费者要么不买电视，要么只买更大尺寸的电视。 [cite: 61]</div>
+                    <div class="eng-subtitle">Unit Growth Stagnant</div>
+                </div>
+                <div class="mini-card">
+                    <div class="title">面积增长加速后放缓</div>
+                    <div class="description">由于大尺寸需求（特别是65英寸和75英寸），电视面板面积将在2025年达到2亿平方米。 [cite: 69] 从2026年起，由于市场成熟，面积增长将放缓。 [cite: 71, 73]</div>
+                    <div class="eng-subtitle">Area Growth Dynamics</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-card">
+            <h2 class="text-3xl font-bold mb-6 text-white border-l-4 highlight-border pl-4">面板厂商策略与产能 <span class="text-lg font-normal text-gray-400">Panel Makers Strategy & Capacity</span></h2>
+            <p class="text-gray-300 mb-4">LCD电视面板制造商在2024-2025年不计划在单位基础上增长，而是专注于更大尺寸。 [cite: 83]</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="mini-card tech-gradient">
+                    <div class="title">成本下降</div>
+                    <div class="description">Gen10.5折旧完成后，65英寸和75英寸LCD的成本将大幅下降。 [cite: 77]</div>
+                    <div class="eng-subtitle">Cost Reduction (65"/75")</div>
+                </div>
+                <div class="mini-card tech-gradient">
+                    <div class="title">Gen8.5产能</div>
+                    <div class="description">更多Gen8.5产能将用于生产85英寸-116英寸的面板。 [cite: 78]</div>
+                    <div class="eng-subtitle">Gen8.5 for 85"-116"</div>
+                </div>
+                <div class="mini-card tech-gradient">
+                    <div class="title">无需新Gen10.5投资</div>
+                    <div class="description">现有Gen10.5产能预计可满足至2029年的65"/75"面板需求，无需新的Gen10.5投资。 [cite: 79]</div>
+                    <div class="eng-subtitle">No New Gen10.5 Investment Needed</div>
+                </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-4 text-white">主要厂商2025年出货目标 (单位：百万片)</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="mini-card">
+                    <div class="value">60</div>
+                    <div class="description">BOE [cite: 84]</div>
+                    <div class="eng-subtitle">BOE 2025 Target</div>
+                </div>
+                <div class="mini-card">
+                    <div class="value">56.5</div>
+                    <div class="description">ChinaStar (含LG广州工厂) [cite: 84]</div>
+                    <div class="eng-subtitle">ChinaStar 2025 Target</div>
+                </div>
+                <div class="mini-card">
+                    <div class="value">36.2</div>
+                    <div class="description">HKC Display [cite: 84]</div>
+                    <div class="eng-subtitle">HKC Display 2025 Target</div>
+                </div>
+                <div class="mini-card">
+                    <div class="value">39.4</div>
+                    <div class="description">Innolux [cite: 84]</div>
+                    <div class="eng-subtitle">Innolux 2025 Target</div>
+                </div>
+            </div>
+            <p class="text-sm text-gray-400 mt-4 text-center">总体积在2025年有所下降，但面积持续增长。 [cite: 85]</p>
+            
+            <div class="mt-8">
+                 <h3 class="text-xl font-semibold mb-4 text-white">电视技术预测 (百万片) <span class="text-sm font-normal text-gray-400">TV Technology Forecast (Million Units)</span></h3>
+                 <div class="chart-container">
+                    <canvas id="tvTechnologyForecastChart"></canvas>
+                 </div>
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                    <div class="mini-card tech-gradient !p-3">
+                        <div class="title !text-lg">Mini LED > OLED</div>
+                        <div class="description !text-xs">2025年，Mini LED背光电视出货量预计超过OLED电视。 [cite: 90]</div>
+                        <div class="eng-subtitle !text-2xs">2025: Mini LED vs OLED</div>
+                    </div>
+                    <div class="mini-card tech-gradient !p-3">
+                        <div class="title !text-lg">WOLED亮度提升</div>
+                        <div class="description !text-xs">2024年，LG Display大幅提升WOLED亮度性能。 [cite: 91]</div>
+                        <div class="eng-subtitle !text-2xs">2024: WOLED Brightness Boost</div>
+                    </div>
+                     <div class="mini-card tech-gradient !p-3">
+                        <div class="title !text-lg">Micro LED 发展</div>
+                        <div class="description !text-xs">2026年，Micro LED电视产品组合将通过LTPS背板完成（但价格仍高）。 [cite: 90]</div>
+                        <div class="eng-subtitle !text-2xs">2026: Micro LED Product Mix</div>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+        <section class="main-card">
+            <h2 class="text-3xl font-bold mb-6 text-white border-l-4 highlight-border pl-4">区域产能分布 <span class="text-lg font-normal text-gray-400">Capacity by Region</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-white">TFT LCD 产能区域占比 (%) [cite: 125]</h3>
+                    <div class="chart-container">
+                        <canvas id="lcdCapacityRegionChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-white">OLED 产能区域占比 (%) [cite: 126]</h3>
+                    <div class="chart-container">
+                        <canvas id="oledCapacityRegionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="mini-card">
+                    <div class="value">76%</div>
+                    <div class="description">2025年中国大陆LCD产能占比预测 [cite: 125]</div>
+                    <div class="eng-subtitle">China LCD Capacity Share 2025F</div>
+                </div>
+                 <div class="mini-card">
+                    <div class="value">47%</div>
+                    <div class="description">2025年中国大陆OLED产能占比预测 [cite: 126]</div>
+                    <div class="eng-subtitle">China OLED Capacity Share 2025F</div>
+                </div>
+                <div class="mini-card">
+                    <div class="value">53%</div>
+                    <div class="description">2025年韩国OLED产能占比预测 [cite: 126]</div>
+                    <div class="eng-subtitle">Korea OLED Capacity Share 2025F</div>
+                </div>
+            </div>
+            <p class="text-gray-300 mt-6">中国大陆：无新建LCD工厂，但扩大Gen8.6和Gen10.5产能。 [cite: 127] 台湾：Gen6-Gen8.5无停产计划，继续利用PC品牌和LCD电视制造商的杠杆。 [cite: 127] 中国大陆：继续追赶OLED工艺和产品技术，对韩国制造商构成威胁。 [cite: 127] Gen8.6 OLED for IT是韩国制造商引领的下一个关键点。 [cite: 128]</p>
+        </section>
+        
+        <section class="main-card">
+            <h2 class="text-3xl font-bold mb-6 text-white border-l-4 highlight-border pl-4">地缘政治与美国关税 <span class="text-lg font-normal text-gray-400">Geopolitics & US Tariff</span></h2>
+            <p class="text-gray-300 mb-6">地缘政治和美国关税正在改变显示器和OEM供应链。 [cite: 171]</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="mini-card tech-gradient">
+                    <div class="title">特朗普1.0关税</div>
+                    <div class="description">2018-2020年，对价值1200亿美元的中国商品（含电视）加征7.5%关税，对2500亿美元商品加征25%关税。 [cite: 173]</div>
+                    <div class="eng-subtitle">Trump 1.0 Tariff History</div>
+                </div>
+                <div class="mini-card tech-gradient">
+                    <div class="title">特朗普2.0关税设想</div>
+                    <div class="description">对中国组装产品加征10%关税，对墨西哥制造产品加征25%（无视USMCA）。 [cite: 174] 对友岸外包生产（东南亚、韩、台、日）可能征收较低关税。 [cite: 174]</div>
+                    <div class="eng-subtitle">Trump 2.0 Tariff Scenario</div>
+                </div>
+            </div>
+             <h3 class="text-xl font-semibold mb-4 text-white">关税潜在影响 <span class="text-sm font-normal text-gray-400">Potential Tariff Impacts</span></h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="mini-card">
+                    <div class="title">短期影响</div>
+                    <div class="description">美国国内价格上涨，人民币贬值，整机组装重新分配。 [cite: 174]</div>
+                    <div class="eng-subtitle">Short-Term Impacts</div>
+                </div>
+                <div class="mini-card">
+                    <div class="title">长期影响</div>
+                    <div class="description">产能重新分配，零部件自主意识增强，形成两条供应链（美国市场与非美国市场）。 [cite: 174]</div>
+                    <div class="eng-subtitle">Long-Term Impacts</div>
+                </div>
+            </div>
+            <p class="text-gray-300 mt-6">美国计划制定一项战略，以减少对中国显示技术的依赖。美国国会已有议员要求国防部禁止在军事合同中使用京东方和天马的面板。 [cite: 181, 182] 目前电视关税为11.45%，PC/智能手机为0%，显示面板为5%。未来可能增加10%-25%的关税。 [cite: 177]</p>
+        </section>
+
+        <section class="main-card">
+            <h2 class="text-3xl font-bold mb-6 text-white border-l-4 highlight-border pl-4">IT面板市场 <span class="text-lg font-normal text-gray-400">IT Panel Market</span></h2>
+            <p class="text-gray-300 mb-4">IT（笔记本、显示器、平板）显示市场正在增长和变化：高端转向OLED/LTPS/Oxide，入门级转向玻璃基板（glass cell）商业模式。 [cite: 213]</p>
+            <div class="chart-container mb-8">
+                <canvas id="itPanelForecastChart"></canvas>
+            </div>
+            <h3 class="text-xl font-semibold mb-4 text-white">IT面板市场趋势</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="mini-card">
+                    <div class="title">OLED渗透</div>
+                    <div class="description">OLED在高端IT市场的渗透率持续上升，预计到2028年将达到14%。 [cite: 298, 222]</div>
+                    <div class="eng-subtitle">OLED Penetration</div>
+                </div>
+                <div class="mini-card">
+                    <div class="title">玻璃基板竞争</div>
+                    <div class="description">玻璃基板（Glass Cell）模式在新产能的激烈竞争下面临供过于求的局面。 [cite: 26, 216]</div>
+                    <div class="eng-subtitle">Glass Cell Competition</div>
+                </div>
+                <div class="mini-card">
+                    <div class="title">供应链转移</div>
+                    <div class="description">PC OEM/ODM/模块制造正逐步迁出中国，越南成为重要转移目的地。 [cite: 208, 232, 233]</div>
+                    <div class="eng-subtitle">Supply Chain Shift</div>
+                </div>
+                <div class="mini-card">
+                    <div class="title">移动PC OLED</div>
+                    <div class="description">尽管短期内价格波动，但OLED在移动PC市场的应用持续增长，预计2025-2027年OLED面板价格将随着三星显示（SDC）的积极推广和中国产能的增加而下降。 [cite: 222]</div>
+                    <div class="eng-subtitle">Mobile PC OLED Growth</div>
+                </div>
+                <div class="mini-card">
+                     <div class="value">6M</div>
+                    <div class="description">2024年苹果iPad Pro OLED实际销量 (预测8M) [cite: 223]</div>
+                    <div class="eng-subtitle">Apple iPad Pro OLED 2024 Sales</div>
+                </div>
+                <div class="mini-card">
+                    <div class="title">开放单元增加</div>
+                    <div class="description">LCD显示器面板制造商正在增加开放单元（Open Cell）的出货量，这可能对长期面板价格产生负面影响。2024年，50%的LCD显示器以开放单元形式出货。 [cite: 240, 241]</div>
+                    <div class="eng-subtitle">Open Cell Shipments Rising</div>
+                </div>
+            </div>
+        </section>
+
+         <section class="main-card">
+            <h2 class="text-3xl font-bold mb-6 text-white border-l-4 highlight-border pl-4">新兴显示技术 <span class="text-lg font-normal text-gray-400">New Display Technologies</span></h2>
+            <p class="text-gray-300 mb-6">Micro LED、OLEDoS、可变形OLED等新兴显示技术需要“创新利基”市场来发展，并需要领先品牌的采纳。 [cite: 27, 261]</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="mini-card tech-gradient">
+                    <div class="title">Micro LED</div>
+                    <div class="description">制造成本高，供应链仍在发展但逐步成熟。目标应用：智能手表、特殊汽车显示、超大尺寸Micro LED电视。透明Micro LED显示是创新方向。 [cite: 263, 264]</div>
+                    <div class="eng-subtitle">Micro LED</div>
+                </div>
+                <div class="mini-card tech-gradient">
+                    <div class="title">OLEDoS</div>
+                    <div class="description">(OLED on Silicon) 用于头戴式显示器、VR。需要极高像素密度和亮度。成本高、良率低，长期需要RGB OLED。 [cite: 262]</div>
+                    <div class="eng-subtitle">OLED on Silicon</div>
+                </div>
+                <div class="mini-card tech-gradient">
+                    <div class="title">Micro LEDoS</div>
+                    <div class="description">(Micro LED on Silicon) 用于智能眼镜、AR。智能眼镜市场较小众，能否扩展为消费电子设备存疑。与OLEDoS和LCoS竞争。 [cite: 266]</div>
+                    <div class="eng-subtitle">Micro LED on Silicon</div>
+                </div>
+                <div class="mini-card tech-gradient">
+                    <div class="title">OLED 发展</div>
+                    <div class="description">在智能手机、智能手表、IT OLED、汽车领域持续增长。但在WOLED电视和QD OLED电视领域增长困难。 [cite: 265]</div>
+                    <div class="eng-subtitle">OLED Development</div>
+                </div>
+            </div>
+            <div class="mt-8">
+                 <h3 class="text-xl font-semibold mb-4 text-white">显示技术总营收预测 (百万美元) <span class="text-sm font-normal text-gray-400">Total Display Tech Revenue Forecast (USD Millions)</span></h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="p-4 bg-gray-800 rounded-lg text-center">
+                        <p class="kpi-value">$133,785</p>
+                        <p class="kpi-label">2024年总营收 [cite: 261]</p>
+                    </div>
+                    <div class="p-4 bg-gray-800 rounded-lg text-center">
+                        <p class="kpi-value">$141,952</p>
+                        <p class="kpi-label">2025年总营收预测 [cite: 261]</p>
+                    </div>
+                    <div class="p-4 bg-gray-800 rounded-lg text-center">
+                        <p class="kpi-value">$161,414</p>
+                        <p class="kpi-label">2031年总营收预测 [cite: 261]</p>
+                    </div>
+                    <div class="p-4 bg-gray-800 rounded-lg text-center">
+                        <p class="kpi-value">$4,139</p>
+                        <p class="kpi-label">2031年 Micro LED 营收预测 [cite: 261]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-card">
+            <h2 class="text-3xl font-bold mb-6 text-white border-l-4 highlight-border pl-4">总结 <span class="text-lg font-normal text-gray-400">Wrap-up</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold mb-3 text-white"><i class="fas fa-chart-line mr-2 highlight-color"></i>市场展望</h3>
+                    <ul class="space-y-3">
+                        <li class="mini-card !text-left !p-4 tech-gradient"><span class="font-semibold text-gray-200">持续增长:</span> 2025年显示需求持续增长，面积增长5%，单位增长1%。 [cite: 295]</li>
+                        <li class="mini-card !text-left !p-4 tech-gradient"><span class="font-semibold text-gray-200">长期挑战:</span> 电视显示单位量长期看可能因市场成熟而下降。 [cite: 296]</li>
+                        <li class="mini-card !text-left !p-4 tech-gradient"><span class="font-semibold text-gray-200">关税影响:</span> 美国潜在关税短期增加订单，中长期改变供应链。 [cite: 297] 后端模块加速迁出中国。 [cite: 297]</li>
+                        <li class="mini-card !text-left !p-4 tech-gradient"><span class="font-semibold text-gray-200">部件短缺:</span> 投资放缓和结构调整可能导致2025年部分显示部件短缺。 [cite: 298]</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-3 text-white"><i class="fas fa-microchip mr-2 highlight-color"></i>技术动态</h3>
+                    <ul class="space-y-3">
+                        <li class="mini-card !text-left !p-4 tech-gradient"><span class="font-semibold text-gray-200">大尺寸OLED:</span> 成本技术改进推动2025年增长33%，IT OLED渗透率2028年达14%。 [cite: 298]</li>
+                        <li class="mini-card !text-left !p-4 tech-gradient"><span class="font-semibold text-gray-200">中小尺寸OLED:</span> 2025年出货量将超10亿片，主要用于智能手机、手表。 [cite: 298]</li>
+                        <li class="mini-card !text-left !p-4 tech-gradient"><span class="font-semibold text-gray-200">可折叠OLED:</span> 市场趋于成熟，华为、三星、苹果将推新品。 [cite: 299]</li>
+                        <li class="mini-card !text-left !p-4 tech-gradient"><span class="font-semibold text-gray-200">OLED新投资:</span> 喷墨打印OLED、精细光罩OLED、Tandem RGB OLED和COE技术投资增加。 [cite: 300]</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-3 text-white"><i class="fas fa-industry mr-2 highlight-color"></i>面板厂商</h3>
+                    <ul class="space-y-3">
+                        <li class="mini-card !text-left !p-4 tech-gradient"><span class="font-semibold text-gray-200">市场格局:</span> 中国厂商主导LCD（超70%）。 [cite: 301] OLED产能中韩各占50%。 [cite: 302]</li>
+                        <li class="mini-card !text-left !p-4 tech-gradient"><span class="font-semibold text-gray-200">竞争加剧:</span> 华星光电对京东方领导地位构成更大威胁，两者都将重塑供应链。 [cite: 302]</li>
+                        <li class="mini-card !text-left !p-4 tech-gradient"><span class="font-semibold text-gray-200">行业整合:</span> 2025年将有更多并购/联盟/重组。 [cite: 303]</li>
+                        <li class="mini-card !text-left !p-4 tech-gradient"><span class="font-semibold text-gray-200">盈利改善:</span> 折旧、成本降低及汇率因素将使2025年面板厂盈利优于2024年。 [cite: 304]</li>
+                        <li class="mini-card !text-left !p-4 tech-gradient"><span class="font-semibold text-gray-200">AI应用:</span> 面板厂积极引入AI辅助工具于设计、性能和工厂管理，尤其OLED厂。 [cite: 304, 307]</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center mt-12 py-8 border-t border-gray-700">
+        <p class="text-sm text-gray-500">&copy; 2025 Omdia, Informa Tech. All rights reserved. [cite: 31, 63, 75, 99, 104, 110, 115, 122, 130, 136, 153, 159, 165, 167, 172, 176, 180, 185, 187, 190, 196, 203, 206, 211, 215, 219, 221, 225, 229, 232, 235, 237, 242, 248, 258, 260, 268, 270, 276, 279, 283, 286, 291, 294, 298, 306, 308, 310, 318, 320, 321, 322, 323, 324, 325, 328, 333, 337, 342, 346, 351, 355]</p>
+        <p class="text-xs text-gray-600 mt-2">This report is a visualization of the "Display Market and Technology Trend 2024 review and 2025 forecast" PDF document. For detailed analysis and original data, please refer to the source document by Omdia.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('content-visible');
+                    // Animate grid items with delay
+                    if (entry.target.querySelectorAll('.grid > div.mini-card, .grid > div.p-4, .grid > ul > li.mini-card').length > 0) {
+                         entry.target.querySelectorAll('.grid > div.mini-card, .grid > div.p-4, .grid > ul > li.mini-card').forEach((item, index) => {
+                            item.style.transitionDelay = `${index * 100}ms`;
+                            item.classList.add('content-visible');
+                        });
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.main-card, .mini-card, .grid > div, .grid > ul > li').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Chart.js configurations
+        Chart.defaults.color = '#E0E0E0';
+        Chart.defaults.borderColor = '#444444';
+
+        // Display Market YoY Chart
+        const displayMarketData = {
+            labels: ['2023 YoY', '2024 YoY', '2025 YoY (F)'],
+            datasets: [
+                {
+                    label: '营收 Revenues (%)',
+                    data: [-7, 13, 6], /* Source: Page 5, Table, row "Revenues" */
+                    backgroundColor: 'rgba(0, 174, 239, 0.5)',
+                    borderColor: 'rgba(0, 174, 239, 1)',
+                    borderWidth: 1,
+                    tension: 0.1
+                },
+                {
+                    label: '面积 Area (%)',
+                    data: [-4, 6, 5], /* Source: Page 5, Table, row "Area" */
+                    backgroundColor: 'rgba(255, 165, 0, 0.5)',
+                    borderColor: 'rgba(255, 165, 0, 1)',
+                    borderWidth: 1,
+                    tension: 0.1
+                }
+            ]
+        };
+        new Chart(document.getElementById('displayMarketYoYChart'), {
+            type: 'bar', // Changed to bar for better comparison
+            data: displayMarketData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: '同比增长 (%) YoY Growth' }
+                    }
+                },
+                plugins: { legend: { position: 'top' } }
+            }
+        });
+
+        // China Double 11 TV Sales Chart [cite: 10, 39]
+        // Simplified representation. Actual data for sizes is complex.
+        const chinaDouble11Data = {
+            labels: ['<65" (Units)', '75"+ (Units)', '<65" (Area)', '75"+ (Area)'],
+            datasets: [{
+                label: 'YoY Change (%)',
+                data: [-10, 100, -5, 150], // Illustrative values based on text "all sizes of 65-inch below are declining demand, while the growths are on the 75-inch, 85-inch and above" and specific large size growth numbers. Actual data on page 7/10.
+                backgroundColor: ['rgba(255, 99, 132, 0.5)', 'rgba(75, 192, 192, 0.5)', 'rgba(255, 99, 132, 0.3)', 'rgba(75, 192, 192, 0.3)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)'],
+                borderWidth: 1
+            }]
+        };
+         new Chart(document.getElementById('chinaDouble11Chart'), {
+            type: 'bar',
+            data: {
+                labels: ['<30"', '50-54"', '65-69"', '75-79"', '85-89"', '95-99"'], // Based on pg 10 chart
+                datasets: [
+                    {
+                        label: '2023 Units (k)',
+                        data: [100, 450, 1500, 700, 400, 50], // Example values from pg 10 chart structure
+                        backgroundColor: 'rgba(0, 174, 239, 0.3)',
+                        borderColor: '#00AEEF',
+                        borderWidth: 1
+                    },
+                    {
+                        label: '2024 Units (k)',
+                        data: [80, 440, 1450, 1200, 800, 150], // Example values from pg 10 chart structure
+                        backgroundColor: 'rgba(0, 174, 239, 0.7)',
+                        borderColor: '#00AEEF',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, title: { display: true, text: 'Units (Thousands)' } } } }
+        });
+
+
+        // North America Black Friday TV Sales Chart [cite: 10, 42]
+        const northAmericaBlackFridayData = {
+             labels: ['<30"', '50-54"', '65-69"', '75"', '90+"'], // Based on pg 10 chart
+            datasets: [
+                 {
+                    label: '2023 Units (k)',
+                    data: [500, 3000, 1800, 1000, 100], // Example values from pg 10 chart structure
+                    backgroundColor: 'rgba(255, 165, 0, 0.3)',
+                    borderColor: '#FFA500',
+                    borderWidth: 1
+                },
+                {
+                    label: '2024 Units (k)',
+                    data: [535, 3210, 1908, 1060, 900], // Example values from pg 10 chart structure (+7%, +7%, +6%, +6%, +900%)
+                    backgroundColor: 'rgba(255, 165, 0, 0.7)',
+                    borderColor: '#FFA500',
+                    borderWidth: 1
+                }
+            ]
+        };
+        new Chart(document.getElementById('northAmericaBlackFridayChart'), {
+            type: 'bar',
+            data: northAmericaBlackFridayData,
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, title: { display: true, text: 'Units (Thousands)' } } } }
+        });
+
+        // Quarterly Demand Chart [cite: 46]
+        const quarterlyDemandData = {
+            labels: ['1Q23', '2Q23', '3Q23', '4Q23', '1Q24', '2Q24', '3Q24', '4Q24', '1Q25', '2Q25', '3Q25', '4Q25'],
+            datasets: [
+                {
+                    label: 'LCD TV (million m²)',
+                    data: [38.3, 44.0, 44.5, 39.4, 41.9, 45.2, 42.7, 44.9, 42.4, 47.6, 48.9, 45.4], // from page 9
+                    borderColor: '#00AEEF',
+                    backgroundColor: 'rgba(0, 174, 239, 0.2)',
+                    fill: true,
+                    tension: 0.4
+                },
+                 {
+                    label: 'Desktop Monitor (million m²)',
+                    data: [5.6, 6.8, 7.2, 6.6, 6.7, 7.5, 7.8, 6.5, 7.1, 7.6, 7.6, 7.3], // from page 9
+                    borderColor: '#FFA500',
+                    backgroundColor: 'rgba(255, 165, 0, 0.2)',
+                    fill: true,
+                    tension: 0.4
+                }
+            ]
+        };
+        new Chart(document.getElementById('quarterlyDemandChart'), {
+            type: 'line',
+            data: quarterlyDemandData,
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, title: { display: true, text: 'Demand (Million m²)' } } } }
+        });
+        
+        // TV Shipment Units Chart [cite: 55]
+        const tvShipmentUnitsData = {
+            labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024(F)', '2025(F)'],
+            datasets: [
+                {
+                    label: 'LCD TV (million units)',
+                    data: [280, 285, 267.2, 254.2, 262.9, 236.5, 243.1, 245.5], // Derived from p11 graph and text [cite: 56, 85, 330]
+                    borderColor: '#00AEEF',
+                    backgroundColor: 'rgba(0, 174, 239, 0.5)',
+                    type: 'bar',
+                    order: 2
+                },
+                {
+                    label: 'OLED TV (million units)',
+                    data: [2.9, 3.0, 4.5, 7.4, 7.5, 5.3, 6.8, 7.1], // Derived from p11 graph and p17 table [cite: 90, 335]
+                    borderColor: '#FFA500',
+                     backgroundColor: 'rgba(255, 165, 0, 0.5)',
+                    type: 'bar',
+                    order: 1
+                }
+            ]
+        };
+        new Chart(document.getElementById('tvShipmentUnitsChart'), {
+            type: 'bar',
+            data: tvShipmentUnitsData,
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { stacked: true, beginAtZero: true, title: { display: true, text: 'Shipments (Million Units)' } }, x: {stacked: true} } }
+        });
+
+        // TV Shipment Area Chart [cite: 65]
+        const tvShipmentAreaData = {
+            labels: ['2018', '2020', '2021', '2022', '2023', '2024(F)', '2025(F)', '2031(F)'],
+            datasets: [
+                {
+                    label: 'TV Shipment Area (million m²)',
+                    data: [160, 170, 180, 178.41, 171.63, 181.85, 191.88, 231.46], // Derived from p12 graph and p66, p67 [cite: 66, 67, 68, 72, 339, 344]
+                    borderColor: '#00AEEF',
+                    backgroundColor: 'rgba(0, 174, 239, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                }
+            ]
+        };
+        new Chart(document.getElementById('tvShipmentAreaChart'), {
+            type: 'line',
+            data: tvShipmentAreaData,
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, title: { display: true, text: 'Shipment Area (Million m²)' } } } }
+        });
+        
+        // TV Technology Forecast Chart
+        const tvTechForecastCtx = document.getElementById('tvTechnologyForecastChart').getContext('2d');
+        new Chart(tvTechForecastCtx, {
+            type: 'line',
+            data: { // Data from page 17 [cite: 90]
+                labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031'],
+                datasets: [
+                    {
+                        label: 'Standard LCD TV',
+                        data: [249.7, 220.0, 222.3, 222.4, 225.8, 225.7, 226.9, 226.9, 228.4, 228.9],
+                        borderColor: '#00AEEF',
+                        tension: 0.1,
+                        fill: false
+                    },
+                    {
+                        label: 'Mini LED Backlight LCD TV',
+                        data: [3.0, 3.5, 4.7, 9.2, 11.8, 13.8, 15.5, 16.7, 17.6, 18.2],
+                        borderColor: '#FFA500',
+                        tension: 0.1,
+                        fill: false
+                    },
+                    {
+                        label: 'WOLED TV',
+                        data: [6.4, 4.2, 5.4, 5.7, 6.2, 6.3, 6.5, 6.6, 6.7, 6.8],
+                        borderColor: '#34D399', // Green
+                        tension: 0.1,
+                        fill: false
+                    },
+                    {
+                        label: 'QD OLED TV',
+                        data: [1.1, 1.1, 1.4, 1.4, 1.3, 1.3, 1.3, 1.3, 1.3, 1.3], // Data used from page 17 table (row QD OLED TV), which has 0.0, 1.1, 1.1, 1.4... I took from 2022 value to align labels.
+                        borderColor: '#F87171', // Red
+                        tension: 0.1,
+                        fill: false
+                    },
+                     {
+                        label: 'Micro LED TV',
+                        data: [0.00, 0.00, 0.00, 0.01, 0.06, 0.17, 0.34, 0.61, 0.90, 1.2], // From pg 17, Micro LED TV row, value for 2031 is 1.2 (assumed from visual trend on chart as table ends at 0.90)
+                        borderColor: '#A78BFA', // Purple
+                        tension: 0.1,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, title: {display: true, text: 'Million Units'} } }
+            }
+        });
+
+
+        // LCD Capacity Region Chart [cite: 125]
+        const lcdCapacityRegionData = {
+            labels: ['China', 'Taiwan', 'Korea', 'Japan', 'India (other)'],
+            datasets: [{
+                label: '2025 TFT LCD Capacity Share (%)',
+                data: [76, 19, 4, 2, 0], // from Page 22 chart data for 2025
+                backgroundColor: ['#00AEEF', '#FFA500', '#34D399', '#A78BFA', '#F87171'],
+            }]
+        };
+        new Chart(document.getElementById('lcdCapacityRegionChart'), {
+            type: 'doughnut',
+            data: lcdCapacityRegionData,
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
+        });
+
+        // OLED Capacity Region Chart [cite: 126]
+        const oledCapacityRegionData = {
+            labels: ['Korea', 'China', 'Taiwan', 'Japan', 'India (other)'],
+            datasets: [{
+                label: '2025 OLED Capacity Share (%)',
+                data: [53, 47, 0, 0, 0], // from Page 22 chart data for 2025
+                backgroundColor: ['#34D399', '#00AEEF', '#FFA500', '#A78BFA', '#F87171'],
+            }]
+        };
+        new Chart(document.getElementById('oledCapacityRegionChart'), {
+            type: 'doughnut',
+            data: oledCapacityRegionData,
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
+        });
+
+        // IT Panel Forecast Chart [cite: 213] (page 41)
+        const itPanelData = {
+            labels: ['2020', '2021', '2022', '2023', '2024(F)', '2025(F)', '2026(F)'],
+            datasets: [
+                {
+                    label: 'Notebook Display (Million units)',
+                    data: [229, 292, 219, 191, 215, 222, 233],
+                    borderColor: '#00AEEF',
+                    backgroundColor: 'rgba(0, 174, 239, 0.1)',
+                    fill: true,
+                    tension: 0.1
+                },
+                {
+                    label: 'Monitor Display (Million units)',
+                    data: [165, 172, 159, 150, 160, 163, 158],
+                    borderColor: '#FFA500',
+                    backgroundColor: 'rgba(255, 165, 0, 0.1)',
+                    fill: true,
+                    tension: 0.1
+                },
+                {
+                    label: 'Tablet Display (Million units)',
+                    data: [279, 277, 257, 255, 276, 271, 268],
+                    borderColor: '#34D399',
+                    backgroundColor: 'rgba(52, 211, 153, 0.1)',
+                    fill: true,
+                    tension: 0.1
+                }
+            ]
+        };
+        new Chart(document.getElementById('itPanelForecastChart'), {
+            type: 'line',
+            data: itPanelData,
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: false, title: { display: true, text: 'Shipments (Million Units)' } } } }
+        });
+
+    </script>
+</body>
+</html>

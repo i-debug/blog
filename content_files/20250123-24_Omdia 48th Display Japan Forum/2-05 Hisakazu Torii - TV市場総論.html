@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电视市场最新动态分析</title>
+    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/tailwind/3.3.3/tailwind.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.staticfile.org/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #f0f0f0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+        .highlight-text { color: #00AEEF; }
+        .highlight-bg { background-color: #00AEEF; }
+        .highlight-border { border-color: #00AEEF; }
+        .tech-gradient {
+            background: linear-gradient(to bottom, rgba(0, 174, 239, 0.5), rgba(0, 174, 239, 0.2));
+        }
+        .main-card {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            box-shadow: 0 4px 15px rgba(0, 174, 239, 0.1);
+        }
+        .mini-card {
+            background-color: #222222;
+            border: 1px solid #333;
+            box-shadow: 0 2px 8px rgba(0, 174, 239, 0.05);
+        }
+
+        .content-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .content-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .mini-card-grid .mini-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .mini-card-grid.is-visible .mini-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Staggered animation for mini-cards */
+        .mini-card-grid.is-visible .mini-card:nth-child(1) { transition-delay: 0.1s; }
+        .mini-card-grid.is-visible .mini-card:nth-child(2) { transition-delay: 0.2s; }
+        .mini-card-grid.is-visible .mini-card:nth-child(3) { transition-delay: 0.3s; }
+        .mini-card-grid.is-visible .mini-card:nth-child(4) { transition-delay: 0.4s; }
+        .mini-card-grid.is-visible .mini-card:nth-child(5) { transition-delay: 0.5s; }
+        .mini-card-grid.is-visible .mini-card:nth-child(6) { transition-delay: 0.6s; }
+        .mini-card-grid.is-visible .mini-card:nth-child(7) { transition-delay: 0.7s; }
+        .mini-card-grid.is-visible .mini-card:nth-child(8) { transition-delay: 0.8s; }
+
+        .chart-container canvas {
+            background-color: rgba(34, 34, 34, 0.5);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <header class="text-center mb-12 md:mb-16 content-section">
+        <i class="fas fa-tv fa-3x highlight-text mb-4"></i>
+        <h1 class="text-5xl md:text-6xl font-bold text-white">电视市场最新动态</h1>
+        <p class="text-xl md:text-2xl text-gray-300 mt-2">TV Market Latest Trends Analysis ~ The Dawn of an Uncertain Era</p>
+        <p class="text-sm text-gray-500 mt-4">第48届显示产业论坛 | 48th Display Japan Forum</p>
+        <p class="text-sm text-gray-500">鸟居寿一 (Hisakazu Torii) | 2025年1月23日~24日</p>
+    </header>
+
+    <section class="main-card rounded-2xl p-6 md:p-8 mb-8 md:mb-12 content-section">
+        <h2 class="text-3xl font-bold mb-6 highlight-text">概要与主要议题</h2>
+        <p class="text-lg text-gray-300 mb-4">本分析将2025年定位为不透明和不确定时代的开端，介绍电视市场的最新动态和未来预测。尤其关注“即将到来的特朗普2.0时代”的影响。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mini-card-grid">
+            <div class="mini-card rounded-lg p-4">
+                <h3 class="text-2xl font-bold highlight-text mb-2">市场议题</h3>
+                <p class="text-sm text-gray-400">特朗普2.0下的关税谈判、汇率、CPI、年终促销趋势。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h3 class="text-2xl font-bold highlight-text mb-2">长期需求预测</h3>
+                <p class="text-sm text-gray-400">电视需求已趋成熟，关注2025年美中市场的需求增长。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h3 class="text-2xl font-bold highlight-text mb-2">大尺寸电视趋势</h3>
+                <p class="text-sm text-gray-400">98/100英寸LCD电视的最新动态与预测。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h3 class="text-2xl font-bold highlight-text mb-2">Mini LED TV</h3>
+                <p class="text-sm text-gray-400">Mini LED背光LCD电视的最新动态与预测。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h3 class="text-2xl font-bold highlight-text mb-2">数据标准</h3>
+                <p class="text-sm text-gray-400">电视整机数据，Sell-in（出货）为准。截至3Q24为实际数据，4Q24起为预测数据。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="main-card rounded-2xl p-6 md:p-8 mb-8 md:mb-12 content-section">
+        <h2 class="text-3xl font-bold mb-6 highlight-text">电视市场的相关议题</h2>
+        
+        <div class="mb-8">
+            <h3 class="text-2xl font-semibold mb-3 text-white">主要经济指标趋势 <span class="text-base text-gray-400">Economic Indicators</span></h3>
+            <div class="chart-container mb-6">
+                <canvas id="cpiChart"></canvas>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mini-card-grid">
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-5xl font-bold highlight-text">2.9%</p>
+                    <p class="text-sm text-gray-300 mt-1">美国CPI (2024年12月)</p>
+                    <p class="text-xs text-gray-500">US CPI (Dec 2024)</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-5xl font-bold highlight-text">2.4%</p>
+                    <p class="text-sm text-gray-300 mt-1">欧元区CPI (2024年12月)</p>
+                    <p class="text-xs text-gray-500">Eurozone CPI (Dec 2024)</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-5xl font-bold highlight-text">0.1%</p>
+                    <p class="text-sm text-gray-300 mt-1">中国CPI (2024年12月)</p>
+                    <p class="text-xs text-gray-500">China CPI (Dec 2024)</p>
+                </div>
+                 <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-sm text-gray-300 mt-1">中国通货紧缩状态持续</p>
+                    <p class="text-xs text-gray-500">China's Deflation Persists</p>
+                </div>
+            </div>
+            <p class="text-sm text-gray-400 mt-4">汇率变动也对市场产生影响。特别是日元贬值后，2024年底达到157日元/美元的水平。</p>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-2xl font-semibold mb-3 text-white">美国电视进口趋势与关税 <span class="text-base text-gray-400">US TV Imports & Tariffs</span></h3>
+            <p class="text-gray-300 mb-4">在特朗普1.0政府时期，追加关税前曾出现抢先进口热潮。从中国进行的生产转移加速，从墨西哥和越南的进口增加。由于特朗普2.0下的关税动向（中国产品可能加征10%关税，墨西哥产品可能加征25%关税），1Q25之后可能再次发生抢先进口，需要密切关注。</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mini-card-grid">
+                <div class="mini-card rounded-lg p-4">
+                    <p class="text-4xl font-bold highlight-text">61% <span class="text-2xl text-gray-400">to</span> 14%</p>
+                    <p class="text-sm text-gray-300 mt-1">美国从中国进口电视份额 (2019年1月 vs 2024年11月)</p>
+                    <p class="text-xs text-gray-500">US TV Import Share from China</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                     <p class="text-4xl font-bold highlight-text">32% <span class="text-2xl text-gray-400">to</span> 59%</p>
+                    <p class="text-sm text-gray-300 mt-1">美国从墨西哥进口电视份额 (2019年1月 vs 2024年11月)</p>
+                    <p class="text-xs text-gray-500">US TV Import Share from Mexico</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <p class="text-2xl font-bold highlight-text">电视关税启动</p>
+                    <p class="text-sm text-gray-300 mt-1">2019年9月，对电视的追加关税（第4批A）以7.5%启动（原为15%）。</p>
+                    <p class="text-xs text-gray-500">TV Tariffs Implemented</p>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <h3 class="text-2xl font-semibold mb-3 text-white">中国家电以旧换新补贴制度 <span class="text-base text-gray-400">China's Appliance Subsidy</span></h3>
+            <p class="text-gray-300 mb-4">中国于2024年推出了家电以旧换新补贴制度，推动了电视销量的增长。该制度已决定在2025年继续并扩大。</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mini-card-grid">
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-5xl font-bold highlight-text">15%</p>
+                    <p class="text-sm text-gray-300 mt-1">补贴率 (二级能效产品，最高2000元)</p>
+                    <p class="text-xs text-gray-500">Subsidy Rate (up to 2000 RMB)</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-4xl font-bold highlight-text">+5.8%</p>
+                    <p class="text-sm text-gray-300 mt-1">4Q24 电视出货量增长 (YoY)</p>
+                    <p class="text-xs text-gray-500">4Q24 TV Shipment Growth (YoY)</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-4xl font-bold highlight-text">+3.3%</p>
+                    <p class="text-sm text-gray-300 mt-1">2025年 电视出货量预测 (YoY)</p>
+                    <p class="text-xs text-gray-500">2025 TV Shipment Forecast (YoY)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="main-card rounded-2xl p-6 md:p-8 mb-8 md:mb-12 content-section">
+        <h2 class="text-3xl font-bold mb-6 highlight-text">年终促销趋势</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <h3 class="text-2xl font-semibold mb-3 text-white">中国双十一 <span class="text-base text-gray-400">China's Double 11 Sale</span></h3>
+                <p class="text-gray-300 mb-4">补贴后，100英寸LCD电视最低价降至约6000元。</p>
+                <div class="mini-card-grid">
+                    <div class="mini-card rounded-lg p-4 text-center tech-gradient">
+                        <p class="text-5xl font-bold text-white">5,949<span class="text-2xl">元</span></p>
+                        <p class="text-sm text-gray-100 mt-1">100英寸 LCD 电视 (2024年双十一后)</p>
+                        <p class="text-xs text-gray-200">Approx. US$829</p>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-400 mt-2">许多尺寸的电视价格同比下降。特别是85-86英寸（降29%）、98英寸（降36%）、100英寸（降41%）价格降幅显著 (2024年双十一 YoY)。</p>
+            </div>
+            <div>
+                <h3 class="text-2xl font-semibold mb-3 text-white">美国黑色星期五 <span class="text-base text-gray-400">US Black Friday Sale</span></h3>
+                <p class="text-gray-300 mb-4">2024年，75英寸及以上尺寸的电视价格下降，促销活动持续到年底。沃尔玛除65英寸外，其他所有尺寸价格均低于上年，销量有所增加。</p>
+                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mini-card-grid">
+                    <div class="mini-card rounded-lg p-4 text-center">
+                        <p class="text-4xl font-bold highlight-text">$378</p>
+                        <p class="text-sm text-gray-300 mt-1">75英寸 4K 电视 (TCL, 沃尔玛黑五 2024)</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4 text-center">
+                        <p class="text-4xl font-bold highlight-text">$548</p>
+                        <p class="text-sm text-gray-300 mt-1">85英寸 4K 电视 (海信, 沃尔玛黑五 2024)</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4 text-center">
+                        <p class="text-4xl font-bold highlight-text">$1,599</p>
+                        <p class="text-sm text-gray-300 mt-1">98英寸/100英寸 4K 电视 (TCL/海信, 黑五 2024)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="main-card rounded-2xl p-6 md:p-8 mb-8 md:mb-12 content-section">
+        <h2 class="text-3xl font-bold mb-6 highlight-text">平板电视长期需求预测</h2>
+        <p class="text-lg text-gray-300 mb-4">电视需求已趋成熟，但在特定地区和细分市场仍有望实现增长。预计2025年后仍将以家庭首台电视的换购需求为主。</p>
+
+        <div class="mb-8">
+            <h3 class="text-2xl font-semibold mb-3 text-white">全球出货趋势 (3Q24F) <span class="text-base text-gray-400">Global Shipments (3Q24F)</span></h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 mini-card-grid">
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-5xl font-bold highlight-text">52.3M</p>
+                    <p class="text-sm text-gray-300 mt-1">3Q24 全球平板电视出货量</p>
+                    <p class="text-xs text-gray-500">Units Shipped</p>
+                </div>
+                <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-5xl font-bold highlight-text">+3%</p>
+                    <p class="text-sm text-gray-300 mt-1">同比增长率 (3Q24)</p>
+                    <p class="text-xs text-gray-500">Year-over-Year Growth</p>
+                </div>
+                 <div class="mini-card rounded-lg p-4 text-center">
+                    <p class="text-5xl font-bold highlight-text">+6%</p>
+                    <p class="text-sm text-gray-300 mt-1">中国 4Q24 出货预测 (YoY)</p>
+                    <p class="text-xs text-gray-500">China 4Q24 Forecast (YoY)</p>
+                </div>
+            </div>
+            <div class="chart-container mb-6">
+                <canvas id="globalTvShipmentsByTechChart"></canvas>
+            </div>
+            <p class="text-sm text-gray-400 mt-2">预计2024年全年出货量为2.052亿台，2025年为2.068亿台。智能电视的普及率预计到2028年将以1%的复合年增长率微幅增长。</p>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-2xl font-semibold mb-3 text-white">各地区需求预测 <span class="text-base text-gray-400">Regional Demand Forecast</span></h3>
+            <div class="chart-container mb-6">
+                <canvas id="regionalTvShipmentsChart"></canvas>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mini-card-grid">
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-xl font-bold highlight-text">北美 <i class="fas fa-arrow-up"></i></h4>
+                    <p class="text-sm text-gray-300">低价品牌表现良好，平台竞争持续推动需求增长。2025年预测：4920万台。</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-xl font-bold highlight-text">西欧 <i class="fas fa-recycle"></i></h4>
+                    <p class="text-sm text-gray-300">2024年体育赛事带动良好销售。2025年预测因反弹效应减少：2810万台。</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-xl font-bold highlight-text">中国 <i class="fas fa-rocket"></i></h4>
+                    <p class="text-sm text-gray-300">补贴效应带动4Q24后需求复苏。2025年预测：3790万台。</p>
+                </div>
+                 <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-xl font-bold highlight-text">亚洲 <i class="fas fa-chart-line"></i></h4>
+                    <p class="text-sm text-gray-300">印度市场增长，其他亚洲国家复苏缓慢。2025年预测：3430万台。</p>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3 class="text-2xl font-semibold mb-3 text-white">各尺寸及价格区间趋势 <span class="text-base text-gray-400">Size & Price Trends</span></h3>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mini-card-grid">
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-xl font-bold highlight-text">大尺寸化趋势 <i class="fas fa-expand-arrows-alt"></i></h4>
+                    <p class="text-sm text-gray-300">60英寸以上占比：2024年26% → 2028年30%。</p>
+                    <p class="text-sm text-gray-300">70英寸以上占比：2024年12% → 2028年15%。</p>
+                    <p class="text-sm text-gray-300">80英寸以上占比：2024年3% → 2028年5%。</p>
+                </div>
+                <div class="mini-card rounded-lg p-4">
+                    <h4 class="text-xl font-bold highlight-text">高价格区间减少 <i class="fas fa-dollar-sign"></i><i class="fas fa-arrow-down"></i></h4>
+                    <p class="text-sm text-gray-300">预计1000美元以上电视的占比将从2024年的8.7%微降至2028年的7.6%。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="main-card rounded-2xl p-6 md:p-8 mb-8 md:mb-12 content-section">
+        <h2 class="text-3xl font-bold mb-6 highlight-text">98英寸及以上 超大尺寸LCD电视趋势</h2>
+        <p class="text-lg text-gray-300 mb-4">在超大尺寸电视市场，中国市场和品牌尤其领先，价格竞争也已波及北美市场。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+            <div>
+                <h3 class="text-xl font-semibold mb-2 text-white">每英寸平均售价趋势 <span class="text-base text-gray-400">ASP per Inch</span></h3>
+                <div class="grid grid-cols-1 gap-4 mini-card-grid">
+                    <div class="mini-card rounded-lg p-4 text-center">
+                        <p class="text-4xl font-bold highlight-text">~$10<span class="text-xl">/inch</span></p>
+                        <p class="text-sm text-gray-300 mt-1">中国 100英寸电视 (3Q24)</p>
+                        <p class="text-xs text-gray-500">China 100" TV ASP/inch</p>
+                    </div>
+                    <div class="mini-card rounded-lg p-4 text-center">
+                        <p class="text-4xl font-bold highlight-text">&lt;$20<span class="text-xl">/inch</span></p>
+                        <p class="text-sm text-gray-300 mt-1">北美 100英寸电视 (3Q24)</p>
+                        <p class="text-xs text-gray-500">North America 100" TV ASP/inch</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-2 text-white">3Q24 出货情况 (98英寸以上) <span class="text-base text-gray-400">3Q24 Shipments (98"+)</span></h3>
+                 <div class="chart-container">
+                    <canvas id="shipments98InchPlusByRegionChart"></canvas>
+                </div>
+                <p class="text-sm text-gray-400 mt-2">中国市场同比增长52%，大幅增长。北美市场也同比增长685%，急剧增长（但基数小于中国）。从制造商来看，海信、TCL、三星占据前列。</p>
+            </div>
+        </div>
+        <div class="mini-card rounded-lg p-6 tech-gradient">
+            <h3 class="text-2xl font-bold text-white mb-2 text-center">北美价格竞争加剧 <i class="fas fa-fire"></i></h3>
+            <p class="text-center text-gray-100">在2024年黑色星期五，TCL 98英寸和海信 100英寸电视均以1599.99美元的价格销售，表明低价竞争已正式蔓延至北美市场。三星也计划在2025年推出100英寸电视。</p>
+            <p class="text-center text-sm text-gray-200 mt-2">TCL和海信的战略是扩大在1000美元以上高端电视市场的份额。</p>
+        </div>
+    </section>
+
+    <section class="main-card rounded-2xl p-6 md:p-8 mb-8 md:mb-12 content-section">
+        <h2 class="text-3xl font-bold mb-6 highlight-text">Mini LED背光LCD电视趋势</h2>
+        <p class="text-lg text-gray-300 mb-4">Mini LED背光LCD电视由中国市场引领，TCL和海信正激烈追赶三星。预计到2026年，其需求将超过OLED电视。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+            <div>
+                <h3 class="text-xl font-semibold mb-2 text-white">3Q24 出货情况 <span class="text-base text-gray-400">3Q24 Shipments</span></h3>
+                 <div class="chart-container">
+                    <canvas id="miniLedShipmentsByRegionChart"></canvas>
+                </div>
+                <p class="text-sm text-gray-400 mt-2">Mini LED电视在中国市场同比增长59%，实现快速增长。北美市场也表现稳健（增长30%）。OLED电视的主要市场是西欧（增长15%）和北美（增长11%）。</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mb-2 text-white">Mini LED vs OLED 需求预测 <span class="text-base text-gray-400">Forecast</span></h3>
+                <div class="chart-container">
+                    <canvas id="miniLedVsOledChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mini-card-grid">
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-3xl font-bold highlight-text">4.7M</h4>
+                <p class="text-sm text-gray-300 mt-1">2024年 Mini LED背光LCD电视出货量预测</p>
+                <p class="text-xs text-gray-500">Units Forecasted for 2024</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold highlight-text">RGB Mini LED登场 <i class="fas fa-lightbulb"></i></h4>
+                <p class="text-sm text-gray-300 mt-1">CES 2025上，海信（116英寸）、三星、TCL展示了RGB Mini LED背光LCD电视。未来技术发展和成本降低值得关注。</p>
+                <p class="text-xs text-gray-500">Potential threat to Micro LED OLED</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="main-card rounded-2xl p-6 md:p-8 mb-8 md:mb-12 content-section">
+        <h2 class="text-3xl font-bold mb-6 highlight-text">AI电视趋势 (CES 2025)</h2>
+        <p class="text-lg text-gray-300 mb-3">AI电视正在从以画质优化为中心的“AI TV 1.0”向包含语音智能、生成式AI以及具体用例建议的“AI TV 2.0”进化。</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mini-card-grid">
+            <div class="mini-card rounded-lg p-4 flex flex-col items-center justify-center tech-gradient">
+                <p class="text-gray-100 text-sm mb-1">2023</p>
+                <p class="text-2xl font-bold text-white">AI TV 1.0</p>
+                <p class="text-sm text-gray-200 text-center">画质·音质优化<br/>(1-2 TOPS)</p>
+                <p class="text-xs text-gray-300 text-center">Picture/Sound Optimization</p>
+            </div>
+            <div class="mini-card rounded-lg p-4 flex flex-col items-center justify-center tech-gradient border-2 highlight-border">
+                <p class="text-gray-100 text-sm mb-1">2024-2025</p>
+                <p class="text-2xl font-bold text-white">AI TV 2.0 (初期)</p>
+                <p class="text-sm text-gray-200 text-center">NLP、生成式AI壁纸等<br/>(3-5 TOPS)</p>
+                 <p class="text-xs text-gray-300 text-center">NLP, GenAI Wallpaper</p>
+            </div>
+            <div class="mini-card rounded-lg p-4 flex flex-col items-center justify-center tech-gradient">
+                <p class="text-gray-100 text-sm mb-1">2026+</p>
+                <p class="text-2xl font-bold text-white">AI TV 2.0 (发展)</p>
+                <p class="text-sm text-gray-200 text-center">更主动的用户辅助<br/>(10-15+ TOPS)</p>
+                <p class="text-xs text-gray-300 text-center">Active User Assistance</p>
+            </div>
+        </div>
+         <p class="text-sm text-gray-400 mt-4">三星/LGE可见与Microsoft Copilot AI的合作，TCL/海信则与Google Gemini AI合作。</p>
+    </section>
+
+    <section class="main-card rounded-2xl p-6 md:p-8 content-section">
+        <h2 class="text-3xl font-bold mb-6 highlight-text">总结 ~ 不透明和不确定时代的开始</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mini-card-grid">
+            <div class="mini-card rounded-lg p-4">
+                <i class="fas fa-industry text-3xl highlight-text mb-2"></i>
+                <h3 class="text-xl font-semibold text-white">生产转移加速</h3>
+                <p class="text-sm text-gray-400">特朗普1.0后，电视生产从中国转向墨西哥、越南。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <i class="fas fa-shipping-fast text-3xl highlight-text mb-2"></i>
+                <h3 class="text-xl font-semibold text-white">抢先进口担忧</h3>
+                <p class="text-sm text-gray-400">2025年上半年可能出现抢先进口，下半年可能进行库存调整。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <i class="fas fa-gifts text-3xl highlight-text mb-2"></i>
+                <h3 class="text-xl font-semibold text-white">中国补贴效应</h3>
+                <p class="text-sm text-gray-400">预计2025年将继续刺激电视需求增长，但也存在透支未来需求的风险。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <i class="fas fa-ruler-combined text-3xl highlight-text mb-2"></i>
+                <h3 class="text-xl font-semibold text-white">大尺寸化持续</h3>
+                <p class="text-sm text-gray-400">以中国和北美为中心，电视大尺寸化趋势将持续。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <i class="fas fa-tag text-3xl highlight-text mb-2"></i>
+                <h3 class="text-xl font-semibold text-white">低价偏好</h3>
+                <p class="text-sm text-gray-400">消费者的低价偏好增强。AI电视必须提供新的价值主张。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <i class="fas fa-exclamation-triangle text-3xl highlight-text mb-2"></i>
+                <h3 class="text-xl font-semibold text-white">2025年 = 不确定性</h3>
+                <p class="text-sm text-gray-400">密切关注各类信息，做好充分准备至关重要。</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center mt-12 md:mt-16 py-8 border-t border-gray-700 content-section">
+        <p class="text-sm text-gray-500"></p>
+        <p class="text-xs text-gray-600 mt-2"></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer for animations
+            const sections = document.querySelectorAll('.content-section, .mini-card-grid');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Chart.js implementations
+            const highlightColor = '#00AEEF';
+            const gridColor = 'rgba(255, 255, 255, 0.1)';
+            const textColor = '#f0f0f0';
+            const tooltipBackgroundColor = '#1a1a1a';
+
+            // CPI Chart (Page 4)
+            const cpiCtx = document.getElementById('cpiChart');
+            if (cpiCtx) {
+                new Chart(cpiCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2022/Jun', '2022/Dec', '2023/Jun', '2023/Dec', '2024/Jun', '2024/Dec'],
+                        datasets: [
+                            {
+                                label: 'US CPI',
+                                data: [9.1, 7.1, 3.0, 3.4, 3.3, 2.9], // Approximate values from chart
+                                borderColor: highlightColor,
+                                tension: 0.1,
+                                pointBackgroundColor: highlightColor,
+                            },
+                            {
+                                label: 'Euro CPI',
+                                data: [8.6, 9.2, 5.5, 2.9, 2.6, 2.4], // Approximate values from chart
+                                borderColor: '#FFA500',
+                                tension: 0.1,
+                                pointBackgroundColor: '#FFA500',
+                            },
+                            {
+                                label: 'China CPI',
+                                data: [2.5, 1.8, 0, -0.3, 0.3, 0.1], // Approximate values from chart
+                                borderColor: '#A0A0A0',
+                                tension: 0.1,
+                                pointBackgroundColor: '#A0A0A0',
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        scales: { x: { ticks: { color: textColor }, grid: { color: gridColor } }, y: { ticks: { color: textColor, callback: function(value) { return value + '%' } }, grid: { color: gridColor } } },
+                        plugins: { legend: { labels: { color: textColor } }, tooltip: { backgroundColor: tooltipBackgroundColor, titleColor: textColor, bodyColor: textColor } }
+                    }
+                });
+            }
+            
+            // Global TV Shipments by Technology (Page 22 - Table)
+            const globalTvShipmentsCtx = document.getElementById('globalTvShipmentsByTechChart');
+            if (globalTvShipmentsCtx) {
+                new Chart(globalTvShipmentsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['2023', '2024', '2025', '2026', '2027', '2028'],
+                        datasets: [
+                            {
+                                label: 'LCD TV',
+                                data: [195.8, 199.2, 200.2, 204.7, 205.4, 207.1], // from table
+                                backgroundColor: highlightColor,
+                            },
+                            {
+                                label: 'OLED TV',
+                                data: [5.6, 6.0, 6.6, 7.0, 7.2, 7.3], // from table
+                                backgroundColor: 'rgba(0, 174, 239, 0.5)',
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        scales: { x: { ticks: { color: textColor }, grid: { display: false }, stacked: true }, y: { ticks: { color: textColor }, grid: { color: gridColor }, stacked: true, title: { display: true, text: 'Million Units', color: textColor} } },
+                        plugins: { legend: { labels: { color: textColor } }, tooltip: { backgroundColor: tooltipBackgroundColor, titleColor: textColor, bodyColor: textColor, mode: 'index', intersect: false } }
+                    }
+                });
+            }
+
+            // Regional TV Shipments (Page 23 - Table) - Showing top 3 regions for simplicity
+            const regionalShipmentsCtx = document.getElementById('regionalTvShipmentsChart');
+            if (regionalShipmentsCtx) {
+                new Chart(regionalShipmentsCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2023', '2024', '2025', '2026', '2027', '2028'],
+                        datasets: [
+                            {
+                                label: 'North America',
+                                data: [47.255, 48.650, 49.210, 49.680, 49.300, 49.400], // from table
+                                borderColor: highlightColor,
+                                tension: 0.1
+                            },
+                            {
+                                label: 'China',
+                                data: [37.604, 36.700, 37.900, 38.500, 38.950, 39.000], // from table
+                                borderColor: '#FFA500',
+                                tension: 0.1
+                            },
+                            {
+                                label: 'Western Europe',
+                                data: [25.909, 28.599, 28.111, 28.618, 28.491, 28.861], // from table
+                                borderColor: '#A0A0A0',
+                                tension: 0.1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        scales: { x: { ticks: { color: textColor }, grid: { color: gridColor } }, y: { ticks: { color: textColor }, grid: { color: gridColor }, title: { display: true, text: 'Million Units', color: textColor} } },
+                        plugins: { legend: { labels: { color: textColor } }, tooltip: { backgroundColor: tooltipBackgroundColor, titleColor: textColor, bodyColor: textColor, mode: 'index', intersect: false } }
+                    }
+                });
+            }
+
+            // 98"/100"+ 4K LCD TV shipments by region in 3Q24 (Page 31)
+            const shipments98InchPlusCtx = document.getElementById('shipments98InchPlusByRegionChart');
+            if (shipments98InchPlusCtx) {
+                new Chart(shipments98InchPlusCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['中国', 'North America', 'Asia & Oceania', 'Western Europe'], // Simplified from chart
+                        datasets: [{
+                            label: '3Q24 出货量 (千台)', // 3Q24 Shipments (Thousand Units)
+                            data: [130, 42, 18, 8], // Approximate values from chart for 98"+100"+ combined in 3Q24
+                            backgroundColor: [highlightColor, 'rgba(0,174,239,0.8)', 'rgba(0,174,239,0.6)', 'rgba(0,174,239,0.4)'],
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                        scales: { x: { ticks: { color: textColor }, grid: { color: gridColor }, title: {display: true, text: 'Thousand Units', color: textColor} }, y: { ticks: { color: textColor }, grid: { display: false } } },
+                        plugins: { legend: { display: false }, tooltip: { backgroundColor: tooltipBackgroundColor, titleColor: textColor, bodyColor: textColor } }
+                    }
+                });
+            }
+            
+            // Mini LED BL LCD TV shipments by region in 3Q24 (Page 36)
+            const miniLedShipmentsCtx = document.getElementById('miniLedShipmentsByRegionChart');
+            if (miniLedShipmentsCtx) {
+                new Chart(miniLedShipmentsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['中国', 'North America', 'Western Europe', 'Asia & Oceania'], // Simplified from chart
+                        datasets: [{
+                            label: '3Q24 Mini LED 出货量 (千台)', // 3Q24 Mini LED Shipments (Thousand Units)
+                            data: [480, 280, 150, 70], // Approximate values from chart for 3Q24
+                            backgroundColor: [highlightColor, 'rgba(0,174,239,0.8)', 'rgba(0,174,239,0.6)', 'rgba(0,174,239,0.4)'],
+                        }]
+                    },
+                     options: {
+                        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                        scales: { x: { ticks: { color: textColor }, grid: { color: gridColor }, title: {display: true, text: 'Thousand Units', color: textColor} }, y: { ticks: { color: textColor }, grid: { display: false } } },
+                        plugins: { legend: { display: false }, tooltip: { backgroundColor: tooltipBackgroundColor, titleColor: textColor, bodyColor: textColor } }
+                    }
+                });
+            }
+
+            // Mini LED vs OLED Forecast (Page 40 - Tables)
+            const miniLedVsOledCtx = document.getElementById('miniLedVsOledChart');
+            if (miniLedVsOledCtx) {
+                new Chart(miniLedVsOledCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2023', '2024', '2025', '2026', '2027', '2028'],
+                        datasets: [
+                            {
+                                label: 'Mini LED BL LCD TV',
+                                data: [3.547, 4.735, 6.357, 7.859, 9.047, 10.048], // from table
+                                borderColor: highlightColor,
+                                tension: 0.1
+                            },
+                            {
+                                label: 'OLED TV',
+                                data: [5.573, 6.010, 6.590, 6.980, 7.180, 7.280], // from table
+                                borderColor: '#FFA500',
+                                tension: 0.1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        scales: { x: { ticks: { color: textColor }, grid: { color: gridColor } }, y: { ticks: { color: textColor }, grid: { color: gridColor }, title: { display: true, text: 'Million Units', color: textColor} } },
+                        plugins: { legend: { labels: { color: textColor } }, tooltip: { backgroundColor: tooltipBackgroundColor, titleColor: textColor, bodyColor: textColor, mode: 'index', intersect: false } }
+                    }
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>

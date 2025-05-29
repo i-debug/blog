@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+
+{% block title %}搜索{% if query %} "{{ query }}"{% endif %} - 个人知识博客{% endblock %}
+
+{% block content %}
+<!-- 搜索头部 -->
+<section class="py-20 bg-gradient-to-b from-apple-gray-50 to-white dark:from-apple-gray-800 dark:to-apple-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="animate-on-scroll">
+            <h1 class="text-4xl sm:text-5xl font-bold mb-6">
+                <i class="fas fa-search text-apple-blue mr-3"></i>
+                搜索结果
+            </h1>
+            
+            {% if query %}
+            <p class="text-xl text-apple-gray-600 dark:text-apple-gray-300 mb-8">
+                搜索关键词: <span class="text-apple-blue font-semibold">"{{ query }}"</span>
+            </p>
+            <p class="text-apple-gray-500 dark:text-apple-gray-400">
+                找到 {{ articles.count }} 篇相关文章
+            </p>
+            {% else %}
+            <p class="text-xl text-apple-gray-600 dark:text-apple-gray-300 mb-8">
+                请输入搜索关键词来查找文章
+            </p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- 搜索结果 -->
+{% if query %}
+    {% if articles %}
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="space-y-6">
+                {% for article in articles %}
+                <article class="animate-on-scroll card-hover bg-white dark:bg-apple-gray-800 rounded-xl shadow-md p-6 border border-apple-gray-100 dark:border-apple-gray-700">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            {% if article.category.icon %}
+                            <i class="{{ article.category.icon }} text-apple-blue"></i>
+                            {% endif %}
+                            <a href="{% url 'content:category_detail' article.category.slug %}" class="text-apple-blue font-medium text-sm hover:underline">
+                                {{ article.category.name }}
+                            </a>
+                        </div>
+                        <span class="text-apple-gray-500 text-sm">{{ article.created_at|date:"Y-m-d" }}</span>
+                    </div>
+                    
+                    <h3 class="text-xl font-semibold mb-2 hover:text-apple-blue transition-colors">
+                        <a href="{% url 'content:article_detail' article.category.slug article.slug %}">
+                            {{ article.title }}
+                        </a>
+                    </h3>
+                    
+                    {% if article.summary %}
+                    <p class="text-apple-gray-600 dark:text-apple-gray-300 mb-4 line-clamp-2">
+                        {{ article.summary }}
+                    </p>
+                    {% endif %}
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            {% if article.get_tags_list %}
+                            <div class="flex flex-wrap gap-2">
+                                {% for tag in article.get_tags_list|slice:":3" %}
+                                <span class="px-2 py-1 bg-apple-gray-100 dark:bg-apple-gray-700 text-apple-gray-600 dark:text-apple-gray-300 text-xs rounded-full">
+                                    {{ tag }}
+                                </span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="flex items-center text-apple-gray-500 text-sm">
+                            <i class="fas fa-eye mr-1"></i>
+                            {{ article.view_count }}
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% else %}
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate-on-scroll">
+                <i class="fas fa-search text-6xl text-apple-gray-300 dark:text-apple-gray-600 mb-6"></i>
+                <h2 class="text-3xl font-bold mb-4">未找到相关文章</h2>
+                <p class="text-apple-gray-600 dark:text-apple-gray-400 mb-8">
+                    没有找到与 "{{ query }}" 相关的内容，请尝试其他关键词。
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="{% url 'content:home' %}" class="inline-flex items-center px-6 py-3 bg-apple-blue text-white rounded-full hover:bg-blue-600 transition-colors">
+                        <i class="fas fa-home mr-2"></i>
+                        返回首页
+                    </a>
+                    <button onclick="document.querySelector('input[name=q]').focus()" class="inline-flex items-center px-6 py-3 border border-apple-gray-300 dark:border-apple-gray-600 text-apple-gray-700 dark:text-apple-gray-300 rounded-full hover:bg-apple-gray-50 dark:hover:bg-apple-gray-800 transition-colors">
+                        <i class="fas fa-search mr-2"></i>
+                        重新搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+{% else %}
+<!-- 搜索建议 -->
+<section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="animate-on-scroll text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4">搜索建议</h2>
+            <p class="text-apple-gray-600 dark:text-apple-gray-400 mb-8">
+                尝试搜索以下关键词来发现有趣的内容
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            <button onclick="searchKeyword('Python')" class="animate-on-scroll bg-white dark:bg-apple-gray-800 rounded-lg p-4 shadow-md border border-apple-gray-100 dark:border-apple-gray-700 hover:bg-apple-gray-50 dark:hover:bg-apple-gray-700 transition-colors">
+                <i class="fab fa-python text-2xl text-blue-500 mb-2"></i>
+                <div class="text-sm font-medium">Python</div>
+            </button>
+            
+            <button onclick="searchKeyword('JavaScript')" class="animate-on-scroll bg-white dark:bg-apple-gray-800 rounded-lg p-4 shadow-md border border-apple-gray-100 dark:border-apple-gray-700 hover:bg-apple-gray-50 dark:hover:bg-apple-gray-700 transition-colors">
+                <i class="fab fa-js-square text-2xl text-yellow-500 mb-2"></i>
+                <div class="text-sm font-medium">JavaScript</div>
+            </button>
+            
+            <button onclick="searchKeyword('Django')" class="animate-on-scroll bg-white dark:bg-apple-gray-800 rounded-lg p-4 shadow-md border border-apple-gray-100 dark:border-apple-gray-700 hover:bg-apple-gray-50 dark:hover:bg-apple-gray-700 transition-colors">
+                <i class="fas fa-server text-2xl text-green-500 mb-2"></i>
+                <div class="text-sm font-medium">Django</div>
+            </button>
+            
+            <button onclick="searchKeyword('机器学习')" class="animate-on-scroll bg-white dark:bg-apple-gray-800 rounded-lg p-4 shadow-md border border-apple-gray-100 dark:border-apple-gray-700 hover:bg-apple-gray-50 dark:hover:bg-apple-gray-700 transition-colors">
+                <i class="fas fa-brain text-2xl text-purple-500 mb-2"></i>
+                <div class="text-sm font-medium">机器学习</div>
+            </button>
+            
+            <button onclick="searchKeyword('数据结构')" class="animate-on-scroll bg-white dark:bg-apple-gray-800 rounded-lg p-4 shadow-md border border-apple-gray-100 dark:border-apple-gray-700 hover:bg-apple-gray-50 dark:hover:bg-apple-gray-700 transition-colors">
+                <i class="fas fa-project-diagram text-2xl text-red-500 mb-2"></i>
+                <div class="text-sm font-medium">数据结构</div>
+            </button>
+            
+            <button onclick="searchKeyword('算法')" class="animate-on-scroll bg-white dark:bg-apple-gray-800 rounded-lg p-4 shadow-md border border-apple-gray-100 dark:border-apple-gray-700 hover:bg-apple-gray-50 dark:hover:bg-apple-gray-700 transition-colors">
+                <i class="fas fa-code text-2xl text-indigo-500 mb-2"></i>
+                <div class="text-sm font-medium">算法</div>
+            </button>
+            
+            <button onclick="searchKeyword('前端开发')" class="animate-on-scroll bg-white dark:bg-apple-gray-800 rounded-lg p-4 shadow-md border border-apple-gray-100 dark:border-apple-gray-700 hover:bg-apple-gray-50 dark:hover:bg-apple-gray-700 transition-colors">
+                <i class="fas fa-palette text-2xl text-pink-500 mb-2"></i>
+                <div class="text-sm font-medium">前端开发</div>
+            </button>
+            
+            <button onclick="searchKeyword('后端开发')" class="animate-on-scroll bg-white dark:bg-apple-gray-800 rounded-lg p-4 shadow-md border border-apple-gray-100 dark:border-apple-gray-700 hover:bg-apple-gray-50 dark:hover:bg-apple-gray-700 transition-colors">
+                <i class="fas fa-database text-2xl text-cyan-500 mb-2"></i>
+                <div class="text-sm font-medium">后端开发</div>
+            </button>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function searchKeyword(keyword) {
+    const searchForm = document.querySelector('form[action="{% url 'content:search' %}"]');
+    const searchInput = searchForm.querySelector('input[name="q"]');
+    searchInput.value = keyword;
+    searchForm.submit();
+}
+
+// 高亮搜索关键词
+{% if query %}
+document.addEventListener('DOMContentLoaded', () => {
+    const query = "{{ query|escapejs }}";
+    const articles = document.querySelectorAll('article');
+    
+    articles.forEach(article => {
+        const title = article.querySelector('h3');
+        const summary = article.querySelector('p');
+        
+        if (title) {
+            title.innerHTML = highlightText(title.innerHTML, query);
+        }
+        if (summary) {
+            summary.innerHTML = highlightText(summary.innerHTML, query);
+        }
+    });
+});
+
+function highlightText(text, query) {
+    const regex = new RegExp(`(${query})`, 'gi');
+    return text.replace(regex, '<mark class="bg-yellow-200 dark:bg-yellow-700 text-yellow-900 dark:text-yellow-100 px-1 rounded">$1</mark>');
+}
+{% endif %}
+</script>
+{% endblock %} 

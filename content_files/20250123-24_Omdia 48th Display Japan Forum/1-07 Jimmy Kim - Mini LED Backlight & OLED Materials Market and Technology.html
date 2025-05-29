@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini LED 背光与 OLED 材料市场与技术分析</title>
+    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/tailwind/3.3.3/tailwind.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.staticfile.org/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <style>
+        body { background-color: #000000; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
+        .highlight-text { color: #0052A3; } /* Samsung Blue */
+        .highlight-bg { background-color: #0052A3; }
+        .highlight-border { border-color: #0052A3; }
+        .card { background-color: #1a1a1a; border: 1px solid #333333; }
+        .tech-gradient { background: linear-gradient(to bottom, rgba(0, 82, 163, 0.7), rgba(0, 82, 163, 0.3)); } /* Samsung Blue gradient */
+        .tech-gradient-subtle { background: linear-gradient(to bottom, rgba(0, 82, 163, 0.2), rgba(0, 82, 163, 0.05)); }
+
+        /* Animation */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Staggered animation for grid items */
+        .grid .animate-on-scroll:nth-child(1) { transition-delay: 0.05s; }
+        .grid .animate-on-scroll:nth-child(2) { transition-delay: 0.1s; }
+        .grid .animate-on-scroll:nth-child(3) { transition-delay: 0.15s; }
+        .grid .animate-on-scroll:nth-child(4) { transition-delay: 0.2s; }
+        .grid .animate-on-scroll:nth-child(5) { transition-delay: 0.25s; }
+        .grid .animate-on-scroll:nth-child(6) { transition-delay: 0.3s; }
+
+
+        /* Chart.js dark mode styles */
+        Chart.defaults.color = '#e0e0e0';
+        Chart.defaults.borderColor = '#444';
+        Chart.defaults.plugins.legend.labels.color = '#e0e0e0';
+        Chart.defaults.scale.ticks.color = '#bbb';
+        Chart.defaults.scale.grid.borderColor = '#333';
+        Chart.defaults.scale.grid.color = 'rgba(100, 100, 100, 0.1)';
+
+        /* Custom scrollbar for a more modern feel (optional, WebKit only) */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111111;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0052A3; /* Highlight color */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #003c7a; /* Darker highlight color */
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center py-12 animate-on-scroll">
+            <i class="fas fa-chart-line fa-3x highlight-text mb-4"></i>
+            <h1 class="text-5xl md:text-6xl font-bold text-white">Mini LED 背光与 OLED 材料</h1>
+            <h2 class="text-xl md:text-2xl font-semibold text-gray-300 mt-2">市场与技术分析</h2>
+            <p class="text-sm text-gray-500 mt-1">Market and Technology Analysis</p>
+            <p class="text-xs text-gray-600 mt-4">来源: Omdia | 第48回ディスプレイ産業フォーラム (2025年1月23-24日)</p>
+        </header>
+
+        <section id="tv-market" class="mb-12">
+            <div class="card rounded-2xl p-6 md:p-8 shadow-xl animate-on-scroll">
+                <h2 class="text-3xl font-bold mb-2 text-white"><i class="fas fa-tv highlight-text mr-2"></i>电视市场动态</h2>
+                <p class="text-sm text-gray-400 mb-6">TV Market Dynamics: Mini LED vs. OLED</p>
+
+                <div class="mb-8 p-4 rounded-lg tech-gradient-subtle animate-on-scroll">
+                     <h3 class="text-xl font-semibold mb-1 text-white">Mini LED 电视市场向好</h3>
+                     <p class="text-sm text-gray-300 mb-3">Mini LED TV market is improving.</p>
+                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-5xl font-bold highlight-text">1.2M+</p>
+                            <p class="text-sm text-gray-300 mt-2">3Q24 出货量</p>
+                            <p class="text-xs text-gray-500 mt-1">Q3'24 Shipments</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-5xl font-bold highlight-text">4.7M</p>
+                            <p class="text-sm text-gray-300 mt-2">2024年预测上调</p>
+                            <p class="text-xs text-gray-500 mt-1">2024 Forecast Raised</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-3xl font-bold text-white mt-1">需求分化</p>
+                            <p class="text-sm text-gray-300 mt-2">高端电视市场中，OLED与Mini LED需求出现分化。</p>
+                            <p class="text-xs text-gray-500 mt-1">Demand Segregation in Premium TV</p>
+                        </div>
+                     </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="animate-on-scroll">
+                        <h3 class="text-xl font-semibold text-white mb-2">电视显示屏出货量预测</h3>
+                        <p class="text-xs text-gray-500 mb-3">TV Display Shipment Forecast (Millions)</p>
+                        <div class="h-96">
+                           <canvas id="tvShipmentForecastChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="animate-on-scroll">
+                        <h3 class="text-xl font-semibold text-white mb-2">高端电视市场趋势</h3>
+                        <p class="text-xs text-gray-500 mb-3">Premium TV Market Trends (Shipments '000 sets)</p>
+                        <div class="h-96">
+                           <canvas id="premiumTvTrendChart"></canvas>
+                        </div>
+                         <p class="text-sm text-gray-400 mt-4">高端LCD电视(含Mini LED)需求增长，而OLED电视销售则陷入低迷。 (趋势观察自 Page 5 图表)</p>
+                    </div>
+                </div>
+
+
+                <div class="mt-8 p-4 rounded-lg tech-gradient-subtle animate-on-scroll">
+                    <h3 class="text-xl font-semibold text-white mb-1">Mini LED 市场领导地位转移</h3>
+                    <p class="text-sm text-gray-300 mb-3">Shift in Mini LED Market Leadership: Samsung to TCL & Hisense.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                        <div class="animate-on-scroll">
+                             <h4 class="text-lg font-semibold text-white mb-2">三星VD策略调整</h4>
+                             <p class="text-sm text-gray-400">三星高端电视总出货量保持不变，但增加了OLED比例，减少了Mini LED。</p>
+                             <p class="text-xs text-gray-500 mt-1">Samsung VD: More OLED, Less Mini LED</p>
+                        </div>
+                        <div class="animate-on-scroll">
+                            <h4 class="text-lg font-semibold text-white mb-2">Mini LED电视厂商份额 (截至3Q24)</h4>
+                             <p class="text-xs text-gray-500 mb-3">Mini LED TV Shipment Share by Maker (until 3Q24)</p>
+                             <div class="h-72">
+                                <canvas id="miniLedTvShareChart"></canvas>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="mt-8 p-4 rounded-lg tech-gradient-subtle animate-on-scroll">
+                    <h3 class="text-xl font-semibold text-white mb-1">低成本Mini LED电视推动市场扩张</h3>
+                    <p class="text-sm text-gray-300 mb-3">Low-cost products may expand Mini LED TV market coverage.</p>
+                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-5xl font-bold highlight-text">4.7M</p>
+                            <p class="text-sm text-gray-300 mt-2">2024年出货量</p>
+                            <p class="text-xs text-gray-500 mt-1">2024 Shipments</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-5xl font-bold highlight-text">9.2M</p>
+                            <p class="text-sm text-gray-300 mt-2">2025年预计大幅增长</p>
+                            <p class="text-xs text-gray-500 mt-1">2025 Big Jump Forecast</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-5xl font-bold highlight-text">15.5M</p>
+                            <p class="text-sm text-gray-300 mt-2">2028年出货量预测</p>
+                            <p class="text-xs text-gray-500 mt-1">2028 Shipment Forecast</p>
+                        </div>
+                     </div>
+                 </div>
+            </div>
+        </section>
+
+        <section id="miniled-tech-cost-tv" class="mb-12">
+            <div class="card rounded-2xl p-6 md:p-8 shadow-xl animate-on-scroll">
+                <h2 class="text-3xl font-bold mb-2 text-white"><i class="fas fa-microchip highlight-text mr-2"></i>Mini LED 技术与成本 (电视)</h2>
+                <p class="text-sm text-gray-400 mb-6">Mini LED Technology & Cost Evolution (TVs)</p>
+
+                <div class="mb-8 p-4 rounded-lg tech-gradient-subtle animate-on-scroll">
+                     <h3 class="text-xl font-semibold mb-1 text-white">TCL POB Mini LED 技术发展</h3>
+                     <p class="text-sm text-gray-300 mb-3">TCL's POB Mini LED Technology Development.</p>
+                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-3xl font-bold text-white mt-1">~2022: 单晶</p>
+                            <p class="text-sm text-gray-300 mt-2 highlight-text">光效 +7%</p>
+                            <p class="text-xs text-gray-500 mt-1">Single Crystal, 7% Light Eff. Incr.</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-3xl font-bold text-white mt-1">2023: 双晶</p>
+                            <p class="text-sm text-gray-300 mt-2 highlight-text">光效 +11.3%</p>
+                            <p class="text-xs text-gray-500 mt-1">Dual-crystal (2-in-1 PKG)</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-3xl font-bold text-white mt-1">2024: 六晶</p>
+                            <p class="text-sm text-gray-300 mt-2 highlight-text">光效 +30.2%</p>
+                            <p class="text-xs text-gray-500 mt-1">Six-crystal (6-in-1 PKG)</p>
+                        </div>
+                     </div>
+                     <p class="text-sm text-gray-400 mt-4">为降本，厂商减少LED封装数，采用多芯片封装补偿亮度损失，而非简单增大芯片尺寸。</p>
+                </div>
+
+                <div class="animate-on-scroll">
+                    <h3 class="text-xl font-semibold text-white mb-2">65英寸4K电视 Mini LED背光LCD成本分析</h3>
+                    <p class="text-xs text-gray-500 mb-3">Cost Analysis: 65" 4K Mini LED Backlighting LCD TV Module (vs. Traditional LCD)</p>
+                    <div class="h-[350px] md:h-[300px]">
+                        <canvas id="miniledLcdCostChart"></canvas>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div class="card rounded-lg p-3 animate-on-scroll">
+                            <p class="text-3xl font-bold highlight-text">1.17x</p> <p class="text-sm text-gray-300 mt-1">低成本Mini LED vs 传统LCD (2-in-1 POB)</p>
+                            <p class="text-xs text-gray-500">Low-cost Mini LED vs. Traditional LCD</p>
+                        </div>
+                        <div class="card rounded-lg p-3 animate-on-scroll">
+                            <p class="text-3xl font-bold highlight-text">-10%</p>
+                            <p class="text-sm text-gray-300 mt-1">2-in-1 LED封装额外降本 (对比Normal POB)</p>
+                            <p class="text-xs text-gray-500">2-in-1 PKG Add. Cost Reduction</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="qdoled-cost-tv" class="mb-12">
+            <div class="card rounded-2xl p-6 md:p-8 shadow-xl animate-on-scroll">
+                <h2 class="text-3xl font-bold mb-2 text-white"><i class="fas fa-atom highlight-text mr-2"></i>QD OLED 成本与市场 (电视)</h2>
+                <p class="text-sm text-gray-400 mb-6">QD OLED Cost & Market Position (TVs)</p>
+
+                <div class="animate-on-scroll">
+                    <h3 class="text-xl font-semibold text-white mb-2">65英寸4K QD OLED 电视制造成本趋势</h3>
+                    <p class="text-xs text-gray-500 mb-3">Manufacturing Cost Trend: 65" 4K QD OLED TV (2021-2024F)</p>
+                    <div class="h-96">
+                        <canvas id="qdOledCostTrendChart"></canvas>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <div class="card rounded-lg p-3 animate-on-scroll">
+                             <p class="text-2xl font-bold text-white">成本饱和</p>
+                             <p class="text-sm text-gray-300 mt-1">良率充分提升后，成本进入饱和阶段。</p>
+                             <p class="text-xs text-gray-500">Cost Saturation Reached</p>
+                        </div>
+                        <div class="card rounded-lg p-3 animate-on-scroll">
+                            <p class="text-2xl font-bold highlight-text">x1.17</p>
+                            <p class="text-sm text-gray-300 mt-1">2024年 QD OLED vs 当前 WOLED</p>
+                            <p class="text-xs text-gray-500">2024 QD OLED vs. Current WOLED</p>
+                        </div>
+                    </div>
+                     <p class="text-sm text-gray-400 mt-4">三星VD计划积极采用QD OLED于其高端产品，大规模量产亦有助提高良率。</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="it-market-oled-shift" class="mb-12">
+            <div class="card rounded-2xl p-6 md:p-8 shadow-xl animate-on-scroll">
+                <h2 class="text-3xl font-bold mb-2 text-white"><i class="fas fa-laptop highlight-text mr-2"></i>IT 市场: Mini LED 向 OLED 迁移</h2>
+                <p class="text-sm text-gray-400 mb-6">IT Market: The On-going Shift from Mini LED to OLED</p>
+
+                <div class="mb-8 p-4 rounded-lg tech-gradient-subtle animate-on-scroll">
+                     <h3 class="text-xl font-semibold mb-1 text-white">苹果IT产品显示技术转变</h3>
+                     <p class="text-sm text-gray-300 mb-3">Apple's IT Products Display Technology Shifting from Mini LED to OLED.</p>
+                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-3xl font-bold text-white mt-1">平板先行</p>
+                            <p class="text-sm text-gray-300 mt-2">技术转变从平板始，Mini LED平板需求骤降。</p>
+                            <p class="text-xs text-gray-500 mt-1">Tablet First, Demand Dropped</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-5xl font-bold highlight-text">~1M</p>
+                            <p class="text-sm text-gray-300 mt-2">旧款Mini LED iPad年出货量</p>
+                            <p class="text-xs text-gray-500 mt-1">Legacy Mini LED iPad Shipments</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-5xl font-bold highlight-text">>7M</p>
+                            <p class="text-sm text-gray-300 mt-2">2024年IT用Mini LED背光出货</p>
+                            <p class="text-xs text-gray-500 mt-1">2024 Mini LED Backlights for IT</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-3xl font-bold text-white mt-1">MacBook 跟进</p>
+                            <p class="text-sm text-gray-300 mt-2">MacBook Pro 预计2026-27年转向OLED。</p>
+                            <p class="text-xs text-gray-500 mt-1">MacBook Pro to Follow (2026-27)</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll col-span-1 sm:col-span-2">
+                            <p class="text-3xl font-bold text-white mt-1">其他厂商需求有限</p>
+                            <p class="text-sm text-gray-300 mt-2">因制造成本高，其他IT制造商对Mini LED的需求预计很少。</p>
+                            <p class="text-xs text-gray-500 mt-1">Limited Demand from Other IT Makers</p>
+                        </div>
+                     </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="animate-on-scroll">
+                        <h3 class="text-xl font-semibold text-white mb-2">平板电脑显示屏出货量预测</h3>
+                        <p class="text-xs text-gray-500 mb-3">Tablet Display Shipment Forecast (Millions)</p>
+                        <div class="h-96">
+                           <canvas id="tabletShipmentForecastChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="animate-on-scroll">
+                        <h3 class="text-xl font-semibold text-white mb-2">笔记本电脑显示屏出货量预测</h3>
+                        <p class="text-xs text-gray-500 mb-3">Notebook PC Display Shipment Forecast (Millions)</p>
+                        <div class="h-96">
+                           <canvas id="notebookShipmentForecastChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 p-4 rounded-lg tech-gradient-subtle animate-on-scroll">
+                    <h3 class="text-xl font-semibold text-white mb-1">苹果IT应用：Mini LED vs. AMOLED 挑战与方案</h3>
+                    <p class="text-sm text-gray-300 mb-3">Apple's IT Applications: Mini LED LCD vs. AMOLED Challenges & Solutions.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <h4 class="text-lg font-semibold text-white mb-2">Mini LED 背光 LCD (2021-23)</h4>
+                            <p class="text-sm text-gray-400 font-semibold">主要挑战:</p>
+                            <ul class="list-disc list-inside text-sm text-gray-300 ml-2 space-y-1">
+                                <li>直接背光中的光学距离</li>
+                                <li>LED数量巨大 (>10,000颗)</li>
+                                <li>7层光学膜堆叠以增强混光</li>
+                            </ul>
+                            <p class="text-sm text-gray-400 font-semibold mt-2">克服方法:</p>
+                             <ul class="list-disc list-inside text-sm text-gray-300 ml-2 space-y-1">
+                                <li>荧光膜 (或QD片) / LED上无荧光粉</li>
+                                <li>增强混光，避免LED-荧光粉工艺差异</li>
+                            </ul>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <h4 class="text-lg font-semibold text-white mb-2">AMOLED (2024-)</h4>
+                             <p class="text-sm text-gray-400 font-semibold">主要挑战:</p>
+                            <ul class="list-disc list-inside text-sm text-gray-300 ml-2 space-y-1">
+                                <li>长时间运行的可靠性</li>
+                                <li>RGB OLED大面积应用/柔性屏</li>
+                                <li>制造输出能力与大面积平坦度</li>
+                            </ul>
+                            <p class="text-sm text-gray-400 font-semibold mt-2">克服方法:</p>
+                             <ul class="list-disc list-inside text-sm text-gray-300 ml-2 space-y-1">
+                                <li>RGB 双层串联结构 (Tandem)</li>
+                                <li>混合OLED (刚性基板 + TFE封装)</li>
+                                <li>Gen 8 Fab 制造</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="oled-it-cost-mfg" class="mb-12">
+            <div class="card rounded-2xl p-6 md:p-8 shadow-xl animate-on-scroll">
+                <h2 class="text-3xl font-bold mb-2 text-white"><i class="fas fa-cogs highlight-text mr-2"></i>IT用OLED: 成本, 制造与未来 (Gen 8+)</h2>
+                <p class="text-sm text-gray-400 mb-6">OLED for IT: Cost, Manufacturing & Future (Gen 8+)</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8 mb-8"> <div class="animate-on-scroll">
+                        <h3 class="text-xl font-semibold text-white mb-2">12.9英寸平板显示成本对比 (4Q24)</h3>
+                        <p class="text-xs text-gray-500 mb-3">Cost Comparison: 12.9" Tablet Display (Total Sales Cost)</p>
+                        <div class="h-80 md:h-96">
+                            <canvas id="tabletCostComparisonChart"></canvas>
+                        </div>
+                        <div class="card rounded-lg p-3 mt-3 animate-on-scroll">
+                           <p class="text-xl font-bold highlight-text">$249 (OLED) vs $218 (Mini-LED)</p>
+                           <p class="text-sm text-gray-300 mt-1">OLED成本当前高约14%</p>
+                           <p class="text-xs text-gray-500">OLED ~14% higher than Mini-LED</p>
+                        </div>
+                    </div>
+                    <div class="animate-on-scroll">
+                        <h3 class="text-xl font-semibold text-white mb-2">16.2英寸笔记本显示成本对比 (4Q24)</h3>
+                        <p class="text-xs text-gray-500 mb-3">Cost Comparison: 16.2" Notebook Display (Total Sales Cost)</p>
+                        <div class="h-80 md:h-96">
+                            <canvas id="notebookCostComparisonChart"></canvas>
+                        </div>
+                        <div class="card rounded-lg p-3 mt-3 animate-on-scroll">
+                           <p class="text-xl font-bold highlight-text">$347 (OLED) vs $252 (Mini-LED)</p>
+                           <p class="text-sm text-gray-300 mt-1">OLED成本当前高近38%</p>
+                           <p class="text-xs text-gray-500">OLED ~38% higher than Mini-LED</p>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="mt-12 p-4 rounded-lg tech-gradient-subtle animate-on-scroll"> <h3 class="text-xl font-semibold text-white mb-1">Gen 8 Fab 对 IT OLED 成本的积极影响</h3>
+                    <p class="text-sm text-gray-300 mb-3">Positive Impact of Gen 8 Fab on IT OLED Costs due to Improved Glass Efficiency.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-2xl font-bold text-white">12.9" 平板效率</p>
+                            <p class="text-sm text-gray-300 mt-1">Gen 6: 78% <i class="fas fa-arrow-right text-xs highlight-text"></i> Gen 8.6: <span class="highlight-text">83%</span></p>
+                            <p class="text-xs text-gray-500">Tablet Glass Efficiency</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-2xl font-bold text-white">16.2" 笔电效率</p>
+                            <p class="text-sm text-gray-300 mt-1">Gen 6: 67% <i class="fas fa-arrow-right text-xs highlight-text"></i> Gen 8.6: <span class="highlight-text">77%</span></p>
+                            <p class="text-xs text-gray-500">Notebook Glass Efficiency</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-2xl font-bold text-white">Gen 8 制造时机</p>
+                             <p class="text-sm text-gray-300 mt-1">建议2026-27年，配合新Gen8 FMM。</p>
+                             <p class="text-xs text-gray-500">Optimal Timing for Gen 8 Mfg.</p>
+                        </div>
+                    </div>
+                 </div>
+
+                 <div class="mt-8 p-4 rounded-lg tech-gradient-subtle animate-on-scroll">
+                     <h3 class="text-xl font-semibold text-white mb-1">Tandem OLED Gen 8 Fab 成本效益 (笔记本 16.2")</h3>
+                     <p class="text-sm text-gray-300 mb-3">Cost Benefits of Tandem OLED from Gen 8 Fab for Notebooks (16.2").</p>
+                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                         <div class="card rounded-lg p-4 animate-on-scroll">
+                             <p class="text-4xl font-bold highlight-text">~34%<span class="text-2xl">↓</span></p>
+                             <p class="text-sm text-gray-300 mt-1">Gen 8 (Double-F) 降本潜力</p>
+                             <p class="text-xs text-gray-500">Cost Down (Gen 8 Double-Flow)</p>
+                         </div>
+                         <div class="card rounded-lg p-4 animate-on-scroll">
+                             <p class="text-3xl font-bold highlight-text">< Mini-LED</p>
+                             <p class="text-sm text-gray-300 mt-1">Gen 8 (One-F) 成本可低于Mini-LED</p>
+                             <p class="text-xs text-gray-500">Gen 8 One-Flow Cost</p>
+                         </div>
+                         <div class="card rounded-lg p-4 animate-on-scroll">
+                             <p class="text-2xl font-bold text-white">优化初期</p>
+                             <p class="text-sm text-gray-300 mt-1">Gen 8 制造优化前成本可能上升。</p>
+                             <p class="text-xs text-gray-500">Initial Costs May Rise</p>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="mt-8 p-4 rounded-lg tech-gradient-subtle animate-on-scroll">
+                     <h3 class="text-xl font-semibold text-white mb-1">Tandem OLED Gen 8 Fab 成本效益 (平板 12.9")</h3>
+                     <p class="text-sm text-gray-300 mb-3">Cost Benefits of Tandem OLED from Gen 8 Fab for Tablets (12.9").</p>
+                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                         <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-3xl font-bold highlight-text">≈ Mini-LED</p>
+                             <p class="text-sm text-gray-300 mt-1">Gen 8 (Double-F) 成本接近Mini-LED</p>
+                             <p class="text-xs text-gray-500">Gen 8 Double-Flow Cost</p>
+                         </div>
+                         <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-3xl font-bold highlight-text"><< Mini-LED</p>
+                             <p class="text-sm text-gray-300 mt-1">Gen 8 (One-F) 成本远低于Mini-LED</p>
+                             <p class="text-xs text-gray-500">Gen 8 One-Flow Cost</p>
+                         </div>
+                          <div class="card rounded-lg p-4 animate-on-scroll">
+                             <p class="text-4xl font-bold highlight-text">~24%<span class="text-2xl">↓</span></p>
+                             <p class="text-sm text-gray-300 mt-1">Gen 8 (One-F) 总降本潜力</p>
+                             <p class="text-xs text-gray-500">Total Cost Down (Gen 8 One-Flow)</p>
+                         </div>
+                     </div>
+                 </div>
+
+                 <div class="mt-8 p-4 rounded-lg tech-gradient-subtle animate-on-scroll">
+                    <h3 class="text-xl font-semibold text-white mb-1">Gen 8.6 vs Gen 8.5 基板对苹果产品成本影响</h3>
+                    <p class="text-sm text-gray-300 mb-3">Impact of Gen 8.6 vs Gen 8.5 Substrate Size on Apple Product Costs.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-2xl font-bold text-white">12.9" iPad</p>
+                            <p class="text-sm text-gray-300 mt-1 highlight-text">Gen 8.6 降本 7%</p>
+                            <p class="text-xs text-gray-500">7% Cost Reduction</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-2xl font-bold text-white">11" iPad</p>
+                            <p class="text-sm text-gray-300 mt-1">Gen 8.6 成本略高 (+0.7%)</p>
+                            <p class="text-xs text-gray-500">Slightly Higher Cost</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-2xl font-bold text-white">14.2" MacBook</p>
+                            <p class="text-sm text-gray-300 mt-1 highlight-text">Gen 8.6 降本 (~3.7%)</p>
+                            <p class="text-xs text-gray-500">Cost Reduction</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-2xl font-bold text-white">16.2" MacBook</p>
+                            <p class="text-sm text-gray-300 mt-1">Gen 8.6 成本高 (+2.7%)</p>
+                            <p class="text-xs text-gray-500">Relatively Higher Cost</p>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+        <section id="oled-materials" class="mb-12">
+            <div class="card rounded-2xl p-6 md:p-8 shadow-xl animate-on-scroll">
+                <h2 class="text-3xl font-bold mb-2 text-white"><i class="fas fa-flask highlight-text mr-2"></i>OLED 材料市场</h2>
+                <p class="text-sm text-gray-400 mb-6">OLED Materials Market Insights</p>
+
+                <div class="mb-8 p-4 rounded-lg tech-gradient-subtle animate-on-scroll">
+                     <h3 class="text-xl font-semibold mb-1 text-white">Tandem OLED 驱动 RGB 材料消耗增长</h3>
+                     <p class="text-sm text-gray-300 mb-3">Tandem OLED Drives RGB Material Consumption Growth.</p>
+                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-4xl font-bold highlight-text">13-25%<span class="text-2xl">↑</span></p>
+                            <p class="text-sm text-gray-300 mt-1">1H24 RGB材料消耗超预期</p>
+                            <p class="text-xs text-gray-500">1H24 RGB Consumption Up</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-2xl font-bold text-white">WOLED 稳定</p>
+                            <p class="text-sm text-gray-300 mt-1">WOLED材料消耗与预测一致。</p>
+                            <p class="text-xs text-gray-500">WOLED Consumption Stable</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-2xl font-bold text-white">2H24 回落</p>
+                            <p class="text-sm text-gray-300 mt-1">OLED iPad需求降，材料支出回落。</p>
+                            <p class="text-xs text-gray-500">2H24 Material Spending Declined</p>
+                        </div>
+                     </div>
+                </div>
+                <div class="animate-on-scroll">
+                    <h3 class="text-xl font-semibold text-white mb-2">OLED 材料消耗量按厂商 (千克)</h3>
+                    <p class="text-xs text-gray-500 mb-3">Quarterly OLED Material Consumption by Maker (Kilograms)</p>
+                    <div class="h-96">
+                       <canvas id="oledMaterialConsumptionByMakerChart"></canvas>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                        <div class="card rounded-lg p-3 animate-on-scroll">
+                            <p class="text-lg font-bold text-white">LGD 增幅最大</p>
+                            <p class="text-sm text-gray-300 mt-1">1Q24起增长，获苹果iPad批准。</p>
+                            <p class="text-xs text-gray-500">LGD: Biggest Gain</p>
+                        </div>
+                        <div class="card rounded-lg p-3 animate-on-scroll">
+                            <p class="text-lg font-bold text-white">SDC 2Q24增长</p>
+                            <p class="text-sm text-gray-300 mt-1">Design-in延迟，仅11"型号。</p>
+                            <p class="text-xs text-gray-500">SDC: Gained in 2Q24</p>
+                        </div>
+                        <div class="card rounded-lg p-3 animate-on-scroll">
+                            <p class="text-lg font-bold text-white">BOE 持续增长</p>
+                            <p class="text-sm text-gray-300 mt-1">4Q24持续增长而SDC/LGD降。</p>
+                            <p class="text-xs text-gray-500">BOE: Continuous Growth</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="miniled-overall-forecast" class="mb-12">
+            <div class="card rounded-2xl p-6 md:p-8 shadow-xl animate-on-scroll">
+                <h2 class="text-3xl font-bold mb-2 text-white"><i class="far fa-lightbulb highlight-text mr-2"></i>Mini LED 背光市场总览与预测</h2>
+                <p class="text-sm text-gray-400 mb-6">Overall Mini LED Backlighting Market Forecast</p>
+
+                <div class="mb-8 p-4 rounded-lg tech-gradient-subtle animate-on-scroll">
+                     <h3 class="text-xl font-semibold mb-1 text-white">市场驱动因素与趋势</h3>
+                     <p class="text-sm text-gray-300 mb-3">Market Drivers and Trends.</p>
+                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-5xl font-bold highlight-text">12.2M</p>
+                            <p class="text-sm text-gray-300 mt-2">2024年Mini LED背光LCD出货量</p>
+                            <p class="text-xs text-gray-500 mt-1">2024 Total Shipments</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-3xl font-bold text-white mt-1">电视市场</p>
+                            <p class="text-sm text-gray-300 mt-2 highlight-text">持续增长</p>
+                            <p class="text-xs text-gray-500 mt-1">Consistent Growth in TV</p>
+                        </div>
+                        <div class="card rounded-lg p-4 animate-on-scroll">
+                            <p class="text-3xl font-bold text-white mt-1">IT市场</p>
+                            <p class="text-sm text-gray-300 mt-2 text-orange-400">被OLED蚕食</p>
+                            <p class="text-xs text-gray-500 mt-1">Cannibalization by OLED in IT</p>
+                        </div>
+                     </div>
+                </div>
+
+                <div class="animate-on-scroll">
+                    <h3 class="text-xl font-semibold text-white mb-2">Mini LED 背光LCD出货量按应用预测 (百万台)</h3>
+                    <p class="text-xs text-gray-500 mb-3">Mini LED Backlighting LCD Shipment Forecast by Application (Millions)</p>
+                    <div class="h-96">
+                       <canvas id="miniLedTotalForecastChart"></canvas>
+                    </div>
+                     <p class="text-sm text-gray-400 mt-4">预计2025年总出货量将进一步增长至16.8百万台，未来几年电视需求将驱动主要增长。</p>
+                </div>
+            </div>
+        </section>
+
+
+        <footer class="text-center py-8 mt-12 animate-on-scroll">
+            <p class="text-sm text-gray-500">&copy; 2025 Omdia. All rights reserved. Informa Tech Target.</p>
+            <p class="text-xs text-gray-600 mt-1">Visualized by AI. Data from "Mini LED Backlight & OLED Materials Market and Technology" by Jimmy Kim, Ph.D.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Intersection Observer for animations
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.05 }); // Lower threshold for earlier trigger
+
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Chart.js Initializations
+        const highlightColor = '#0052A3'; // Samsung Blue
+        const highlightColorRGB = '0, 82, 163';
+
+        const chartOptions = (yLabel, xLabel = null, stacked = false, indexAxis = 'x') => ({
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: indexAxis,
+            scales: {
+                y: { title: { display: true, text: yLabel, font: {size: 12} }, stacked: stacked, grid: { color: 'rgba(100,100,100,0.1)'}, ticks: {color: '#bbb', font: {size: 10}} },
+                x: { title: { display: xLabel ? true : false, text: xLabel, font: {size: 12} }, stacked: stacked, grid: { color: 'rgba(100,100,100,0.1)'}, ticks: {color: '#bbb', font: {size: 10}} }
+            },
+            plugins: { legend: { labels: { boxWidth: 12, padding: 10, color: '#e0e0e0', font: {size: 12}} }, tooltip: { bodyFont: {size: 12}, titleFont: {size: 14}} }
+        });
+        
+        const chartOptionsDoughnut = () => ({
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, padding: 10, color: '#e0e0e0', font: {size: 12}} }, tooltip: { bodyFont: {size: 12}, titleFont: {size: 14}} }
+        });
+
+
+        // Chart 1: TV Shipment Forecast
+        const tvShipmentCtx = document.getElementById('tvShipmentForecastChart');
+        if (tvShipmentCtx) {
+            new Chart(tvShipmentCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028'],
+                    datasets: [
+                        {
+                            label: 'Mini LED TV',
+                            data: [3.0, 3.5, 4.7, 9.2, 11.8, 13.8, 15.5], /* From page 12 */
+                            backgroundColor: `rgba(${highlightColorRGB}, 0.8)`,
+                        },
+                        {
+                            label: 'OLED TV',
+                            data: [7.5, 5.3, 6.8, 7.1, 7.5, 7.6, 7.8], /* From page 12 */
+                            backgroundColor: `rgba(${highlightColorRGB}, 0.5)`,
+                        },
+                        {
+                            label: 'Normal LCD TV',
+                            data: [259.9, 232.9, 238.3, 236.3, 239.5, 238.8, 239.5], /* From page 12 */
+                            backgroundColor: 'rgba(120, 120, 120, 0.5)',
+                        }
+                    ]
+                },
+                options: chartOptions('Shipments (Millions)', 'Year')
+            });
+        }
+
+        // Chart 2: Premium TV Trend Chart
+        const premiumTvCtx = document.getElementById('premiumTvTrendChart');
+        if (premiumTvCtx) {
+            new Chart(premiumTvCtx, {
+                type: 'line',
+                data: {
+                    labels: ['1Q22', '2Q22', '3Q22', '4Q22', '1Q23', '2Q23', '3Q23', '4Q23', '1Q24', '2Q24', '3Q24'], // Simplified from page 5 graph
+                    datasets: [
+                        {
+                            label: 'QLED LCD (incl. Mini LED)',
+                            data: [3500, 3000, 4000, 4800, 2800, 3200, 4200, 4500, 3000, 3500, 4700], // Estimated from graph page 5
+                            borderColor: highlightColor,
+                            backgroundColor: `rgba(${highlightColorRGB}, 0.15)`,
+                            tension: 0.2, fill: true
+                        },
+                        {
+                            label: 'OLED',
+                            data: [2000, 1800, 2200, 2500, 1300, 1500, 1600, 1700, 1400, 1600, 1500], // Estimated from graph page 5
+                            borderColor: 'rgba(200, 200, 200, 0.8)',
+                            backgroundColor: 'rgba(200, 200, 200, 0.15)',
+                            tension: 0.2, fill: true
+                        }
+                    ]
+                },
+                options: chartOptions('Shipments (000 sets)', 'Quarter')
+            });
+        }
+
+        // Chart 3: Mini LED TV Share by Maker
+        const miniLedShareCtx = document.getElementById('miniLedTvShareChart');
+        if (miniLedShareCtx) {
+             new Chart(miniLedShareCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Samsung VD', 'TCL', 'Hisense', 'LGE', 'Sony', 'Others'], /* From page 6 */
+                    datasets: [{
+                        label: 'Share (until 3Q24)',
+                        data: [33, 25, 22, 2, 6, 12], /* From page 6 */
+                        backgroundColor: [
+                            `rgba(${highlightColorRGB}, 0.9)`, `rgba(${highlightColorRGB}, 0.75)`, `rgba(${highlightColorRGB}, 0.6)`,
+                            `rgba(200,200,200,0.7)`, `rgba(150,150,150,0.6)`, `rgba(100,100,100,0.5)`,
+                        ],
+                        borderColor: '#1a1a1a', borderWidth: 3
+                    }]
+                },
+                options: chartOptionsDoughnut()
+            });
+        }
+
+        // Chart 4: Mini LED LCD Cost Chart (65" 4K TV)
+        const miniledLcdCostCtx = document.getElementById('miniledLcdCostChart');
+        if (miniledLcdCostCtx) {
+             const costChartOptions = chartOptions('Price / Total Manufacturing Cost ($)', null, false, 'y');
+             costChartOptions.plugins.tooltip.callbacks = {
+                    footer: function(tooltipItems) {
+                        const gaps = ["", "X1.23", "X1.17", "X2.08"]; /* Gap to typical LCD, from page 9 */
+                        return 'Gap to typical LCD: ' + gaps[tooltipItems[0].dataIndex];
+                    }
+                };
+             new Chart(miniledLcdCostCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Traditional LCD (Edge LED)', 'Mini LED Low Cost 1 (POB, 1k chips)', 'Mini LED Low Cost 2 (2-in-1 POB, 1k chips)', 'Mini LED Typical (COB, 10k chips)'], /* From page 9 */
+                    datasets: [{
+                        label: 'Total Manufacturing Price',
+                        data: [268, 329, 313, 556], /* From page 9 */
+                        backgroundColor: [
+                            'rgba(150,150,150,0.7)', `rgba(${highlightColorRGB},0.6)`,
+                            `rgba(${highlightColorRGB},0.8)`, `rgba(${highlightColorRGB},0.45)`,
+                        ]
+                    }]
+                },
+                options: costChartOptions
+            });
+        }
+
+        // Chart 5: QD OLED Cost Trend (65" 4K TV)
+        const qdOledCostCtx = document.getElementById('qdOledCostTrendChart');
+        if (qdOledCostCtx) {
+            const qdOLEDChartOptions = chartOptions('Manufacturing Cost ($)', 'Year', true);
+            qdOLEDChartOptions.plugins.tooltip.callbacks = {
+                    footer: function(tooltipItems) {
+                        let sum = tooltipItems.reduce((acc, item) => acc + item.parsed.y, 0);
+                        const gaps = ["X3.36", "X2.18", "X1.24", "X1.17"]; /* Gap to current WOLED, page 10 */
+                        return 'Total: $' + sum.toFixed(0) + '\nGap to WOLED: ' + gaps[tooltipItems[0].dataIndex];
+                    }
+                };
+            new Chart(qdOledCostCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2021', '2022', '2023', '2024 (F)'], /* From page 10 */
+                    datasets: [
+                        { label: 'Non-yielded material', data: [309, 288, 271, 262], backgroundColor: `rgba(${highlightColorRGB}, 0.4)` },
+                        { label: 'Yield-loss', data: [363, 174, 32, 22], backgroundColor: `rgba(${highlightColorRGB}, 0.7)` },
+                        { label: 'Overhead cost', data: [930, 578, 289, 274], backgroundColor: 'rgba(150,150,150,0.5)' }
+                    ] /* Data from page 10 */
+                },
+                options: qdOLEDChartOptions
+            });
+        }
+
+        // Chart 6: Tablet Display Shipment Forecast
+        const tabletShipmentCtx = document.getElementById('tabletShipmentForecastChart');
+        if (tabletShipmentCtx) {
+            new Chart(tabletShipmentCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028'],
+                    datasets: [
+                        { label: 'Mini LED Tablet', data: [5.7, 2.5, 1.0, 0.3, 0.2, 0.2, 0.2], borderColor: highlightColor, backgroundColor: `rgba(${highlightColorRGB},0.15)`, tension: 0.2, fill: true },
+                        { label: 'OLED Tablet', data: [4.0, 3.8, 10.9, 12.1, 14.9, 23.6, 27.2], borderColor: 'rgba(200,200,200,0.8)', backgroundColor: 'rgba(200,200,200,0.15)', tension: 0.2, fill: true },
+                        { label: 'Normal LCD Tablet', data: [251.7, 248.6, 263.6, 258.2, 253.2, 249.4, 241.9], borderColor: 'rgba(100,100,100,0.7)', fill: false, hidden: true }
+                    ] /* Data from page 13 */
+                },
+                options: chartOptions('Shipments (Millions)', 'Year')
+            });
+        }
+
+        // Chart 7: Notebook PC Display Shipment Forecast
+        const notebookShipmentCtx = document.getElementById('notebookShipmentForecastChart');
+        if (notebookShipmentCtx) {
+            new Chart(notebookShipmentCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028'],
+                    datasets: [
+                        { label: 'Mini LED Notebook', data: [9.7, 3.7, 6.0, 6.7, 4.5, 1.9, 1.7], borderColor: highlightColor, backgroundColor: `rgba(${highlightColorRGB},0.15)`, tension: 0.2, fill: true },
+                        { label: 'OLED Notebook', data: [5.5, 4.1, 8.9, 11.6, 16.0, 29.0, 41.8], borderColor: 'rgba(200,200,200,0.8)', backgroundColor: 'rgba(200,200,200,0.15)', tension: 0.2, fill: true },
+                        { label: 'Normal LCD Notebook', data: [203.4, 182.8, 199.8, 203.8, 212.3, 193.9, 187.4], borderColor: 'rgba(100,100,100,0.7)', fill: false, hidden: true }
+                    ] /* Data from page 14 */
+                },
+                options: chartOptions('Shipments (Millions)', 'Year')
+            });
+        }
+        
+        // Chart 8: 12.9" Tablet Cost Comparison
+        const tabletCostCompCtx = document.getElementById('tabletCostComparisonChart');
+        if (tabletCostCompCtx) {
+            const tabletCostOpts = chartOptions('Total Sales Cost ($)');
+            tabletCostOpts.plugins.tooltip.callbacks = { footer: (tip) => 'Gap to normal LCD: ' + ["", "X2.9", "X2.5"][tip[0].dataIndex] }; /* page 16 */
+            new Chart(tabletCostCompCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Normal LCD', 'RGB OLED', 'Mini-LED LCD'], /* From page 16 */
+                    datasets: [{
+                        label: 'Total Sales Cost ($)', data: [86, 249, 218], /* From page 16 */
+                        backgroundColor: ['rgba(150,150,150,0.7)', `rgba(${highlightColorRGB},0.8)`, `rgba(${highlightColorRGB},0.6)`]
+                    }]
+                }, options: tabletCostOpts
+            });
+        }
+
+        // Chart 9: 16.2" Notebook Cost Comparison
+        const notebookCostCompCtx = document.getElementById('notebookCostComparisonChart');
+        if (notebookCostCompCtx) {
+            const notebookCostOpts = chartOptions('Total Sales Cost ($)');
+            notebookCostOpts.plugins.tooltip.callbacks = { footer: (tip) => 'Gap to normal LCD: ' + ["", "X3.3", "X2.4"][tip[0].dataIndex] }; /* page 17 */
+            new Chart(notebookCostCompCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Normal LCD', 'RGB OLED', 'Mini-LED LCD'], /* From page 17 */
+                    datasets: [{
+                        label: 'Total Sales Cost ($)', data: [105, 347, 252], /* From page 17 */
+                        backgroundColor: ['rgba(150,150,150,0.7)', `rgba(${highlightColorRGB},0.8)`, `rgba(${highlightColorRGB},0.6)`]
+                    }]
+                }, options: notebookCostOpts
+            });
+        }
+
+        // Chart 10: OLED Material Consumption by Maker
+        const oledMaterialMakerCtx = document.getElementById('oledMaterialConsumptionByMakerChart');
+        if (oledMaterialMakerCtx) {
+            new Chart(oledMaterialMakerCtx, {
+                type: 'line',
+                data: {
+                    labels: ['3Q23', '4Q23', '1Q24', '2Q24', '3Q24', '4Q24(F)'], /* From page 25 */
+                    datasets: [
+                        { label: 'SDC', data: [6200,6000,5800,7000,6500,6000], borderColor: `rgba(${highlightColorRGB},0.9)`, tension:0.2, fill:false }, /* Estimated from graph page 25 */
+                        { label: 'LGD', data: [3800,3500,6500,8500,7000,5500], borderColor: 'rgba(100,180,255,0.9)', tension:0.2, fill:false }, /* Estimated from graph page 25 */
+                        { label: 'BOE', data: [7000,6000,5800,5900,6800,7500], borderColor: 'rgba(200,200,200,0.8)', tension:0.2, fill:false } /* Estimated from graph page 25 */
+                    ]
+                },
+                options: chartOptions('Material Consumption (Kilograms)', 'Quarter')
+            });
+        }
+
+        // Chart 11: Total Mini LED Backlight Forecast by Application
+        const miniLedTotalCtx = document.getElementById('miniLedTotalForecastChart');
+        if (miniLedTotalCtx) {
+            const miniLedTotalOpts = chartOptions('Shipments (Millions)', 'Year', true);
+            miniLedTotalOpts.plugins.tooltip.callbacks = {
+                    footer: function(tooltipItems) {
+                        const totals = [18.7, 10.2, 12.2, 16.8, 17.4, 16.8, 18.5]; /* From page 26 */
+                        return 'Total Mini LED: ' + totals[tooltipItems[0].dataIndex] + 'M';
+                    }
+                };
+            new Chart(miniLedTotalCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028'], /* From page 26 */
+                    datasets: [
+                        { label: 'Tablet',    data: [5.7, 2.5, 1.0, 0.3, 0.2, 0.2, 0.2], backgroundColor: `rgba(${highlightColorRGB},0.9)` },
+                        { label: 'Note-PC',   data: [9.7, 3.7, 6.0, 6.7, 4.5, 1.9, 1.7], backgroundColor: `rgba(${highlightColorRGB},0.7)` },
+                        { label: 'Monitor',   data: [0.3, 0.4, 0.5, 0.7, 0.8, 0.9, 1.0], backgroundColor: `rgba(${highlightColorRGB},0.5)` },
+                        { label: 'TV',        data: [3.0, 3.5, 4.7, 9.2, 11.8, 13.8, 15.5], backgroundColor: `rgba(${highlightColorRGB},0.3)` }
+                    ] /* Data from page 26 */
+                },
+                options: miniLedTotalOpts
+            });
+        }
+
+    </script>
+</body>
+</html>

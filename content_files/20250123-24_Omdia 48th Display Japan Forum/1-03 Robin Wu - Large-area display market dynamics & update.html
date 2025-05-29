@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大尺寸显示市场动态与更新</title>
+    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/tailwind/3.3.3/tailwind.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.staticfile.org/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #E0E0E0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+        .highlight-text { color: #00AEEF; }
+        .highlight-bg { background-color: #00AEEF; }
+        .highlight-border { border-color: #00AEEF; }
+
+        .tech-gradient-bg {
+            background: linear-gradient(to bottom, rgba(0, 174, 239, 0.2), rgba(0, 174, 239, 0.05));
+        }
+        .tech-gradient-text-bg { /* More subtle, for text backgrounds if needed */
+            background: linear-gradient(to right, rgba(0, 174, 239, 0.1), rgba(0, 174, 239, 0.03));
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        .card {
+            background-color: #1A1A1A;
+            border: 1px solid #333333;
+            overflow: hidden; /* Ensures rounded corners clip content */
+        }
+        .main-card {
+            border-radius: 1rem; /* rounded-xl */
+        }
+        .mini-card {
+            background-color: #222222; /* Slightly different for mini-cards if needed */
+            border-radius: 0.75rem; /* rounded-lg */
+            border: 1px solid #383838;
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .mini-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 174, 239, 0.1), 0 4px 6px -2px rgba(0, 174, 239, 0.05);
+        }
+
+        /* Animation classes */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 40vh;
+            width: 100%;
+            max-width: 800px; /* Control max chart width */
+        }
+
+        h2.section-title {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #00AEEF; /* Highlight color border */
+            display: inline-block;
+        }
+         h3.card-title {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600; /* font-semibold */
+            color: #FFFFFF; /* Brighter for titles inside cards */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+        .mini-card-value {
+            font-size: 3rem; /* text-5xl */
+            font-weight: 800; /* font-extrabold */
+        }
+        .mini-card-title-text {
+            font-size: 2rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+        }
+        .mini-card-desc {
+            font-size: 0.875rem; /* text-sm */
+            color: #A0A0A0; /* Slightly lighter gray for better contrast on #222 */
+        }
+        .mini-card-sub-desc {
+            font-size: 0.75rem; /* text-xs */
+            color: #707070; /* Darker gray for sub-descriptions */
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <header class="text-center mb-12 md:mb-16 reveal-on-scroll">
+        <i class="fas fa-chart-line highlight-text text-4xl mb-4"></i>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white">大尺寸显示市场动态与更新</h1>
+        <p class="text-lg sm:text-xl md:text-2xl font-semibold text-gray-300 mt-2">Large-area Display Market Dynamics & Update</p>
+        <p class="text-sm text-gray-500 mt-3">Robin Wu | Omdia | January 23-24, 2025</p>
+    </header>
+
+    <main class="space-y-12">
+
+        <section class="main-card p-6 md:p-8 reveal-on-scroll">
+            <h2 class="section-title highlight-text">LCD TV面板出货与补贴政策</h2>
+            <p class="text-gray-400 mb-6 text-lg">洞察LCD电视面板出货趋势以及中国市场补贴政策带来的影响。</p>
+
+            <div class="mb-8">
+                <h3 class="card-title">LCD TV 面板出货动态 (2024年)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="mini-card p-5 flex flex-col justify-center items-center text-center">
+                        <p class="mini-card-value highlight-text">122.5<span class="text-2xl align-baseline">M</span></p>
+                        <p class="mini-card-desc mt-1">2024上半年出货量</p>
+                        <p class="mini-card-sub-desc">1H24 Shipments</p>
+                    </div>
+                    <div class="mini-card p-5 flex flex-col justify-center items-center text-center">
+                        <p class="mini-card-value highlight-text">120.6<span class="text-2xl align-baseline">M</span></p>
+                        <p class="mini-card-desc mt-1">2024下半年出货量</p>
+                        <p class="mini-card-sub-desc">2H24 Shipments</p>
+                    </div>
+                </div>
+                <p class="text-gray-400 mt-4 text-sm">2024年2月出货量达12年低点，3月则达5年高点。下半年受中国“以旧换新”补贴及海外市场促销影响，表现优于2023年同期。</p>
+            </div>
+            <div class="chart-container mb-8">
+                <canvas id="lcdTvShipmentChart"></canvas>
+            </div>
+
+            <div class="mt-8">
+                <h3 class="card-title">中国“以旧换新”补贴政策</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="mini-card p-5">
+                        <p class="mini-card-title-text highlight-text">政策延续</p>
+                        <p class="mini-card-desc mt-2">新政策预计扩展至2025全年，中央政府支付90%补贴，有助维持2025上半年面板需求。</p>
+                        <p class="mini-card-sub-desc mt-1">Policy Extended to 2025</p>
+                    </div>
+                    <div class="mini-card p-5">
+                        <p class="mini-card-title-text highlight-text">预算增加</p>
+                        <p class="mini-card-desc mt-2">2025年补贴预算增至810亿元人民币，覆盖12类家电及新增的平板、手机、智能手表等。</p>
+                        <p class="mini-card-sub-desc mt-1">Budget Increased to ¥81 Billion</p>
+                    </div>
+                    <div class="mini-card p-5">
+                        <p class="mini-card-title-text highlight-text">补贴标准</p>
+                        <p class="mini-card-desc mt-2">家电：一级/二级能效，补贴15%-20%，上限2000元。数码产品：ASP<6000元补贴15%，上限500元。</p>
+                        <p class="mini-card-sub-desc mt-1">Subsidy Standards Detailed</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-card p-6 md:p-8 reveal-on-scroll tech-gradient-bg">
+            <h2 class="section-title highlight-text">TV尺寸竞争与超大尺寸趋势</h2>
+            <p class="text-gray-400 mb-6 text-lg">探索电视面板尺寸的演变，特别是超大尺寸面板的增长势头及其对市场的影响。</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="mini-card p-5 flex flex-col items-center text-center">
+                    <p class="mini-card-value highlight-text">52.5<span class="text-2xl align-baseline">吋</span></p>
+                    <p class="mini-card-desc mt-1">2025年平均TV尺寸预测</p>
+                    <p class="mini-card-sub-desc">Avg. TV Size Forecast 2025</p>
+                </div>
+                <div class="mini-card p-5 flex flex-col items-center text-center">
+                    <p class="mini-card-value highlight-text">11.1<span class="text-2xl align-baseline">M</span></p>
+                    <p class="mini-card-desc mt-1">2025年 75吋及以上面板出货预测</p>
+                    <p class="mini-card-sub-desc">75"+ Panel Shipment Fcst. 2025</p>
+                </div>
+                <div class="mini-card p-5 flex flex-col items-center text-center">
+                    <p class="mini-card-value highlight-text">4.7<span class="text-2xl align-baseline">%</span></p>
+                    <p class="mini-card-desc mt-1">2025年 75吋及以上市场份额预测</p>
+                    <p class="mini-card-sub-desc">75"+ Market Share Fcst. 2025</p>
+                </div>
+                 <div class="mini-card p-5">
+                    <p class="mini-card-title-text">大尺寸化</p>
+                    <p class="mini-card-desc mt-2">面板厂商策略转向盈利性更佳的更大尺寸，G8.5/8.6代线对75吋以上面板生产至关重要。</p>
+                    <p class="mini-card-sub-desc mt-1">Shift to Larger, Profitable Sizes</p>
+                </div>
+                <div class="mini-card p-5">
+                    <p class="mini-card-title-text">MMG技术</p>
+                    <p class="mini-card-desc mt-2">BOE B10 (40"+43"), HKC H5 (116"+32") 等MMG方案提升大尺寸面板生产效率。</p>
+                    <p class="mini-card-sub-desc mt-1">MMG Enhancing Large Size Efficiency</p>
+                </div>
+                <div class="mini-card p-5">
+                    <p class="mini-card-title-text">98"/100" 激增</p>
+                    <p class="mini-card-desc mt-2">2025年98"/100"面板出货预测达208万片，年增长近80%。</p>
+                    <p class="mini-card-sub-desc mt-1">98"/100" Shipments Surge</p>
+                </div>
+            </div>
+            <div class="chart-container mb-8">
+                <canvas id="tvAverageSizeChart"></canvas>
+            </div>
+            <div class="chart-container mb-8">
+                <canvas id="ultraLargeShipmentChart"></canvas>
+            </div>
+        </section>
+
+        <section class="main-card p-6 md:p-8 reveal-on-scroll">
+            <h2 class="section-title highlight-text">面板厂策略与产能展望</h2>
+            <p class="text-gray-400 mb-6 text-lg">分析主要面板厂商的业务规划、G10.5代线产能情况及未来可能的产能紧张。</p>
+            
+            <div class="mb-8">
+                <h3 class="card-title">2025年 LCD TV 面板业务计划</h3>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="mini-card p-5 flex flex-col justify-center items-center text-center">
+                        <p class="mini-card-value highlight-text">238.1<span class="text-2xl align-baseline">M</span></p>
+                        <p class="mini-card-desc mt-1">2025年总LCD TV面板出货目标</p>
+                        <p class="mini-card-sub-desc">Total LCD TV Panel BP 2025</p>
+                    </div>
+                    <div class="mini-card p-5 flex flex-col justify-center items-center text-center">
+                        <p class="mini-card-value highlight-text">-1.8<span class="text-2xl align-baseline">%</span></p>
+                        <p class="mini-card-desc mt-1">较2024年同比变化</p>
+                        <p class="mini-card-sub-desc">YoY Change vs 2024</p>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm">面板厂2025年业务计划总体保守，但更注重财务表现和高利润产品。</p>
+            </div>
+
+            <div class="mt-8">
+                <h3 class="card-title">G10.5 代线产能分析</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="mini-card p-5">
+                        <p class="mini-card-title-text">需求增长</p>
+                        <p class="mini-card-desc mt-2">65吋和75吋面板需求持续增长，预计2026年合计超6000万片，对G10.5产能提出挑战。</p>
+                        <p class="mini-card-sub-desc mt-1">Rising Demand for 65"/75"</p>
+                    </div>
+                    <div class="mini-card p-5">
+                        <p class="mini-card-value highlight-text">824K</p>
+                        <p class="mini-card-desc mt-1">2026年G10.5所需月产能 (片/月)</p>
+                        <p class="mini-card-sub-desc">Needed G10.5 Capacity 2026 (sheets/month)</p>
+                    </div>
+                     <div class="mini-card p-5">
+                        <p class="mini-card-value highlight-text">760K</p>
+                        <p class="mini-card-desc mt-1">2026年G10.5可用月产能 (片/月)</p>
+                        <p class="mini-card-sub-desc">Available G10.5 Capacity 2026 (sheets/month)</p>
+                    </div>
+                    <div class="mini-card p-5">
+                        <p class="mini-card-title-text">产能扩张</p>
+                        <p class="mini-card-desc mt-2">BOE计划将G10.5产能扩至380K/月，中国星计划扩至300K/月以应对潜在短缺。</p>
+                        <p class="mini-card-sub-desc mt-1">BOE & CSOT G10.5 Expansion</p>
+                    </div>
+                    <div class="mini-card p-5">
+                        <p class="mini-card-title-text">HKC 116吋</p>
+                        <p class="mini-card-desc mt-2">HKC利用G8.6产线MMG技术开发116吋面板，目标2025年Q1量产约3千片。</p>
+                        <p class="mini-card-sub-desc mt-1">HKC 116" on G8.6 MMG</p>
+                    </div>
+                     <div class="mini-card p-5">
+                        <p class="mini-card-title-text">超大尺寸焦点</p>
+                        <p class="mini-card-desc mt-2">75吋以上超大尺寸面板占G8.5/8.6产能12-14%，对维持稼动率至关重要。</p>
+                        <p class="mini-card-sub-desc mt-1">75"+ Key for G8.5/8.6 Utilization</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-container mt-8">
+                <canvas id="g105CapacityChart"></canvas>
+            </div>
+        </section>
+
+        <section class="main-card p-6 md:p-8 reveal-on-scroll tech-gradient-bg">
+            <h2 class="section-title highlight-text">IT显示市场分析</h2>
+            <p class="text-gray-400 mb-6 text-lg">显示器和笔记本电脑面板市场表现回顾与展望，以及中国大陆面板厂份额变化。</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="mini-card p-5 flex flex-col items-center text-center">
+                    <p class="mini-card-value highlight-text">159.9<span class="text-2xl align-baseline">M</span></p>
+                    <p class="mini-card-desc mt-1">2024年显示器面板出货量</p>
+                    <p class="mini-card-sub-desc">Monitor Panel Shipments 2024</p>
+                </div>
+                <div class="mini-card p-5 flex flex-col items-center text-center">
+                    <p class="mini-card-value highlight-text">206.7<span class="text-2xl align-baseline">M</span></p>
+                    <p class="mini-card-desc mt-1">2024年笔记本面板出货量 (原为216M, PDF P19)</p>
+                    <p class="mini-card-sub-desc">Notebook Panel Shipments 2024 (per P19)</p>
+                </div>
+                <div class="mini-card p-5">
+                    <p class="mini-card-title-text">市场复苏</p>
+                    <p class="mini-card-desc mt-2">2024年IT面板市场表现优于2023年，得益于换机周期、中国补贴及AI PC概念。</p>
+                    <p class="mini-card-sub-desc mt-1">IT Market Recovery in 2024</p>
+                </div>
+                <div class="mini-card p-5">
+                    <p class="mini-card-title-text">2025年展望</p>
+                    <p class="mini-card-desc mt-2">显示器面板2025年目标约1.66亿片，笔记本面板目标约2.32亿片。</p>
+                    <p class="mini-card-sub-desc mt-1">2025 Outlook: Monitor ~166M, Notebook ~232M</p>
+                </div>
+                <div class="mini-card p-5">
+                    <p class="mini-card-value highlight-text">67.0<span class="text-2xl align-baseline">%</span></p>
+                    <p class="mini-card-desc mt-1">中国大陆厂2025年显示器面板份额目标</p>
+                    <p class="mini-card-sub-desc">China Mfr. Monitor Share BP 2025</p>
+                </div>
+                 <div class="mini-card p-5">
+                    <p class="mini-card-value highlight-text">47.0<span class="text-2xl align-baseline">%</span></p>
+                    <p class="mini-card-desc mt-1">中国大陆厂2025年笔记本面板份额目标</p>
+                    <p class="mini-card-sub-desc">China Mfr. Notebook Share BP 2025</p>
+                </div>
+            </div>
+            <div class="chart-container mb-8">
+                <canvas id="monitorShipmentsByMakerChart"></canvas>
+            </div>
+             <div class="chart-container mt-8">
+                <canvas id="notebookShipmentsByMakerChart"></canvas>
+            </div>
+        </section>
+
+        <section class="main-card p-6 md:p-8 reveal-on-scroll">
+            <h2 class="section-title highlight-text">产线稼动率与OLED IT趋势</h2>
+            <p class="text-gray-400 mb-6 text-lg">分析TFT LCD产线稼动率动态，以及OLED在IT应用领域的投资热点和发展前景。</p>
+
+            <div class="mb-8">
+                <h3 class="card-title">TFT LCD 产线稼动率 (UT Ratio)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="mini-card p-5 flex flex-col items-center text-center">
+                        <p class="mini-card-value highlight-text">>80<span class="text-2xl align-baseline">%</span></p>
+                        <p class="mini-card-desc mt-1">2025年Q1平均稼动率预测</p>
+                        <p class="mini-card-sub-desc">Q1'25 Avg. UT Ratio Forecast</p>
+                    </div>
+                    <div class="mini-card p-5 flex flex-col items-center text-center">
+                        <p class="mini-card-value highlight-text">86<span class="text-2xl align-baseline">%</span></p>
+                        <p class="mini-card-desc mt-1">2025-2028年所需平均稼动率 (85%良率)</p>
+                        <p class="mini-card-sub-desc">Required Avg. UT (2025-28, 85% Yield)</p>
+                    </div>
+                    <div class="mini-card p-5">
+                        <p class="mini-card-title-text">产能趋紧</p>
+                        <p class="mini-card-desc mt-2">稼动率需较当前水平提升9-10%，预示未来TFT LCD整体产能可能面临紧张局面。</p>
+                        <p class="mini-card-sub-desc mt-1">Potential Capacity Tightness Ahead</p>
+                    </div>
+                </div>
+                 <div class="chart-container mt-8">
+                    <canvas id="fabUtRatioChart"></canvas>
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <h3 class="card-title">OLED IT 投资热点</h3>
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="mini-card p-5 flex flex-col items-center text-center">
+                        <p class="mini-card-value highlight-text">~30<span class="text-2xl align-baseline">M</span></p>
+                        <p class="mini-card-desc mt-1">2025年OLED IT面板出货预测</p>
+                        <p class="mini-card-sub-desc">OLED IT Panel Shipment Fcst. 2025</p>
+                    </div>
+                    <div class="mini-card p-5">
+                        <p class="mini-card-value highlight-text">~100<span class="text-2xl align-baseline">M</span></p>
+                        <p class="mini-card-desc mt-1">2030年OLED IT面板出货潜力</p>
+                        <p class="mini-card-sub-desc">OLED IT Shipment Potential by 2030</p>
+                    </div>
+                    <div class="mini-card p-5">
+                        <p class="mini-card-title-text">积极投资</p>
+                        <p class="mini-card-desc mt-2">中国面板厂如BOE, CSOT, Visionox等积极投资G6/G8.6 OLED IT产线，推动市场增长。</p>
+                        <p class="mini-card-sub-desc mt-1">Aggressive Investment by Chinese Makers</p>
+                    </div>
+                </div>
+                <div class="chart-container mt-8">
+                    <canvas id="oledItShipmentChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-card p-6 md:p-8 reveal-on-scroll text-center tech-gradient-bg">
+            <h2 class="section-title highlight-text">报告总结与展望</h2>
+            <p class="text-gray-300 mb-4 text-lg">大尺寸显示市场在政策激励、技术革新和需求演变的共同作用下，展现出复杂的动态和新的增长机遇。超大尺寸、IT应用以及OLED技术将是未来几年的关键发展方向。</p>
+            <i class="fas fa-microchip highlight-text text-3xl"></i>
+        </section>
+
+    </main>
+
+    <footer class="text-center mt-12 md:mt-16 py-8 border-t border-gray-700">
+        <p class="text-gray-500 text-sm">数据来源：Omdia | 报告生成日期：<span id="generationDate"></span></p>
+        <p class="text-gray-600 text-xs mt-1">此HTML报告基于 "1-03 Robin Wu - Large-area display market dynamics & update.pdf" 生成。</p>
+    </footer>
+
+    <script>
+        document.getElementById('generationDate').textContent = new Date().toLocaleDateString();
+
+        // Animation on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const revealCallback = (entries, observer) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Apply a staggered delay for grid items if needed, otherwise direct reveal
+                    const delay = entry.target.classList.contains('mini-card') ? (index % 5) * 100 : 0; // Example stagger for mini-cards
+                    setTimeout(() => {
+                        entry.target.classList.add('revealed');
+                    }, delay);
+                    // observer.unobserve(entry.target); // Keep observing if you want animations to replay
+                }
+            });
+        };
+
+        const scrollObserver = new IntersectionObserver(revealCallback, observerOptions);
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => scrollObserver.observe(el));
+
+        // Chart.js Implementations
+        const chartTextColor = '#E0E0E0';
+        const gridColor = 'rgba(224, 224, 224, 0.1)';
+        const highlightColor = '#00AEEF';
+        const highlightColorTransparent = 'rgba(0, 174, 239, 0.7)';
+
+        // 1. LCD TV Panel Shipment Chart (Page 3 data)
+        const lcdTvShipmentCtx = document.getElementById('lcdTvShipmentChart');
+        if (lcdTvShipmentCtx) {
+            new Chart(lcdTvShipmentCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [
+                        {
+                            label: '2024 Shipments (M units)',
+                            data: [19.488, 16.075, 24.184, 21.246, 21.073, 20.427, 19.193, 19.746, 21.017, 19.595, 20.557, 20.842],
+                            borderColor: highlightColor,
+                            backgroundColor: highlightColorTransparent,
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: '2023 Shipments (M units)',
+                            data: [17.201, 19.955, 21.286, 20.507, 21.606, 22.064, 21.508, 20.770, 19.378, 16.840, 16.700, 18.578],
+                            borderColor: '#A0A0A0',
+                            tension: 0.3,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: {
+                        y: { title: { display: true, text: 'Shipments (Million Units)', color: chartTextColor }, ticks: { color: chartTextColor }, grid: { color: gridColor } },
+                        x: { ticks: { color: chartTextColor }, grid: { color: gridColor } }
+                    },
+                    plugins: { legend: { labels: { color: chartTextColor } } }
+                }
+            });
+        }
+
+        // 2. TV Average Size Chart (Page 8 data)
+        const tvAverageSizeCtx = document.getElementById('tvAverageSizeChart');
+        if (tvAverageSizeCtx) {
+            new Chart(tvAverageSizeCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024(F)', '2025(F)'],
+                    datasets: [{
+                        label: 'TV Average Size (inches)',
+                        data: [42.6, 43.7, 44.1, 45.4, 47.1, 48.5, 47.6, 50.5, 51.6, 52.5],
+                        borderColor: highlightColor,
+                        backgroundColor: highlightColorTransparent,
+                        tension: 0.3,
+                        fill: true,
+                        pointRadius: 5,
+                        pointBackgroundColor: highlightColor,
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: {
+                        y: { title: { display: true, text: 'Average Size (Inches)', color: chartTextColor }, ticks: { color: chartTextColor }, grid: { color: gridColor } },
+                        x: { ticks: { color: chartTextColor }, grid: { color: gridColor } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+        
+        // 3. Ultra-Large (98"/100") Shipment Chart (Page 10 data)
+        const ultraLargeShipmentCtx = document.getElementById('ultraLargeShipmentChart');
+        if (ultraLargeShipmentCtx) {
+            new Chart(ultraLargeShipmentCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024(F)', '2025(F)'],
+                    datasets: [{
+                        label: '98"/100" Panel Shipments (Thousand Units)',
+                        data: [98.60, 137.10, 262.10, 640.80, 1157.00, 2080.00],
+                        backgroundColor: highlightColorTransparent,
+                        borderColor: highlightColor,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: {
+                        y: { title: { display: true, text: 'Shipments (K Units)', color: chartTextColor }, ticks: { color: chartTextColor }, grid: { color: gridColor } },
+                        x: { ticks: { color: chartTextColor }, grid: { color: gridColor } }
+                    },
+                    plugins: { legend: { labels: { color: chartTextColor } } }
+                }
+            });
+        }
+
+        // 4. G10.5 Capacity Needed vs Available (Page 13 data)
+        const g105CapacityCtx = document.getElementById('g105CapacityChart');
+        if (g105CapacityCtx) {
+            new Chart(g105CapacityCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028'],
+                    datasets: [
+                        {
+                            label: 'G10.5 Needed Capacity (K sheets/month, with yield)',
+                            data: [488, 555, 652, 771, 824, 845, 862],
+                            borderColor: '#FFA500', // Orange for needed
+                            tension: 0.1,
+                            fill: false
+                        },
+                        {
+                            label: 'G10.5 Available Capacity (K sheets/month)',
+                            data: [610, 690, 720, 750, 760, 760, 760],
+                            borderColor: highlightColor, // Blue for available
+                            backgroundColor: highlightColorTransparent,
+                            tension: 0.1,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: {
+                        y: { title: { display: true, text: 'Capacity (K sheets/month)', color: chartTextColor }, ticks: { color: chartTextColor }, grid: { color: gridColor } },
+                        x: { ticks: { color: chartTextColor }, grid: { color: gridColor } }
+                    },
+                    plugins: { legend: { labels: { color: chartTextColor } } }
+                }
+            });
+        }
+
+        // 5. Monitor Panel Shipments by Top Makers (Simplified from Page 18 table - example using top 3 + others)
+        const monitorShipmentsCtx = document.getElementById('monitorShipmentsByMakerChart');
+        if (monitorShipmentsCtx) {
+             new Chart(monitorShipmentsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2023 Result', '2024 Result', '2025 BP'],
+                    datasets: [
+                        {
+                            label: 'BOE',
+                            data: [45.0, 51.0, 55.0], // Example data based on trends
+                            backgroundColor: 'rgba(0, 174, 239, 0.8)',
+                        },
+                        {
+                            label: 'HKC Display',
+                            data: [20.5, 25.1, 28.0], // Example data
+                            backgroundColor: 'rgba(0, 174, 239, 0.6)',
+                        },
+                        {
+                            label: 'China Star',
+                            data: [10.2, 13.5, 15.5], // Example data
+                            backgroundColor: 'rgba(0, 174, 239, 0.4)',
+                        },
+                         {
+                            label: 'Others',
+                            data: [159.3-45-20.5-10.2, 159.9-51-25.1-13.5, 166-(55+28+15.5)], // Calculated 'Others'
+                            backgroundColor: 'rgba(100, 100, 100, 0.5)',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: {
+                        y: { stacked: true, title: { display: true, text: 'Shipments (Million Units)', color: chartTextColor }, ticks: { color: chartTextColor }, grid: { color: gridColor } },
+                        x: { stacked: true, ticks: { color: chartTextColor }, grid: { color: gridColor } }
+                    },
+                    plugins: { legend: { labels: { color: chartTextColor } }, title: {display: true, text: 'Monitor Panel Shipments by Maker (Example)', color: chartTextColor}}
+                }
+            });
+        }
+
+        // 6. Notebook Panel Shipments by Top Makers (Simplified from Page 19 table - example)
+        const notebookShipmentsCtx = document.getElementById('notebookShipmentsByMakerChart');
+        if (notebookShipmentsCtx) {
+             new Chart(notebookShipmentsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2023 Result', '2024 Result', '2025 BP'],
+                    datasets: [
+                        {
+                            label: 'BOE',
+                            data: [65.5, 68.0, 72.0], // From PDF P19 for 2023, 2025, est 2024
+                            backgroundColor: 'rgba(0, 174, 239, 0.8)',
+                        },
+                        {
+                            label: 'AUO',
+                            data: [35.5, 38.0, 40.0], // From PDF P19
+                            backgroundColor: 'rgba(0, 174, 239, 0.6)',
+                        },
+                        {
+                            label: 'Innolux',
+                            data: [35.0, 36.0, 37.4], // From PDF P19
+                            backgroundColor: 'rgba(0, 174, 239, 0.4)',
+                        },
+                         {
+                            label: 'Others', // Sum of (Total - BOE - AUO - Innolux)
+                            data: [214.2-65.5-35.5-35, 216.0-68-38-36, 232.2-72-40-37.4],
+                            backgroundColor: 'rgba(100, 100, 100, 0.5)',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: {
+                        y: { stacked: true, title: { display: true, text: 'Shipments (Million Units)', color: chartTextColor }, ticks: { color: chartTextColor }, grid: { color: gridColor } },
+                        x: { stacked: true, ticks: { color: chartTextColor }, grid: { color: gridColor } }
+                    },
+                    plugins: { legend: { labels: { color: chartTextColor } }, title: {display: true, text: 'Notebook Panel Shipments by Maker (Example)', color: chartTextColor}}
+                }
+            });
+        }
+
+        // 7. TFT LCD Fab Utilization Ratio (Page 20 data)
+        const fabUtRatioCtx = document.getElementById('fabUtRatioChart');
+        if (fabUtRatioCtx) {
+            new Chart(fabUtRatioCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan\'25', 'Feb\'25', 'Mar\'25'],
+                    datasets: [
+                        {
+                            label: 'Gen 7 UT (%)', data: [91, 86, 87], borderColor: '#FF6384', fill: false, tension: 0.1
+                        },
+                        {
+                            label: 'Gen 8.5 UT (%)', data: [77, 78, 78], borderColor: '#FF9F40', fill: false, tension: 0.1
+                        },
+                        {
+                            label: 'Gen 8.6 UT (%)', data: [82, 78, 78], borderColor: '#FFCD56', fill: false, tension: 0.1
+                        },
+                        {
+                            label: 'Gen 10.5 UT (%)', data: [91, 89, 88], borderColor: '#4BC0C0', fill: false, tension: 0.1
+                        },
+                         {
+                            label: 'Avg UT (%)', data: [85, 83, 83], borderColor: highlightColor, backgroundColor: highlightColorTransparent, fill: true, tension: 0.1, borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: {
+                        y: { title: { display: true, text: 'Utilization Ratio (%)', color: chartTextColor }, ticks: { color: chartTextColor, callback: function(value) { return value + '%' } }, grid: { color: gridColor } },
+                        x: { ticks: { color: chartTextColor }, grid: { color: gridColor } }
+                    },
+                    plugins: { legend: { labels: { color: chartTextColor } }, title: {display: true, text: 'TFT LCD Fab UT Ratio Forecast (Q1 2025)', color: chartTextColor}}
+                }
+            });
+        }
+
+        // 8. OLED IT Panel Shipment Forecast (Page 22 data)
+        const oledItShipmentCtx = document.getElementById('oledItShipmentChart');
+        if (oledItShipmentCtx) {
+            new Chart(oledItShipmentCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Monitor', 'Notebook PC', 'Tablet PC'],
+                    datasets: [{
+                        label: '2025 OLED IT Panel Shipment Forecast (Million Units)',
+                        data: [3.2, 14.96, 14.7], // From PDF p22 for 2025
+                        backgroundColor: [
+                            'rgba(0, 174, 239, 0.8)',
+                            'rgba(0, 174, 239, 0.6)',
+                            'rgba(0, 174, 239, 0.4)'
+                        ],
+                        borderColor: highlightColor,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                    scales: {
+                        x: { title: { display: true, text: 'Shipments (Million Units)', color: chartTextColor }, ticks: { color: chartTextColor }, grid: { color: gridColor } },
+                        y: { ticks: { color: chartTextColor }, grid: { color: gridColor } }
+                    },
+                    plugins: { legend: { display: false }, title: {display: true, text: 'OLED IT Panel Shipment Forecast (2025)', color: chartTextColor}}
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>

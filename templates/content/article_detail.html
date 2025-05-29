@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }} - {{ category.name }} - 个人知识博客{% endblock %}
+
+{% block content %}
+<!-- 面包屑导航 -->
+<nav class="bg-apple-gray-800 py-4">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center space-x-2 text-sm">
+            <a href="{% url 'content:home' %}" class="text-apple-blue hover:underline">首页</a>
+            <i class="fas fa-chevron-right text-apple-gray-400 text-xs"></i>
+            <a href="{% url 'content:category_detail' category.slug %}" class="text-apple-blue hover:underline">{{ category.name }}</a>
+            <i class="fas fa-chevron-right text-apple-gray-400 text-xs"></i>
+            <span class="text-apple-gray-300">{{ article.title }}</span>
+        </div>
+    </div>
+</nav>
+
+<!-- 文章头部 -->
+<section class="py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="animate-on-scroll text-center mb-12">
+            <!-- 分类标签 -->
+            <div class="flex justify-center items-center mb-4">
+                {% if category.icon %}
+                <i class="{{ category.icon }} text-apple-blue mr-2"></i>
+                {% endif %}
+                <span class="text-apple-blue font-medium">{{ category.name }}</span>
+            </div>
+            
+            <!-- 文章标题 -->
+            <h1 class="text-4xl sm:text-5xl font-bold mb-6">{{ article.title }}</h1>
+            
+            <!-- 文章元信息 -->
+            <div class="flex flex-wrap justify-center items-center gap-6 text-apple-gray-400">
+                <div class="flex items-center">
+                    <i class="fas fa-calendar mr-2"></i>
+                    <span>{{ article.created_at|date:"Y年m月d日" }}</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-eye mr-2"></i>
+                    <span>{{ article.view_count }} 次阅读</span>
+                </div>
+                {% if article.get_tags_list %}
+                <div class="flex items-center">
+                    <i class="fas fa-tags mr-2"></i>
+                    <div class="flex flex-wrap gap-2">
+                        {% for tag in article.get_tags_list %}
+                        <span class="px-2 py-1 bg-apple-gray-700 text-apple-gray-300 text-xs rounded-full">
+                            {{ tag }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            {% if article.summary %}
+            <p class="text-xl text-apple-gray-300 mt-6 max-w-4xl mx-auto">
+                {{ article.summary }}
+            </p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- 文章内容 -->
+<section class="pb-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <article class="animate-on-scroll bg-apple-gray-800 rounded-2xl shadow-lg border border-apple-gray-700 overflow-hidden">
+            <div class="p-8 sm:p-12">
+                <!-- HTML内容容器 -->
+                <div class="prose prose-lg max-w-none 
+                            prose-headings:font-bold prose-headings:text-apple-gray-100
+                            prose-p:text-blog-text
+                            prose-a:text-apple-blue prose-a:no-underline hover:prose-a:underline
+                            prose-strong:text-apple-gray-100
+                            prose-code:bg-apple-gray-700 prose-code:text-apple-blue prose-code:px-2 prose-code:py-1 prose-code:rounded
+                            prose-pre:bg-apple-gray-800 prose-pre:border prose-pre:border-apple-gray-600
+                            prose-blockquote:border-l-apple-blue prose-blockquote:bg-apple-gray-800 prose-blockquote:p-4 prose-blockquote:rounded-r-lg
+                            prose-ul:list-none prose-ol:list-none
+                            prose-li:relative prose-li:pl-6 prose-li:mb-2">
+                    
+                    <!-- 注入HTML内容 -->
+                    {% if html_content %}
+                        {{ html_content|safe }}
+                    {% elif article.content %}
+                        {{ article.content|safe }}
+                    {% else %}
+                        <div class="bg-yellow-900/20 p-4 rounded-lg border border-yellow-900/30 mt-8">
+                            <div class="flex items-center text-yellow-300 mb-2">
+                                <i class="fas fa-exclamation-circle mr-2"></i>
+                                <span class="font-semibold">提示</span>
+                            </div>
+                            <p class="text-yellow-200">
+                                该文章内容暂未加载。请稍后再试。
+                            </p>
+                            {% if article.html_file_path %}
+                            <p class="text-yellow-200 mt-2">
+                                <small>文件路径: {{ article.html_file_path }}</small>
+                            </p>
+                            {% endif %}
+                            <div class="mt-4">
+                                <a href="{% url 'content:home' %}" class="inline-block bg-apple-blue text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                                    <i class="fas fa-home mr-2"></i>返回首页
+                                </a>
+                                <a href="{% url 'content:category_detail' category.slug %}" class="inline-block bg-apple-gray-700 text-white px-4 py-2 rounded-lg hover:bg-apple-gray-600 transition-colors ml-2">
+                                    <i class="fas fa-folder mr-2"></i>查看更多{{ category.name }}
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<!-- 相关文章 -->
+{% if related_articles %}
+<section class="py-16 bg-apple-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="animate-on-scroll text-center mb-12">
+            <h2 class="text-3xl font-bold mb-4">
+                <i class="fas fa-lightbulb text-apple-blue mr-3"></i>
+                相关文章
+            </h2>
+            <p class="text-apple-gray-400">
+                在 {{ category.name }} 分类下的其他精彩内容
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for related_article in related_articles %}
+            <div class="animate-on-scroll card-hover">
+                <a href="{% url 'content:article_detail' related_article.category.slug related_article.slug %}" 
+                   class="block bg-apple-gray-700 rounded-xl p-6 shadow-md border border-apple-gray-600 h-full">
+                    <div class="mb-3">
+                        <span class="text-apple-blue text-sm font-medium">{{ related_article.category.name }}</span>
+                    </div>
+                    <h3 class="font-semibold mb-3 line-clamp-2 hover:text-apple-blue transition-colors">
+                        {{ related_article.title }}
+                    </h3>
+                    {% if related_article.summary %}
+                    <p class="text-apple-gray-300 text-sm mb-4 line-clamp-3">
+                        {{ related_article.summary }}
+                    </p>
+                    {% endif %}
+                    <div class="flex items-center justify-between text-apple-gray-500 text-xs">
+                        <span>{{ related_article.created_at|date:"M d" }}</span>
+                        <div class="flex items-center">
+                            <i class="fas fa-eye mr-1"></i>
+                            {{ related_article.view_count }}
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- 返回顶部按钮 -->
+<button id="backToTop" class="fixed bottom-8 right-8 bg-apple-blue text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300 opacity-0 pointer-events-none z-50">
+    <i class="fas fa-arrow-up"></i>
+</button>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// 返回顶部功能
+const backToTopBtn = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+        backToTopBtn.classList.add('opacity-100');
+    } else {
+        backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+        backToTopBtn.classList.remove('opacity-100');
+    }
+});
+
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// 代码块高亮和复制功能
+document.addEventListener('DOMContentLoaded', () => {
+    // 为代码块添加语言标签和复制按钮
+    const codeBlocks = document.querySelectorAll('pre code');
+    codeBlocks.forEach((codeBlock, index) => {
+        const pre = codeBlock.parentElement;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'relative';
+        
+        // 复制按钮
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'absolute top-2 right-2 bg-apple-gray-700 hover:bg-apple-gray-600 text-white px-3 py-1 rounded text-sm transition-colors';
+        copyBtn.innerHTML = '<i class="fas fa-copy mr-1"></i>复制';
+        
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                copyBtn.innerHTML = '<i class="fas fa-check mr-1"></i>已复制';
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-copy mr-1"></i>复制';
+                }, 2000);
+            });
+        });
+        
+        pre.parentNode.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+        wrapper.appendChild(copyBtn);
+    });
+    
+    // 为HTML内容中的列表项添加图标
+    const listItems = document.querySelectorAll('.prose li');
+    listItems.forEach(li => {
+        if (!li.querySelector('i')) {
+            li.innerHTML = '<i class="fas fa-circle text-apple-blue text-xs mr-3 mt-1 absolute left-0 top-2"></i>' + li.innerHTML;
+        }
+    });
+    
+    // 处理HTML内容中的特殊结构，转换为迷你卡片
+    const contentContainer = document.querySelector('.prose');
+    if (contentContainer) {
+        // 查找包含多个要点的列表
+        const lists = contentContainer.querySelectorAll('ul, ol');
+        lists.forEach(list => {
+            if (list.children.length >= 3) {
+                // 转换为卡片网格
+                const cardGrid = document.createElement('div');
+                cardGrid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-8 not-prose';
+                
+                Array.from(list.children).forEach(li => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-apple-gray-700 rounded-lg p-4 border border-apple-gray-600';
+                    card.innerHTML = `
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-apple-blue mr-3 mt-1 text-sm"></i>
+                            <div class="text-sm">${li.innerHTML}</div>
+                        </div>
+                    `;
+                    cardGrid.appendChild(card);
+                });
+                
+                list.parentNode.replaceChild(cardGrid, list);
+            }
+        });
+    }
+});
+</script>
+{% endblock %} 

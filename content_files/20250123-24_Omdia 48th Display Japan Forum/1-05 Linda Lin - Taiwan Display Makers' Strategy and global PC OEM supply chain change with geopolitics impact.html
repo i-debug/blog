@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台湾显示器制造商策略与全球PC OEM供应链变革分析</title>
+    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/tailwind/3.3.3/tailwind.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.staticfile.org/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #f0f0f0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .main-card {
+            background-color: #1a1a1a; /* Dark grey */
+            border: 1px solid #333;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .mini-card {
+            background-color: #222222; /* Slightly lighter dark grey */
+            border: 1px solid #333;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .main-card.is-visible, .mini-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .highlight-text {
+            color: #00AEEF; /* Tech Blue */
+        }
+        .highlight-bg {
+            background-color: #00AEEF; /* Tech Blue */
+        }
+        .highlight-gradient-bg {
+            background-image: linear-gradient(to bottom, rgba(0, 174, 239, 0.7), rgba(0, 174, 239, 0.3));
+        }
+        .highlight-border {
+            border-color: #00AEEF;
+        }
+        .chart-container canvas {
+            background-color: rgba(34, 34, 34, 0.5); /* #222222 with some transparency */
+            border-radius: 0.5rem; /* rounded-lg */
+        }
+        .table-fixed th, .table-fixed td {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <header class="mb-12 text-center main-card rounded-2xl p-8">
+        <i class="fas fa-tv fa-3x highlight-text mb-4"></i>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-2">台湾显示器制造商的策略与地缘政治影响下的全球PC OEM供应链变革</h1>
+        <p class="text-lg sm:text-xl md:text-2xl font-semibold text-gray-400">Taiwan Display Makers' Strategy and global PC OEM supply chain change with geopolitics impact</p>
+        <p class="text-sm text-gray-500 mt-4">Linda Lin 林筱茹 | Senior Principal Analyst, Tablet and Notebook Display and OEM | 48th Display Japan Forum</p>
+    </header>
+
+    <section class="main-card rounded-2xl p-6 md:p-8 mb-8">
+        <h2 class="text-3xl font-bold mb-6 highlight-text"><i class="fas fa-list-alt mr-2"></i>议程亮点</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="mini-card rounded-lg p-6">
+                <h3 class="text-2xl font-semibold mb-2 text-white">台湾厂商显示业务展望</h3>
+                <p class="text-gray-400 text-sm">深入分析台湾显示器制造商的业务前景与市场定位。</p>
+            </div>
+            <div class="mini-card rounded-lg p-6">
+                <h3 class="text-2xl font-semibold mb-2 text-white">全球PC OEM供应链变革</h3>
+                <p class="text-gray-400 text-sm">探讨地缘政治如何影响全球个人电脑OEM的供应链布局。</p>
+            </div>
+            <div class="mini-card rounded-lg p-6">
+                <h3 class="text-2xl font-semibold mb-2 text-white">台湾显示器制造商的机遇</h3>
+                <p class="text-gray-400 text-sm">剖析在此变革下，台湾显示器制造商面临的潜在机遇。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="main-card rounded-2xl p-6 md:p-8 mb-8">
+        <h2 class="text-3xl font-bold mb-6 highlight-text"><i class="fas fa-chart-line mr-2"></i>台湾厂商显示业务展望</h2>
+        <p class="text-lg text-gray-300 mb-6">台湾显示器制造商在笔记本电脑与平板电脑面板的市占率预计于2024年后下滑。</p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <div class="mini-card rounded-lg p-4">
+                <p class="text-4xl font-bold highlight-text">35%</p>
+                <p class="text-xl font-semibold mt-1 text-white">笔电面板市占预测 (2025)</p>
+                <p class="text-sm text-gray-400 mt-1">相较于2023年前的40%有所下降。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <p class="text-4xl font-bold highlight-text">10%</p>
+                <p class="text-xl font-semibold mt-1 text-white">平板面板市占预测 (2025 Q3)</p>
+                <p class="text-sm text-gray-400 mt-1">台湾厂商平板面板市占率在2025年Q3预计为10%。</p>
+            </div>
+        </div>
+
+        <div class="chart-container mb-8 p-4 rounded-lg h-[500px]">
+            <h3 class="text-xl font-semibold mb-4 text-center">台湾面板厂各应用出货占比 (%)</h3>
+            <canvas id="taiwanShipmentShareChart"></canvas>
+        </div>
+
+        <h3 class="text-2xl font-semibold my-6 text-white">台湾面板厂 2024-2025 年业务计划摘要</h3>
+        <p class="text-md text-gray-400 mb-4">尤其是监视器、平板和手机出货量在2024年大幅下降。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold mb-2 highlight-text">友達 (AUO)</h4>
+                <p class="text-sm text-gray-300"><strong class="text-white">电视:</strong> 2024年增加85寸和65寸产量。</p>
+                <p class="text-sm text-gray-300"><strong class="text-white">显示器:</strong> 持续聚焦超大尺寸显示器 (如35寸, 49寸)。</p>
+                <p class="text-sm text-gray-300"><strong class="text-white">笔电:</strong> LTPS笔电业务因2025年与OLED的价格竞争，可能难以扩大市场份额。</p>
+                <p class="text-sm text-gray-300"><strong class="text-white">车用:</strong> 从车用显示扩展至移动解决方案。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold mb-2 highlight-text">群创 (Innolux)</h4>
+                <p class="text-sm text-gray-300"><strong class="text-white">电视:</strong> 仍专注于50寸及以下市场。</p>
+                <p class="text-sm text-gray-300"><strong class="text-white">显示器:</strong> 减少23.8寸及以下显示器出货。</p>
+                <p class="text-sm text-gray-300"><strong class="text-white">笔电:</strong> 与中国新兴面板厂在入门型号直接竞争，2025年扩展NB业务面临挑战。</p>
+                <p class="text-sm text-gray-300"><strong class="text-white">车用:</strong> 寻求汽车产业合作伙伴提供完整解决方案。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold mb-2 highlight-text">瀚宇彩晶 (HannStar)</h4>
+                <p class="text-sm text-gray-300"><strong class="text-white">平板:</strong> 来自Amazon和三星的需求大幅下降。</p>
+                <p class="text-sm text-gray-300"><strong class="text-white">手机:</strong> 主要为玻璃业务。</p>
+                <p class="text-sm text-gray-300"><strong class="text-white">车用:</strong> 持续增加车用业务。</p>
+                <p class="text-sm text-gray-300"><strong class="text-white">重点:</strong> 2024-2025年聚焦车用和电子阅读器以提升获利。</p>
+            </div>
+        </div>
+
+        <h3 class="text-2xl font-semibold my-6 text-white">营收占比变化</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-lg font-bold mb-2 text-center text-white">AUO 营收结构</h4>
+                 <p class="text-sm text-center text-gray-400 mb-2">解决方案业务营收持续成长。</p>
+                <div class="chart-container h-64"><canvas id="auoRevenueShareChart"></canvas></div>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-lg font-bold mb-2 text-center text-white">Innolux 营收结构</h4>
+                <p class="text-sm text-center text-gray-400 mb-2">非显示业务营收持续成长。</p>
+                <div class="chart-container h-64"><canvas id="innoluxRevenueShareChart"></canvas></div>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-lg font-bold mb-2 text-center text-white">HannStar 营收结构 (依尺寸)</h4>
+                 <p class="text-sm text-center text-gray-400 mb-2">车用业务带动成长。</p>
+                <div class="chart-container h-64"><canvas id="hannstarRevenueShareChart"></canvas></div>
+            </div>
+        </div>
+
+        <h3 class="text-2xl font-semibold my-6 text-white">友達 (AUO) 智慧座舱 2025</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            <div class="mini-card rounded-lg p-3 text-center">
+                <p class="text-lg font-semibold highlight-text">14.3"</p>
+                <p class="text-xs text-white">Morphing Center Control</p>
+                <p class="text-xs text-gray-400">可变形中控屏幕</p>
+            </div>
+            <div class="mini-card rounded-lg p-3 text-center">
+                <p class="text-lg font-semibold highlight-text">30"</p>
+                <p class="text-xs text-white">XR Interactive Window</p>
+                <p class="text-xs text-gray-400">XR互动车窗</p>
+            </div>
+            <div class="mini-card rounded-lg p-3 text-center">
+                <p class="text-lg font-semibold highlight-text">55"</p>
+                <p class="text-xs text-white">Virtual Sky Canopy</p>
+                <p class="text-xs text-gray-400">虚拟天空天窗</p>
+            </div>
+             <div class="mini-card rounded-lg p-3 text-center">
+                <p class="text-lg font-semibold highlight-text">14.6"</p>
+                <p class="text-xs text-white">Foldable Cruise Pilot</p>
+                <p class="text-xs text-gray-400">可折叠巡航导航</p>
+            </div>
+            <div class="mini-card rounded-lg p-3 text-center">
+                <p class="text-lg font-semibold highlight-text">47.5"</p>
+                <p class="text-xs text-white">Horizon Image Glass</p>
+                <p class="text-xs text-gray-400">地平线影像玻璃</p>
+            </div>
+            <div class="mini-card rounded-lg p-3 text-center">
+                <p class="text-lg font-semibold highlight-text">矩阵</p>
+                <p class="text-xs text-white">Interactive Matrix Display</p>
+                <p class="text-xs text-gray-400">互动矩阵显示</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="main-card rounded-2xl p-6 md:p-8 mb-8">
+        <h2 class="text-3xl font-bold mb-6 highlight-text"><i class="fas fa-globe-americas mr-2"></i>全球PC OEM供应链变革</h2>
+        <p class="text-lg text-gray-300 mb-6">美国政府额外的关税政策，进一步推动PC OEM生产在2025年移出中国。</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="mini-card rounded-lg p-4">
+                <h3 class="text-xl font-bold highlight-text"><i class="fas fa-industry mr-1"></i> 中国</h3>
+                <p class="text-sm text-white mt-2">主要生产基地</p>
+                <p class="text-xs text-gray-400">面临潜在10%关税 (北美市场)</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h3 class="text-xl font-bold highlight-text"><i class="fas fa-leaf mr-1"></i> 越南/泰国</h3>
+                <p class="text-sm text-white mt-2">美国市场PC OEM转移热点</p>
+                <p class="text-xs text-gray-400">0%关税 (北美市场)</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h3 class="text-xl font-bold highlight-text"><i class="fas fa-flag-usa mr-1"></i> 墨西哥</h3>
+                <p class="text-sm text-white mt-2">部分PC OEM生产</p>
+                <p class="text-xs text-gray-400">面临潜在25%关税 (北美市场)</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h3 class="text-xl font-bold highlight-text"><i class="fas fa-rupee-sign mr-1"></i> 印度</h3>
+                <p class="text-sm text-white mt-2">手机OEM为主，PC进口税仍在讨论</p>
+                <p class="text-xs text-gray-400">0%关税 (北美市场)</p>
+            </div>
+        </div>
+
+        <h3 class="text-2xl font-semibold my-6 text-white">OEM厂产能转移动态 (2024-2025)</h3>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-400 table-fixed">
+                <thead class="text-xs text-gray-300 uppercase bg-gray-700">
+                    <tr>
+                        <th scope="col" class="px-4 py-3 w-1/5">OEM厂</th>
+                        <th scope="col" class="px-4 py-3 w-1/5">国家</th>
+                        <th scope="col" class="px-4 py-3 w-1/5">城市</th>
+                        <th scope="col" class="px-4 py-3 w-1/5">月产能 (千台)</th>
+                        <th scope="col" class="px-4 py-3 w-1/5">备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-gray-700"> <td class="px-4 py-2">Quanta</td> <td class="px-4 py-2">越南</td> <td class="px-4 py-2">河内</td> <td class="px-4 py-2">200-500 (2024)</td> <td class="px-4 py-2">Apple Q4'24启动</td> </tr>
+                    <tr class="border-b border-gray-700"> <td class="px-4 py-2">Wistron</td> <td class="px-4 py-2">越南</td> <td class="px-4 py-2">河内</td> <td class="px-4 py-2">目标100万/月 (2024)</td> <td class="px-4 py-2">2H23已达300K/月</td> </tr>
+                    <tr class="border-b border-gray-700"> <td class="px-4 py-2">Inventec</td> <td class="px-4 py-2">泰国</td> <td class="px-4 py-2">Samut Prakan</td> <td class="px-4 py-2">50</td> <td class="px-4 py-2">HP机种先行 (2H24)</td> </tr>
+                    <tr class="border-b border-gray-700"> <td class="px-4 py-2">Compal</td> <td class="px-4 py-2">越南</td> <td class="px-4 py-2">河内</td> <td class="px-4 py-2">200-400 (2024)</td> <td class="px-4 py-2">未来可达300万台OEM产能</td> </tr>
+                    <tr class="border-b border-gray-700"> <td class="px-4 py-2">Foxconn</td> <td class="px-4 py-2">越南</td> <td class="px-4 py-2">河内</td> <td class="px-4 py-2">500</td> <td class="px-4 py-2">MacBooks Q2'24, 平板未来也将生产</td> </tr>
+                     <tr class="border-b border-gray-700"> <td class="px-4 py-2">LCFC</td> <td class="px-4 py-2">越南</td> <td class="px-4 py-2">河内</td> <td class="px-4 py-2">计划中</td> <td class="px-4 py-2">目标Q2'25量产 (Lenovo推动)</td> </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="text-2xl font-semibold my-6 text-white">顶级PC品牌北美市场出货量 (3Q24)</h3>
+        <div class="chart-container p-4 rounded-lg h-[400px]"> <canvas id="northAmericaPCShipmentsChart"></canvas>
+        </div>
+
+        <h3 class="text-2xl font-semibold my-6 text-white">PC OEM 生产基地转移趋势 (2023 vs 2024F)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-lg font-bold mb-2 text-white">HP</h4>
+                <p class="text-sm text-gray-300">泰国生产占比: 2023 (2%) <i class="fas fa-arrow-right mx-1"></i> 2024F (11%)</p>
+                 <p class="text-xs text-gray-400">主要由广达(Quanta)及英业达(Inventec)在泰国扩厂。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-lg font-bold mb-2 text-white">Dell</h4>
+                <p class="text-sm text-gray-300">越南生产占比: 2023 (10%) <i class="fas fa-arrow-right mx-1"></i> 2024F (14%)</p>
+                <p class="text-xs text-gray-400">主要由仁宝(Compal)在越南生产。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-lg font-bold mb-2 text-white">Apple</h4>
+                <p class="text-sm text-gray-300">越南生产占比: 2023 (0%) <i class="fas fa-arrow-right mx-1"></i> 2024F (11%)</p>
+                <p class="text-xs text-gray-400">由广达(Quanta)及富士康(Foxconn)在越南启动生产。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-lg font-bold mb-2 text-white">Lenovo</h4>
+                <p class="text-sm text-gray-300">越南生产占比: 2024F (计划中)</p>
+                <p class="text-xs text-gray-400">联宝(LCFC)及华勤(Huaqin)计划在越南设厂。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="main-card rounded-2xl p-6 md:p-8 mb-8">
+        <h2 class="text-3xl font-bold mb-6 highlight-text"><i class="fas fa-microchip mr-2"></i>中国制造商与面板供应链动态</h2>
+        <p class="text-lg text-gray-300 mb-4">中国本土制造商积极加入笔记本电脑及平板OEM业务。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold highlight-text">华勤 (Huaqing)</h4>
+                <p class="text-sm text-white">笔电出货: 2023 (11M) <i class="fas fa-arrow-right mx-1"></i> 2025F (16-18M)</p>
+                <p class="text-xs text-gray-400">客户含Lenovo, Acer, Asus等，持续扩展NB业务。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold highlight-text">闻泰 (Wingtech)</h4>
+                <p class="text-sm text-white">笔电出货: 受Apple需求下降及制裁影响，2025F预估1.1M。</p>
+                <p class="text-xs text-gray-400">平板客户含三星、小米等。</p>
+            </div>
+             <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold highlight-text">光弘 (DBG)</h4>
+                <p class="text-sm text-white">平板出货: 2023 (12M) <i class="fas fa-arrow-right mx-1"></i> 2025F (13M)</p>
+                <p class="text-xs text-gray-400">专注华为业务。</p>
+            </div>
+        </div>
+
+        <h3 class="text-2xl font-semibold my-6 text-white">笔记本电脑品牌面板采购来源 (2024)</h3>
+        <div class="chart-container p-4 rounded-lg h-[500px]"> <canvas id="notebookPanelSourceChart"></canvas>
+        </div>
+
+        <h3 class="text-2xl font-semibold my-6 text-white">中国主要面板厂客户策略 (2024)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold highlight-text">京东方 (BOE)</h4>
+                <p class="text-sm text-white">43%笔电面板供给美国品牌 (Apple, HP, Dell)。</p>
+                <p class="text-xs text-gray-400">考虑将LCD模组厂移出中国以规避风险。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold highlight-text">华星光电 (CSOT)</h4>
+                <p class="text-sm text-white">2024年开始供应Dell笔电面板，市占 &lt;10%。</p>
+                <p class="text-xs text-gray-400">为争取更多美国客户，亦需考虑非中国模组厂。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold highlight-text">惠科 (HKC)</h4>
+                <p class="text-sm text-white">HP为其最大笔电客户，占30%出货。</p>
+                <p class="text-xs text-gray-400">主供入门级型号，移厂急迫性较低。</p>
+            </div>
+        </div>
+         <h3 class="text-2xl font-semibold my-6 text-white">笔记本电脑LCM厂越南布局计划</h3>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-400 table-fixed">
+                <thead class="text-xs text-gray-300 uppercase bg-gray-700">
+                    <tr>
+                        <th scope="col" class="px-4 py-3 w-1/6">LCM厂</th>
+                        <th scope="col" class="px-4 py-3 w-1/6">时程</th>
+                        <th scope="col" class="px-4 py-3 w-1/6">客户</th>
+                        <th scope="col" class="px-4 py-3 w-1/6">月产能 (K)</th>
+                        <th scope="col" class="px-4 py-3 w-1/3">地点/备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-gray-700"><td>AUO</td><td>3Q'24</td><td>Dell</td><td>120</td><td>河南 (HaNam), Dell未来多项目启动</td></tr>
+                    <tr class="border-b border-gray-700"><td>BOE</td><td>2H 2025</td><td>HP/Dell</td><td>200-300</td><td>巴地头顿 (BaRiaVungTau), 寻求更多客户</td></tr>
+                    <tr class="border-b border-gray-700"><td>LGD</td><td>2026</td><td>HP</td><td>-</td><td>海防 (HaiPhong), 已有OLED模组厂</td></tr>
+                    <tr class="border-b border-gray-700"><td>SDC OLED</td><td>2026</td><td>-</td><td>800</td><td>北宁 (BacNinh), 结合SEC整机厂资源</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="main-card rounded-2xl p-6 md:p-8 mb-8">
+        <h2 class="text-3xl font-bold mb-6 highlight-text"><i class="fas fa-lightbulb mr-2"></i>台湾显示器制造商的机遇</h2>
+        <p class="text-lg text-gray-300 mb-6">台湾厂商Micro LED仍处于研发阶段，并积极扩展非显示业务。</p>
+
+        <h3 class="text-2xl font-semibold my-6 text-white">Micro LED 发展重点</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold highlight-text">AUO 14.3" 车用可挠曲 Micro LED</h4>
+                <p class="text-sm text-white">分辨率: 1280x640, 100 PPI</p>
+                <p class="text-sm text-white">亮度: &gt;1,000 cd/m²</p>
+                <p class="text-xs text-gray-400">应用于可动态激活的信息中心/功能控制。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold highlight-text">Innolux 9.6" 镜面 Micro LED</h4>
+                <p class="text-sm text-white">分辨率: 1920x1080 (229 ppi)</p>
+                <p class="text-sm text-white">亮度: &gt;3,600 nits, 色域: 115% NTSC</p>
+                <p class="text-xs text-gray-400">用于特殊显示或拼接至大型看板。</p>
+            </div>
+        </div>
+
+        <h3 class="text-2xl font-semibold my-6 text-white">扩大非显示业务布局</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold highlight-text">友達 (AUO) 非显示策略</h4>
+                <p class="text-sm text-white"><i class="fas fa-car mr-1"></i> 车用: BHTC (HMI, CC, ECU Tier 1)</p>
+                <p class="text-sm text-white"><i class="fas fa-medkit mr-1"></i> 医疗: AUOCare</p>
+                <p class="text-sm text-white"><i class="fas fa-store mr-1"></i> 零售/看板: AUO Display+, JohnRyan, Space4M</p>
+                <p class="text-sm text-white"><i class="fas fa-industry mr-1"></i> 工业: AD Link</p>
+                <p class="text-xs text-gray-400">致力于下游高附加价值业务。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold highlight-text">群创 (Innolux) 非显示策略</h4>
+                <p class="text-sm text-white"><i class="fas fa-microchip mr-1"></i> 上游技术: 高阶IC, 指纹辨识, 平板天线</p>
+                <p class="text-sm text-white"><i class="fas fa-car mr-1"></i> 车用: CarUX (与JDI eLeap合作)</p>
+                <p class="text-sm text-white"><i class="fas fa-x-ray mr-1"></i> 医疗: InnoCare (X光感测器)</p>
+                <p class="text-sm text-white"><i class="fas fa-cogs mr-1"></i> 解决方案: 智慧整体解决方案中心</p>
+                <p class="text-xs text-gray-400">发展上游显示技术。</p>
+            </div>
+        </div>
+
+        <h3 class="text-2xl font-semibold my-6 text-white">营运策略与获利展望</h3>
+         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <div class="chart-container p-4 rounded-lg h-[400px]"> <h4 class="text-lg font-semibold mb-2 text-center text-white">台湾面板厂营益率 (%)</h4>
+                <canvas id="opMarginChart"></canvas>
+            </div>
+            <div class="chart-container p-4 rounded-lg h-[400px]"> <h4 class="text-lg font-semibold mb-2 text-center text-white">台湾面板厂平均产能利用率 (%)</h4>
+                <canvas id="fabLoadingRateChart"></canvas>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold highlight-text">控制产能利用率</h4>
+                <p class="text-sm text-gray-300">针对显示业务进行产能调控。</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold highlight-text">瞄准非显示利基市场</h4>
+                <p class="text-sm text-gray-300">发展面板半导体、Micro LED技术、整体解决方案供应商 (车用、看板、医疗等)。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="main-card rounded-2xl p-6 md:p-8">
+        <h2 class="text-3xl font-bold mb-6 highlight-text"><i class="fas fa-rocket mr-2"></i>台湾显示的下一步：非显示业务蓬勃发展</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div class="mini-card rounded-lg p-5 text-center">
+                <i class="fas fa-brain fa-3x highlight-text mb-3"></i>
+                <h3 class="text-2xl font-semibold text-white">AI组织重整</h3>
+                <p class="text-sm text-gray-400">AI Re-organization</p>
+            </div>
+            <div class="mini-card rounded-lg p-5 text-center">
+                <i class="fas fa-industry fa-3x highlight-text mb-3"></i>
+                <h3 class="text-2xl font-semibold text-white">厂房结构调整</h3>
+                <p class="text-sm text-gray-400">Fab restructure</p>
+            </div>
+            <div class="mini-card rounded-lg p-5 text-center">
+                <i class="fas fa-chart-pie fa-3x highlight-text mb-3"></i>
+                <h3 class="text-2xl font-semibold text-white">业务单元调整</h3>
+                <p class="text-sm text-gray-400">显示业务缩减，非显示业务扩展</p>
+            </div>
+            <div class="mini-card rounded-lg p-5 text-center">
+                <i class="fas fa-search-dollar fa-3x highlight-text mb-3"></i>
+                <h3 class="text-2xl font-semibold text-white">开拓潜力市场</h3>
+                <p class="text-sm text-gray-400">车用、医疗、看板、Micro LED、类纸显示</p>
+            </div>
+            <div class="mini-card rounded-lg p-5 text-center">
+                <i class="fas fa-cogs fa-3x highlight-text mb-3"></i>
+                <h3 class="text-2xl font-semibold text-white">多元解决方案</h3>
+                <p class="text-sm text-gray-400">系统整合、内容提供、服务提供</p>
+            </div>
+            <div class="mini-card rounded-lg p-5 text-center">
+                <i class="fas fa-car-battery fa-3x highlight-text mb-3"></i>
+                <h3 class="text-2xl font-semibold text-white">新概念显示</h3>
+                <p class="text-sm text-gray-400">绿色环保、电动车、AI市场</p>
+            </div>
+        </div>
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+            <div class="mini-card rounded-lg p-4">
+                <h4 class="text-xl font-bold text-white">AUO 友達光电</h4>
+                <p class="highlight-text font-semibold">Tap into the possibility</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                 <h4 class="text-xl font-bold text-white">INNOLUX 群创光电</h4>
+                <p class="highlight-text font-semibold">More than Panel</p>
+            </div>
+            <div class="mini-card rounded-lg p-4">
+                 <h4 class="text-xl font-bold text-white">HannStar 瀚宇彩晶</h4>
+                <p class="highlight-text font-semibold">Eco friendly display</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center text-gray-500 text-xs mt-12">
+        <p>资料来源：Omdia，第48回显示产业论坛，2025年1月23-24日。</p>
+        <p>本文件所含Omdia研究、数据和信息（"Omdia材料"）为Informa Tech Target及其子公司或关联公司（统称"Informa Tech Target"）或其第三方数据提供商的版权财产，代表Informa Tech Target发布的数据、研究、意见或观点，并非事实陈述。 Omdia材料反映的是原始出版日期的信息和意见，而非本文件的日期。 Omdia材料中的信息和意见如有更改，恕不另行通知，Informa Tech Target没有任何义务或责任因此更新Omdia材料或本出版物。 Omdia材料按"原样"和"现有"基础提供。 不对Omdia材料中所含信息、意见和结论的公正性、准确性、完整性或正确性作任何明示或暗示的陈述或保证。</p>
+        <p class="mt-2">Generated by AI for visualization purposes. All rights reserved Informa Tech Target, a trading division of Informa PLC.</p>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = document.querySelectorAll('.main-card, .mini-card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('is-visible');
+                }, index * 50);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+
+    const CHART_TEXT_COLOR = '#f0f0f0';
+    const CHART_GRID_COLOR = 'rgba(255, 255, 255, 0.1)';
+    const HIGHLIGHT_COLOR = '#00AEEF';
+    const SECONDARY_COLOR_1 = '#FFA500';
+    const SECONDARY_COLOR_2 = '#32CD32';
+    const SECONDARY_COLOR_3 = '#FF69B4';
+    const SECONDARY_COLOR_4 = '#BA55D3';
+    const SECONDARY_COLOR_5 = '#40E0D0';
+
+
+    const taiwanShipmentShareCtx = document.getElementById('taiwanShipmentShareChart');
+    if (taiwanShipmentShareCtx) {
+        new Chart(taiwanShipmentShareCtx, {
+            type: 'line',
+            data: {
+                labels: ['1Q23', '2Q23', '3Q23', '4Q23', '1Q24', '2Q24', '3Q24(F)', '1Q25(F)', '2Q25(F)', '3Q25(F)'],
+                datasets: [
+                    { label: 'TV', data: [21, 22, 22, 21, 21, 22, 23, 23, 22, 23], borderColor: HIGHLIGHT_COLOR, tension: 0.1 },
+                    { label: 'Monitor', data: [24, 24, 23, 21, 20, 19, 18, 17, 16, 16], borderColor: SECONDARY_COLOR_1, tension: 0.1 },
+                    { label: 'NB', data: [40, 40, 41, 36, 35, 34, 37, 31, 34, 34], borderColor: SECONDARY_COLOR_2, tension: 0.1 },
+                    { label: 'Tablet', data: [25, 31, 21, 20, 20, 16, 11, 11, 10, 10], borderColor: SECONDARY_COLOR_3, tension: 0.1 }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { y: { ticks: { color: CHART_TEXT_COLOR }, grid: { color: CHART_GRID_COLOR } }, x: { ticks: { color: CHART_TEXT_COLOR }, grid: { color: CHART_GRID_COLOR } } },
+                plugins: { legend: { labels: { color: CHART_TEXT_COLOR } } }
+            }
+        });
+    }
+
+    const auoRevenueCtx = document.getElementById('auoRevenueShareChart');
+    if (auoRevenueCtx) {
+        new Chart(auoRevenueCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Display', 'Mobility Solution', 'Vertical Solution', 'Others'],
+                datasets: [{ data: [53, 17, 19, 5], backgroundColor: [HIGHLIGHT_COLOR, SECONDARY_COLOR_1, SECONDARY_COLOR_2, SECONDARY_COLOR_3] }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: CHART_TEXT_COLOR } } } }
+        });
+    }
+
+    const innoluxRevenueCtx = document.getElementById('innoluxRevenueShareChart');
+    if (innoluxRevenueCtx) {
+        new Chart(innoluxRevenueCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Commodity', 'Non-Commodity', 'Non-Display'],
+                datasets: [{ data: [69, 9, 22], backgroundColor: [HIGHLIGHT_COLOR, SECONDARY_COLOR_1, SECONDARY_COLOR_2] }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: CHART_TEXT_COLOR } } } }
+        });
+    }
+
+    const hannstarRevenueCtx = document.getElementById('hannstarRevenueShareChart');
+    if (hannstarRevenueCtx) {
+        new Chart(hannstarRevenueCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['11" and above', '6.06"-10.4"', '6" and below'],
+                datasets: [{ data: [62, 12, 27], backgroundColor: [HIGHLIGHT_COLOR, SECONDARY_COLOR_1, SECONDARY_COLOR_2] }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: CHART_TEXT_COLOR } } } }
+        });
+    }
+
+    const naPcShipmentsCtx = document.getElementById('northAmericaPCShipmentsChart');
+    if (naPcShipmentsCtx) {
+        new Chart(naPcShipmentsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Apple', 'Dell', 'HP', 'Lenovo', 'Acer', 'Asus'],
+                datasets: [{ label: '3Q24 Shipments (thousands)', data: [2755, 3088, 3780, 2911, 1260, 909], backgroundColor: [HIGHLIGHT_COLOR, SECONDARY_COLOR_1, SECONDARY_COLOR_2, SECONDARY_COLOR_3, SECONDARY_COLOR_4, SECONDARY_COLOR_5] }]
+            },
+            options: {
+                indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+                scales: { y: { ticks: { color: CHART_TEXT_COLOR }, grid: { color: CHART_GRID_COLOR } }, x: { ticks: { color: CHART_TEXT_COLOR }, grid: { color: CHART_GRID_COLOR } } },
+                plugins: { legend: { display: false } }
+            }
+        });
+    }
+
+    const nbPanelSourceCtx = document.getElementById('notebookPanelSourceChart');
+    if (nbPanelSourceCtx) {
+        new Chart(nbPanelSourceCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Acer', 'ASUS', 'Apple', 'HP', 'Dell', 'Lenovo', 'Huawei', 'Others'],
+                datasets: [
+                    { label: 'China', data: [43, 43, 35, 34, 45, 52, 100, 55], backgroundColor: HIGHLIGHT_COLOR },
+                    { label: 'Taiwan', data: [51, 48, 0, 54, 35, 43, 0, 24], backgroundColor: SECONDARY_COLOR_1 },
+                    { label: 'Korea', data: [6, 8, 47, 12, 18, 5, 0, 16], backgroundColor: SECONDARY_COLOR_2 },
+                    { label: 'Japan', data: [0, 1, 19, 0, 2, 0, 0, 6], backgroundColor: SECONDARY_COLOR_3 }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: {
+                    y: { stacked: true, ticks: { color: CHART_TEXT_COLOR, callback: function(value) { return value + '%';} }, grid: { color: CHART_GRID_COLOR }, title: { display: true, text: 'Share (%)', color: CHART_TEXT_COLOR } },
+                    x: { stacked: true, ticks: { color: CHART_TEXT_COLOR }, grid: { color: CHART_GRID_COLOR } }
+                },
+                plugins: { legend: { position: 'top', labels: { color: CHART_TEXT_COLOR } } }
+            }
+        });
+    }
+
+    const opMarginCtx = document.getElementById('opMarginChart');
+    if (opMarginCtx) {
+        const opMarginLabels = ['2Q18','3Q18','4Q18','1Q19','2Q19','3Q19','4Q19','1Q20','2Q20','3Q20','4Q20','1Q21','2Q21','3Q21','4Q21','1Q22','2Q22','3Q22','4Q22','1Q23','2Q23','3Q23','4Q23','1Q24','2Q24(F)','3Q24(F)','4Q24(F)','1Q25(F)'];
+        const auoOpMargin = [5,3,0,-5,-4,-2,0,-2,2,8,10,15,18,15,8,-2,-10,-25,-20,-15,-8,-5,0,2,3,4,3,4];
+        const innoluxOpMargin = [4,2,-1,-6,-5,-3,-1,-3,1,7,9,14,16,13,7,-3,-12,-28,-22,-18,-10,-7,-2,1,2,3,2,3];
+        const hannstarOpMargin = [6,4,1,-4,-3,-1,1,-1,3,9,11,16,20,17,10,0,-8,-22,-18,-12,-6,-3,1,3,4,5,4,5];
+
+        new Chart(opMarginCtx, {
+            type: 'line',
+            data: {
+                labels: opMarginLabels,
+                datasets: [
+                    { label: 'AUO', data: auoOpMargin, borderColor: HIGHLIGHT_COLOR, tension: 0.1, fill: false },
+                    { label: 'Innolux', data: innoluxOpMargin, borderColor: SECONDARY_COLOR_1, tension: 0.1, fill: false },
+                    { label: 'HannStar', data: hannstarOpMargin, borderColor: SECONDARY_COLOR_2, tension: 0.1, fill: false }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { y: { ticks: { color: CHART_TEXT_COLOR, callback: function(value) { return value + '%';} }, grid: { color: CHART_GRID_COLOR } }, x: { ticks: { color: CHART_TEXT_COLOR }, grid: { color: CHART_GRID_COLOR } } },
+                plugins: { legend: { labels: { color: CHART_TEXT_COLOR } } }
+            }
+        });
+    }
+
+    const fabLoadingCtx = document.getElementById('fabLoadingRateChart');
+    if (fabLoadingCtx) {
+        const fabLoadingLabels = ['2Q18','3Q18','4Q18','1Q19','2Q19','3Q19','4Q19','1Q20','2Q20','3Q20','4Q20','1Q21','2Q21','3Q21','4Q21','1Q22','2Q22','3Q22','4Q22','1Q23','2Q23','3Q23','4Q23','1Q24','2Q24(F)','3Q24(F)','4Q24(F)','1Q25(F)'];
+        const auoLoading = [80,82,75,70,68,72,75,70,78,85,88,90,92,88,85,75,65,45,50,60,65,70,65,70,72,68,65,60];
+        const innoluxLoading = [82,80,77,72,70,74,77,72,80,87,90,92,90,86,83,73,63,43,48,58,63,68,63,68,70,66,63,58];
+        const hannstarLoading = [78,80,73,68,66,70,73,68,76,83,86,88,90,86,83,73,63,43,48,58,63,68,63,68,70,66,63,58];
+
+        new Chart(fabLoadingCtx, {
+            type: 'line',
+            data: {
+                labels: fabLoadingLabels,
+                datasets: [
+                     { label: 'AUO', data: auoLoading, borderColor: HIGHLIGHT_COLOR, tension: 0.1, fill: false },
+                     { label: 'Innolux', data: innoluxLoading, borderColor: SECONDARY_COLOR_1, tension: 0.1, fill: false },
+                     { label: 'HannStar', data: hannstarLoading, borderColor: SECONDARY_COLOR_2, tension: 0.1, fill: false }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                scales: { y: { ticks: { color: CHART_TEXT_COLOR, callback: function(value) { return value + '%';} }, grid: { color: CHART_GRID_COLOR }, min:0, max:100 }, x: { ticks: { color: CHART_TEXT_COLOR }, grid: { color: CHART_GRID_COLOR } } },
+                plugins: { legend: { labels: { color: CHART_TEXT_COLOR } } }
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>

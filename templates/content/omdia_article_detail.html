@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }} - 个人知识博客{% endblock %}
+
+{% block content %}
+<!-- 文章头部 -->
+<section class="py-16 bg-apple-gray-800/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="animate-on-scroll">
+            <!-- 面包屑导航 -->
+            <div class="flex items-center space-x-2 text-sm mb-6">
+                <a href="{% url 'content:home' %}" class="text-blue-600 hover:underline">首页</a>
+                <i class="fas fa-chevron-right text-apple-gray-400 text-xs"></i>
+                <a href="{% url 'content:category_detail' article.category.slug %}" class="text-blue-600 hover:underline">
+                    {{ article.category.name }}
+                </a>
+                <i class="fas fa-chevron-right text-apple-gray-400 text-xs"></i>
+                <span class="text-apple-gray-300">{{ article.title|slice:"5:" }}</span>
+            </div>
+            
+            <!-- 文章标题和会话编号 -->
+            <div class="mb-6 flex items-center justify-center">
+                <div class="bg-blue-900/30 text-blue-300 text-lg font-medium px-4 py-1 rounded-full">
+                    {{ article.title|slice:":5" }}
+                </div>
+            </div>
+            
+            <h1 class="text-4xl sm:text-5xl font-bold mb-6 text-center">
+                {{ article.title|slice:"5:" }}
+            </h1>
+            
+            <!-- 文章元数据 -->
+            <div class="flex flex-wrap justify-center items-center gap-4 text-apple-gray-400 mb-8">
+                <div class="flex items-center">
+                    <i class="fas fa-calendar-alt mr-2"></i>
+                    <span>{{ article.created_at|date:"Y年m月d日" }}</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-eye mr-2"></i>
+                    <span>{{ article.view_count }} 次浏览</span>
+                </div>
+                {% if article.get_tags_list %}
+                <div class="flex items-center">
+                    <i class="fas fa-tags mr-2"></i>
+                    <div class="flex flex-wrap gap-2">
+                        {% for tag in article.get_tags_list %}
+                        <span class="px-2 py-1 bg-blue-900/30 text-blue-300 text-xs rounded-full">
+                            {{ tag }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 文章内容 -->
+<section class="py-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-apple-gray-800 rounded-2xl shadow-lg p-8 border border-apple-gray-700 mb-12">
+            {% if html_content %}
+            <!-- 嵌入HTML内容 -->
+            <div class="omdia-content prose max-w-none">
+                {{ html_content|safe }}
+            </div>
+            {% elif article.content %}
+            <!-- 如果没有HTML内容，显示文章content字段内容 -->
+            <div class="omdia-content prose max-w-none">
+                {{ article.content|safe }}
+            </div>
+            {% else %}
+            <!-- 如果没有HTML内容和content内容，显示摘要 -->
+            <div class="prose max-w-none">
+                <p>{{ article.summary }}</p>
+                <div class="bg-yellow-900/20 p-4 rounded-lg border border-yellow-900/30 mt-8">
+                    <div class="flex items-center text-yellow-300 mb-2">
+                        <i class="fas fa-exclamation-circle mr-2"></i>
+                        <span class="font-semibold">提示</span>
+                    </div>
+                    <p class="text-yellow-200">
+                        该演讲内容暂未加载。请稍后再试。
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- 相关文章 -->
+        {% if related_articles %}
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">
+                <i class="fas fa-link text-blue-600 mr-2"></i>
+                相关演讲
+            </h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for related in related_articles %}
+                <div class="animate-on-scroll card-hover">
+                    <a href="{% url 'content:article_detail' related.category.slug related.slug %}" 
+                       class="block bg-apple-gray-800 rounded-xl p-6 shadow-md border border-blue-900/20 h-full">
+                        <div class="mb-3 flex justify-between items-center">
+                            <span class="text-blue-600 text-sm font-medium">{{ related.title|slice:":5" }}</span>
+                            <i class="fas fa-tv text-blue-500 opacity-50"></i>
+                        </div>
+                        <h3 class="font-semibold mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
+                            {{ related.title|slice:"5:" }}
+                        </h3>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- 返回按钮 -->
+        <div class="flex justify-center">
+            <a href="{% url 'content:category_detail' article.category.slug %}" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>
+                返回论坛列表
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Omdia内容样式覆盖 */
+    .omdia-content {
+        font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+        color: #D1D5DB; /* 使用blog-text颜色 */
+    }
+    
+    .omdia-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+    }
+    
+    .omdia-content h1, .omdia-content h2, .omdia-content h3,
+    .omdia-content h4, .omdia-content h5, .omdia-content h6 {
+        color: #8ab4f8;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+    
+    .omdia-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+    }
+    
+    .omdia-content th, .omdia-content td {
+        border: 1px solid #374151;
+        padding: 0.75rem;
+        text-align: left;
+    }
+    
+    .omdia-content th {
+        background-color: #1f2937;
+        font-weight: 600;
+    }
+    
+    .omdia-content ul, .omdia-content ol {
+        margin-left: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .omdia-content li {
+        margin-bottom: 0.5rem;
+    }
+</style>
+{% endblock %} 
