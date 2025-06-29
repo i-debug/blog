@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用本地Tailwind CSS的示例</title>
+    <!-- 替换CDN链接为本地CSS文件 -->
+    <link rel="stylesheet" href="./output.css">
+    <link rel="stylesheet" href="./fontawesome/all.min.css">
+    <script src="./chartjs/chart.umd.min.js"></script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #E0E0E0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+        .highlight-color { color: #00AEEF; }
+        .highlight-bg { background-color: #00AEEF; }
+        .highlight-border { border-color: #00AEEF; }
+        .tech-gradient {
+            background-image: linear-gradient(to bottom, rgba(0, 174, 239, 0.2), rgba(0, 174, 239, 0.05));
+        }
+        .tech-gradient-solid {
+             background-image: linear-gradient(to bottom, rgba(0, 174, 239, 0.7), rgba(0, 174, 239, 0.3));
+        }
+
+        .main-card {
+            background-color: #1A1A1A;
+            border: 1px solid #333333;
+            border-radius: 1rem; /* rounded-xl */
+            padding: 2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .mini-card {
+            background-color: #222222;
+            border: 1px solid #333333;
+            border-radius: 0.75rem; /* rounded-lg */
+            padding: 1.5rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%; /* Ensure cards in a row have same height */
+        }
+
+        .main-card.visible, .mini-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto">
+        <div class="main-card visible">
+            <h1 class="text-center text-2xl font-bold highlight-color mb-6">
+                <i class="fas fa-chart-line mr-3"></i>
+                使用本地Tailwind CSS的示例页面
+            </h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="mini-card visible">
+                    <div class="text-center">
+                        <i class="fas fa-download text-3xl highlight-color mb-4"></i>
+                        <h3 class="text-lg font-semibold mb-2">本地CSS文件</h3>
+                        <p class="text-sm text-gray-300">使用本地生成的output.css文件</p>
+                    </div>
+                </div>
+                
+                <div class="mini-card visible">
+                    <div class="text-center">
+                        <i class="fas fa-rocket text-3xl highlight-color mb-4"></i>
+                        <h3 class="text-lg font-semibold mb-2">更快加载</h3>
+                        <p class="text-sm text-gray-300">无需依赖外部CDN，加载更快</p>
+                    </div>
+                </div>
+                
+                <div class="mini-card visible">
+                    <div class="text-center">
+                        <i class="fas fa-shield-alt text-3xl highlight-color mb-4"></i>
+                        <h3 class="text-lg font-semibold mb-2">生产就绪</h3>
+                        <p class="text-sm text-gray-300">经过压缩优化的CSS文件</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tech-gradient p-6 rounded-lg">
+                <h2 class="text-xl font-bold mb-4 highlight-color">
+                    <i class="fas fa-cogs mr-2"></i>
+                    如何使用
+                </h2>
+                <ol class="list-decimal list-inside space-y-2 text-sm">
+                    <li>将HTML文件中的CDN链接替换为本地CSS文件链接</li>
+                    <li>运行 <code class="bg-gray-800 px-2 py-1 rounded">npm run build-prod</code> 生成优化的CSS文件</li>
+                    <li>确保output.css文件与HTML文件在同一目录或正确的相对路径</li>
+                    <li>部署时包含output.css文件</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -145,9 +145,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 安全设置 - 针对无SSL的IP访问进行调整
 if not DEBUG:
-    # 内容安全策略
+    # 内容安全策略 - 使用本地静态文件
     CSP_DEFAULT_SRC = ("'self'",)
-    CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "https://cdn.tailwindcss.com", "https://cdnjs.cloudflare.com")
-    CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "https://cdn.tailwindcss.com", "https://cdn.jsdelivr.net")
-    CSP_FONT_SRC = ("'self'", "https://cdnjs.cloudflare.com")
+    CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
+    CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'")
+    CSP_FONT_SRC = ("'self'",)
     CSP_IMG_SRC = ("'self'", "data:", "https:")

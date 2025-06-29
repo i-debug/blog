@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini LED 背光与 OLED 材料市场与技术分析</title>
-    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/tailwind/3.3.3/tailwind.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.staticfile.org/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="./output.css">
+    <link rel="stylesheet" href="./fontawesome/all.min.css">
+    <script src="./chartjs/chart.umd.min.js"></script>
+    <script>
+        // Chart.js dark mode configuration
+        Chart.defaults.color = '#e0e0e0';
+        Chart.defaults.borderColor = '#444';
+        Chart.defaults.plugins.legend.labels.color = '#e0e0e0';
+        Chart.defaults.scale.ticks.color = '#bbb';
+        Chart.defaults.scale.grid.borderColor = '#333';
+        Chart.defaults.scale.grid.color = 'rgba(100, 100, 100, 0.1)';
+    </script>
     <style>
         body { background-color: #000000; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
         .highlight-text { color: #0052A3; } /* Samsung Blue */
@@ -35,13 +44,7 @@
         .grid .animate-on-scroll:nth-child(6) { transition-delay: 0.3s; }
 
 
-        /* Chart.js dark mode styles */
-        Chart.defaults.color = '#e0e0e0';
-        Chart.defaults.borderColor = '#444';
-        Chart.defaults.plugins.legend.labels.color = '#e0e0e0';
-        Chart.defaults.scale.ticks.color = '#bbb';
-        Chart.defaults.scale.grid.borderColor = '#333';
-        Chart.defaults.scale.grid.color = 'rgba(100, 100, 100, 0.1)';
+
 
         /* Custom scrollbar for a more modern feel (optional, WebKit only) */
         ::-webkit-scrollbar {

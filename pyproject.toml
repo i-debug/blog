@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "blog"
+version = "0.1.0"
+description = "A blog project."
+requires-python = ">=3.12"
+authors = [
+    { name = "Your Name", email = "you@example.com" }
+]
+license = "MIT"
+classifiers = [
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent"
+]
+dependencies = [
+    "django>=5.2.3",
+    "dotenv>=0.9.9",
+    "pillow>=11.2.1",
+    "whitenoise>=6.9.0",
+]
+
+[tool.setuptools]
+packages = []
+

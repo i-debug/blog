@@ -5,59 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}个人知识博客{% endblock %}</title>
     
-    <!-- TailwindCSS CDN - 使用字节跳动静态资源公共库 -->
-    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/tailwind/3.3.3/tailwind.min.js"></script>
-    
-    <!-- Font Awesome - 使用BootCDN -->
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Chart.js - 使用七牛云CDN -->
-    <script src="https://cdn.staticfile.org/Chart.js/4.4.0/chart.umd.min.js"></script>
-    
-    <!-- 自定义样式 -->
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        'apple-blue': '#007AFF',
-                        'apple-gray': {
-                            50: '#F2F2F7',
-                            100: '#E5E5EA',
-                            200: '#D1D1D6',
-                            300: '#C7C7CC',
-                            400: '#AEAEB2',
-                            500: '#8E8E93',
-                            600: '#636366',
-                            700: '#48484A',
-                            800: '#3A3A3C',
-                            900: '#1C1C1E'
-                        },
-                        'blog-text': '#D1D5DB', // 新增非黑非白的文本颜色
-                        'blog-bg': '#1F2937'    // 新增深色背景颜色
-                    },
-                    fontFamily: {
-                        'apple': ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif']
-                    },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 0.6s ease-out',
-                        'fade-in': 'fadeIn 0.6s ease-out'
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- 完整的本地资源文件 -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tailwind-complete.css' %}">
+
+    <!-- Font Awesome 本地文件 -->
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+
+    <!-- Chart.js 本地文件 -->
+    <script src="{% static 'js/chart.umd.min.js' %}"></script>
     
     <style>
         .animate-on-scroll {
@@ -129,7 +85,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <div class="text-apple-gray-400">
-                    <p>&copy; {% now "Y" %} 个人知识博客. 简约而不简单.</p>
+                    <p>&copy; {% now "Y" %} JUSTDO.ICU BY CZZ.</p>
+                    <p class="mt-2 text-sm">鄂ICP备2025120051</p>
                 </div>
             </div>
         </div>
